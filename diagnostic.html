@@ -291,8 +291,8 @@
     }
     .pain-card:hover .pain-ico-wrap { background: rgba(240,192,64,.16); border-color: rgba(240,192,64,.35); }
     .pain-ico-wrap svg { width: 20px; height: 20px; }
-    .pain-card h3 { font-size: .97rem; font-weight: 700; margin-bottom: 8px; line-height: 1.35; }
-    .pain-card p { color: var(--text2); font-size: .87rem; line-height: 1.6; }
+    .pain-card h3 { font-size: 1.08rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3; color: var(--text); }
+    .pain-card p { color: var(--text3); font-size: .88rem; line-height: 1.68; }
     @media(max-width:900px){ .pain-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:580px){ .pain-grid { grid-template-columns: 1fr; } }
 
@@ -329,56 +329,50 @@
     @media(max-width:580px){ .testi-grid { grid-template-columns: 1fr; } }
 
     /* ── CASE CARDS ── */
-    .cases-grid {
-      display: grid; grid-template-columns: repeat(2,1fr); gap: 20px;
-    }
+    .cases-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
     .case-card {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r2); padding: 28px 26px;
+      border-radius: var(--r2); padding: 22px 20px;
       position: relative; transition: border-color .25s, transform .25s;
-      display: flex; flex-direction: column; gap: 16px;
+      display: flex; flex-direction: column; gap: 14px;
       box-shadow: 0 1px 3px rgba(30,20,5,.06), 0 4px 16px rgba(30,20,5,.04);
     }
     .case-card:hover { border-color: rgba(240,192,64,.25); transform: translateY(-2px); }
     .case-result-badge {
-      display: inline-flex; align-items: center; gap: 8px;
+      display: inline-flex; align-items: center; gap: 6px;
       background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.25);
-      border-radius: 8px; padding: 6px 12px;
+      border-radius: 6px; padding: 5px 10px;
       font-size: .78rem; font-weight: 800; color: #22c55e;
-      letter-spacing: .03em; width: fit-content;
+      letter-spacing: .02em; width: fit-content;
     }
-    .case-result-badge::before { content: '↑'; font-size: .9rem; }
-    .case-ab {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-    }
-    .case-ab-block {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; padding: 12px 14px;
-    }
+    .case-result-badge::before { content: '↑'; font-size: .85rem; }
+    .case-ab { display: flex; flex-direction: column; gap: 7px; }
+    .case-ab-row { display: flex; align-items: baseline; gap: 10px; }
     .case-ab-label {
-      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; margin-bottom: 6px; color: var(--text3);
+      font-size: .65rem; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase; flex-shrink: 0; width: 46px; padding-top: 1px;
     }
-    .case-ab-block.was .case-ab-label { color: #ef4444; }
-    .case-ab-block.became .case-ab-label { color: #22c55e; }
-    .case-ab-text { font-size: .87rem; color: var(--text2); line-height: 1.55; }
-    .case-ab-block.became .case-ab-text { color: var(--text); font-weight: 600; }
-    .case-insight {
-      font-size: .87rem; color: var(--text2); line-height: 1.6;
-      border-left: 2px solid rgba(240,192,64,.4);
-      padding-left: 12px; font-style: italic;
+    .case-ab-row.was .case-ab-label { color: rgba(239,68,68,.75); }
+    .case-ab-row.became .case-ab-label { color: #22c55e; }
+    .case-ab-text { font-size: .87rem; color: var(--text3); line-height: 1.5; }
+    .case-ab-row.became .case-ab-text { color: var(--text); font-weight: 700; font-size: .9rem; }
+    .case-quote {
+      font-size: .83rem; color: var(--text2); line-height: 1.6; font-style: italic;
+      border-left: 2px solid rgba(201,168,76,.35); padding-left: 12px;
     }
-    .case-footer { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 4px; border-top: 1px solid var(--border); }
+    .case-footer {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border);
+    }
     .case-avatar {
-      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       display: flex; align-items: center; justify-content: center;
-      font-size: .78rem; font-weight: 800; color: #000;
+      font-size: .75rem; font-weight: 800; color: #000;
     }
     .case-name { font-size: .82rem; font-weight: 700; margin-bottom: 1px; }
     .case-role { font-size: .72rem; color: var(--text3); }
     @media(max-width:760px){ .cases-grid { grid-template-columns: 1fr; } }
-    @media(max-width:580px){ .case-ab { grid-template-columns: 1fr; } }
 
     /* ── TYPES ── */
     .types-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 40px; }
@@ -995,7 +989,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <h3>«Снова согласился на меньше»</h3>
-        <p>Клиент сказал «дорого» — ты предложил скидку. Сделал за 35к то за что хотел 70к. «Дорого» — это начало разговора, не его конец. Просто никто не объяснил как именно.</p>
+        <p>Клиент сказал «дорого» — ты предложил скидку. Сделал за 35к то, за что хотел 70к. «Дорого» — это начало разговора, не его конец.</p>
       </div>
       <div class="pain-card reveal reveal-d1">
         <div class="pain-ico-wrap">
@@ -1016,14 +1010,14 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
         </div>
         <h3>«Работаю больше — доход тот же»</h3>
-        <p>Берёшь ещё один проект, устаёшь сильнее. 100–150к — потолок уже несколько месяцев. Больше работы не помогает. Значит дело не в количестве — в чём-то другом.</p>
+        <p>Берёшь ещё один проект, устаёшь сильнее. 100–150к — потолок уже несколько месяцев. Больше работы не помогает — значит, дело не в количестве.</p>
       </div>
       <div class="pain-card reveal reveal-d1">
         <div class="pain-ico-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
         <h3>«Ещё один курс. Доход не вырос.»</h3>
-        <p>Изучил инструменты, прокачал навык. Всё делаешь правильно. А доход тот же — потому что проблема не в инструментах. Мозг ищет определённость в «ещё одном уроке», а барьер совсем в другом.</p>
+        <p>Изучил инструменты, прокачал навык. Всё делаешь правильно. Доход тот же — потому что проблема не в инструментах. Барьер совсем в другом.</p>
       </div>
       <div class="pain-card reveal reveal-d2">
         <div class="pain-ico-wrap">
@@ -1148,16 +1142,16 @@
       <div class="case-card reveal">
         <div class="case-result-badge">420 000 ₽ за 11 дней</div>
         <div class="case-ab">
-          <div class="case-ab-block was">
-            <div class="case-ab-label">Было</div>
-            <div class="case-ab-text">Полгода прокрастинация, самобичевание. Декабрь закрыл еле-еле на 80к. Боялся встреч и звонков — избегал продаж.</div>
+          <div class="case-ab-row was">
+            <span class="case-ab-label">Было</span>
+            <span class="case-ab-text">Декабрь — 80к, полгода прокрастинации. Боялся звонков и встреч, избегал продаж.</span>
           </div>
-          <div class="case-ab-block became">
-            <div class="case-ab-label">Стало</div>
-            <div class="case-ab-text">420 000 ₽ за первые 11 дней января. Заходит в продажи уверенно и с кайфом. Видит возможности там, где раньше видел стресс.</div>
+          <div class="case-ab-row became">
+            <span class="case-ab-label">Стало</span>
+            <span class="case-ab-text">420 000 ₽ за первые 11 дней января. Заходит в продажи уверенно и с кайфом.</span>
           </div>
         </div>
-        <p class="case-insight">«Перестал бояться звонков. Стал заходить в продажи с кайфом — впервые в жизни.»</p>
+        <p class="case-quote">«Перестал бояться звонков — впервые захожу в продажи с удовольствием.»</p>
         <div class="case-footer">
           <div class="case-avatar">О</div>
           <div><div class="case-name">Олег</div><div class="case-role">Digital-агентство</div></div>
@@ -1168,16 +1162,16 @@
       <div class="case-card reveal reveal-d1">
         <div class="case-result-badge">280к → 600к + своё обучение</div>
         <div class="case-ab">
-          <div class="case-ab-block was">
-            <div class="case-ab-label">Было</div>
-            <div class="case-ab-text">Зарабатывал 280к, но не верил что работа может стоить нормальных денег. Всё делал сам — забирал задачи у сотрудников. Целей не было вообще, понимания куда двигаться — ноль.</div>
+          <div class="case-ab-row was">
+            <span class="case-ab-label">Было</span>
+            <span class="case-ab-text">280к/мес, не верил в ценность своей работы. Всё тянул сам, целей — ноль.</span>
           </div>
-          <div class="case-ab-block became">
-            <div class="case-ab-label">Стало</div>
-            <div class="case-ab-text">Выручка 600 000 ₽. Запустил собственное обучение по дизайну, собрал команду. Впервые ощутил что движется туда, куда сам хочет.</div>
+          <div class="case-ab-row became">
+            <span class="case-ab-label">Стало</span>
+            <span class="case-ab-text">600 000 ₽ в месяц. Запустил своё обучение по дизайну, собрал команду.</span>
           </div>
         </div>
-        <p class="case-insight">«Запустил своё обучение. Впервые начал двигаться туда, куда сам хочу — а не туда, куда тянут клиенты.»</p>
+        <p class="case-quote">«Впервые двигаюсь туда, куда сам хочу — а не туда, куда тянут клиенты.»</p>
         <div class="case-footer">
           <div class="case-avatar">М</div>
           <div><div class="case-name">Марат</div><div class="case-role">Дизайнер, основатель студии</div></div>
@@ -1188,16 +1182,16 @@
       <div class="case-card reveal">
         <div class="case-result-badge">Впервые пробил 300к</div>
         <div class="case-ab">
-          <div class="case-ab-block was">
-            <div class="case-ab-label">Было</div>
-            <div class="case-ab-text">Потолок один и тот же — каждый месяц до 300к не доходил. Продажи шли рывками. Непонятно почему одни сделки закрываются, другие — нет.</div>
+          <div class="case-ab-row was">
+            <span class="case-ab-label">Было</span>
+            <span class="case-ab-text">Несколько месяцев упирался в один и тот же потолок. Непонятно, почему одни сделки закрываются, другие — нет.</span>
           </div>
-          <div class="case-ab-block became">
-            <div class="case-ab-label">Стало</div>
-            <div class="case-ab-text">Впервые в жизни 300 000 ₽ за месяц. Говорит: «Это просто новая точка отсчёта» — больше не воспринимает 300к как потолок.</div>
+          <div class="case-ab-row became">
+            <span class="case-ab-label">Стало</span>
+            <span class="case-ab-text">300 000 ₽ за месяц — впервые в жизни. Говорит: «Это просто новая точка отсчёта».</span>
           </div>
         </div>
-        <p class="case-insight">«300к — это просто новая точка отсчёта. Больше не воспринимаю её как потолок.»</p>
+        <p class="case-quote">«300к — просто новая точка отсчёта. Больше не воспринимаю её как потолок.»</p>
         <div class="case-footer">
           <div class="case-avatar">Ф</div>
           <div><div class="case-name">Фёдор</div><div class="case-role">Веб-разработчик, Новосибирск</div></div>
@@ -1208,16 +1202,16 @@
       <div class="case-card reveal reveal-d1">
         <div class="case-result-badge">Вышел на 500к из спокойствия</div>
         <div class="case-ab">
-          <div class="case-ab-block was">
-            <div class="case-ab-label">Было</div>
-            <div class="case-ab-text">Двигался от страха: просадка — стресс, хаотичные действия, выгорание. Продажи были, но всё держалось на морально-волевых. Системы — ноль.</div>
+          <div class="case-ab-row was">
+            <span class="case-ab-label">Было</span>
+            <span class="case-ab-text">Просадка — стресс, хаос, выгорание. Продажи шли, но всё держалось на морально-волевых.</span>
           </div>
-          <div class="case-ab-block became">
-            <div class="case-ab-label">Стало</div>
-            <div class="case-ab-text">500 000 ₽ в месяц. Впервые ощутил что рост идёт из спокойствия, а не из тревоги. Перестал зависеть от настроения и хаотичных действий.</div>
+          <div class="case-ab-row became">
+            <span class="case-ab-label">Стало</span>
+            <span class="case-ab-text">500 000 ₽ в месяц. Рост — из спокойствия, а не из тревоги.</span>
           </div>
         </div>
-        <p class="case-insight">«Впервые рост идёт из спокойствия, а не из тревоги. Перестал зависеть от настроения.»</p>
+        <p class="case-quote">«Впервые рост идёт из спокойствия. Перестал зависеть от настроения.»</p>
         <div class="case-footer">
           <div class="case-avatar">С</div>
           <div><div class="case-name">Самат</div><div class="case-role">Таргетолог</div></div>
@@ -1225,19 +1219,19 @@
       </div>
 
       <!-- Егор -->
-      <div class="case-card reveal" style="grid-column: 1 / -1; max-width: 580px; margin-inline: auto;">
+      <div class="case-card reveal" style="grid-column: 1 / -1; max-width: 560px; margin-inline: auto;">
         <div class="case-result-badge">0 → 100 000 ₽ с нуля</div>
         <div class="case-ab">
-          <div class="case-ab-block was">
-            <div class="case-ab-label">Было</div>
-            <div class="case-ab-text">Заработок — ноль. Много лет обманывал себя: «нельзя получать удовольствие, пока не заработал». Попытки продавать заканчивались ничем. «Был трупом ходячим».</div>
+          <div class="case-ab-row was">
+            <span class="case-ab-label">Было</span>
+            <span class="case-ab-text">Заработок — ноль. Попытки продавать заканчивались ничем. Сам говорит: «Был ходячим трупом».</span>
           </div>
-          <div class="case-ab-block became">
-            <div class="case-ab-label">Стало</div>
-            <div class="case-ab-text">100 000 ₽ за первый месяц с нуля. Освоил холодные продажи, разбил цель на ежедневные шаги. Впервые начал получать удовольствие от процесса.</div>
+          <div class="case-ab-row became">
+            <span class="case-ab-label">Стало</span>
+            <span class="case-ab-text">100 000 ₽ за первый месяц с нуля. Освоил холодные продажи, впервые получает удовольствие от процесса.</span>
           </div>
         </div>
-        <p class="case-insight">«Впервые начал получать удовольствие от самого процесса продаж. Раньше избегал — теперь захожу сам.»</p>
+        <p class="case-quote">«Раньше избегал продаж — теперь захожу сам.»</p>
         <div class="case-footer">
           <div class="case-avatar">Е</div>
           <div><div class="case-name">Егор</div><div class="case-role">Продажи маркетинговых услуг</div></div>
