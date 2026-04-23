@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>История Шамиля — Прощай, жидкость | artofsales.art</title>
+  <meta name="description" content="Как я прошёл путь от 40к в армии до 1.5 млн выручки. Армия, крипта, банк, фриланс, обучение — честно и без прикрас." />
+  <link rel="canonical" href="https://artofsales.art/story" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23C9A84C'/><text y='.9em' x='18' font-size='65'>⚡</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #111111;
+      --card: #141414;
+      --border: rgba(255,255,255,.06);
+      --border2: rgba(255,255,255,.12);
+      --gold: #C9A84C;
+      --gold2: #b8944a;
+      --text: #ffffff;
+      --text2: #cccccc;
+      --text3: #aaaaaa;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+      background: rgba(13,13,13,.94); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-weight: 900; font-size: .95rem;
+      display: flex; align-items: center; gap: 10px; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+    }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-back {
+      color: var(--text2); font-size: .87rem; font-weight: 500;
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--gold); color: #000;
+      padding: 9px 22px; border-radius: 0;
+      font-weight: 800; font-size: .85rem; text-decoration: none;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    @media(max-width:680px){ nav { padding: 0 20px; } .nav-back { display: none; } }
+    @media(max-width:480px){ .nav-cta { display: none; } }
+
+    /* ── ARTICLE ── */
+    .article-wrap {
+      max-width: 720px; margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .article-label {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      border: 1px solid rgba(201,168,76,.35);
+      padding: 6px 14px; border-radius: 0;
+      margin-bottom: 24px;
+    }
+
+    .article-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900; letter-spacing: -1.5px;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    .article-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .article-meta {
+      font-size: .82rem; color: var(--text3);
+      margin-bottom: 48px; padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-body { font-size: 1rem; color: var(--text2); line-height: 1.8; }
+    .article-body p { margin-bottom: 20px; }
+    .article-body strong { color: var(--text); }
+    .article-body em { color: var(--text3); font-style: italic; }
+
+    .article-body h2 {
+      font-size: 1.3rem; font-weight: 800; color: var(--text);
+      margin: 48px 0 16px; letter-spacing: -.5px; line-height: 1.3;
+    }
+    .article-body h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--gold);
+      margin: 32px 0 12px; letter-spacing: .02em; text-transform: uppercase;
+      font-size: .78rem;
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid rgba(201,168,76,.4);
+      padding: 12px 20px; margin: 24px 0;
+      background: var(--card);
+      border-radius: 0 8px 8px 0;
+      color: var(--text3); font-style: italic;
+    }
+
+    .step-num-inline {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; font-weight: 900; font-size: .82rem;
+      margin-right: 10px; vertical-align: middle; flex-shrink: 0;
+    }
+
+    .article-divider {
+      height: 1px; background: var(--border);
+      margin: 48px 0;
+    }
+
+    .article-cta {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      margin-top: 64px; text-align: center;
+    }
+    .article-cta h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .article-cta p { color: var(--text2); font-size: .9rem; margin-bottom: 24px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold); color: #000;
+      font-weight: 700; font-size: .95rem;
+      padding: 14px 32px; border-radius: 0; text-decoration: none;
+      font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,.3); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-dot">⚡</div>
+    Искусство продаж
+  </a>
+  <div class="nav-right">
+    <a href="/" class="nav-back">← Главная</a>
+    <a href="/diagnostic.html" class="nav-cta">Пройти диагностику</a>
+  </div>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-label">История Шамиля</div>
+
+  <h1 class="article-title">Прощай, жидкость.<br><em>Или как войти в режим берсерка.</em></h1>
+
+  <div class="article-meta">Август 2025 · Личная история · 15 минут чтения</div>
+
+  <div class="article-body">
+
+    <p>И я не просто так говорю на эту тему, а потому что сам был таким. Жидким, слабым, нерешительным. Об этом и расскажу, чтоб не быть пустословом.</p>
+
+    <div class="article-divider"></div>
+
+    <h2>1. Начало. Альметьевск, 1999</h2>
+
+    <p>Мухаметзянов Шамиль. Родился в Альметьевске — город маленький, считай деревня. Отца не было, растила одна мать.</p>
+
+    <p>Я был таким же как большинство парней, которых сейчас вижу на улицах: <strong>слабый, неспособный ни на что.</strong> Бегал за девушками, упрашивал уделить внимание. Слушал мать, которая говорила:</p>
+
+    <blockquote>«Оценки — самое главное в твоей жизни. Получишь хорошие оценки, поступишь в институт, пойдёшь на работу и всё у тебя будет хорошо.»</blockquote>
+
+    <p>Но что-то из меня рвалось наружу и не давало просто идти по протоптанной дороге.</p>
+
+    <h2>2. Первые решения</h2>
+
+    <p><strong>Физическая слабость</strong> — записался на бокс. Научился драться, приобрёл нормальную физическую форму.</p>
+
+    <p><strong>Тело есть, но не хватает духа.</strong> Было много ситуаций неуважения — когда надо было ответить, но не решался. Тогда принял одно из самых поворотных решений: пошёл в армию. Потом контрактником. Хотел пойти в СОБР.</p>
+
+    <p>Мне казалось — вот она суть настоящего мужчины. Расстался с девушкой, которая выносила мозги. Начал относиться к жизни иначе.</p>
+
+    <h2>3. Кризис</h2>
+
+    <p>Такая жизнь — полный разрыв для психики. Начало разъедать на физическом уровне. Нервная система так напряглась, что вылезла на коже — первые признаки нейродерматита. Стресс настолько разъедает, что кожа начинает чесаться так, что нет выбора.</p>
+
+    <p>Тогда я начал смотреть Арсена Ашотовича. Многие его мысли нравились. Оказывается, быть мужчиной — это вести себя по-мужски в любой ситуации, иметь достоинство, быть честным с собой.</p>
+
+    <p>Понял, что мой мув с армией — попытка себя уничтожить. Внутренняя агрессия, которую годами копил, направилась на меня самого.</p>
+
+    <p>Принял решение: вернусь домой. Любым способом. Это сработало — выбрался, целый и невредимый. <strong>Если чего-то реально захочешь — оно случится.</strong></p>
+
+    <h2>4. Обычная жизнь</h2>
+
+    <p>Сначала ушёл в отрыв. Работал то там то здесь. Потом нашёл «стабильную» работу — смешно сейчас, но реально так думал. Что нужно обязательно устроиться в найм и отпахать несколько лет.</p>
+
+    <p>Устроился в банк — сидеть на телефоне и продавать кредиты. Параллельно купил курсы программирования. Думал: <em>«Это перспективно, буду спокойно дома сидеть, код писать и зарабатывать хорошие деньги».</em></p>
+
+    <p>Жил по линеечке: подъём в 9, сразу за работу, звонить людям. Потом курсы программирования, потом зал. Жизнь земляного червя.</p>
+
+    <h2>5. Потерял 500 000 ₽</h2>
+
+    <p>Начал ощущать, что всё это меня конкретно заедает. Что дало толчок? Проиграл полляма.</p>
+
+    <p>Вложил в крипту — деньги ушли. С кошелька съехали 500+ тысяч. Присел на очко. Но сейчас очень благодарен этим скамерам — они буквально спасли меня от ещё нескольких месяцев бесполезной жизни.</p>
+
+    <p>Без денег мозг заработал сразу: <strong>где взять? как заработать? как выживать?</strong></p>
+
+    <p>Начал ебашить как папа Карло. Больше звонков, больше продаж, больше часов. Вышел в топ-3 продажника в группе. Зарабатывал около 120к два месяца.</p>
+
+    <p>И тут вышел анонс Grind University.</p>
+
+    <h2>6. Grind University</h2>
+
+    <p>Недельку пытался совмещать и понял, что делаю какую-то хуйню. На работе трачу 8 часов, работая на чужого дядю за 100к. А могу потратить 12 часов обучаясь делу, которое принесёт миллионы.</p>
+
+    <p>Выбор был очевиден — просто перестал выходить на работу. Сидел в компьютере не разгибаясь, смотрел видео, выполнял задания, общался в чатах.</p>
+
+    <p>С прикладной работой не пошло — ковыряться в сайтах не для меня. Другое дело — продажи. С ними точно не останешься с голой жопой.</p>
+
+    <p>Начал собирать команду: я продаю, кто-то другой делает сайт, маркетинг, что угодно.</p>
+
+    <p>Самое важное, что взял из ГУ — <strong>коммьюнити.</strong> Понял насколько важно иметь людей на все случаи жизни. На протяжении всего обучения делал самое важное — проявлялся. Был во всех чатах, на каждом эфире. Всем отвечал, помогал, давал советы. Теперь это мой самый дорогой актив.</p>
+
+    <h2>7. Мастермайнд за 300к</h2>
+
+    <p>Попал на открытую встречу к Ринату Хаматдинову — миллионер, успешный предприниматель. Объявил о наборе на Мастермайнд. Цена вопроса — 300к. У меня в кармане 10к.</p>
+
+    <p>Тяжёлое решение, но почувствовал: <strong>иначе останусь в жопе.</strong> Принял решение и поехал.</p>
+
+    <p>Каким вернулся — пиздец. Из меня вытаскивали самое плохое, страшное и неприятное что сидело внутри. Вышел оттуда вообще другим. Как будто в голове что-то переставили.</p>
+
+    <h2>8. Стартап и станки</h2>
+
+    <p>Залетел на партнёрство к крупному предпринимателю. Задача — создать компанию по продаже станков. Очень быстро принял решение и подумал, что одного напора хватит. Не хватило.</p>
+
+    <p>Цель не выполнил, но приобрёл огромный опыт. Теперь вижу в каких моментах мог бы поступить по-другому.</p>
+
+    <h2>9. Мой меч — это люди</h2>
+
+    <p>Вернулся из Вьетнама с голой жопой. Жил у мамы. Нашёл человека, который собирает сайты — моя задача продавать их.</p>
+
+    <p><strong>За неделю напродавал на 500 000 ₽.</strong> Так сильно хотелось съехать от мамы в свою квартиру.</p>
+
+    <p>Но сайты продавать не нравилось. Обратился в сторону наставничества — мне с самого начала пути было кайфово помогать, обучать, давать советы. Только зачем делал это бесплатно?</p>
+
+    <h2>10. Где я сейчас</h2>
+
+    <p>За последний месяц — <strong>1,5 млн чистой прибыли.</strong> Полтора года назад работал в найме за 40к.</p>
+
+    <p>За это время: пожил во Вьетнаме, переехал в нормальную квартиру, купил макбук, прошёл обучений на 1+ млн.</p>
+
+    <p><em>Но мне мало.</em> Тот самый режим Берсерка — это когда <strong>ты не согласен.</strong> Не согласен на меньшее. Не согласен терпеть хуёвое к себе отношение. Ничто не остановит на пути к цели.</p>
+
+    <div class="article-divider"></div>
+
+    <h2>Три вещи, которые реально работают</h2>
+
+    <h3>Блок 1 — Установки</h3>
+
+    <p>Если не настроен вычищать говно из башки — дальше можно не идти. Твои мысли привели тебя туда где ты есть.</p>
+
+    <p><strong>Навык желаний.</strong> Ты его в себе убил. Хочешь стейк — но жалко тысячу, купишь курицу за 300. Одно из самых важных заданий на обучении — сесть и выписать 50 своих желаний. По-настоящему. Без «слишком дорого» и «не заслужил». Ты хочешь — значит будет.</p>
+
+    <p><strong>Сила намерения.</strong> У кого больше шансов заработать: у того, кому мама готовит — или у того, кто собрал шмотки и на последние деньги переехал в другой город? В моей практике выигрывает второй.</p>
+
+    <p><strong>Смена окружения.</strong> Тотальная. Вырезайте как опухоль людей, которые тянут назад. Они будут говорить что вы занимаетесь какой-то хуйнёй, что лучше пойти на работу. Я перестал общаться со всеми из прошлой жизни — и вылетел как пробка.</p>
+
+    <h3>Блок 2 — Инструменты (продажи)</h3>
+
+    <p>Всё что объединяет любую деятельность, любой бизнес — продажи. Деньги не появляются сами, их надо зарабатывать. А продажа — это не манипуляция. Это <strong>вовлечение.</strong></p>
+
+    <p>Если умеешь вовлечь человека в свою картину мира — можешь продать что угодно. И точно так же клиент может вовлечь тебя в свою — тогда ты соглашаешься на меньше.</p>
+
+    <p><strong>Схема СПИН-продаж</strong> (из книги — обязательно прочитай целиком):</p>
+
+    <blockquote>
+      <strong>С — Ситуационные.</strong> Выясни как у человека вообще обстоят дела. Не продавай — просто разведай.<br><br>
+      <strong>П — Проблемные.</strong> Наведи на мысль что проблема есть. Не спрашивай «что не нравится» — ищи детали и тяни за нитку. Клиент сам всё расскажет.<br><br>
+      <strong>И — Извлекающие.</strong> Пусть сам подумает как эти проблемы влияют на жизнь и деньги. Не нагнетай — просто пусть осознает.<br><br>
+      <strong>Н — Направляющие.</strong> «А представь что было бы если бы...» Пусть помечтает. И вот тут предлагаешь то что нужно.
+    </blockquote>
+
+    <p>Без давления и пропихивания — человек сам захочет купить. Он сам себе продал эту идею.</p>
+
+    <h3>Блок 3 — Практика: отчёты каждый день</h3>
+
+    <p>Это то что я делаю сам каждый день и заставляю делать каждого на обучении. Было на всех обучениях людей, которые зарабатывают от миллиарда. Так что это работает.</p>
+
+    <p>Каждый вечер садишься и пишешь что конкретно сделал для достижения цели. Вот тут все и осознают кто они на самом деле. Сам себе наврёшь какой ты молодец — но отчёт никогда не соврёт.</p>
+
+    <div class="article-divider"></div>
+
+    <p style="color:var(--text);font-size:1.05rem;line-height:1.7;">Эта информация собиралась по крупицам через пот, кровь и боль полтора года. Я ещё сам на пути — а значит, она будет дополняться.</p>
+
+    <div class="article-cta">
+      <h3>Хочешь найти свой барьер?</h3>
+      <p>Шамиль читает ответы лично и говорит конкретно — что держит тебя на текущем доходе.</p>
+      <a href="/diagnostic.html" class="btn-primary">Пройти диагностику бесплатно →</a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

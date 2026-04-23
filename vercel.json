@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/diagnostic", "destination": "/diagnostic.html" },
     { "source": "/диагностика", "destination": "/diagnostic.html" },
-    { "source": "/thanks", "destination": "/thanks.html" }
+    { "source": "/thanks", "destination": "/thanks.html" },
+    { "source": "/story", "destination": "/story.html" }
   ]
 }
