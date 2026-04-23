@@ -381,7 +381,7 @@
     @media(max-width:580px){ .case-ab { grid-template-columns: 1fr; } }
 
     /* ── TYPES ── */
-    .types-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 40px; }
+    .types-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 40px; }
     .type-card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: var(--r2); padding: 24px 20px; text-align: center;
@@ -396,11 +396,12 @@
       pointer-events: none;
     }
     .type-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
-    .type-ico { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .type-card h3 { font-size: .93rem; font-weight: 800; margin-bottom: 8px; color: var(--gold); }
-    .type-card p { color: var(--text2); font-size: .83rem; line-height: 1.55; }
+    .type-ico { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+    .type-card h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; color: var(--gold); }
+    .type-card p { color: var(--text3); font-size: .88rem; line-height: 1.55; }
     @media(max-width:900px){ .types-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:480px){ .types-grid { grid-template-columns: 1fr; } }
+
 
     /* ── BTN SECONDARY ── */
     .btn-secondary {
@@ -1043,30 +1044,40 @@
 <section class="section">
   <div class="section-inner">
     <div class="text-center">
-      <div class="section-label reveal">4 типа фрилансера</div>
-      <h2 class="section-title reveal">У каждого свой барьер — нужно понять свой</h2>
-      <p class="section-sub center reveal">Совет «просто продавай больше» не работает, потому что у каждого — разная причина застревания.</p>
+      <div class="section-label reveal">6 типов фрилансера</div>
+      <h2 class="section-title reveal">Какой ты сейчас?</h2>
+      <p class="section-sub center reveal">Узнай свой тип — и поймёшь почему застрял именно здесь</p>
     </div>
     <div class="types-grid">
       <div class="type-card reveal">
-        <span class="type-ico">🦥</span>
-        <h3>Невидимка</h3>
-        <p>Делаешь хорошо — но клиентов мало. Непонятно как объяснить ценность и почему именно ты, а не другой.</p>
+        <span class="type-ico">😶</span>
+        <h3>«Всё понимаю — молчу о цене»</h3>
+        <p>Делаешь отлично. Но когда клиент спрашивает «сколько стоит» — голос садится и называешь в два раза меньше.</p>
       </div>
       <div class="type-card reveal reveal-d1">
-        <span class="type-ico">🎢</span>
-        <h3>Хаотик</h3>
-        <p>Клиенты есть, но приходят случайно. Непонятно почему одни сделки закрываются, а другие — нет.</p>
+        <span class="type-ico">🏳️</span>
+        <h3>«Сказал дорого — уже скидка»</h3>
+        <p>Ты ещё не закончил называть цену, а рука уже тянется делать скидку. «Ну ладно, давай за 30».</p>
       </div>
       <div class="type-card reveal reveal-d2">
-        <span class="type-ico">🧊</span>
-        <h3>Замороженный</h3>
-        <p>Знаешь что делать — но не делаешь. Что-то внутри тормозит: страх отказа, страх цены, страх звонков.</p>
+        <span class="type-ico">😴</span>
+        <h3>«Всё знаю — ничего не делаю»</h3>
+        <p>Список дел составлен. Курсы куплены. Книги прочитаны. Доход не изменился.</p>
       </div>
       <div class="type-card reveal reveal-d3">
-        <span class="type-ico">💪</span>
-        <h3>Готовый к росту</h3>
-        <p>Всё работает, но доход стоит на месте. Понятно что нужно поднимать чек — непонятно как это сделать без потери клиентов.</p>
+        <span class="type-ico">🎰</span>
+        <h3>«Сарафан и молитва»</h3>
+        <p>Клиенты есть — но только по рекомендации или если повезёт. Система? Нет, это судьба.</p>
+      </div>
+      <div class="type-card reveal reveal-d3">
+        <span class="type-ico">📚</span>
+        <h3>«Ещё один курс — и точно»</h3>
+        <p>Уже пять курсов. Скоро шестой. Где-то там, в следующем модуле, скрыт ответ.</p>
+      </div>
+      <div class="type-card reveal reveal-d3">
+        <span class="type-ico">⚡</span>
+        <h3>«Занят 24/7, зарабатываю мало»</h3>
+        <p>Работы — завались. Денег — не хватает. Потому что берёшь всех, а ценник боишься поднять.</p>
       </div>
     </div>
     <div class="text-center">

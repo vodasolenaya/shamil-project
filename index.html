@@ -69,6 +69,14 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none;
+      opacity: .028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
     /* ── SCROLL PROGRESS ── */
     #scroll-bar {
       position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
@@ -197,9 +205,18 @@
       text-align: left; padding: 80px 24px 80px;
       position: relative; overflow: hidden;
     }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 120px; z-index: 2;
+      background: linear-gradient(180deg, transparent, rgba(201,168,76,.4), transparent);
+    }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
-      background: #0d0d0d;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(201,168,76,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 85% 20%, rgba(201,168,76,.05) 0%, transparent 60%),
+        #0d0d0d;
     }
     .hero-noise {
       position: absolute; inset: 0; z-index: 1; opacity: .025;
@@ -351,6 +368,9 @@
 
     /* ── SECTIONS ── */
     .section { padding: 120px 24px; }
+    .section + .section {
+      border-top: 1px solid rgba(255,255,255,.04);
+    }
     .section-inner { max-width: 1080px; margin: 0 auto; }
     .section-inner.wide { max-width: 1200px; }
     .section-label {
@@ -372,7 +392,9 @@
     }
 
     /* ── PAIN BENTO ── */
-    .pain { background: var(--bg2); }
+    .pain, .steps-section, .about-section {
+      background: linear-gradient(180deg, #111111 0%, #0f0e0c 100%);
+    }
     .bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
     .bento-card {
       background: var(--card); border: 1px solid rgba(255,255,255,.06);
