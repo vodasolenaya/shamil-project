@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "phase": 1,
+  "phase_label": "Product Discovery",
+  "stage": "research",
+  "stage_index": 0,
+  "last_updated": "2026-04-08T09:00:19.054924+00:00",
+  "context": {
+    "greenfield": true
+  }
+}

@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Диагностика продаж для фрилансера — Шамиль читает лично | artofsales.art</title>
+  <meta name="description" content="Называешь цену — клиент говорит дорого. Шамиль читает твои ответы лично и говорит где конкретно ты теряешь деньги. 15 вопросов · 5 блоков, бесплатно. 80+ фрилансеров прошли." />
+  <meta name="keywords" content="диагностика продаж фрилансер, почему теряю клиентов, как поднять доход фрилансу, продажи без скриптов" />
+  <link rel="canonical" href="https://artofsales.art/diagnostic" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23f0c040'/><text y='.9em' x='15' font-size='65'>🧲</text></svg>" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://artofsales.art/diagnostic" />
+  <meta property="og:title" content="Диагностика продаж — Шамиль читает лично и говорит где затык" />
+  <meta property="og:description" content="Клиент говорит «дорого» — ты соглашаешься на меньше. Шамиль найдёт где конкретно теряются деньги. 15 вопросов · 5 блоков, бесплатно." />
+  <meta property="og:image" content="https://artofsales.art/og-diagnostic.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ru_RU" />
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=108665262','ym');
+    ym(108665262,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/108665262" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf7f2;
+      --bg2: #f3ede0;
+      --card: #ffffff;
+      --card2: #faf5ec;
+      --border: rgba(30,20,5,.09);
+      --border2: rgba(30,20,5,.16);
+      --gold: #c8860a;
+      --gold2: #a86210;
+      --gold-glow: rgba(200,134,10,.18);
+      --gold-faint: rgba(200,134,10,.08);
+      --text: #1c1408;
+      --text2: #5c4e38;
+      --text3: #9c8870;
+      --green: #16a34a;
+      --r: 14px;
+      --r2: 20px;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-bar {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      width: 0%; transition: width .1s linear;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+      background: rgba(250,247,242,.94); backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(30,20,5,.08);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s, border-color .3s, box-shadow .3s;
+    }
+    nav.scrolled {
+      background: rgba(245,240,230,1);
+      border-bottom-color: rgba(200,134,10,.25);
+      box-shadow: 0 4px 40px rgba(0,0,0,.55);
+    }
+    .nav-logo {
+      font-weight: 900; font-size: .95rem; letter-spacing: -.3px;
+      display: flex; align-items: center; gap: 10px; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; flex-shrink: 0;
+    }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-back {
+      color: var(--text2); font-size: .87rem; font-weight: 500;
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--gold); color: #000;
+      padding: 9px 22px; border-radius: 8px;
+      font-weight: 800; font-size: .85rem; text-decoration: none;
+      transition: opacity .2s, transform .2s;
+      letter-spacing: -.1px;
+    }
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+    @media(max-width:680px){
+      nav { padding: 0 20px; }
+      .nav-back { display: none; }
+    }
+    @media(max-width:480px){
+      .nav-cta { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,134,10,.14) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(168,98,16,.08) 0%, transparent 50%),
+        var(--bg);
+    }
+    .hero-noise {
+      position: absolute; inset: 0; z-index: 1; opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(200,134,10,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,134,10,.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,0,0,.7) 0%, transparent 75%);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,0,0,.7) 0%, transparent 75%);
+      animation: gridDrift 28s linear infinite;
+    }
+    @keyframes gridDrift { 0%{background-position:0 0} 100%{background-position:64px 64px} }
+    .hero > * { position: relative; z-index: 2; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(240,192,64,.1); border: 1px solid rgba(240,192,64,.25);
+      color: var(--gold); border-radius: 100px; padding: 6px 16px 6px 10px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -1.5px;
+      max-width: 780px; margin: 0 auto 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 40%, #ffaa30 70%, var(--gold) 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: gradientFlow 5s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text2);
+      max-width: 500px; margin: 0 auto 44px; line-height: 1.7;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; font-weight: 800; font-size: 1.05rem;
+      padding: 17px 40px; border-radius: 12px; text-decoration: none; border: none; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 40px rgba(240,192,64,.25);
+      position: relative; overflow: hidden;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 48px rgba(240,192,64,.35); }
+
+    .hero-note { font-size: .82rem; color: var(--text2); margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .hero-note span { display: flex; align-items: center; gap: 5px; }
+
+    .hero-social-proof {
+      display: flex; align-items: center; gap: 12px; margin-top: 20px;
+    }
+    .hero-avatars { display: flex; }
+    .hero-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border: 2px solid var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 900; color: #000;
+    }
+    .hero-avatars .hero-avatar + .hero-avatar { margin-left: -8px; }
+    .hero-proof-text { font-size: .82rem; color: var(--text2); }
+    .hero-proof-text strong { color: var(--gold); }
+
+    /* ── SECTIONS ── */
+    .section { padding: 88px 24px; }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--gold); font-size: .72rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section-label::before { content:''; width:20px; height:1px; background:var(--gold); }
+    h2.section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 900; letter-spacing: -1px; line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--text2); max-width: 520px; line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .section-sub.center { text-align: center; margin: 0 auto 48px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: .1s; }
+    .reveal-d2 { transition-delay: .2s; }
+    .reveal-d3 { transition-delay: .3s; }
+
+    /* ── STEPS (how it works) ── */
+    .steps-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps-row {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative;
+    }
+    .steps-row::before {
+      content: ''; position: absolute; top: 28px; left: 16.5%; right: 16.5%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+      opacity: .2; z-index: 0;
+    }
+    .step-item {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 0 16px; position: relative; z-index: 1;
+    }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; font-weight: 900; color: #000;
+      margin-bottom: 20px; flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(240,192,64,.3);
+    }
+    .step-title { font-size: .97rem; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: .85rem; color: var(--text2); line-height: 1.6; }
+    @media(max-width:680px){
+      .steps-row { grid-template-columns: 1fr; gap: 32px; }
+      .steps-row::before { display: none; }
+    }
+
+    /* ── PAIN GRID ── */
+    .pain-section { background: var(--bg2); }
+    .pain-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .pain-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r2); padding: 26px 22px;
+      transition: border-color .25s, background .25s, transform .25s;
+      position: relative; overflow: hidden;
+      --mx: -999px; --my: -999px;
+      box-shadow: 0 1px 3px rgba(30,20,5,.06), 0 4px 16px rgba(30,20,5,.04);
+    }
+    .pain-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(340px circle at var(--mx) var(--my), rgba(240,192,64,.08), transparent 65%);
+      pointer-events: none;
+    }
+    .pain-card:hover { border-color: rgba(240,192,64,.2); background: var(--card2); transform: translateY(-2px); }
+    .pain-ico-wrap {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(240,192,64,.1); border: 1px solid rgba(240,192,64,.22);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; color: var(--gold); flex-shrink: 0;
+      transition: background .25s, border-color .25s;
+    }
+    .pain-card:hover .pain-ico-wrap { background: rgba(240,192,64,.16); border-color: rgba(240,192,64,.35); }
+    .pain-ico-wrap svg { width: 20px; height: 20px; }
+    .pain-card h3 { font-size: .97rem; font-weight: 700; margin-bottom: 8px; line-height: 1.35; }
+    .pain-card p { color: var(--text2); font-size: .87rem; line-height: 1.6; }
+    @media(max-width:900px){ .pain-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:580px){ .pain-grid { grid-template-columns: 1fr; } }
+
+    /* ── REVIEWS ── */
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .testi-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r2); padding: 24px 22px;
+      position: relative; transition: border-color .25s, transform .25s;
+      --mx: -999px; --my: -999px;
+      box-shadow: 0 1px 3px rgba(30,20,5,.06), 0 4px 16px rgba(30,20,5,.04);
+    }
+    .testi-card::before {
+      content: '\201C'; position: absolute; top: 14px; right: 18px;
+      font-size: 3.5rem; color: var(--gold); opacity: .15; line-height: 1; font-family: Georgia, serif;
+    }
+    .testi-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(340px circle at var(--mx) var(--my), rgba(240,192,64,.08), transparent 65%);
+      pointer-events: none;
+    }
+    .testi-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
+    .testi-quote { font-size: .92rem; color: var(--text); line-height: 1.65; margin-bottom: 18px; }
+    .testi-author { display: flex; align-items: center; gap: 10px; }
+    .testi-avatar {
+      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 800; color: #000;
+    }
+    .testi-name { font-size: .82rem; font-weight: 700; margin-bottom: 2px; }
+    .testi-role { font-size: .75rem; color: var(--text2); }
+    @media(max-width:900px){ .testi-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:580px){ .testi-grid { grid-template-columns: 1fr; } }
+
+    /* ── CASE CARDS ── */
+    .cases-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 20px;
+    }
+    .case-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r2); padding: 28px 26px;
+      position: relative; transition: border-color .25s, transform .25s;
+      display: flex; flex-direction: column; gap: 16px;
+      box-shadow: 0 1px 3px rgba(30,20,5,.06), 0 4px 16px rgba(30,20,5,.04);
+    }
+    .case-card:hover { border-color: rgba(240,192,64,.25); transform: translateY(-2px); }
+    .case-result-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.25);
+      border-radius: 8px; padding: 6px 12px;
+      font-size: .78rem; font-weight: 800; color: #22c55e;
+      letter-spacing: .03em; width: fit-content;
+    }
+    .case-result-badge::before { content: '↑'; font-size: .9rem; }
+    .case-ab {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .case-ab-block {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px;
+    }
+    .case-ab-label {
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; margin-bottom: 6px; color: var(--text3);
+    }
+    .case-ab-block.was .case-ab-label { color: #ef4444; }
+    .case-ab-block.became .case-ab-label { color: #22c55e; }
+    .case-ab-text { font-size: .87rem; color: var(--text2); line-height: 1.55; }
+    .case-ab-block.became .case-ab-text { color: var(--text); font-weight: 600; }
+    .case-insight {
+      font-size: .87rem; color: var(--text2); line-height: 1.6;
+      border-left: 2px solid rgba(240,192,64,.4);
+      padding-left: 12px; font-style: italic;
+    }
+    .case-footer { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 4px; border-top: 1px solid var(--border); }
+    .case-avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 800; color: #000;
+    }
+    .case-name { font-size: .82rem; font-weight: 700; margin-bottom: 1px; }
+    .case-role { font-size: .72rem; color: var(--text3); }
+    @media(max-width:760px){ .cases-grid { grid-template-columns: 1fr; } }
+    @media(max-width:580px){ .case-ab { grid-template-columns: 1fr; } }
+
+    /* ── TYPES ── */
+    .types-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 40px; }
+    .type-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r2); padding: 24px 20px; text-align: center;
+      transition: border-color .25s, transform .25s;
+      position: relative;
+      --mx: -999px; --my: -999px;
+      box-shadow: 0 1px 3px rgba(30,20,5,.06), 0 4px 12px rgba(30,20,5,.04);
+    }
+    .type-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(300px circle at var(--mx) var(--my), rgba(240,192,64,.08), transparent 65%);
+      pointer-events: none;
+    }
+    .type-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
+    .type-ico { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .type-card h3 { font-size: .93rem; font-weight: 800; margin-bottom: 8px; color: var(--gold); }
+    .type-card p { color: var(--text2); font-size: .83rem; line-height: 1.55; }
+    @media(max-width:900px){ .types-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:480px){ .types-grid { grid-template-columns: 1fr; } }
+
+    /* ── BTN SECONDARY ── */
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--gold); color: var(--gold);
+      padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: .95rem;
+      text-decoration: none; transition: background .2s, color .2s; background: transparent; cursor: pointer;
+    }
+    .btn-secondary:hover { background: var(--gold); color: #000; }
+
+    /* ── QUIZ ── */
+    .quiz-section { background: var(--bg2); border-top: 1px solid var(--border); }
+    .quiz-wrap { max-width: 680px; margin: 0 auto; }
+    .quiz-header { text-align: center; margin-bottom: 40px; }
+
+    .quiz-progress { margin-bottom: 28px; }
+    .progress-label { display: flex; justify-content: space-between; font-size: .82rem; color: var(--text2); margin-bottom: 8px; }
+    .progress-bar-bg { background: var(--border2); border-radius: 4px; height: 6px; }
+    .progress-bar-fill { background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 4px; height: 6px; transition: width .4s cubic-bezier(.16,1,.3,1); }
+
+    /* ── BLOCK-FORMAT QUIZ ── */
+    .quiz-step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .quiz-step-label { font-size: .85rem; font-weight: 700; color: var(--text2); }
+    .quiz-step-pct { font-size: .85rem; font-weight: 700; color: var(--gold); }
+    .quiz-step-bar-bg { background: var(--border2); border-radius: 4px; height: 6px; margin-bottom: 12px; }
+    .quiz-step-bar-fill { background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 4px; height: 6px; transition: width .4s cubic-bezier(.16,1,.3,1); }
+
+    .step-dots { display: flex; gap: 8px; margin-top: 12px; margin-bottom: 28px; justify-content: center; flex-wrap: wrap; }
+    .step-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; font-weight: 700;
+      border: 2px solid var(--border2); color: var(--text3);
+      transition: all .3s; flex-shrink: 0; background: var(--card);
+    }
+    .step-dot.done {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border-color: var(--gold); color: #000;
+    }
+    .step-dot.done::after { content: '✓'; }
+    .step-dot.active { border-color: var(--gold); color: var(--gold); font-weight: 800; }
+
+    .quiz-time-badge {
+      display: inline-flex; align-items: center;
+      background: rgba(200,134,10,.1); border: 1px solid rgba(200,134,10,.2);
+      color: var(--gold); border-radius: 100px;
+      padding: 4px 12px; font-size: .75rem; font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .block-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -.5px; margin-bottom: 8px; line-height: 1.2; }
+    .block-subtitle { font-size: .92rem; color: var(--text2); margin-bottom: 28px; line-height: 1.6; }
+    .block-questions { display: flex; flex-direction: column; gap: 28px; }
+    .block-q-num { font-size: .75rem; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .block-q-text { font-size: 1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.45; }
+    .block-q-context { font-size: .85rem; color: var(--text3); margin-bottom: 12px; line-height: 1.6; font-style: italic; }
+
+    .question-card {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: var(--r2); padding: 36px 32px;
+      box-shadow: 0 4px 24px rgba(30,20,5,.08);
+    }
+    .question-num { color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .question-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 28px; line-height: 1.5; }
+
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--r);
+      padding: 14px 18px; cursor: pointer; transition: border-color .15s, background .15s;
+    }
+    .option:hover { border-color: rgba(240,192,64,.4); background: rgba(240,192,64,.04); }
+    .option.selected { border-color: var(--gold); background: rgba(240,192,64,.08); }
+    .option input[type=radio] { display: none; }
+    .option-dot {
+      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .15s, background .15s;
+    }
+    .option.selected .option-dot { border-color: var(--gold); background: var(--gold); }
+    .option.selected .option-dot::after { content: ''; display: block; width: 8px; height: 8px; background: #000; border-radius: 50%; }
+    .option-label { font-size: .93rem; line-height: 1.45; color: var(--text); }
+
+    .quiz-nav { display: flex; align-items: center; margin-top: 24px; gap: 14px; }
+    .btn-back {
+      background: transparent; border: 1.5px solid var(--border2); color: var(--text2);
+      padding: 12px 22px; border-radius: var(--r); font-size: .9rem; font-weight: 600; cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-back:hover { border-color: var(--text2); color: var(--text); }
+    .btn-next {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; padding: 14px 36px; border-radius: var(--r);
+      font-size: .97rem; font-weight: 800; border: none; cursor: pointer;
+      transition: opacity .15s, transform .15s; margin-left: auto; min-width: 160px; max-width: 280px;
+      position: relative; overflow: hidden;
+    }
+    .btn-next:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-next:disabled { opacity: .3; cursor: not-allowed; transform: none; }
+
+    /* ── TEXTAREA for open questions ── */
+    .q-textarea {
+      width: 100%; background: var(--bg); border: 1.5px solid var(--border2); border-radius: 10px;
+      padding: 14px 16px; color: var(--text); font-size: .97rem; outline: none;
+      transition: border-color .2s, box-shadow .2s; resize: vertical; min-height: 108px;
+      font-family: inherit; line-height: 1.65;
+    }
+    .q-textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(240,192,64,.12); }
+    .q-textarea::placeholder { color: var(--text3); font-size: .88rem; }
+    .q-char-hint { font-size: .75rem; color: var(--text3); margin-top: 6px; text-align: right; }
+
+    /* ── FORMAT CHOOSER ── */
+    .format-chooser { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; align-items: start; }
+    @media(max-width:520px){ .format-chooser { grid-template-columns: 1fr; } }
+    .format-card {
+      border: 1.5px solid var(--border2); border-radius: 14px; padding: 20px 18px;
+      cursor: pointer; transition: border-color .2s, background .2s, box-shadow .2s;
+      text-align: left; position: relative; background: var(--card);
+    }
+    .format-card:hover { border-color: rgba(240,192,64,.4); }
+    .format-card.active { border-color: var(--gold); background: rgba(240,192,64,.05); }
+    .format-card.fc-paid-card {
+      border-color: rgba(200,134,10,.3);
+      box-shadow: 0 4px 20px rgba(200,134,10,.1);
+    }
+    .format-card.fc-paid-card.active {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold), 0 4px 24px rgba(200,134,10,.2);
+    }
+    .fc-recommended {
+      display: inline-block;
+      font-size: .62rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; border-radius: 100px; padding: 3px 9px; margin-bottom: 10px;
+    }
+    .format-card .fc-badge {
+      font-size: .65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--text3); margin-bottom: 8px;
+    }
+    .format-card.active .fc-badge { color: var(--gold2); }
+    .format-card .fc-title { font-size: 1.05rem; font-weight: 900; color: var(--text); margin-bottom: 6px; letter-spacing: -.3px; }
+    .format-card .fc-price {
+      font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 12px; line-height: 1;
+    }
+    .format-card .fc-free-price {
+      font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;
+      color: var(--text3); margin-bottom: 12px; line-height: 1;
+    }
+    .format-card .fc-divider { height: 1px; background: var(--border); margin-bottom: 12px; }
+    .fc-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin: 0; padding: 0; }
+    .fc-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .8rem; line-height: 1.45; }
+    .fc-list li.yes { color: var(--text); }
+    .fc-list li.no  { color: var(--text3); }
+    .fc-list li .fc-ico { flex-shrink: 0; margin-top: 1px; font-size: .75rem; width: 16px; }
+    .format-card .fc-check {
+      position: absolute; top: 14px; right: 14px; width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--border2); display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, background .2s; flex-shrink: 0;
+    }
+    .format-card.active .fc-check { border-color: var(--gold); background: var(--gold); }
+    .format-card.active .fc-check::after { content: ''; display: block; width: 7px; height: 7px; background: #000; border-radius: 50%; }
+
+    /* sheen on quiz buttons */
+    .btn-next::before {
+      content: ''; position: absolute;
+      top: 0; left: -120%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: skewX(-20deg);
+      animation: btnSheen 5s ease infinite;
+    }
+    @keyframes btnSheen {
+      0%, 55% { left: -120%; }
+      100%     { left: 200%; }
+    }
+
+    /* lead form inside quiz */
+    .lead-form-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .lead-form-sub { color: var(--text2); font-size: .93rem; margin-bottom: 28px; line-height: 1.6; }
+    .field-group { margin-bottom: 18px; }
+    .field-group label { display: block; font-size: .82rem; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
+    .field-group input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border2); border-radius: 10px;
+      padding: 13px 16px; color: var(--text); font-size: .95rem; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .field-group input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(240,192,64,.12); }
+    .btn-submit {
+      width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; font-weight: 800; font-size: 1.05rem;
+      padding: 16px; border-radius: 12px; border: none; cursor: pointer;
+      transition: opacity .2s, transform .2s; margin-top: 8px;
+      box-shadow: 0 4px 24px rgba(240,192,64,.25);
+      position: relative; overflow: hidden;
+    }
+    .btn-submit::before {
+      content: ''; position: absolute;
+      top: 0; left: -120%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: skewX(-20deg);
+      animation: btnSheen 5s ease infinite;
+    }
+    .btn-submit:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .privacy-note { color: var(--text3); font-size: .77rem; text-align: center; margin-top: 10px; }
+
+    /* success inside form */
+    .success-msg {
+      display: none; text-align: center; padding: 24px;
+      background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+      border-radius: 14px; margin-top: 20px;
+    }
+    .success-msg.visible { display: block; }
+    .success-msg h3 { color: var(--green); font-size: 1.1rem; margin-bottom: 6px; }
+    .success-msg p { color: var(--text2); font-size: .92rem; }
+
+    /* ── RESULT ── */
+    /* result-section visibility controlled via JS inline style */
+    .result-wrap { max-width: 680px; margin: 0 auto; }
+    .result-type-badge {
+      display: inline-block; padding: 6px 18px; border-radius: 100px;
+      background: rgba(240,192,64,.12); border: 1px solid rgba(240,192,64,.3);
+      color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .result-card {
+      background: var(--card); border: 1.5px solid rgba(240,192,64,.35); border-radius: var(--r2);
+      padding: 36px 32px; margin-bottom: 28px;
+      box-shadow: 0 0 48px rgba(240,192,64,.08);
+    }
+    .result-card h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; letter-spacing: -.5px; margin-bottom: 14px; }
+    .result-desc { color: var(--text2); font-size: .97rem; line-height: 1.7; margin-bottom: 24px; }
+    .result-barriers { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .result-barriers li { display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; color: var(--text2); }
+    .result-barriers li::before { content: '→'; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .result-cta-block {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: var(--r2); padding: 32px; text-align: center;
+    }
+    .result-cta-block h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: -.3px; margin-bottom: 10px; }
+    .result-cta-block p { color: var(--text2); font-size: .95rem; margin-bottom: 24px; line-height: 1.6; }
+    .btn-result {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; font-weight: 800; font-size: 1.05rem;
+      padding: 16px 40px; border-radius: 12px; text-decoration: none; border: none; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(240,192,64,.3);
+      position: relative; overflow: hidden;
+    }
+    .btn-result::before {
+      content: ''; position: absolute;
+      top: 0; left: -120%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: skewX(-20deg);
+      animation: btnSheen 5s ease infinite;
+    }
+    .btn-result:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(240,192,64,.4); }
+
+    /* ── ABOUT ── */
+    .about-section { background: var(--bg2); border-top: 1px solid var(--border); }
+    .about-inner { display: grid; grid-template-columns: 260px 1fr; gap: 60px; align-items: start; }
+    .about-photo-wrap { position: sticky; top: 88px; }
+    .about-photo-circle {
+      width: 180px; height: 180px; border-radius: 50%;
+      overflow: hidden; margin-bottom: 18px;
+      border: 2px solid rgba(240,192,64,.3);
+    }
+    .about-photo-circle img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .about-name { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+    .about-role { font-size: .85rem; color: var(--text2); }
+    .tg-link {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .8rem; color: var(--text2); text-decoration: none;
+      transition: color .2s;
+    }
+    .tg-link:hover { color: #229ED9; }
+    .about-text p { color: var(--text2); font-size: .97rem; line-height: 1.75; margin-bottom: 18px; }
+    .about-text p strong { color: var(--text); }
+    .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+    .fact-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--gold-faint); border: 1px solid rgba(240,192,64,.2);
+      color: var(--gold); border-radius: 8px; padding: 10px 14px;
+      font-size: .82rem; font-weight: 600; line-height: 1.35;
+    }
+    @media(max-width:768px){
+      .about-inner { grid-template-columns: 1fr; }
+      .about-photo-wrap { position: static; }
+      .about-photo-circle { width: 130px; height: 130px; }
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--bg); }
+    .faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden; transition: border-color .2s;
+      position: relative; --mx: -999px; --my: -999px;
+    }
+    .faq-item::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(300px circle at var(--mx) var(--my), rgba(240,192,64,.06), transparent 65%);
+      pointer-events: none;
+    }
+    .faq-item:hover { border-color: var(--border2); }
+    .faq-q {
+      width: 100%; background: none; border: none; text-align: left;
+      color: var(--text); font-size: .95rem; font-weight: 600;
+      padding: 18px 22px; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-q::after {
+      content: '+'; font-size: 1.4rem; font-weight: 300; color: var(--gold);
+      flex-shrink: 0; transition: transform .25s;
+    }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, padding .25s;
+      font-size: .9rem; color: var(--text2); line-height: 1.7;
+      padding: 0 22px;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 22px 18px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 24px 32px;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+    }
+    .footer-links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .footer-link {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 18px;
+      color: var(--text); font-size: .85rem; font-weight: 600; text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .footer-link:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-copy { font-size: .78rem; color: var(--text3); }
+
+    /* ── TELEGRAM FLOAT ── */
+    .tg-float {
+      position: fixed; bottom: 28px; right: 24px; z-index: 91;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #229ED9;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(34,158,217,.45);
+      text-decoration: none;
+      opacity: 0; pointer-events: none;
+      transition: opacity .4s, transform .2s, box-shadow .2s;
+    }
+    .tg-float.show { opacity: 1; pointer-events: auto; }
+    .tg-float:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 28px rgba(34,158,217,.55); }
+    .tg-float svg { width: 26px; height: 26px; fill: #fff; }
+    .tg-float-tooltip {
+      position: absolute; right: 62px; top: 50%; transform: translateY(-50%);
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--text); font-size: .78rem; font-weight: 600;
+      padding: 7px 12px; border-radius: 8px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity .2s;
+    }
+    .tg-float:hover .tg-float-tooltip { opacity: 1; }
+    @media(max-width:680px){ .tg-float { bottom: 20px; right: 16px; width: 48px; height: 48px; } }
+
+    /* ── MOBILE FLOAT CTA ── */
+    .float-cta {
+      display: none; position: fixed; bottom: 20px; left: 16px; right: 16px; z-index: 90;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; font-weight: 800; font-size: 1rem;
+      padding: 16px; border-radius: 14px; text-align: center; text-decoration: none;
+      box-shadow: 0 8px 32px rgba(240,192,64,.35); transition: opacity .3s;
+    }
+    @media(max-width:680px){ .float-cta { display: block; right: 80px; } }
+
+    /* ── SHEEN on primary ── */
+    .btn-primary::before {
+      content: ''; position: absolute;
+      top: 0; left: -120%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: skewX(-20deg);
+      animation: btnSheen 5s ease infinite;
+    }
+
+    /* ── MID-QUIZ TESTIMONIAL ── */
+    .quiz-mid-testi {
+      margin-top: 16px; padding: 14px 18px;
+      background: var(--gold-faint); border: 1px solid rgba(240,192,64,.15);
+      border-radius: 10px; animation: fadeInUp .35s ease;
+    }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+    .qmt-quote { font-size: .87rem; color: var(--text2); line-height: 1.65; margin-bottom: 8px; font-style: italic; }
+    .qmt-author { font-size: .75rem; color: var(--gold); font-weight: 700; }
+
+    /* ── RESTORE BANNER ── */
+    #restore-banner {
+      display: none; background: rgba(240,192,64,.08); border: 1px solid rgba(240,192,64,.25);
+      border-radius: 12px; padding: 14px 20px; margin-bottom: 24px;
+      display: none; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    #restore-banner.show { display: flex; }
+    .restore-text { font-size: .88rem; color: var(--text2); }
+    .restore-text strong { color: var(--gold); }
+    .restore-btns { display: flex; gap: 8px; }
+    .btn-restore {
+      padding: 8px 16px; border-radius: 8px; font-size: .82rem; font-weight: 700;
+      cursor: pointer; border: none; transition: opacity .2s;
+    }
+    .btn-restore.primary { background: var(--gold); color: #000; }
+    .btn-restore.secondary { background: transparent; border: 1px solid var(--border2); color: var(--text2); }
+    .btn-restore:hover { opacity: .8; }
+
+    /* ── URGENCY BADGE ── */
+    .urgency-badge {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.2);
+      border-radius: 8px; padding: 10px 14px; margin-bottom: 18px;
+      font-size: .83rem; color: #f87171; font-weight: 600;
+    }
+    .urgency-dot { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; animation: pulse 1.5s infinite; flex-shrink: 0; }
+
+    /* ── BOT LINK IN SUCCESS ── */
+    .bot-link-block {
+      display: none; margin-top: 16px;
+      background: rgba(34,158,217,.08); border: 1px solid rgba(34,158,217,.2);
+      border-radius: 10px; padding: 14px 18px; text-align: center;
+    }
+    .bot-link-block.show { display: block; }
+    .bot-link-block p { font-size: .85rem; color: var(--text2); margin-bottom: 10px; }
+    .btn-bot {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #229ED9; color: #fff; font-weight: 700; font-size: .9rem;
+      padding: 10px 22px; border-radius: 8px; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn-bot:hover { opacity: .88; }
+
+    /* ── PAID SUCCESS MODAL ── */
+    #paid-success-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    #paid-success-modal.show { display: flex; }
+    .psm-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation: psmFadeIn .3s ease;
+    }
+    .psm-card {
+      position: relative; z-index: 1;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      padding: 48px 40px 40px;
+      max-width: 520px; width: 100%;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(0,0,0,.6);
+      animation: psmSlideUp .4s cubic-bezier(.22,1,.36,1);
+    }
+    .psm-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg,#22c55e22,#22c55e44);
+      border: 2px solid #22c55e55;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 24px;
+      animation: psmPop .5s .2s cubic-bezier(.22,1,.36,1) both;
+    }
+    .psm-title {
+      font-size: clamp(1.6rem,4vw,2.1rem);
+      font-weight: 900; letter-spacing: -.5px;
+      margin-bottom: 14px; color: #fff;
+    }
+    .psm-desc {
+      color: #aaa; font-size: .97rem; line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .psm-divider {
+      height: 1px; background: rgba(255,255,255,.06);
+      margin: 0 0 28px;
+      border-radius: 1px;
+    }
+    .psm-sub {
+      font-size: .78rem; color: #888; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em;
+    }
+    .psm-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000;
+      font-weight: 800; font-size: .97rem;
+      padding: 14px 28px; border-radius: 12px;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .psm-btn:hover { opacity: .88; transform: translateY(-1px); }
+    .psm-close {
+      position: absolute; top: 16px; right: 18px;
+      background: rgba(255,255,255,.07); border: none;
+      color: #888; font-size: 1.1rem; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, color .2s;
+    }
+    .psm-close:hover { background: rgba(255,255,255,.14); color: #fff; }
+    @keyframes psmFadeIn { from { opacity:0 } to { opacity:1 } }
+    @keyframes psmSlideUp { from { opacity:0; transform:translateY(28px) scale(.97) } to { opacity:1; transform:none } }
+    @keyframes psmPop { from { transform:scale(.5); opacity:0 } to { transform:scale(1); opacity:1 } }
+
+    /* ── CENTER UTIL ── */
+    .text-center { text-align: center; }
+    .mt-40 { margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-dot">🧲</div>
+    Искусство продаж
+  </a>
+  <div class="nav-right">
+    <a href="/" class="nav-back">← Главная</a>
+    <a href="#quiz-section" class="nav-cta">Пройти диагностику</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Личный разбор · Читает Шамиль
+  </div>
+
+  <h1>Ты прокачиваешь инструменты.<br><em>А доход не растёт.</em></h1>
+
+  <p class="hero-sub">
+    Шамиль читает ответы лично и находит где конкретно ты теряешь деньги. 5 тематических блоков — точный диагноз за 15 минут.
+  </p>
+
+  <a href="#quiz-section" class="btn-primary">
+    Пройти диагностику бесплатно
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <div class="hero-note">
+    <span>⏱ 15–20 минут</span>
+    <span>✦ 15 вопросов · 5 блоков</span>
+    <span>✦ Без давления</span>
+  </div>
+
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;margin-bottom:4px;">
+    <span style="font-size:.8rem;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.25);color:var(--gold);padding:5px 14px;border-radius:100px;font-weight:600;">Шамиль читает лично — не бот</span>
+    <span style="font-size:.8rem;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.2);color:#16a34a;padding:5px 14px;border-radius:100px;font-weight:600;">Ответ в течение 24 часов</span>
+    <span style="font-size:.8rem;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.25);color:var(--gold);padding:5px 14px;border-radius:100px;font-weight:600;">Бесплатно</span>
+  </div>
+
+  <div class="hero-social-proof">
+    <div class="hero-avatars">
+      <div class="hero-avatar">О</div>
+      <div class="hero-avatar">М</div>
+      <div class="hero-avatar">Ф</div>
+      <div class="hero-avatar">С</div>
+    </div>
+    <p class="hero-proof-text"><strong>80+ фрилансеров</strong> уже прошли · Олег, Марат, Фёдор, Самат пробили свой потолок</p>
+  </div>
+</section>
+
+<!-- PAIN PATTERNS -->
+<section class="section pain-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Узнаёшь себя?</div>
+    <h2 class="section-title reveal">Дело не в навыках. И не в лени.</h2>
+    <p class="section-sub reveal">Это не недостаток опыта. У каждого — свой конкретный барьер. Диагностика его находит.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-ico-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>«Снова согласился на меньше»</h3>
+        <p>Клиент сказал «дорого» — ты предложил скидку. Сделал за 35к то за что хотел 70к. «Дорого» — это начало разговора, не его конец. Просто никто не объяснил как именно.</p>
+      </div>
+      <div class="pain-card reveal reveal-d1">
+        <div class="pain-ico-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg>
+        </div>
+        <h3>«Неловко говорить о деньгах первым»</h3>
+        <p>Проще сделать хорошую работу и надеяться что сами предложат нормально. Не предлагают. А ты молчишь — потому что страшно выглядеть жадным или навязчивым.</p>
+      </div>
+      <div class="pain-card reveal reveal-d2">
+        <div class="pain-ico-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </div>
+        <h3>«Клиенты есть — но откуда придут следующие?»</h3>
+        <p>Хороший месяц — везёт. Плохой — паника. Сарафан и биржа — это не система, это случайность. Без системы нет спокойствия, даже когда деньги есть.</p>
+      </div>
+      <div class="pain-card reveal">
+        <div class="pain-ico-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+        </div>
+        <h3>«Работаю больше — доход тот же»</h3>
+        <p>Берёшь ещё один проект, устаёшь сильнее. 100–150к — потолок уже несколько месяцев. Больше работы не помогает. Значит дело не в количестве — в чём-то другом.</p>
+      </div>
+      <div class="pain-card reveal reveal-d1">
+        <div class="pain-ico-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>«Ещё один курс. Доход не вырос.»</h3>
+        <p>Изучил инструменты, прокачал навык. Всё делаешь правильно. А доход тот же — потому что проблема не в инструментах. Мозг ищет определённость в «ещё одном уроке», а барьер совсем в другом.</p>
+      </div>
+      <div class="pain-card reveal reveal-d2">
+        <div class="pain-ico-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3>«Хочется больше — но без давления и скриптов»</h3>
+        <p>Видишь как продают агрессивно — не хочешь так. Поэтому не продаёшь вообще. Но между «впаривать» и «ждать» есть третий путь — просто никто не показал.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-40">
+      <a href="#quiz-section" class="btn-secondary">Узнать свой барьер →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TYPES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-label reveal">4 типа фрилансера</div>
+      <h2 class="section-title reveal">У каждого свой барьер — нужно понять свой</h2>
+      <p class="section-sub center reveal">Совет «просто продавай больше» не работает, потому что у каждого — разная причина застревания.</p>
+    </div>
+    <div class="types-grid">
+      <div class="type-card reveal">
+        <span class="type-ico">🦥</span>
+        <h3>Невидимка</h3>
+        <p>Делаешь хорошо — но клиентов мало. Непонятно как объяснить ценность и почему именно ты, а не другой.</p>
+      </div>
+      <div class="type-card reveal reveal-d1">
+        <span class="type-ico">🎢</span>
+        <h3>Хаотик</h3>
+        <p>Клиенты есть, но приходят случайно. Непонятно почему одни сделки закрываются, а другие — нет.</p>
+      </div>
+      <div class="type-card reveal reveal-d2">
+        <span class="type-ico">🧊</span>
+        <h3>Замороженный</h3>
+        <p>Знаешь что делать — но не делаешь. Что-то внутри тормозит: страх отказа, страх цены, страх звонков.</p>
+      </div>
+      <div class="type-card reveal reveal-d3">
+        <span class="type-ico">💪</span>
+        <h3>Готовый к росту</h3>
+        <p>Всё работает, но доход стоит на месте. Понятно что нужно поднимать чек — непонятно как это сделать без потери клиентов.</p>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="#quiz-section" class="btn-secondary">Узнать свой тип →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-circle">
+          <img src="photo.jpg" alt="Шамиль" />
+        </div>
+        <div class="about-name">Шамиль Мухаметзянов</div>
+        <div class="about-role">Учу продавать — оставаясь собой</div>
+        <div style="margin-top:18px;display:flex;flex-direction:column;gap:8px;">
+          <a href="https://t.me/localframe" target="_blank" class="tg-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#229ED9"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.94z"/></svg>
+            @localframe — основной канал
+          </a>
+          <a href="https://t.me/ozareniecases" target="_blank" class="tg-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#229ED9"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.94z"/></svg>
+            @ozareniecases — кейсы учеников
+          </a>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-d1">
+        <div class="section-label" style="margin-bottom:18px;">Немного обо мне</div>
+
+        <p>Служил в армии за 40 000 ₽ в месяц. Потом банк — 100к потолок. Потерял 500к на крипте, вернулся из Вьетнама без денег. Пошёл продавать сайты — <strong>за первую неделю закрыл на 500 000 ₽.</strong> Не потому что перестроился и стал другим. А потому что наконец понял как говорить о ценности — и перестал бояться называть цену.</p>
+
+        <p>С тех пор вложил <strong>2+ млн рублей</strong> в развитие: мастермайнды, наставничество, психология переговоров. Прошёл от 100к до <strong>1 млн/мес за 1.5 года</strong> — и веду других тем же маршрутом.</p>
+
+        <p>Провёл <strong>200+ личных разборов</strong>. Вижу каждый тип барьера с первых строк ответов — и точно знаю что именно блокирует рост в твоём конкретном случае.</p>
+
+        <!-- Подход -->
+        <div style="margin:24px 0;padding:18px 20px 18px 24px;background:var(--gold-faint);border:1px solid rgba(240,192,64,.15);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Мой подход</div>
+          <p style="font-size:.92rem;color:var(--text);line-height:1.7;margin:0;">Я не учу скриптам и холодным звонкам. Помогаю продавать так, как ты уже умеешь разговаривать — честно, прямо, без ощущения что давишь. Не нужно становиться другим человеком. Нужно убрать один конкретный барьер — тот, что держит тебя прямо сейчас.</p>
+        </div>
+
+        <div class="about-facts">
+          <div class="fact-chip">⚡ 0 → 500к за первую неделю</div>
+          <div class="fact-chip">📈 100к → 1 млн/мес за 1.5 года</div>
+          <div class="fact-chip">🎓 200+ личных разборов</div>
+          <div class="fact-chip">💎 2+ млн вложил в развитие</div>
+          <div class="fact-chip">🌍 Работаю из любой точки мира</div>
+          <div class="fact-chip">✅ Все кейсы публичны — с реальными цифрами</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">Реальные результаты</div>
+    <h2 class="section-title reveal">Что происходит после разбора</h2>
+    <p class="section-sub reveal">Конкретные люди, конкретные цифры. Не «стало лучше» — а что именно изменилось и почему.</p>
+
+    <div class="cases-grid" style="margin-top:40px;">
+
+      <!-- Олег -->
+      <div class="case-card reveal">
+        <div class="case-result-badge">420 000 ₽ за 11 дней</div>
+        <div class="case-ab">
+          <div class="case-ab-block was">
+            <div class="case-ab-label">Было</div>
+            <div class="case-ab-text">Полгода прокрастинация, самобичевание. Декабрь закрыл еле-еле на 80к. Боялся встреч и звонков — избегал продаж.</div>
+          </div>
+          <div class="case-ab-block became">
+            <div class="case-ab-label">Стало</div>
+            <div class="case-ab-text">420 000 ₽ за первые 11 дней января. Заходит в продажи уверенно и с кайфом. Видит возможности там, где раньше видел стресс.</div>
+          </div>
+        </div>
+        <p class="case-insight">«Перестал бояться звонков. Стал заходить в продажи с кайфом — впервые в жизни.»</p>
+        <div class="case-footer">
+          <div class="case-avatar">О</div>
+          <div><div class="case-name">Олег</div><div class="case-role">Digital-агентство</div></div>
+        </div>
+      </div>
+
+      <!-- Марат -->
+      <div class="case-card reveal reveal-d1">
+        <div class="case-result-badge">280к → 600к + своё обучение</div>
+        <div class="case-ab">
+          <div class="case-ab-block was">
+            <div class="case-ab-label">Было</div>
+            <div class="case-ab-text">Зарабатывал 280к, но не верил что работа может стоить нормальных денег. Всё делал сам — забирал задачи у сотрудников. Целей не было вообще, понимания куда двигаться — ноль.</div>
+          </div>
+          <div class="case-ab-block became">
+            <div class="case-ab-label">Стало</div>
+            <div class="case-ab-text">Выручка 600 000 ₽. Запустил собственное обучение по дизайну, собрал команду. Впервые ощутил что движется туда, куда сам хочет.</div>
+          </div>
+        </div>
+        <p class="case-insight">«Запустил своё обучение. Впервые начал двигаться туда, куда сам хочу — а не туда, куда тянут клиенты.»</p>
+        <div class="case-footer">
+          <div class="case-avatar">М</div>
+          <div><div class="case-name">Марат</div><div class="case-role">Дизайнер, основатель студии</div></div>
+        </div>
+      </div>
+
+      <!-- Федя -->
+      <div class="case-card reveal">
+        <div class="case-result-badge">Впервые пробил 300к</div>
+        <div class="case-ab">
+          <div class="case-ab-block was">
+            <div class="case-ab-label">Было</div>
+            <div class="case-ab-text">Потолок один и тот же — каждый месяц до 300к не доходил. Продажи шли рывками. Непонятно почему одни сделки закрываются, другие — нет.</div>
+          </div>
+          <div class="case-ab-block became">
+            <div class="case-ab-label">Стало</div>
+            <div class="case-ab-text">Впервые в жизни 300 000 ₽ за месяц. Говорит: «Это просто новая точка отсчёта» — больше не воспринимает 300к как потолок.</div>
+          </div>
+        </div>
+        <p class="case-insight">«300к — это просто новая точка отсчёта. Больше не воспринимаю её как потолок.»</p>
+        <div class="case-footer">
+          <div class="case-avatar">Ф</div>
+          <div><div class="case-name">Фёдор</div><div class="case-role">Веб-разработчик, Новосибирск</div></div>
+        </div>
+      </div>
+
+      <!-- Самат -->
+      <div class="case-card reveal reveal-d1">
+        <div class="case-result-badge">Вышел на 500к из спокойствия</div>
+        <div class="case-ab">
+          <div class="case-ab-block was">
+            <div class="case-ab-label">Было</div>
+            <div class="case-ab-text">Двигался от страха: просадка — стресс, хаотичные действия, выгорание. Продажи были, но всё держалось на морально-волевых. Системы — ноль.</div>
+          </div>
+          <div class="case-ab-block became">
+            <div class="case-ab-label">Стало</div>
+            <div class="case-ab-text">500 000 ₽ в месяц. Впервые ощутил что рост идёт из спокойствия, а не из тревоги. Перестал зависеть от настроения и хаотичных действий.</div>
+          </div>
+        </div>
+        <p class="case-insight">«Впервые рост идёт из спокойствия, а не из тревоги. Перестал зависеть от настроения.»</p>
+        <div class="case-footer">
+          <div class="case-avatar">С</div>
+          <div><div class="case-name">Самат</div><div class="case-role">Таргетолог</div></div>
+        </div>
+      </div>
+
+      <!-- Егор -->
+      <div class="case-card reveal" style="grid-column: 1 / -1; max-width: 580px; margin-inline: auto;">
+        <div class="case-result-badge">0 → 100 000 ₽ с нуля</div>
+        <div class="case-ab">
+          <div class="case-ab-block was">
+            <div class="case-ab-label">Было</div>
+            <div class="case-ab-text">Заработок — ноль. Много лет обманывал себя: «нельзя получать удовольствие, пока не заработал». Попытки продавать заканчивались ничем. «Был трупом ходячим».</div>
+          </div>
+          <div class="case-ab-block became">
+            <div class="case-ab-label">Стало</div>
+            <div class="case-ab-text">100 000 ₽ за первый месяц с нуля. Освоил холодные продажи, разбил цель на ежедневные шаги. Впервые начал получать удовольствие от процесса.</div>
+          </div>
+        </div>
+        <p class="case-insight">«Впервые начал получать удовольствие от самого процесса продаж. Раньше избегал — теперь захожу сам.»</p>
+        <div class="case-footer">
+          <div class="case-avatar">Е</div>
+          <div><div class="case-name">Егор</div><div class="case-role">Продажи маркетинговых услуг</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center" style="margin-top:36px;">
+      <a href="https://t.me/ozareniecases" target="_blank" class="btn-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.94z"/></svg>
+        Все кейсы учеников → @ozareniecases
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section steps-section">
+  <div class="section-inner">
+    <div class="text-center">
+      <div class="section-label reveal">Как это работает</div>
+      <h2 class="section-title reveal">Три шага — и ты знаешь где именно застрял</h2>
+    </div>
+    <div class="steps-row" style="margin-top:48px;">
+      <div class="step-item reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">15 вопросов · 5 блоков — пишешь честно</div>
+        <div class="step-desc">Пять тематических блоков по 3 вопроса: точка А, место разрыва, эмоциональный узел, сделки и паттерны, цель. Своими словами, без прикрас. Занимает 15–20 минут.</div>
+      </div>
+      <div class="step-item reveal reveal-d1">
+        <div class="step-num">02</div>
+        <div class="step-title">Шамиль читает лично</div>
+        <div class="step-desc">Никакого автомата. Шамиль сам читает ответы — и видит конкретный барьер. Обычно он один, и именно он держит тебя на текущем доходе.</div>
+      </div>
+      <div class="step-item reveal reveal-d2">
+        <div class="step-num">03</div>
+        <div class="step-title">Шамиль пишет в Telegram</div>
+        <div class="step-desc">В течение 24 часов — конкретно: какой барьер, почему он держит, что менять прямо сейчас. Хочешь глубже — письменный разбор за 990 ₽ или личный созвон за 5 000 ₽.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="section quiz-section" id="quiz-section">
+  <div class="quiz-wrap">
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:32px;flex-wrap:wrap;">
+  <div style="display:flex;">
+    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0c040,#e07820);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;">О</div>
+    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0c040,#e07820);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;margin-left:-7px;">С</div>
+    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0c040,#e07820);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;margin-left:-7px;">М</div>
+    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0c040,#e07820);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;margin-left:-7px;">Д</div>
+  </div>
+  <p style="font-size:.87rem;color:var(--text2);"><strong style="color:var(--gold);">80+ фрилансеров</strong> уже прошли · Шамиль читает ответы лично · 15 вопросов · 5 блоков · ответ в течение часа</p>
+</div>
+    <div class="quiz-header">
+      <div class="section-label" style="justify-content:center;">Диагностика</div>
+      <h2 class="section-title">5 блоков о твоих продажах</h2>
+      <p style="color:var(--text2);">15 вопросов, сгруппированных по смыслу. Пиши как есть — без приукрашиваний. Чем честнее, тем точнее Шамиль увидит где затык.</p>
+    </div>
+
+    <!-- Restore progress banner -->
+    <div id="restore-banner">
+      <div class="restore-text">Ты уже начинал диагностику. <strong>Продолжить с места где остановился?</strong></div>
+      <div class="restore-btns">
+        <button class="btn-restore primary" onclick="restoreQuiz()">Продолжить</button>
+        <button class="btn-restore secondary" onclick="startFresh()">Начать заново</button>
+      </div>
+    </div>
+
+    <div id="quiz-body">
+      <div class="quiz-step-header">
+        <span class="quiz-step-label">Шаг <span id="step-num">1</span> из 5</span>
+        <span class="quiz-step-pct" id="step-pct">0%</span>
+      </div>
+      <div class="quiz-step-bar-bg">
+        <div class="quiz-step-bar-fill" id="step-bar" style="width:0%"></div>
+      </div>
+      <div class="step-dots" id="step-dots"></div>
+
+      <div class="question-card" id="block-card">
+        <div class="quiz-time-badge" id="block-time">~2–3 мин</div>
+        <h2 class="block-title" id="block-title">Точка А</h2>
+        <p class="block-subtitle" id="block-subtitle">Уточним откуда стартуем...</p>
+        <div class="block-questions" id="block-questions"></div>
+
+        <div class="quiz-nav">
+          <button class="btn-back" id="btn-back">← Назад</button>
+          <button class="btn-next" id="btn-next">Далее →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- lead form -->
+    <div class="question-card" id="lead-form-card" style="display:none">
+      <div class="lead-form-title">Ответы получены — выбери формат разбора</div>
+      <div class="lead-form-sub">Шамиль читает лично. Не команда, не автоматика — он сам.</div>
+
+      <!-- Urgency -->
+      <div class="urgency-badge">
+        <div class="urgency-dot"></div>
+        Шамиль читает ответы лично — обрабатывается вручную
+      </div>
+
+      <div class="format-chooser">
+
+        <!-- FREE -->
+        <div class="format-card active" id="fc-free" onclick="selectFormat('free')">
+          <div class="fc-check"></div>
+          <div class="fc-badge">Базовый</div>
+          <div class="fc-title">Найти барьер</div>
+          <div class="fc-free-price">Бесплатно</div>
+          <div class="fc-divider"></div>
+          <ul class="fc-list">
+            <li class="yes"><span class="fc-ico">✓</span> Шамиль называет главный барьер</li>
+            <li class="no"><span class="fc-ico">—</span> Без плана действий</li>
+            <li class="no"><span class="fc-ico">—</span> Без конкретных шагов</li>
+            <li class="no"><span class="fc-ico">—</span> Без разбора ошибок</li>
+          </ul>
+        </div>
+
+        <!-- PAID -->
+        <div class="format-card fc-paid-card" id="fc-paid" onclick="selectFormat('paid')">
+          <div class="fc-check"></div>
+          <div class="fc-recommended">Рекомендуем</div>
+          <div class="fc-title">Убрать барьер</div>
+          <div class="fc-price">990 ₽</div>
+          <div class="fc-divider"></div>
+          <ul class="fc-list">
+            <li class="yes"><span class="fc-ico">✓</span> Шамиль называет барьер</li>
+            <li class="yes"><span class="fc-ico">✓</span> Конкретные точки потерь</li>
+            <li class="yes"><span class="fc-ico">✓</span> Что сделать на этой неделе</li>
+            <li class="yes"><span class="fc-ico">✓</span> Разбор ошибок в продажах</li>
+            <li class="yes"><span class="fc-ico">✓</span> План на 30 дней</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="field-group">
+        <label>Имя</label>
+        <input type="text" id="lf-name" placeholder="Как тебя зовут" />
+      </div>
+      <div class="field-group">
+        <label>Telegram</label>
+        <input type="text" id="lf-tg" placeholder="@username" />
+      </div>
+      <div class="field-group" id="email-field-group" style="display:none">
+        <label>Email <span style="font-size:.78rem;color:var(--text3);font-weight:400;">(для чека об оплате)</span></label>
+        <input type="email" id="lf-email" placeholder="you@example.com" />
+      </div>
+      <input type="text" id="lf-website" style="display:none" tabindex="-1" autocomplete="off" />
+      <button class="btn-submit" id="btn-submit" onclick="submitLead()">Получить общий ответ бесплатно →</button>
+      <p class="privacy-note">Данные не передаются третьим лицам. Без спама.</p>
+      <div class="success-msg" id="success-msg">
+        <h3>✅ Готово — ответы у Шамиля</h3>
+        <p id="success-text">Он лично прочитает и напишет в Telegram в течение часа. Держи телефон рядом.</p>
+        <div class="bot-link-block" id="bot-link-block">
+          <p>Нажми ниже — бот пришлёт уведомление когда Шамиль выйдет на связь</p>
+          <a href="https://t.me/artofsales_shamil_bot?start=quiz" target="_blank" class="btn-bot" id="bot-cta-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+            Получить уведомление от бота
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAID SUCCESS MODAL (shown via ?paid=ok) -->
+<div id="paid-success-modal" role="dialog" aria-modal="true" aria-label="Оплата прошла">
+  <div class="psm-overlay" id="psm-overlay"></div>
+  <div class="psm-card">
+    <button class="psm-close" id="psm-close" aria-label="Закрыть">✕</button>
+    <div class="psm-icon">✓</div>
+    <h2 class="psm-title">Оплата прошла!</h2>
+    <p class="psm-desc">Шамиль получил уведомление об оплате и твои ответы.<br>Письменный разбор придёт в Telegram в течение&nbsp;24&nbsp;часов.</p>
+    <div class="psm-divider"></div>
+    <p class="psm-sub">Хочешь уточнить детали?</p>
+    <a href="https://t.me/vodasolenaya" target="_blank" class="psm-btn">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.94z"/></svg>
+      Написать Шамилю
+    </a>
+  </div>
+</div>
+
+<!-- RESULT -->
+<section id="result-section" style="display:none;padding:88px 24px;">
+  <div class="result-wrap">
+    <div class="result-card" style="text-align:center;">
+      <div style="font-size:3rem;margin-bottom:16px;">✅</div>
+      <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;letter-spacing:-.5px;margin-bottom:14px;">Ответы у Шамиля</h2>
+      <p class="result-desc">Он сам прочитает и напишет тебе в Telegram. Обычно в течение часа — держи телефон рядом.</p>
+    </div>
+    <div class="result-cta-block">
+      <h3 id="result-cta-title">Шамиль скоро напишет</h3>
+      <p id="result-cta-desc">Он читает лично — и в Telegram напишет когда увидит барьер. Обычно это в течение часа.</p>
+      <a href="https://t.me/vodasolenaya" target="_blank" class="btn-result">
+        Написать Шамилю в Telegram →
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section">
+  <div class="section-inner">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">Частые вопросы</h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">Что приходит в бесплатном ответе?</button>
+        <div class="faq-a">Шамиль читает твои ответы и пишет в Telegram — какой у тебя главный барьер роста. Без детального плана и конкретных шагов — это общий вывод по ситуации.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Что входит в детальный разбор за 990 ₽?</button>
+        <div class="faq-a">Конкретные точки где ты теряешь деньги прямо сейчас, что сделать на этой неделе, план на 30 дней под твою ситуацию и разбор ошибок в твоих продажах — всё письменно в Telegram лично от Шамиля.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Что будет после разбора?</button>
+        <div class="faq-a">Уйдёшь с пониманием своего конкретного барьера и что с ним делать. Дальше — или начнём работать глубже (созвон 5 000 ₽ или полная программа), или нет. Без давления.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Зачем платить 990 ₽ — если есть бесплатный вариант?</button>
+        <div class="faq-a">Бесплатно — это общий барьер, одна фраза. За 990 ₽ — детальный разбор твоей конкретной ситуации с планом. Большинство окупают это первой же сделкой на новый чек. Если ценности нет — вернём деньги.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Я уже проходил курсы по продажам — чем это отличается?</button>
+        <div class="faq-a">Большинство курсов учат технике: скрипты, этапы, возражения. Но проблема фрилансеров не в незнании техники — это страх называть цену, неловкость при разговоре о деньгах, отсутствие уверенности в своей ценности. Здесь работаем с этим, а не со скриптами.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Подходит для моей ниши?</button>
+        <div class="faq-a">Да. Работали SMM-щики, таргетологи, дизайнеры, веб-разработчики, копирайтеры, видеомонтажёры, маркетологи. Барьеры в продажах у всех похожи — меняются детали, не суть.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Когда ждать первых изменений?</button>
+        <div class="faq-a">После разбора многие закрывают первую сделку на новый чек в первые 1–2 недели. Это не гарантия — зависит от того насколько быстро применяешь. Но обычно быстро, потому что работаем с конкретным барьером а не с абстрактными советами.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Я интроверт — мне это подойдёт?</button>
+        <div class="faq-a">Особенно подойдёт. Интроверты часто продают лучше экстравертов — умеют слушать, не давят, вникают. Продажи на 80% про то чтобы понять клиента, а не про «говорить красиво». Работаем с тем что есть.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">У меня клиенты с биржи и сарафана — зачем что-то менять?</button>
+        <div class="faq-a">Биржа и сарафан — не система, а везение. Сегодня есть, завтра нет. Система — когда ты сам управляешь потоком: знаешь откуда придёт следующий клиент и называешь цену без страха потерять его.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Кейсы настоящие?</button>
+        <div class="faq-a">Да. Реальные люди, реальные цифры, реальные ниши. Канал @ozareniecases — там всё публично, можно проверить.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Нет времени. Можно позже?</button>
+        <div class="faq-a">Диагностика занимает 5–10 минут. Созвон — 30. Это не курс на месяц. Если совсем некогда — выбери письменный формат, Шамиль пришлёт разбор текстом.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="https://t.me/localframe" target="_blank" class="footer-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+      Telegram-канал
+    </a>
+    <a href="https://t.me/ozareniecases" target="_blank" class="footer-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+      Кейсы учеников
+    </a>
+    <a href="/" class="footer-link">← Основной сайт</a>
+  </div>
+  <div class="footer-copy">© 2026 Шамиль Мухаметзянов · Искусство продаж</div>
+</footer>
+
+<!-- TELEGRAM FLOAT -->
+<a href="https://t.me/vodasolenaya" target="_blank" class="tg-float" id="tg-float">
+  <span class="tg-float-tooltip">Написать Шамилю</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+</a>
+
+<!-- MOBILE FLOAT CTA -->
+<a href="#quiz-section" class="float-cta">Пройти диагностику бесплатно →</a>
+
+<script>
+  /* ── BOT USERNAME — заменить на реальный после создания бота ── */
+  const BOT_USERNAME = 'artofsales_shamil_bot'; // например: shamil_sales_bot
+
+  /* ── QUIZ DATA (5 блоков по 3 вопроса) ── */
+  const BLOCKS = [
+    {
+      id: 1,
+      title: "Точка А",
+      subtitle: "Уточним откуда стартуем и что уже пробовал.",
+      time: "~2–3 мин",
+      questions: [
+        {
+          text: "Сколько зарабатываешь сейчас в среднем, откуда приходят клиенты — и насколько это стабильно?",
+          context: "Мне нужна конкретика — не чтобы оценить, а чтобы видеть с чем работать. Нет правильного ответа.",
+          placeholder: "Например: 80–100к, в основном сарафан и иногда биржа. Бывают месяцы по 50к — нестабильно..."
+        },
+        {
+          text: "Сколько хочешь зарабатывать — и к какому сроку? Не «больше» — конкретная цифра.",
+          context: "Конкретная цель — это не хвастовство. Это точка на карте. Без неё непонятно куда идти.",
+          placeholder: "Например: хочу выйти на 300к стабильно к концу года. Или: 200к через 3 месяца..."
+        },
+        {
+          text: "Что ты уже делал чтобы зарабатывать больше? Расскажи конкретно — и что из этого дало результат, а что нет.",
+          context: "Мне важно не предлагать то что ты уже пробовал. И понять что именно тормозило.",
+          placeholder: "Например: прошёл курс по таргету — стало больше клиентов, но ценник не вырос. Пробовал поднять цену — часть клиентов ушла..."
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Место разрыва",
+      subtitle: "Найдём где именно обрывается путь от твоей работы к деньгам.",
+      time: "~3–4 мин",
+      questions: [
+        {
+          text: "Что именно ты даёшь клиентам — какую проблему решаешь или какой результат создаёшь?",
+          context: "Не название профессии — а что конкретно меняется у клиента после работы с тобой.",
+          placeholder: "Например: настраиваю таргет так что заявки дешевеют в 2–3 раза. Или: делаю сайты которые конвертят, а не просто красиво выглядят..."
+        },
+        {
+          text: "Кому это нужно больше всего — как выглядит клиент с которым работать в кайф?",
+          context: "Большинство работают с теми кто пишет — а не с теми кого хотят. Это меняется когда есть система.",
+          placeholder: "Например: онлайн-школы с бюджетом от 200к/мес, которые хотят снизить стоимость лида..."
+        },
+        {
+          text: "Где на практике сейчас обрывается путь к деньгам?",
+          context: "Нет клиентов / есть интерес но не покупают / боюсь поднять цену / не умею предлагать — опиши своё.",
+          placeholder: "Например: клиенты приходят, но почти все говорят дорого. Или: не знаю где искать нормальных клиентов..."
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Эмоциональный узел",
+      subtitle: "Проверим что происходит внутри в ключевые моменты.",
+      time: "~3–4 мин",
+      questions: [
+        {
+          text: "Что чувствуешь когда называешь цену — особенно если она выше обычного?",
+          context: "Пиши честно — не то что должен чувствовать, а что реально происходит. Это самый важный момент.",
+          placeholder: "Например: волнуюсь, голос меняется. Или: нормально, но потом жду реакции с тревогой..."
+        },
+        {
+          text: "Что происходит внутри когда клиент говорит «дорого» или «я подумаю»?",
+          context: "Первая реакция — не обдуманный ответ. Именно она показывает где барьер.",
+          placeholder: "Например: сразу хочу предложить скидку. Или: внутри сжимается, думаю что потеряю клиента..."
+        },
+        {
+          text: "Что чувствуешь когда видишь коллегу который зарабатывает сильно больше тебя?",
+          context: "Первая эмоция — зависть, вдохновение, злость, безразличие? Здесь обычно тоже что-то важное.",
+          placeholder: "Например: завидую и думаю что он просто лучше меня. Или: вдохновляет, хочу так же..."
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Сделки и паттерны",
+      subtitle: "Разберём конкретные ситуации — в них виден повторяющийся паттерн.",
+      time: "~3–4 мин",
+      questions: [
+        {
+          text: "Вспомни последний раз когда называл цену клиенту — что произошло дальше?",
+          context: "Как он отреагировал, что ты ответил, чем закончилось. Пиши как помнишь — без прикрас.",
+          placeholder: "Например: назвал 60к, он сказал подумает — потом пропал. Или: сразу согласился, но я потом пожалел что не назвал больше..."
+        },
+        {
+          text: "Вспомни клиента или сделку которую потерял — что конкретно происходило в том разговоре?",
+          context: "На каком моменте пошло не так, что было сказано. В потерянных сделках всегда есть паттерн — он повторяется.",
+          placeholder: "Например: долго переписывались, потом пропал. Или: сказал дорого, я сделал скидку — он всё равно не купил..."
+        },
+        {
+          text: "Есть ли сделки или решения по клиентам о которых сейчас жалеешь? Что бы сделал иначе?",
+          context: "Не нужно анализировать — просто вспомни что первое приходит в голову.",
+          placeholder: "Например: взял клиента за дёшево потому что боялся что других не будет. Или: не предложил продолжение работы когда мог..."
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "Куда и что мешает",
+      subtitle: "Последнее — про цель и то что между тобой и ней.",
+      time: "~2–3 мин",
+      questions: [
+        {
+          text: "Есть ли рядом люди которые зарабатывают больше тебя и с которыми можно обсудить рост?",
+          context: "Окружение определяет потолок дохода сильнее чем навыки. Это неудобный факт — но важный.",
+          placeholder: "Например: есть пара знакомых кто зарабатывает больше, но мы не обсуждаем деньги. Или: в моём окружении все примерно на одном уровне..."
+        },
+        {
+          text: "Как выглядит твоя жизнь через год если всё пошло хорошо — конкретно?",
+          context: "Не красиво — честно. Цифры, как работаешь, что чувствуешь, что появилось в жизни.",
+          placeholder: "Например: зарабатываю 300к стабильно, работаю с 3–4 клиентами которых сам выбрал, не боюсь следующего месяца..."
+        },
+        {
+          text: "Что прямо сейчас мешает тебе прийти к тому что написал выше?",
+          context: "Последний вопрос — и самый важный. Иногда человек сам знает ответ. Просто не формулировал вслух. Пиши как есть.",
+          placeholder: "Например: не знаю как продавать без давления. Или: страшно поднять цену. Или: нет системы — каждый месяц с нуля..."
+        }
+      ]
+    }
+  ];
+
+  let currentBlock = 0;
+  // answers[blockIndex][questionIndex]
+  let answers = BLOCKS.map(b => b.questions.map(() => ''));
+  let selectedFormat = 'free';
+
+  /* ── LOCALSTORAGE ── */
+  function saveProgress() {
+    try {
+      localStorage.setItem('quiz_progress_v2', JSON.stringify({ currentBlock, answers, selectedFormat }));
+    } catch(e) {}
+  }
+
+  function loadProgress() {
+    try {
+      const d = JSON.parse(localStorage.getItem('quiz_progress_v2') || 'null');
+      if (d && Array.isArray(d.answers) && d.answers.length === BLOCKS.length) {
+        return d;
+      }
+    } catch(e) {}
+    return null;
+  }
+
+  function clearProgress() {
+    try { localStorage.removeItem('quiz_progress_v2'); } catch(e) {}
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+
+  function restoreQuiz() {
+    const d = loadProgress();
+    if (!d) return;
+    currentBlock = d.currentBlock || 0;
+    answers = d.answers;
+    selectedFormat = d.selectedFormat || 'free';
+    document.getElementById('restore-banner').classList.remove('show');
+    const fc = document.querySelector('.float-cta');
+    if (fc) fc.style.display = 'none';
+    renderBlock(currentBlock);
+  }
+
+  function startFresh() {
+    clearProgress();
+    document.getElementById('restore-banner').classList.remove('show');
+    const fc = document.querySelector('.float-cta');
+    if (fc) fc.style.display = 'none';
+    currentBlock = 0;
+    answers = BLOCKS.map(b => b.questions.map(() => ''));
+    renderBlock(0);
+  }
+
+  /* ── RENDER BLOCK ── */
+  function renderBlock(idx, scroll) {
+    const block = BLOCKS[idx];
+
+    // прогресс
+    const pct = Math.round((idx / BLOCKS.length) * 100);
+    document.getElementById('step-num').textContent = idx + 1;
+    document.getElementById('step-pct').textContent = pct + '%';
+    document.getElementById('step-bar').style.width = pct + '%';
+
+    // кружки
+    const dotsEl = document.getElementById('step-dots');
+    dotsEl.innerHTML = '';
+    BLOCKS.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'step-dot' + (i < idx ? ' done' : i === idx ? ' active' : '');
+      if (i >= idx) dot.textContent = i + 1;
+      dotsEl.appendChild(dot);
+    });
+
+    // карточка блока
+    document.getElementById('block-time').textContent = block.time;
+    document.getElementById('block-title').textContent = block.title;
+    document.getElementById('block-subtitle').textContent = block.subtitle;
+
+    const qContainer = document.getElementById('block-questions');
+    qContainer.innerHTML = '';
+    block.questions.forEach((q, qi) => {
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <div class="block-q-num">Вопрос ${qi + 1}</div>
+        <div class="block-q-text">${escapeHtml(q.text)}</div>
+        <div class="block-q-context">${escapeHtml(q.context)}</div>
+        <textarea class="q-textarea" rows="4" placeholder="${escapeHtml(q.placeholder)}" data-bi="${idx}" data-qi="${qi}">${escapeHtml(answers[idx][qi] || '')}</textarea>
+        <div class="q-char-hint">Чем подробнее — тем точнее разбор</div>
+      `;
+      qContainer.appendChild(div);
+    });
+
+    // сохранение ответов по input
+    qContainer.querySelectorAll('textarea').forEach(ta => {
+      ta.addEventListener('input', () => {
+        answers[+ta.dataset.bi][+ta.dataset.qi] = ta.value;
+        saveProgress();
+      });
+    });
+
+    // кнопка Назад
+    document.getElementById('btn-back').style.visibility = idx === 0 ? 'hidden' : 'visible';
+    // кнопка Далее
+    document.getElementById('btn-next').textContent = idx === BLOCKS.length - 1 ? 'Завершить →' : 'Далее →';
+
+    saveProgress();
+
+    // scroll to top of quiz only on explicit navigation
+    if (scroll) {
+      const qs = document.getElementById('quiz-section');
+      if (qs) qs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* ── NAV ── */
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (typeof ym !== 'undefined') {
+      ym(108665262, 'reachGoal', `quiz_block${currentBlock + 1}_done`);
+    }
+    if (currentBlock < BLOCKS.length - 1) {
+      currentBlock++;
+      renderBlock(currentBlock, true);
+    } else {
+      showLeadForm();
+    }
+  });
+
+  document.getElementById('btn-back').addEventListener('click', () => {
+    if (currentBlock > 0) {
+      currentBlock--;
+      renderBlock(currentBlock, true);
+    }
+  });
+
+  function showLeadForm() {
+    document.getElementById('quiz-body').style.display = 'none';
+    document.getElementById('lead-form-card').style.display = 'block';
+    document.getElementById('lead-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function selectFormat(f) {
+    selectedFormat = f;
+    document.getElementById('fc-free').classList.toggle('active', f === 'free');
+    document.getElementById('fc-paid').classList.toggle('active', f === 'paid');
+    document.getElementById('btn-submit').textContent = f === 'free'
+      ? 'Получить общий ответ бесплатно →'
+      : 'Получить детальный разбор за 990 ₽ →';
+    document.getElementById('email-field-group').style.display = f === 'paid' ? '' : 'none';
+  }
+
+  /* ── UTM ── */
+  (function(){
+    const p = new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign'].forEach(k => {
+      const v = p.get(k) || sessionStorage.getItem(k);
+      if (v) sessionStorage.setItem(k, v);
+    });
+  })();
+
+  /* ── SUBMIT LEAD ── */
+  async function submitLead() {
+    const name    = document.getElementById('lf-name').value.trim();
+    let   tg      = document.getElementById('lf-tg').value.trim();
+    const email   = (document.getElementById('lf-email')?.value || '').trim();
+    const website = document.getElementById('lf-website').value.trim();
+    if (!name || !tg) { alert('Введи имя и Telegram'); return; }
+
+    // Нормализуем @username: добавляем @ если забыли, обрезаем лишнее
+    if (/^[a-zA-Z0-9_]{4,}$/.test(tg)) tg = '@' + tg;
+    if (!/^[@+]/.test(tg) && !/^https?:\/\/t\.me\//i.test(tg)) {
+      alert('Telegram должен быть в формате @username или +7ХXXXXXXXXX');
+      return;
+    }
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = selectedFormat === 'paid' ? 'Создаю платёж...' : 'Отправляю...';
+
+    // 1. Send quiz answers to Shamil regardless of format
+    const flatAnswers = BLOCKS.flatMap((b, bi) => b.questions.map((q, qi) => ({
+      block: b.title,
+      question: q.text,
+      answer: answers[bi][qi] || ''
+    })));
+    try {
+      const payload = new URLSearchParams({
+        name, telegram: tg, website,
+        format: selectedFormat,
+        sphere: 'диагностика',
+        utm_source:   sessionStorage.getItem('utm_source')   || '',
+        utm_medium:   sessionStorage.getItem('utm_medium')   || '',
+        utm_campaign: sessionStorage.getItem('utm_campaign') || '',
+        answers_json: JSON.stringify(flatAnswers),
+      });
+      flatAnswers.forEach((item, i) => {
+        payload.append(`q${i+1}`, `[${item.block}] ${item.question}\n${item.answer}`);
+      });
+      await fetch('/api/notify', { method: 'POST', body: payload });
+    } catch(e) {}
+
+    if (typeof ym !== 'undefined') ym(108665262, 'reachGoal', 'quiz_submit');
+
+    // 2. Paid flow → create payment and redirect
+    if (selectedFormat === 'paid') {
+      try {
+        const payResp = await fetch('/api/create-payment', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ name, telegram: tg, email }),
+        });
+        const payData = await payResp.json();
+        if (payData.url) {
+          btn.textContent = 'Перехожу к оплате...';
+          window.location.href = payData.url;
+          return; // Tinkoff handles success from here
+        }
+      } catch(e) {}
+      // Fallback: Tinkoff недоступен — показываем инструкцию и разблокируем кнопку
+      btn.disabled = false;
+      btn.textContent = 'Попробовать ещё раз';
+      document.getElementById('success-text').textContent =
+        'Шамиль напишет тебе реквизиты в Telegram в течение часа. Письменный разбор — в течение 24 часов.';
+    }
+
+    // 3. Free flow (or paid fallback) — clear progress and redirect to /thanks
+    btn.textContent = '✅ Отправлено';
+    clearProgress();
+    window.location.href = '/thanks.html';
+  }
+
+  /* ── ?paid=ok / ?paid=fail HANDLER ── */
+  (function() {
+    const params = new URLSearchParams(location.search);
+    const paid = params.get('paid');
+    if (paid === 'ok') {
+      const modal = document.getElementById('paid-success-modal');
+      const closeBtn = document.getElementById('psm-close');
+      const overlay = document.getElementById('psm-overlay');
+
+      function openModal() {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+        // Clean URL without reload
+        history.replaceState(null, '', location.pathname);
+      }
+
+      setTimeout(openModal, 350);
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', closeModal);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+      if (typeof ym !== 'undefined') ym(108665262, 'reachGoal', 'payment_success');
+    } else if (paid === 'fail') {
+      // Показываем toast и прокручиваем к квизу
+      const toast = document.createElement('div');
+      toast.style.cssText = [
+        'position:fixed;bottom:28px;left:50%;transform:translateX(-50%)',
+        'background:#ef4444;color:#fff;font-weight:700;font-size:.95rem',
+        'padding:14px 24px;border-radius:12px;z-index:9999',
+        'box-shadow:0 8px 32px rgba(239,68,68,.35)',
+        'animation:psmFadeIn .3s ease',
+      ].join(';');
+      toast.textContent = '❌ Оплата не прошла — попробуй ещё раз';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 5000);
+
+      setTimeout(() => {
+        const qs = document.getElementById('quiz-section');
+        if (qs) qs.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  })();
+
+  /* ── INIT: check for saved progress ── */
+  (function() {
+    const saved = loadProgress();
+    if (saved && (saved.currentBlock > 0 || (saved.answers && saved.answers.some(bl => bl.some(a => a && a.trim().length > 0))))) {
+      document.getElementById('restore-banner').classList.add('show');
+    }
+    renderBlock(currentBlock);
+  })();
+
+  /* ── SCROLL PROGRESS BAR + NAV SCROLLED ── */
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    document.getElementById('scroll-bar').style.width = (p * 100) + '%';
+    navEl.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  /* ── REVEAL ON SCROLL ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── TELEGRAM FLOAT ── */
+  const tgFloat = document.getElementById('tg-float');
+  if (tgFloat) {
+    new IntersectionObserver(([e]) => {
+      tgFloat.classList.toggle('show', !e.isIntersecting);
+    }, { threshold: 0 }).observe(document.getElementById('hero'));
+  }
+
+  /* ── CARD SPOTLIGHT ── */
+  document.querySelectorAll('.pain-card, .testi-card, .type-card, .faq-item').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.setProperty('--mx', '-999px');
+      el.style.setProperty('--my', '-999px');
+    });
+  });
+
+  /* ── MAGNETIC BUTTON ── */
+  document.querySelectorAll('.btn-primary, .nav-cta, .btn-result').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width * .5) * .18;
+      const y = (e.clientY - r.top - r.height * .5) * .18;
+      el.style.transform = `translate(${x}px, ${y}px) translateY(-2px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1), box-shadow .2s, opacity .2s';
+      el.style.transform = '';
+      setTimeout(() => { el.style.transition = ''; }, 500);
+    });
+    el.addEventListener('mouseenter', () => {
+      el.style.transition = 'transform .12s ease, box-shadow .2s, opacity .2s';
+    });
+  });
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+<style>
+  .nav-back { color: var(--text2); }
+  .nav-back:hover { color: var(--text); }
+  .hero-badge { background: rgba(200,134,10,.12) !important; border-color: rgba(200,134,10,.3) !important; }
+  .pain-card::after { background: radial-gradient(340px circle at var(--mx) var(--my), rgba(200,134,10,.08), transparent 65%) !important; }
+  .testi-card::after { background: radial-gradient(340px circle at var(--mx) var(--my), rgba(200,134,10,.08), transparent 65%) !important; }
+  .type-card::after { background: radial-gradient(300px circle at var(--mx) var(--my), rgba(200,134,10,.08), transparent 65%) !important; }
+  .faq-item::after { background: radial-gradient(300px circle at var(--mx) var(--my), rgba(200,134,10,.06), transparent 65%) !important; }
+  .quiz-mid-testi { background: rgba(200,134,10,.06) !important; border-color: rgba(200,134,10,.18) !important; }
+  #scroll-bar { height: 3px; }
+</style>
+</body>
+</html>

@@ -1,0 +1,175 @@
+{
+  "nodes": [
+    {
+      "id": "users_shamil_shamil_project_netlify_functions_notify_js",
+      "label": "notify.js",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/netlify/functions/notify.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "users_shamil_shamil_project_api_notify_js",
+      "label": "notify.js",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/notify.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "notify_handler",
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/notify.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "users_shamil_shamil_project_api_tinkoff_webhook_js",
+      "label": "tinkoff-webhook.js",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tinkoff_webhook_verifytoken",
+      "label": "verifyToken()",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "tinkoff_webhook_handler",
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L15"
+    },
+    {
+      "id": "users_shamil_shamil_project_api_create_payment_js",
+      "label": "create-payment.js",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "create_payment_buildtoken",
+      "label": "buildToken()",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "create_payment_handler",
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L16"
+    },
+    {
+      "id": "users_shamil_shamil_project_api_tg_bot_js",
+      "label": "tg-bot.js",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/tg-bot.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tg_bot_handler",
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "/Users/shamil/shamil-project/api/tg-bot.js",
+      "source_location": "L2"
+    }
+  ],
+  "edges": [
+    {
+      "source": "users_shamil_shamil_project_api_notify_js",
+      "target": "notify_handler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/notify.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_tinkoff_webhook_js",
+      "target": "crypto",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_tinkoff_webhook_js",
+      "target": "tinkoff_webhook_verifytoken",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_tinkoff_webhook_js",
+      "target": "tinkoff_webhook_handler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "tinkoff_webhook_handler",
+      "target": "tinkoff_webhook_verifytoken",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/tinkoff-webhook.js",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_create_payment_js",
+      "target": "crypto",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_create_payment_js",
+      "target": "create_payment_buildtoken",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_create_payment_js",
+      "target": "create_payment_handler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "create_payment_handler",
+      "target": "create_payment_buildtoken",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/create-payment.js",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "users_shamil_shamil_project_api_tg_bot_js",
+      "target": "tg_bot_handler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/Users/shamil/shamil-project/api/tg-bot.js",
+      "source_location": "L2",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

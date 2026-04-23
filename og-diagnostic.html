@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #080808;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    display: flex; align-items: center;
+    position: relative;
+  }
+  .bg-glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 30% 50%, rgba(240,192,64,.13) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 85% 20%, rgba(224,120,32,.08) 0%, transparent 50%);
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(240,192,64,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,192,64,.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .content { position: relative; z-index: 2; padding: 64px 80px; max-width: 700px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(240,192,64,.12); border: 1px solid rgba(240,192,64,.3);
+    color: #f0c040; border-radius: 100px; padding: 6px 16px;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #4caf72; }
+  h1 { font-size: 52px; font-weight: 900; line-height: 1.1; color: #f0f0f0; letter-spacing: -1.5px; margin-bottom: 20px; }
+  h1 em { font-style: normal; color: #f0c040; }
+  .sub { font-size: 20px; color: #a0a0a0; line-height: 1.5; margin-bottom: 36px; }
+  .sub strong { color: #f0f0f0; }
+  .cta { display: inline-block; background: linear-gradient(135deg, #f0c040, #e07820); color: #000; font-weight: 800; font-size: 17px; padding: 14px 32px; border-radius: 10px; }
+  .right {
+    position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 14px; align-items: center; z-index: 2;
+  }
+  .type-card {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px; padding: 16px 22px; text-align: center; min-width: 180px;
+  }
+  .type-ico { font-size: 24px; margin-bottom: 6px; }
+  .type-name { font-size: 14px; font-weight: 800; color: #f0c040; margin-bottom: 2px; }
+  .type-desc { font-size: 11px; color: #606060; }
+  .domain { position: absolute; bottom: 32px; right: 80px; font-size: 14px; color: #404040; font-weight: 600; z-index: 2; }
+</style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="grid"></div>
+  <div class="content">
+    <div class="badge"><span class="dot"></span> Бесплатная диагностика · 5 минут</div>
+    <h1>Почему доход<br>не <em>растёт?</em></h1>
+    <p class="sub">15 вопросов — узнаёшь свой тип<br>и <strong>главный барьер</strong> в продажах.</p>
+    <div class="cta">Пройти диагностику →</div>
+  </div>
+  <div class="right">
+    <div class="type-card"><div class="type-ico">👻</div><div class="type-name">Невидимка</div><div class="type-desc">избегает предложений</div></div>
+    <div class="type-card"><div class="type-ico">🌀</div><div class="type-name">Хаотик</div><div class="type-desc">нет системы</div></div>
+    <div class="type-card"><div class="type-ico">🧊</div><div class="type-name">Замороженный</div><div class="type-desc">страх называть цену</div></div>
+    <div class="type-card"><div class="type-ico">🚀</div><div class="type-name">Готов к росту</div><div class="type-desc">нужна система</div></div>
+  </div>
+  <div class="domain">artofsales.art/diagnostic</div>
+</body>
+</html>

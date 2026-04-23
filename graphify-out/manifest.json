@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "path": "/Users/shamil/shamil-project",
+  "nodes": 111,
+  "edges": 150,
+  "chunks": 2,
+  "semantic_input_tokens": 0,
+  "semantic_output_tokens": 0,
+  "ast_nodes": 11,
+  "ast_edges": 10
+}
