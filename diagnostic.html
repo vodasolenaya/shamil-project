@@ -34,20 +34,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #faf7f2;
-      --bg2: #f3ede0;
-      --card: #ffffff;
-      --card2: #faf5ec;
-      --border: rgba(30,20,5,.09);
-      --border2: rgba(30,20,5,.16);
-      --gold: #c8860a;
-      --gold2: #a86210;
-      --gold-glow: rgba(200,134,10,.18);
-      --gold-faint: rgba(200,134,10,.08);
-      --text: #1c1408;
-      --text2: #5c4e38;
-      --text3: #9c8870;
-      --green: #16a34a;
+      --bg: #0d0d0d;
+      --bg2: #111111;
+      --card: #111111;
+      --card2: #111111;
+      --border: rgba(255,255,255,.06);
+      --border2: rgba(255,255,255,.12);
+      --gold: #C9A84C;
+      --gold2: #b8944a;
+      --gold-glow: rgba(201,168,76,.18);
+      --gold-faint: rgba(201,168,76,.08);
+      --text: #ffffff;
+      --text2: #cccccc;
+      --text3: #aaaaaa;
+      --green: #4ade80;
       --r: 14px;
       --r2: 20px;
     }
@@ -73,14 +73,14 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px; height: 64px;
-      background: rgba(250,247,242,.94); backdrop-filter: blur(20px);
-      box-shadow: 0 1px 0 rgba(30,20,5,.08);
+      background: rgba(13,13,13,.94); backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.06);
       border-bottom: 1px solid var(--border);
       transition: background .3s, border-color .3s, box-shadow .3s;
     }
     nav.scrolled {
-      background: rgba(245,240,230,1);
-      border-bottom-color: rgba(200,134,10,.25);
+      background: rgba(13,13,13,1);
+      border-bottom-color: rgba(201,168,76,.25);
       box-shadow: 0 4px 40px rgba(0,0,0,.55);
     }
     .nav-logo {
@@ -102,10 +102,10 @@
     .nav-back:hover { color: var(--text); }
     .nav-cta {
       background: var(--gold); color: #000;
-      padding: 9px 22px; border-radius: 8px;
+      padding: 9px 22px; border-radius: 0;
       font-weight: 800; font-size: .85rem; text-decoration: none;
       transition: opacity .2s, transform .2s;
-      letter-spacing: -.1px;
+      letter-spacing: .5px; text-transform: uppercase;
     }
     .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
     @media(max-width:680px){
@@ -181,14 +181,14 @@
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; font-weight: 800; font-size: 1.05rem;
-      padding: 17px 40px; border-radius: 12px; text-decoration: none; border: none; cursor: pointer;
+      background: #C9A84C;
+      color: #000; font-weight: 700; font-size: 1.05rem;
+      padding: 18px 44px; border-radius: 0; text-decoration: none; border: none; cursor: pointer;
       transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 40px rgba(240,192,64,.25);
+      text-transform: uppercase; letter-spacing: 1px;
       position: relative; overflow: hidden;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 48px rgba(240,192,64,.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 48px rgba(201,168,76,.35); }
 
     .hero-note { font-size: .82rem; color: var(--text2); margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
     .hero-note span { display: flex; align-items: center; gap: 5px; }
@@ -212,11 +212,12 @@
     .section { padding: 88px 24px; }
     .section-inner { max-width: 960px; margin: 0 auto; }
     .section-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--gold); font-size: .72rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+      display: inline-flex; align-items: center;
+      color: #C9A84C; font-size: .68rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px;
+      background: transparent; border: 1px solid #C9A84C;
+      border-radius: 0; padding: 5px 14px;
     }
-    .section-label::before { content:''; width:20px; height:1px; background:var(--gold); }
     h2.section-title {
       font-size: clamp(1.7rem, 3.5vw, 2.5rem);
       font-weight: 900; letter-spacing: -1px; line-height: 1.15;
@@ -1383,7 +1384,7 @@
       <p class="privacy-note">Данные не передаются третьим лицам. Без спама.</p>
       <div class="success-msg" id="success-msg">
         <h3>✅ Готово — ответы у Шамиля</h3>
-        <p id="success-text">Он лично прочитает и напишет в Telegram в течение часа. Держи телефон рядом.</p>
+        <p id="success-text">Он лично прочитает и напишет в Telegram в течение 24 часов. Держи телефон рядом.</p>
         <div class="bot-link-block" id="bot-link-block">
           <p>Нажми ниже — бот пришлёт уведомление когда Шамиль выйдет на связь</p>
           <a href="https://t.me/artofsales_shamil_bot?start=quiz" target="_blank" class="btn-bot" id="bot-cta-link">
@@ -1419,11 +1420,11 @@
     <div class="result-card" style="text-align:center;">
       <div style="font-size:3rem;margin-bottom:16px;">✅</div>
       <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;letter-spacing:-.5px;margin-bottom:14px;">Ответы у Шамиля</h2>
-      <p class="result-desc">Он сам прочитает и напишет тебе в Telegram. Обычно в течение часа — держи телефон рядом.</p>
+      <p class="result-desc">Он сам прочитает и напишет тебе в Telegram. В течение 24 часов — держи телефон рядом.</p>
     </div>
     <div class="result-cta-block">
       <h3 id="result-cta-title">Шамиль скоро напишет</h3>
-      <p id="result-cta-desc">Он читает лично — и в Telegram напишет когда увидит барьер. Обычно это в течение часа.</p>
+      <p id="result-cta-desc">Он читает лично — и в Telegram напишет когда увидит барьер. В течение 24 часов.</p>
       <a href="https://t.me/vodasolenaya" target="_blank" class="btn-result">
         Написать Шамилю в Telegram →
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1456,24 +1457,8 @@
         <div class="faq-a">Бесплатно — это общий барьер, одна фраза. За 990 ₽ — детальный разбор твоей конкретной ситуации с планом. Большинство окупают это первой же сделкой на новый чек. Если ценности нет — вернём деньги.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Я уже проходил курсы по продажам — чем это отличается?</button>
-        <div class="faq-a">Большинство курсов учат технике: скрипты, этапы, возражения. Но проблема фрилансеров не в незнании техники — это страх называть цену, неловкость при разговоре о деньгах, отсутствие уверенности в своей ценности. Здесь работаем с этим, а не со скриптами.</div>
-      </div>
-      <div class="faq-item">
         <button class="faq-q">Подходит для моей ниши?</button>
         <div class="faq-a">Да. Работали SMM-щики, таргетологи, дизайнеры, веб-разработчики, копирайтеры, видеомонтажёры, маркетологи. Барьеры в продажах у всех похожи — меняются детали, не суть.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Когда ждать первых изменений?</button>
-        <div class="faq-a">После разбора многие закрывают первую сделку на новый чек в первые 1–2 недели. Это не гарантия — зависит от того насколько быстро применяешь. Но обычно быстро, потому что работаем с конкретным барьером а не с абстрактными советами.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Я интроверт — мне это подойдёт?</button>
-        <div class="faq-a">Особенно подойдёт. Интроверты часто продают лучше экстравертов — умеют слушать, не давят, вникают. Продажи на 80% про то чтобы понять клиента, а не про «говорить красиво». Работаем с тем что есть.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">У меня клиенты с биржи и сарафана — зачем что-то менять?</button>
-        <div class="faq-a">Биржа и сарафан — не система, а везение. Сегодня есть, завтра нет. Система — когда ты сам управляешь потоком: знаешь откуда придёт следующий клиент и называешь цену без страха потерять его.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Кейсы настоящие?</button>
@@ -1481,7 +1466,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">Нет времени. Можно позже?</button>
-        <div class="faq-a">Диагностика занимает 5–10 минут. Созвон — 30. Это не курс на месяц. Если совсем некогда — выбери письменный формат, Шамиль пришлёт разбор текстом.</div>
+        <div class="faq-a">Диагностика занимает 5–10 минут. Это не курс на месяц. Если совсем некогда — выбери письменный формат за 990 ₽, Шамиль пришлёт детальный разбор текстом в Telegram.</div>
       </div>
     </div>
   </div>
