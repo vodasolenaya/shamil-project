@@ -42,6 +42,7 @@
       --border2: rgba(0,0,0,.15);
       --gold: #C9A84C;
       --gold2: #b8944a;
+      --gold-text: #8B6914;
       --gold-glow: rgba(201,168,76,.18);
       --gold-faint: rgba(201,168,76,.08);
       --text: #0d0d0d;
@@ -149,7 +150,7 @@
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(240,192,64,.1); border: 1px solid rgba(240,192,64,.25);
-      color: var(--gold); border-radius: 100px; padding: 6px 16px 6px 10px;
+      color: var(--gold-text); border-radius: 100px; padding: 6px 16px 6px 10px;
       font-size: .75rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
       margin-bottom: 32px;
     }
@@ -192,6 +193,7 @@
 
     .hero-note { font-size: .82rem; color: var(--text2); margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
     .hero-note span { display: flex; align-items: center; gap: 5px; }
+    .hero-note-sep { color: var(--border2); }
 
     .hero-social-proof {
       display: flex; align-items: center; gap: 12px; margin-top: 20px;
@@ -206,16 +208,16 @@
     }
     .hero-avatars .hero-avatar + .hero-avatar { margin-left: -8px; }
     .hero-proof-text { font-size: .82rem; color: var(--text2); }
-    .hero-proof-text strong { color: var(--gold); }
+    .hero-proof-text strong { color: var(--gold-text); }
 
     /* ── SECTIONS ── */
     .section { padding: 88px 24px; }
     .section-inner { max-width: 960px; margin: 0 auto; }
     .section-label {
       display: inline-flex; align-items: center;
-      color: #C9A84C; font-size: .72rem; font-weight: 700;
+      color: var(--gold-text); font-size: .72rem; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px;
-      background: transparent; border: 1px solid #C9A84C;
+      background: transparent; border: 1px solid var(--gold);
       border-radius: 6px; padding: 5px 14px;
     }
     h2.section-title {
@@ -344,7 +346,7 @@
     .case-card:hover { border-color: rgba(240,192,64,.25); transform: translateY(-2px); }
     .case-result {
       font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 900; letter-spacing: -1.5px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      background: linear-gradient(135deg, #8B6914, #7A5810);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       line-height: 1; margin-bottom: 5px;
     }
@@ -384,7 +386,7 @@
     }
     .type-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
     .type-ico { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-    .type-card h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; color: var(--gold); }
+    .type-card h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; color: var(--gold-text); }
     .type-card p { color: var(--text2); font-size: .88rem; line-height: 1.55; }
     @media(max-width:900px){ .types-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:480px){ .types-grid { grid-template-columns: 1fr; } }
@@ -393,7 +395,7 @@
     /* ── BTN SECONDARY ── */
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 8px;
-      border: 1.5px solid var(--gold); color: var(--gold);
+      border: 1.5px solid var(--gold); color: var(--gold-text);
       padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: .95rem;
       text-decoration: none; transition: background .2s, color .2s; background: transparent; cursor: pointer;
     }
@@ -412,7 +414,7 @@
     /* ── BLOCK-FORMAT QUIZ ── */
     .quiz-step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .quiz-step-label { font-size: .85rem; font-weight: 700; color: var(--text2); }
-    .quiz-step-pct { font-size: .85rem; font-weight: 700; color: var(--gold); }
+    .quiz-step-pct { font-size: .85rem; font-weight: 700; color: var(--gold-text); }
     .quiz-step-bar-bg { background: var(--border2); border-radius: 4px; height: 6px; margin-bottom: 12px; }
     .quiz-step-bar-fill { background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 4px; height: 6px; transition: width .4s cubic-bezier(.16,1,.3,1); }
 
@@ -429,19 +431,19 @@
       border-color: var(--gold); color: #000;
     }
     .step-dot.done::after { content: '✓'; }
-    .step-dot.active { border-color: var(--gold); color: var(--gold); font-weight: 800; }
+    .step-dot.active { border-color: var(--gold); color: var(--gold-text); font-weight: 800; }
 
     .quiz-time-badge {
       display: inline-flex; align-items: center;
       background: rgba(200,134,10,.1); border: 1px solid rgba(200,134,10,.2);
-      color: var(--gold); border-radius: 100px;
+      color: var(--gold-text); border-radius: 100px;
       padding: 4px 12px; font-size: .75rem; font-weight: 700;
       margin-bottom: 16px;
     }
     .block-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -.5px; margin-bottom: 8px; line-height: 1.2; }
     .block-subtitle { font-size: .92rem; color: var(--text2); margin-bottom: 28px; line-height: 1.6; }
     .block-questions { display: flex; flex-direction: column; gap: 28px; }
-    .block-q-num { font-size: .75rem; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .block-q-num { font-size: .75rem; font-weight: 700; color: var(--gold-text); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
     .block-q-text { font-size: 1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.45; }
     .block-q-context { font-size: .85rem; color: var(--text3); margin-bottom: 12px; line-height: 1.6; font-style: italic; }
 
@@ -450,7 +452,7 @@
       border-radius: var(--r2); padding: 36px 32px;
       box-shadow: 0 4px 24px rgba(30,20,5,.08);
     }
-    .question-num { color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .question-num { color: var(--gold-text); font-size: .75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
     .question-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 28px; line-height: 1.5; }
 
     .options { display: flex; flex-direction: column; gap: 10px; }
@@ -528,11 +530,11 @@
       font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
       color: var(--text3); margin-bottom: 8px;
     }
-    .format-card.active .fc-badge { color: var(--gold2); }
+    .format-card.active .fc-badge { color: var(--gold-text); }
     .format-card .fc-title { font-size: 1.05rem; font-weight: 900; color: var(--text); margin-bottom: 6px; letter-spacing: -.3px; }
     .format-card .fc-price {
       font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      background: linear-gradient(135deg, #8B6914, #7A5810);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       margin-bottom: 12px; line-height: 1;
     }
@@ -613,7 +615,7 @@
     .result-type-badge {
       display: inline-block; padding: 6px 18px; border-radius: 100px;
       background: rgba(240,192,64,.12); border: 1px solid rgba(240,192,64,.3);
-      color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: 1.5px;
+      color: var(--gold-text); font-size: .75rem; font-weight: 700; letter-spacing: 1.5px;
       text-transform: uppercase; margin-bottom: 24px;
     }
     .result-card {
@@ -674,7 +676,7 @@
     .fact-chip {
       display: flex; align-items: center; gap: 8px;
       background: var(--gold-faint); border: 1px solid rgba(240,192,64,.2);
-      color: var(--gold); border-radius: 8px; padding: 10px 14px;
+      color: var(--gold-text); border-radius: 8px; padding: 10px 14px;
       font-size: .82rem; font-weight: 600; line-height: 1.35;
     }
     @media(max-width:768px){
@@ -704,7 +706,7 @@
       justify-content: space-between; align-items: center; gap: 16px;
     }
     .faq-q::after {
-      content: '+'; font-size: 1.4rem; font-weight: 300; color: var(--gold);
+      content: '+'; font-size: 1.4rem; font-weight: 300; color: var(--gold-text);
       flex-shrink: 0; transition: transform .25s;
     }
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
@@ -783,7 +785,7 @@
     }
     @keyframes fadeInUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
     .qmt-quote { font-size: .87rem; color: var(--text2); line-height: 1.65; margin-bottom: 8px; font-style: italic; }
-    .qmt-author { font-size: .75rem; color: var(--gold); font-weight: 700; }
+    .qmt-author { font-size: .75rem; color: var(--gold-text); font-weight: 700; }
 
     /* ── RESTORE BANNER ── */
     #restore-banner {
@@ -793,7 +795,7 @@
     }
     #restore-banner.show { display: flex; }
     .restore-text { font-size: .88rem; color: var(--text2); }
-    .restore-text strong { color: var(--gold); }
+    .restore-text strong { color: var(--gold-text); }
     .restore-btns { display: flex; gap: 8px; }
     .btn-restore {
       padding: 8px 16px; border-radius: 8px; font-size: .82rem; font-weight: 700;
@@ -947,15 +949,17 @@
   </a>
 
   <div class="hero-note">
-    <span>⏱ 15–20 минут</span>
-    <span>✦ 15 вопросов · 5 блоков</span>
-    <span>✦ Без давления</span>
+    <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 15–20 минут</span>
+    <span class="hero-note-sep">·</span>
+    <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 15 вопросов · 5 блоков</span>
+    <span class="hero-note-sep">·</span>
+    <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Без давления</span>
   </div>
 
   <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;margin-bottom:4px;">
-    <span style="font-size:.8rem;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.25);color:var(--gold);padding:5px 14px;border-radius:100px;font-weight:600;">Шамиль читает лично — не бот</span>
+    <span style="font-size:.8rem;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.25);color:var(--gold-text);padding:5px 14px;border-radius:100px;font-weight:600;">Шамиль читает лично — не бот</span>
     <span style="font-size:.8rem;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.2);color:#16a34a;padding:5px 14px;border-radius:100px;font-weight:600;">Ответ в течение 24 часов</span>
-    <span style="font-size:.8rem;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.25);color:var(--gold);padding:5px 14px;border-radius:100px;font-weight:600;">Бесплатно</span>
+    <span style="font-size:.8rem;background:rgba(200,134,10,.1);border:1px solid rgba(200,134,10,.25);color:var(--gold-text);padding:5px 14px;border-radius:100px;font-weight:600;">Бесплатно</span>
   </div>
 
   <div class="hero-social-proof">
@@ -1105,7 +1109,7 @@
 
         <!-- Подход -->
         <div style="margin:24px 0;padding:18px 20px 18px 24px;background:var(--gold-faint);border:1px solid rgba(240,192,64,.15);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;">
-          <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Мой подход</div>
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-text);margin-bottom:10px;">Мой подход</div>
           <p style="font-size:.92rem;color:var(--text);line-height:1.7;margin:0;">Я не учу скриптам и холодным звонкам. Помогаю продавать так, как ты уже умеешь разговаривать — честно, прямо, без ощущения что давишь. Нужно убрать один конкретный барьер — тот, что держит тебя прямо сейчас.</p>
         </div>
 
@@ -1216,6 +1220,60 @@
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">Голоса учеников</div>
+    <h2 class="section-title reveal">Что говорят те, кто уже прошёл</h2>
+    <p class="section-sub reveal">Не придуманные истории — реальные слова.</p>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <p class="testi-quote">«Полгода прокрастинировал, ничего не мог продать. За 11 дней после старта закрыл на 420 000 ₽. Каждый день вижу новые возможности — и это не останавливается.»</p>
+        <div class="testi-author">
+          <div class="testi-avatar">О</div>
+          <div><div class="testi-name">Олег</div><div class="testi-role">Digital-агентство</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d1">
+        <p class="testi-quote">«Не верил что моя работа может стоить дорого. За месяц — 600 000 ₽, запустил своё обучение по дизайну и нанял людей. Даже не думал что так можно.»</p>
+        <div class="testi-author">
+          <div class="testi-avatar">М</div>
+          <div><div class="testi-name">Марат</div><div class="testi-role">Дизайнер</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d2">
+        <p class="testi-quote">«Первый раз в жизни точно знаю откуда возьмутся деньги в следующем месяце. Это ощущение спокойствия — бесценно.»</p>
+        <div class="testi-author">
+          <div class="testi-avatar">С</div>
+          <div><div class="testi-name">Самат</div><div class="testi-role">Таргетолог</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <p class="testi-quote">«Пробил отметку 300к. Страх называть цену — ушёл полностью. Теперь говорю цифру спокойно и клиент соглашается.»</p>
+        <div class="testi-author">
+          <div class="testi-avatar">Ф</div>
+          <div><div class="testi-name">Фёдор</div><div class="testi-role">Веб-разработчик</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d1">
+        <p class="testi-quote">«Пришёл с полным нулём по продажам. Через месяц — 100 000 ₽ с холодных заявок. Научился ставить цели и каждый день иду к ним.»</p>
+        <div class="testi-author">
+          <div class="testi-avatar">Е</div>
+          <div><div class="testi-name">Егор</div><div class="testi-role">Маркетолог</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d2" style="background:var(--gold-faint);border-color:rgba(240,192,64,.2);">
+        <p class="testi-quote">«Думал что продавать — значит давить и уговаривать. Оказалось всё иначе. Теперь продаю с кайфом и клиенты сами благодарят.»</p>
+        <div class="testi-author">
+          <div class="testi-avatar">А</div>
+          <div><div class="testi-name">Артём</div><div class="testi-role">Копирайтер</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="section steps-section">
   <div class="section-inner">
@@ -1256,7 +1314,7 @@
     <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0c040,#e07820);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;margin-left:-7px;">М</div>
     <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f0c040,#e07820);border:2px solid var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:900;color:#000;margin-left:-7px;">Д</div>
   </div>
-  <p style="font-size:.87rem;color:var(--text2);"><strong style="color:var(--gold);">80+ фрилансеров</strong> уже прошли · Шамиль читает ответы лично · 15 вопросов · 5 блоков · ответ в течение часа</p>
+  <p style="font-size:.87rem;color:var(--text2);"><strong style="color:var(--gold-text);">80+ фрилансеров</strong> уже прошли · Шамиль читает ответы лично · 15 вопросов · 5 блоков · ответ в течение часа</p>
 </div>
     <div class="quiz-header">
       <div class="section-label" style="justify-content:center;">Диагностика</div>
