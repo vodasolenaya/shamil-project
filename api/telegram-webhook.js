@@ -38,10 +38,9 @@ function calcSendAt(daysOffset, hourUTC) {
 }
 
 export default async function handler(req, res) {
-  // Telegram ждёт быстрый 200
-  res.status(200).end();
-
-  if (req.method !== 'POST') return;
+  if (req.method !== 'POST') {
+    return res.status(200).end();
+  }
 
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const CHAT_ID   = process.env.TELEGRAM_CHAT_ID;  // чат Шамиля
@@ -121,7 +120,7 @@ export default async function handler(req, res) {
       `📌 @ozareniecases — реальные результаты\n\n` +
       `Держи телефон рядом 👋`
     );
-    return;
+    return res.status(200).end();
   }
 
   // ── Найти лида по tg_user_id ──────────────────────────────────────────────
@@ -147,7 +146,7 @@ export default async function handler(req, res) {
       `Хорошо, больше не буду писать.\n\n` +
       `Если захочешь вернуться — напиши сюда в любой момент.`
     );
-    return;
+    return res.status(200).end();
   }
 
   // ── Ключевые слова (интерес) ──────────────────────────────────────────────
@@ -175,7 +174,7 @@ export default async function handler(req, res) {
       `Отлично! Шамиль увидит твоё сообщение и напишет лично.\n\n` +
       `Обычно отвечает в течение нескольких часов.`
     );
-    return;
+    return res.status(200).end();
   }
 
   // ── Любое другое сообщение ────────────────────────────────────────────────
@@ -208,4 +207,6 @@ export default async function handler(req, res) {
     `Привет! Это автоматический бот.\n\n` +
     `Шамиль читает твоё сообщение и вернётся лично. Если срочно — напиши напрямую: <a href="https://t.me/vodasolenaya">@vodasolenaya</a>`
   );
+
+  return res.status(200).end();
 }
