@@ -7,9 +7,7 @@
     { "source": "/admin",        "destination": "/admin.html" }
   ],
   "crons": [
-    {
-      "path":     "/api/cron-drip",
-      "schedule": "0 8 * * *"
-    }
+    { "path": "/api/cron-drip", "schedule": "0 8  * * *" },
+    { "path": "/api/cron-drip", "schedule": "0 15 * * *" }
   ]
 }
