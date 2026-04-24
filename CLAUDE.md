@@ -1,32 +1,47 @@
 # CLAUDE.md — Искусство продаж / artofsales.art
 
-> Этот файл Claude читает автоматически при каждом запуске. Здесь — актуальное состояние проекта, правила работы и архитектура. Подробный контекст о Шамиле, ЦА, кейсах и позиционировании — в `PROJECT_CONTEXT.md`.
+> Этот файл Claude читает автоматически при каждом запуске. Здесь — актуальное состояние проекта, правила работы и архитектура. Расширенный контекст о Шамиле, ЦА, кейсах и позиционировании — в `PROJECT_CONTEXT.md`.
 
 ---
 
-## 1. Что сделано — актуальная воронка (апрель 2026)
+## 1. Воронка (апрель 2026 — актуально)
 
 ```
 Трафик → artofsales.art (index.html)
-  → Боли / кейсы / доверие
-  → Форма → /api/notify.js → GitHub-база + Telegram Шамилю
-  → НЕТ цен, НЕТ упоминания созвона до отправки
+  → Боли / кейсы / доверие / история
+  → Кнопка «Пройти диагностику» → /diagnostic
 
-Трафик → artofsales.art/diagnostic (diagnostic.html)
-  → 8 открытых вопросов
-  → Lead-форма: имя + Telegram (только)
-  → Submit → /api/notify.js → /thanks.html
+/diagnostic (diagnostic.html)
+  → 8 открытых вопросов + имя + Telegram
+  → Submit → /api/submit-diagnostic
+       → Neon Postgres (таблица leads)
+       → Telegram-уведомление Шамилю
+       → deeplink на бота: t.me/artofsales_shamil_bot?start=<lead_id>
+  → Редирект на /thanks?id=<lead_id>
 
-/thanks.html
-  → 990₽ письменный разбор (единственное место с ценой)
-  → Кнопка открыть бота @artofsales_shamil_bot
+/thanks (thanks.html)
+  → Подтверждение + апсейл 990 ₽
+  → Кнопка «Письменный разбор» → t.me/vodasolenaya (Шамиль вручную)
+  → Кнопка «Открыть бота» с deeplink (если есть в sessionStorage)
+
+@artofsales_shamil_bot (webhook: /api/telegram-webhook)
+  → /start <lead_id> → привязка, drip-расписание, msg #0
+  → Ключевые слова → пауза воронки, уведомление Шамилю
+  → Стоп-слова → отписка
+
+Vercel Cron (08:00 и 15:00 UTC)
+  → /api/cron-drip → рассылка по расписанию
+
+/admin (admin.html)
+  → Заявки из GitHub (старые) + лиды из Neon (новые)
+  → Статусы, шаблоны, созвоны, черновики разборов
+  → Защита: ADMIN_SECRET в query string
 ```
 
 **Жёсткие правила воронки:**
 - ❌ Никаких цен на `index.html` и `diagnostic.html`
-- ❌ Никаких упоминаний созвона как бесплатного лида
-- ❌ Никакого выбора формата в диагностике (всегда `format: 'free'`)
-- ✅ 990₽ — только на `thanks.html` как апсейл после отправки
+- ❌ Никакого упоминания созвона как бесплатного лида
+- ✅ 990 ₽ — только на `thanks.html` как апсейл
 
 ---
 
@@ -34,35 +49,53 @@
 
 ```
 /Users/shamil/shamil-project/
-├── index.html              # Главный лендинг (светлая тема)
-├── diagnostic.html         # Квиз-диагностика (светлая тема)
+├── index.html              # Главный лендинг
+├── diagnostic.html         # Диагностика (8 вопросов)
 ├── thanks.html             # Страница «Спасибо» — апсейл 990₽
-├── admin.html              # Админка с заявками (читает GitHub API)
+├── admin.html              # Админка (GitHub-заявки + Neon-лиды)
 ├── story.html              # История Шамиля
-├── shamil-hero.jpg         # Фото героя
-├── og-image.png            # OG для index
-├── og-diagnostic.png       # OG для diagnostic
+├── shamil-hero.jpg
+├── og-image.png / og-diagnostic.png
 ├── robots.txt / sitemap.xml
 ├── vercel.json             # Rewrites: /diagnostic /thanks /admin /story
-├── CLAUDE.md               # ← этот файл (читается автоматически)
-├── PROJECT_CONTEXT.md      # Расширенный контекст: ЦА, кейсы, бренд
-├── TZ_drip_bot.md          # ТЗ: Telegram-бот 7-дневная воронка (следующий этап)
-└── api/
-    ├── notify.js           # POST — приём заявки → GitHub + Telegram
-    ├── submissions.js      # GET  — список заявок для админки
-    ├── tg-bot.js           # POST — webhook Telegram-бота (базовый)
-    └── tinkoff-webhook.js  # POST — webhook оплаты Tinkoff (не используется)
+├── CLAUDE.md               # ← этот файл
+├── PROJECT_CONTEXT.md      # ЦА, кейсы, бренд (расширенный контекст)
+├── BRIEF_core_offer.md     # Источник правды по позиционированию
+│
+├── api/
+│   ├── notify.js           # POST — старая форма заявки → GitHub + TG (legacy)
+│   ├── submissions.js      # GET  — список GitHub-заявок для админки
+│   ├── submit-diagnostic.js# POST — новая форма диагностики → Neon + TG
+│   ├── leads-admin.js      # GET/POST — работа с лидами из Neon
+│   ├── telegram-webhook.js # POST — webhook @artofsales_shamil_bot
+│   ├── cron-drip.js        # GET  — Vercel Cron (каждый час)
+│   ├── generate-analysis.js# POST — AI-черновик (требует ANTHROPIC_API_KEY — НЕ НАСТРОЕН)
+│   ├── tg-bot.js           # POST — старый базовый бот (legacy, не используется)
+│   ├── create-payment.js   # POST — Tinkoff (не используется)
+│   └── tinkoff-webhook.js  # POST — Tinkoff webhook (не используется)
+│
+├── lib/
+│   ├── db.js               # getDb() → Neon Postgres (@neondatabase/serverless)
+│   ├── messages.js         # getMessage(), DRIP_SCHEDULE (8 сообщений #0..#7)
+│   ├── message-templates.js# buildTemplates(), buildCallFollowup(), buildCallReminder()
+│   └── cases.js            # CASES[], recommendCase(quizAnswers)
+│
+└── db/
+    ├── schema.sql          # Базовая схема
+    └── migration_v2.sql    # ALTER TABLE (запустить в Neon SQL Editor вручную)
 ```
 
 ---
 
 ## 3. Технический стек
 
-- **HTML/CSS/JS** — никаких фреймворков, только ванильный JS
+- **Frontend:** HTML/CSS/JS, без фреймворков, ванильный JS
 - **Хостинг:** Vercel (автодеплой при `git push main`)
-- **База данных:** GitHub Contents API (репо `vodasolenaya/artofsales-data`, папка `submissions/`)
+- **БД:** Neon Postgres (`@neondatabase/serverless`) — таблицы: `leads`, `drip_schedule`, `events`
+- **Старая БД (legacy):** GitHub Contents API (репо `vodasolenaya/artofsales-data`, папка `submissions/`) — только для старых заявок
 - **Шрифт:** Inter 400–900, Google Fonts
-- **Метрика:** Яндекс.Метрика ID `108665262` — не трогать
+- **Метрика:** Яндекс.Метрика ID `108665262` — **не трогать**
+- **CI:** GitHub Actions (`.github/workflows/content-guard.yml`) — проверяет запрещённые имена и стоп-слова
 
 **Деплой:**
 ```bash
@@ -73,12 +106,82 @@ git push origin main
 
 ---
 
-## 4. Дизайн-система
+## 4. База данных — Neon Postgres
 
-### Цветовая палитра — обе страницы СВЕТЛЫЕ
+### Таблицы
+
+**`leads`** — основная таблица лидов:
+```
+id, name, tg_handle, tg_user_id, email,
+income, sphere, quiz_answers (JSONB),
+status, format, source,
+recommended_case, typology,
+ai_draft, final_answer, ai_analysis_json (JSONB),
+voice_file_id,
+call_scheduled_at, call_completed, call_zoom_url, call_note,
+created_at, updated_at
+```
+
+**Статусы лида:** `new` → `active` → `engaged` → `reached_out` → `call_scheduled` → `call_done` → `converted` / `paid` / `lost` / `unsubscribed` / `cold`
+
+**`drip_schedule`** — расписание drip-сообщений:
+```
+id, lead_id, step, send_at, sent_at, paused, message_key, type
+```
+Типы: `drip` (обычное), `call_reminder`, `call_followup`
+
+**`events`** — лог событий:
+```
+id, lead_id, type, payload (JSONB), created_at
+```
+
+### ⚠️ Миграция
+`db/migration_v2.sql` нужно запустить вручную в Neon SQL Editor (один раз).
+
+---
+
+## 5. API endpoints
+
+| Метод | URL | Описание |
+|-------|-----|----------|
+| POST | `/api/submit-diagnostic` | Новая заявка → Neon + TG |
+| GET | `/api/submissions` | Старые GitHub-заявки (legacy) |
+| GET/POST | `/api/leads-admin` | Управление лидами в Neon |
+| POST | `/api/telegram-webhook` | Webhook бота |
+| GET | `/api/cron-drip` | Запуск drip (Vercel Cron) |
+| POST | `/api/notify` | Старая форма (legacy) |
+
+### `POST /api/leads-admin` — действия:
+`pause`, `resume`, `convert`, `paid`, `lost`, `delete`, `send_message`, `schedule_call`, `call_completed`, `cancel_call`, `save_draft`, `save_final`, `send_final`
+
+---
+
+## 6. Переменные окружения (Vercel)
+
+```
+# Обязательные для работы бота
+TELEGRAM_BOT_TOKEN   — токен @artofsales_shamil_bot
+TELEGRAM_CHAT_ID     — ID чата Шамиля (уведомления о лидах)
+DATABASE_URL         — Neon Postgres connection string
+
+# Обязательные для админки
+ADMIN_SECRET         — пароль для /admin
+CRON_SECRET          — токен для /api/cron-drip (Vercel Cron)
+
+# Для старых GitHub-заявок (legacy)
+GITHUB_DB_TOKEN      — PAT для записи в artofsales-data
+
+# НЕ настроен (AI-разбор отключён — Шамиль пишет вручную)
+# ANTHROPIC_API_KEY
+```
+
+---
+
+## 7. Дизайн-система (актуальные значения)
+
+### Цветовая палитра — светлая тема (обе страницы)
 
 ```css
-/* index.html и diagnostic.html — warm light */
 :root {
   --bg: #fafaf8;
   --bg2: #f2f1ed;
@@ -86,9 +189,9 @@ git push origin main
   --card2: #f7f6f3;
   --border: rgba(0,0,0,.08);
   --border2: rgba(0,0,0,.15);
-  --gold: #C9A84C;           /* декоративный золотой */
+  --gold: #C9A84C;
   --gold2: #b8944a;
-  --gold-text: #8B6914;      /* читаемый золотой для текста */
+  --gold-text: #8B6914;
   --gold-glow: rgba(201,168,76,.18);
   --gold-faint: rgba(201,168,76,.08);
   --text: #0d0d0d;
@@ -100,108 +203,64 @@ git push origin main
 }
 ```
 
-**Важно:** `PROJECT_CONTEXT.md` содержит устаревшую тёмную тему — не использовать её значения. Актуальные значения — выше.
+**Важно:** `PROJECT_CONTEXT.md` содержит устаревшую тёмную тему — не использовать. Актуальные значения выше.
 
 ### Ключевые размеры
 - Мобильный брейкпоинт: `max-width: 680px`
-- Мобильный брейкпоинт для format-chooser (удалён): `max-width: 520px`
-- Прогресс-бар: `height: 2px`, gold градиент
 - Радиус карточек: `--r: 14px`, `--r2: 20px`
 
-### Компоненты
-- `.bento-card` — карточки болей со spotlight hover (mousemove → `--mx, --my`)
-- `.case-card` — кейсы учеников, hierarchy: result → period → name
-- `.testi-card` — отзывы (без `::before` кавычки — удалена)
-- `.hero-eyebrow` — бейдж в hero, mobile: `letter-spacing: .5px; font-size: .7rem`
-- `.btn-primary` — золотая кнопка с sheen-анимацией
-- `.sticky-bar` — появляется при скролле после hero
+---
+
+## 8. 5 канонических кейсов учеников
+
+| Имя | Роль | Результат |
+|-----|------|-----------|
+| Олег | Digital-агентство / B2B | 420 000 ₽ за 11 дней |
+| Марат | Дизайнер, основатель студии | 600 000 ₽, запустил обучение |
+| Самат | Таргетолог | 460 000 ₽ в марте |
+| Фёдор | Веб-разработчик, Новосибирск | 300 000+ ₽, пробил потолок |
+| Егор | Продажи маркетинговых услуг | 100 000 ₽ с нуля |
+
+**Запрещённые имена:** Анна, Дмитрий, Артём — **никогда не использовать**
+
+**Стоп-слова:** трансформация, прорыв, масштабирование, инвестируй в себя, выйди из зоны комфорта, прокачайся
 
 ---
 
-## 5. API / Backend
-
-### `POST /api/notify.js`
-Получает заявку с формы:
-```
-name, telegram, income, sphere, type, website(honeypot),
-format, utm_source, utm_medium, utm_campaign,
-q1..q20 (ответы диагностики)
-```
-- Пишет `submissions/<id>.json` в GitHub (репо `vodasolenaya/artofsales-data`)
-- Отправляет уведомление в Telegram Шамилю
-- Возвращает `{ok: true, saved: bool, id: string}`
-
-**Мёртвый код:** `format === 'paid'` ветка в `notify.js` — никогда не выполняется (всегда `'free'`), оставить как есть.
-
-### `GET /api/submissions.js`
-Защищён `?secret=ADMIN_SECRET`. Читает список из GitHub, пагинация offset/limit.
-
-### `POST /api/tg-bot.js`
-Базовый webhook. При `/start` — шлёт приветствие. При других сообщениях — редирект к @vodasolenaya.
-
----
-
-## 6. Переменные окружения (Vercel)
-
-```
-GITHUB_DB_TOKEN      — PAT для записи в artofsales-data
-TELEGRAM_BOT_TOKEN   — токен @artofsales_shamil_bot
-TELEGRAM_CHAT_ID     — ID Шамиля (куда приходят заявки)
-ADMIN_SECRET         — пароль для /admin
-```
-
----
-
-## 7. Правила работы Claude в этом проекте
+## 9. Правила работы Claude в этом проекте
 
 ### Перед правкой файла
-1. **Прочитай весь редактируемый блок** ± 30 строк контекста вокруг
+1. Прочитай весь редактируемый блок ± 30 строк контекста вокруг
 2. Если убираешь HTML-компонент → сразу найди и удали его CSS (grep по классам)
 3. Если убираешь JS-функцию → убери все её вызовы
 
-### Чеклист после каждого изменения
+### Чеклист после изменения
 - [ ] Все HTML-теги закрыты корректно?
 - [ ] Убранный HTML → убрать связанный CSS?
 - [ ] Текст не противоречит другим местам на странице?
-- [ ] Воронка сохраняет правила (п.1)?
+- [ ] Воронка сохраняет правила из п.1?
 - [ ] Мобильная версия учтена (680px)?
 
 ### Git-дисциплина
-- Коммитить после каждой логической задачи, не накапливать
+- Коммитить после каждой логической задачи
 - Указывать конкретные файлы: `git add index.html`, не `git add -A`
 - После push проверять деплой на Vercel
 
 ### Чего не делать
 - ❌ Не добавлять фреймворки и библиотеки
-- ❌ Не трогать Яндекс.Метрика код
+- ❌ Не трогать Яндекс.Метрика код (ID 108665262)
 - ❌ Не менять структуру воронки без обсуждения
 - ❌ Не использовать тёмные CSS-значения из `PROJECT_CONTEXT.md` (устарело)
 - ❌ Не использовать em-дашы (—) в кнопках и заголовках
 
 ---
 
-## 8. Следующий этап разработки — Telegram-бот воронка
+## 10. GitHub Actions — Content Guard
 
-**Файл ТЗ:** `TZ_drip_bot.md`
+Файл: `.github/workflows/content-guard.yml`
 
-**Суть:** 7-дневная автоматическая цепочка сообщений в `@artofsales_shamil_bot` для подогрева лидов после диагностики.
-
-**Что нужно построить:**
-1. `POST /api/submit-diagnostic` — принимает заявку, пишет в БД, возвращает deeplink на бота
-2. БД: Postgres (Neon/Supabase) — таблицы `leads`, `drip_schedule`, `events`
-3. Webhook бота `/api/telegram/webhook` — обработка `/start <lead_id>`, ответов пользователя
-4. Vercel Cron — раз в час проверяет `drip_schedule`, отправляет нужные сообщения
-5. Обновить `thanks.html` — добавить CTA «Открыть бота» с deeplink
-6. Обновить `admin.html` — список лидов, статусы, управление воронкой
-7. Файл `messages.js` — 8 текстов сообщений (#0..#7) из ТЗ
-
-**Стек бота:** Node.js + нативный fetch (без Telegraf — проще деплоить на Vercel Functions)
-
-**Переменные оффера (редактируемые в админке):**
-```
-next_cohort_date, slots_left, max_students
-```
-
-**Статусы лида:** `new` → `active` → `engaged` → `converted` / `unsubscribed`
-
-Перед стартом реализации — прочитать `TZ_drip_bot.md` целиком.
+Запускается при push/PR к `**.html` и `lib/messages.js`:
+- ❌ **Блокирует** если найдены запрещённые имена (Анна, Дмитрий, Артём)
+- ⚠️ **Предупреждает** (не блокирует) при стоп-словах
+- ⚠️ **Предупреждает** если Самат не Веб-разработчик
+- ⚠️ **Предупреждает** при `href="#"` (заглушки)

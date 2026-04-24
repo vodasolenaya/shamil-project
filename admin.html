@@ -770,21 +770,18 @@
               <div class="template-cards" id="da-tpl-${l.id}"></div>
             </div>
             <div class="da-section">
-              <div class="da-section-title">🤖 AI-разбор</div>
+              <div class="da-section-title">✍️ Черновик ответа</div>
               <div class="ai-block" id="da-ai-${l.id}">
-                ${l.ai_draft
-                  ? `<textarea class="ai-draft-area" id="draft-${l.id}" onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft)}</textarea>
-                     <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                       <button class="lead-btn" onclick="generateDraft('${l.id}','free',event)">↻ Regenerate FREE</button>
-                       <button class="lead-btn" onclick="generateDraft('${l.id}','paid',event)">↻ Regenerate PAID</button>
-                       <button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>
-                     </div>`
-                  : `<div style="display:flex;gap:8px;flex-wrap:wrap;">
-                       <button class="lead-btn" onclick="generateDraft('${l.id}','free',event)">✨ Сгенерировать FREE-разбор</button>
-                       <button class="lead-btn" onclick="generateDraft('${l.id}','paid',event)">✨ Сгенерировать PAID-разбор</button>
-                     </div>
-                     <div id="draft-area-${l.id}" style="margin-top:12px;"></div>`
-                }
+                <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px;">
+                  Напиши разбор вручную — здесь сохраняется автоматически. Потом отправь клиенту одной кнопкой.
+                </div>
+                <textarea class="ai-draft-area" id="draft-${l.id}"
+                  placeholder="Имя, вот что я вижу в твоих ответах…&#10;&#10;[Типаж и почему — 2-3 предложения]&#10;[3 маркера с цитатами из ответов]&#10;[Кейс ученика похожей ситуации]&#10;[1 конкретный шаг на неделю]&#10;&#10;— Шамиль"
+                  onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft || '')}</textarea>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+                  <button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>
+                  <button class="lead-btn" onclick="copyTemplate('draft-${l.id}',event)">Скопировать</button>
+                </div>
               </div>
             </div>
             <div class="da-section">
