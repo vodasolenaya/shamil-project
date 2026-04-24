@@ -765,6 +765,32 @@
     @media(max-width:900px){ .testi-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:580px){ .testi-grid { grid-template-columns: 1fr; } }
 
+    /* ── CIRCLE VIDEOS ── */
+    .circle-video-section { background: var(--bg2); }
+    .circle-video-grid {
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 40px;
+    }
+    .circle-video-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .circle-video-wrap {
+      width: 160px; height: 160px; border-radius: 50%; overflow: hidden;
+      position: relative; cursor: pointer; background: #0d0d0d;
+      box-shadow: 0 0 0 3px var(--gold), 0 8px 32px rgba(0,0,0,.18);
+      flex-shrink: 0;
+    }
+    .circle-video-wrap video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .circle-play-overlay {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.38); transition: opacity .2s;
+    }
+    .circle-play-overlay svg { filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
+    .circle-video-wrap.playing .circle-play-overlay { opacity: 0; }
+    .circle-video-wrap.playing:hover .circle-play-overlay { opacity: 1; }
+    .circle-video-name { font-size: .9rem; font-weight: 800; color: var(--text); }
+    .circle-video-role { font-size: .8rem; color: var(--text3); margin-top: -8px; }
+    @media(max-width:580px){ .circle-video-wrap { width: 130px; height: 130px; } .circle-video-grid { gap: 24px; } }
+
     /* ── URGENCY BANNER ── */
     .urgency-banner {
       display: flex; align-items: center; justify-content: center; gap: 24px;
@@ -1427,6 +1453,51 @@
   </div>
 </section>
 
+<!-- CIRCLE VIDEO TESTIMONIALS -->
+<section class="section circle-video-section">
+  <div class="section-inner">
+    <div class="section-label reveal" style="justify-content:center;">Голос учеников</div>
+    <h2 class="section-title reveal" style="text-align:center;">Послушай сам</h2>
+    <p class="section-sub reveal" style="text-align:center;">Не текст — реальный голос. Нажми и послушай.</p>
+    <div class="circle-video-grid">
+
+      <div class="circle-video-item reveal">
+        <div class="circle-video-wrap" onclick="toggleCircleVideo(this)">
+          <video src="/media/fedor.mp4" playsinline preload="metadata" muted></video>
+          <div class="circle-play-overlay">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
+          </div>
+        </div>
+        <div class="circle-video-name">Фёдор</div>
+        <div class="circle-video-role">Веб-разработчик · 300к+</div>
+      </div>
+
+      <div class="circle-video-item reveal reveal-delay-1">
+        <div class="circle-video-wrap" onclick="toggleCircleVideo(this)">
+          <video src="/media/samat.mp4" playsinline preload="metadata" muted></video>
+          <div class="circle-play-overlay">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
+          </div>
+        </div>
+        <div class="circle-video-name">Самат</div>
+        <div class="circle-video-role">Таргетолог · 460к в марте</div>
+      </div>
+
+      <div class="circle-video-item reveal reveal-delay-2">
+        <div class="circle-video-wrap" onclick="toggleCircleVideo(this)">
+          <video src="/media/ivan.mp4" playsinline preload="metadata" muted></video>
+          <div class="circle-play-overlay">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
+          </div>
+        </div>
+        <div class="circle-video-name">Иван</div>
+        <div class="circle-video-role">Ученик</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FOR WHOM -->
 <section class="section">
   <div class="section-inner">
@@ -1820,6 +1891,27 @@
       ym(108665262, 'reachGoal', 'tg_float_click');
     });
   })();
+
+  /* ── CIRCLE VIDEOS ── */
+  function toggleCircleVideo(wrap) {
+    const video = wrap.querySelector('video');
+    const allWraps = document.querySelectorAll('.circle-video-wrap');
+    // pause all others
+    allWraps.forEach(w => {
+      if (w !== wrap) {
+        w.querySelector('video').pause();
+        w.classList.remove('playing');
+      }
+    });
+    if (video.paused) {
+      video.muted = false;
+      video.play();
+      wrap.classList.add('playing');
+    } else {
+      video.pause();
+      wrap.classList.remove('playing');
+    }
+  }
 
 </script>
 </body>
