@@ -202,7 +202,7 @@
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       border: 2px solid #ffffff;
       display: flex; align-items: center; justify-content: center;
-      font-size: .65rem; font-weight: 900; color: #000;
+      font-size: .72rem; font-weight: 900; color: #000;
     }
     .hero-avatars .hero-avatar + .hero-avatar { margin-left: -8px; }
     .hero-proof-text { font-size: .82rem; color: var(--text2); }
@@ -213,10 +213,10 @@
     .section-inner { max-width: 960px; margin: 0 auto; }
     .section-label {
       display: inline-flex; align-items: center;
-      color: #C9A84C; font-size: .68rem; font-weight: 700;
+      color: #C9A84C; font-size: .72rem; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px;
       background: transparent; border: 1px solid #C9A84C;
-      border-radius: 0; padding: 5px 14px;
+      border-radius: 6px; padding: 5px 14px;
     }
     h2.section-title {
       font-size: clamp(1.7rem, 3.5vw, 2.5rem);
@@ -292,7 +292,7 @@
     .pain-card:hover .pain-ico-wrap { background: rgba(240,192,64,.16); border-color: rgba(240,192,64,.35); }
     .pain-ico-wrap svg { width: 20px; height: 20px; }
     .pain-card h3 { font-size: 1.08rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3; color: var(--text); }
-    .pain-card p { color: var(--text3); font-size: .88rem; line-height: 1.68; }
+    .pain-card p { color: var(--text2); font-size: .88rem; line-height: 1.68; }
     @media(max-width:900px){ .pain-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:580px){ .pain-grid { grid-template-columns: 1fr; } }
 
@@ -343,11 +343,11 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       line-height: 1; margin-bottom: 5px;
     }
-    .case-period { font-size: .82rem; color: var(--text3); margin-bottom: 16px; line-height: 1.4; }
+    .case-period { font-size: .84rem; color: var(--text2); margin-bottom: 16px; line-height: 1.4; }
     .case-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
-    .case-who { font-size: .75rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+    .case-who { font-size: .78rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--text2); margin-bottom: 6px; }
     .case-before { font-size: .83rem; color: var(--text2); line-height: 1.45; margin-bottom: 10px; }
-    .case-quote { font-size: .84rem; color: var(--text3); line-height: 1.55; font-style: italic; margin-bottom: 0; }
+    .case-quote { font-size: .84rem; color: var(--text2); line-height: 1.55; font-style: italic; margin-bottom: 0; }
     .case-footer {
       display: flex; align-items: center; gap: 10px;
       margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border);
@@ -359,7 +359,7 @@
       font-size: .75rem; font-weight: 800; color: #000;
     }
     .case-name { font-size: .82rem; font-weight: 700; margin-bottom: 1px; }
-    .case-role { font-size: .72rem; color: var(--text3); }
+    .case-role { font-size: .75rem; color: var(--text2); }
     @media(max-width:760px){ .cases-grid { grid-template-columns: 1fr; } }
 
     /* ── TYPES ── */
@@ -380,7 +380,7 @@
     .type-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
     .type-ico { font-size: 2.2rem; margin-bottom: 12px; display: block; }
     .type-card h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; color: var(--gold); }
-    .type-card p { color: var(--text3); font-size: .88rem; line-height: 1.55; }
+    .type-card p { color: var(--text2); font-size: .88rem; line-height: 1.55; }
     @media(max-width:900px){ .types-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:480px){ .types-grid { grid-template-columns: 1fr; } }
 
@@ -493,7 +493,7 @@
     }
     .q-textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(240,192,64,.12); }
     .q-textarea::placeholder { color: var(--text3); font-size: .88rem; }
-    .q-char-hint { font-size: .75rem; color: var(--text3); margin-top: 6px; text-align: right; }
+    .q-char-hint { font-size: .75rem; color: var(--text2); margin-top: 6px; text-align: right; }
 
     /* ── FORMAT CHOOSER ── */
     .format-chooser { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; align-items: start; }
@@ -515,12 +515,12 @@
     }
     .fc-recommended {
       display: inline-block;
-      font-size: .62rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+      font-size: .72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
       color: #000; border-radius: 100px; padding: 3px 9px; margin-bottom: 10px;
     }
     .format-card .fc-badge {
-      font-size: .65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
       color: var(--text3); margin-bottom: 8px;
     }
     .format-card.active .fc-badge { color: var(--gold2); }
@@ -590,7 +590,7 @@
     }
     .btn-submit:hover { opacity: .9; transform: translateY(-1px); }
     .btn-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-    .privacy-note { color: var(--text3); font-size: .77rem; text-align: center; margin-top: 10px; }
+    .privacy-note { color: var(--text2); font-size: .78rem; text-align: center; margin-top: 10px; }
 
     /* success inside form */
     .success-msg {
@@ -725,7 +725,7 @@
       transition: border-color .2s, color .2s;
     }
     .footer-link:hover { border-color: var(--gold); color: var(--gold); }
-    .footer-copy { font-size: .78rem; color: var(--text3); }
+    .footer-copy { font-size: .8rem; color: var(--text2); }
 
     /* ── TELEGRAM FLOAT ── */
     .tg-float {
@@ -874,7 +874,7 @@
       border-radius: 1px;
     }
     .psm-sub {
-      font-size: .78rem; color: var(--text3); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em;
+      font-size: .78rem; color: var(--text2); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .08em;
     }
     .psm-btn {
       display: inline-flex; align-items: center; gap: 8px;
