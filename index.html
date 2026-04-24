@@ -364,7 +364,7 @@
     /* ── SECTIONS ── */
     .section { padding: 120px 24px; }
     .section + .section {
-      border-top: 1px solid rgba(0,0,0,.05);
+      border-top: 1px solid rgba(0,0,0,.08);
     }
     .section-inner { max-width: 1080px; margin: 0 auto; }
     .section-inner.wide { max-width: 1200px; }
@@ -400,14 +400,7 @@
     }
     .bento-card:hover { box-shadow: 0 12px 48px rgba(28,20,8,.1); transform: translateY(-3px); }
     .bento-card.wide { grid-column: span 2; }
-    /* Quote mark decoration */
-    .bento-card::before {
-      content: '\201C';
-      position: absolute; top: 14px; right: 20px;
-      font-size: 5rem; line-height: 1;
-      color: var(--gold); opacity: .08;
-      font-family: Georgia, serif; pointer-events: none;
-    }
+    /* Quote mark decoration — removed for cleaner visual */
     .bento-ico { font-size: 1.8rem; margin-bottom: 16px; display: block; }
     .bento-ico-wrap {
       width: 36px; height: 36px; border-radius: 8px;
@@ -754,10 +747,7 @@
       position: relative; transition: border-color .25s, transform .25s;
     }
     .testi-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
-    .testi-card::before {
-      content: '\201C'; position: absolute; top: 14px; right: 18px;
-      font-size: 3.5rem; color: var(--gold); opacity: .2; line-height: 1; font-family: Georgia, serif;
-    }
+    /* testi-card::before quote removed for cleaner look */
     .testi-quote { font-size: .95rem; color: var(--text); line-height: 1.65; margin-bottom: 18px; }
     .testi-author { display: flex; align-items: center; gap: 10px; }
     .testi-avatar {
@@ -977,7 +967,30 @@
       .pain-card p, .bento-card p { font-size: .92rem; }
       .testi-quote { font-size: .93rem; }
       .case-result { font-size: 1.8rem; }
+
+      /* Left-align body text on mobile for readability */
+      .section-sub { text-align: left; margin-left: 0; }
+      .bento-card p, .testi-quote, .pain-card p { text-align: left; }
+      .about-text p { text-align: left; }
+      .prog-item { text-align: left; }
+
+      /* Hero badge — reduce letter-spacing so it doesn't span nearly full width */
+      .hero-eyebrow { letter-spacing: .5px; font-size: .7rem; }
     }
+
+    /* ── SECTION DIVIDERS — visual breathing room ── */
+    .section + .section::before {
+      content: ''; display: block; height: 0;
+    }
+    .pain + .section > .section-inner,
+    .cases + .section > .section-inner { padding-top: 0; }
+
+    /* ── CASE CARD HIERARCHY — stronger visual weight ── */
+    .case-result { font-size: clamp(2.2rem,3.5vw,2.8rem); }
+    .case-period { font-size: .86rem; font-weight: 500; color: var(--text3); }
+    .case-name { font-size: .76rem; font-weight: 900; letter-spacing: .1em; }
+    .case-before { font-size: .85rem; color: var(--text2); line-height: 1.5; }
+    .case-quote { font-size: .87rem; font-style: italic; color: var(--text2); }
   </style>
 </head>
 <body>
@@ -1097,44 +1110,32 @@
 
     <div class="bento">
       <div class="bento-card reveal">
-        <div class="bento-ico-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
-        </div>
+        <span class="bento-ico">📚</span>
         <h3>«Ещё один курс. Доход тот же.»</h3>
         <p>Навык есть. Дохода больше — нет.</p>
       </div>
       <div class="bento-card reveal reveal-delay-1">
-        <div class="bento-ico-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-        </div>
+        <span class="bento-ico">💸</span>
         <h3>«Снова согласился на меньшее.»</h3>
         <p>Клиент сказал «дорого» — ты уже режешь ценник.</p>
       </div>
       <div class="bento-card reveal reveal-delay-1">
-        <div class="bento-ico-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="17" y1="8" x2="23" y2="14"/><line x1="23" y1="8" x2="17" y2="14"/></svg>
-        </div>
+        <span class="bento-ico">⚖️</span>
         <h3>«Хорошо работаю — плохо зарабатываю.»</h3>
         <p>Те, кто делает хуже, зарабатывают больше. Это не несправедливость — это сигнал.</p>
       </div>
       <div class="bento-card reveal reveal-delay-2">
-        <div class="bento-ico-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
+        <span class="bento-ico">🗓️</span>
         <h3>«Непонятно откуда деньги в следующем месяце.»</h3>
         <p>Сарафан, биржа — как повезёт. Не система, а лотерея.</p>
       </div>
       <div class="bento-card reveal reveal-delay-2">
-        <div class="bento-ico-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
+        <span class="bento-ico">🤐</span>
         <h3>«Не хочу давить. Не хочу продавать вот так.»</h3>
         <p>Поэтому и не продаёшь. Деньги сами не приходят.</p>
       </div>
       <div class="bento-card reveal reveal-delay-3">
-        <div class="bento-ico-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        </div>
+        <span class="bento-ico">🔓</span>
         <h3>«Ушёл на фриланс за свободой. А чувствую себя хуже чем в найме.»</h3>
         <p>Берёшь всех, кто пишет. Какая уж тут свобода.</p>
       </div>
