@@ -1,0 +1,74 @@
+name: Content Guard
+
+on:
+  push:
+    paths:
+      - '**.html'
+      - 'lib/messages.js'
+  pull_request:
+    paths:
+      - '**.html'
+      - 'lib/messages.js'
+
+jobs:
+  guard:
+    name: Check content rules
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check forbidden names
+        run: |
+          echo "=== Проверка запрещённых имён ==="
+          BAD=$(grep -rn "Анна\|Дмитрий\|Артём" index.html diagnostic.html lib/messages.js 2>/dev/null || true)
+          if [ -n "$BAD" ]; then
+            echo "❌ ОШИБКА: найдены запрещённые имена:"
+            echo "$BAD"
+            exit 1
+          fi
+          echo "✅ Запрещённых имён нет"
+
+      - name: Check stop-list words
+        run: |
+          echo "=== Проверка стоп-листа ==="
+          BAD=$(grep -nEi "трансформация|прорыв|масштабирование|инвестируй в себя|выйди из зоны комфорта|прокачайся" index.html diagnostic.html 2>/dev/null || true)
+          if [ -n "$BAD" ]; then
+            echo "⚠️  ПРЕДУПРЕЖДЕНИЕ: найдены слова из стоп-листа:"
+            echo "$BAD"
+            # Не фейлим, только предупреждение
+          else
+            echo "✅ Стоп-лист чист"
+          fi
+
+      - name: Check Samat consistency
+        run: |
+          echo "=== Проверка консистентности Самат ==="
+          # Самат должен быть Веб-разработчик везде в HTML
+          WRONG=$(grep -n "Самат" index.html diagnostic.html 2>/dev/null | grep -v "Веб-разработчик" | grep -v "460" || true)
+          if [ -n "$WRONG" ]; then
+            echo "⚠️  Самат с неправильной профессией:"
+            echo "$WRONG"
+          else
+            echo "✅ Самат консистентен"
+          fi
+
+      - name: Check no broken anchor hrefs
+        run: |
+          echo "=== Проверка href='#' ==="
+          BAD=$(grep -n 'href="#"' index.html diagnostic.html 2>/dev/null || true)
+          if [ -n "$BAD" ]; then
+            echo "⚠️  Найдены href='#' (возможно заглушки):"
+            echo "$BAD"
+          else
+            echo "✅ Якорных заглушек нет"
+          fi
+
+      - name: Summary
+        if: always()
+        run: |
+          echo ""
+          echo "=== Итог проверки Content Guard ==="
+          echo "HTML-файлы: index.html, diagnostic.html"
+          echo "JS-файлы: lib/messages.js"
+          echo "Коммит: ${{ github.sha }}"
