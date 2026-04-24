@@ -223,6 +223,57 @@
       .sub-details-row { grid-template-columns: 1fr; }
       .sub-meta { display: none; }
     }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex; gap: 4px; margin-bottom: 28px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 4px;
+    }
+    .tab-btn {
+      flex: 1; padding: 9px 16px; border-radius: 9px; border: none;
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: var(--text2);
+      transition: background .15s, color .15s;
+    }
+    .tab-btn.active {
+      background: var(--bg2); color: var(--text);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── LEAD CARDS ── */
+    .lead-status {
+      display: inline-block; font-size: .68rem; font-weight: 700;
+      letter-spacing: .5px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 6px;
+    }
+    .lead-status.new         { background: rgba(255,255,255,.05); color: var(--text3); border: 1px solid var(--border); }
+    .lead-status.active      { background: rgba(201,168,76,.12); color: var(--gold); border: 1px solid rgba(201,168,76,.2); }
+    .lead-status.engaged     { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+    .lead-status.converted   { background: rgba(34,197,94,.2); color: #4ade80; border: 1px solid rgba(34,197,94,.4); }
+    .lead-status.unsubscribed{ background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+    .lead-status.cold        { background: rgba(255,255,255,.03); color: var(--text3); border: 1px solid var(--border); }
+
+    .lead-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .lead-btn {
+      padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg2); color: var(--text2); font-size: .8rem;
+      cursor: pointer; font-weight: 600; transition: all .15s;
+    }
+    .lead-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .lead-btn.danger:hover { border-color: #ef4444; color: #ef4444; }
+    .lead-btn.success { border-color: rgba(34,197,94,.4); color: var(--green); }
+
+    /* Stat filters */
+    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-chip {
+      padding: 5px 14px; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--card);
+      color: var(--text2); font-size: .78rem; font-weight: 600;
+      cursor: pointer; transition: all .15s;
+    }
+    .filter-chip.active { border-color: var(--gold); color: var(--gold); }
   </style>
 </head>
 <body>
@@ -250,23 +301,57 @@
   </div>
 
   <div class="main">
-    <div class="stats-row" id="stats-row">
-      <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-label">Всего заявок</div></div>
-      <div class="stat-card"><div class="stat-num" id="st-diag">—</div><div class="stat-label">Диагностик</div></div>
-      <div class="stat-card"><div class="stat-num" id="st-paid">—</div><div class="stat-label">Платных (990₽)</div></div>
-      <div class="stat-card"><div class="stat-num" id="st-today">—</div><div class="stat-label">Сегодня</div></div>
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-subs-btn"  onclick="switchTab('subs')">📋 Заявки</button>
+      <button class="tab-btn"        id="tab-leads-btn" onclick="switchTab('leads')">🤖 Лиды бота</button>
     </div>
 
-    <div class="table-header">
-      <div class="table-title">Заявки</div>
-      <input type="text" class="search-input" id="search" placeholder="🔍 Поиск по имени или telegram…" oninput="filterSubs()" />
+    <!-- ── TAB: ЗАЯВКИ ── -->
+    <div class="tab-panel active" id="tab-subs">
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-label">Всего заявок</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-diag">—</div><div class="stat-label">Диагностик</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-paid">—</div><div class="stat-label">Платных (990₽)</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-today">—</div><div class="stat-label">Сегодня</div></div>
+      </div>
+
+      <div class="table-header">
+        <div class="table-title">Заявки</div>
+        <input type="text" class="search-input" id="search" placeholder="🔍 Поиск по имени или telegram…" oninput="filterSubs()" />
+      </div>
+
+      <div id="subs-container">
+        <div class="loading"><div class="spinner"></div>Загружаю заявки…</div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
     </div>
 
-    <div id="subs-container">
-      <div class="loading"><div class="spinner"></div>Загружаю заявки…</div>
-    </div>
+    <!-- ── TAB: ЛИДЫ БОТА ── -->
+    <div class="tab-panel" id="tab-leads">
+      <div class="stats-row" id="leads-stats-row">
+        <div class="stat-card"><div class="stat-num" id="ls-total">—</div><div class="stat-label">Всего лидов</div></div>
+        <div class="stat-card"><div class="stat-num" id="ls-active">—</div><div class="stat-label">В воронке</div></div>
+        <div class="stat-card"><div class="stat-num" id="ls-engaged">—</div><div class="stat-label">Заинтересовались</div></div>
+        <div class="stat-card"><div class="stat-num" id="ls-conv">—</div><div class="stat-label">Конвертированы</div></div>
+      </div>
 
-    <div class="pagination" id="pagination"></div>
+      <div class="filter-row" id="lead-filters">
+        <span class="filter-chip active" onclick="filterLeads('')"   data-status="">Все</span>
+        <span class="filter-chip"        onclick="filterLeads('new')"          data-status="new">Новые</span>
+        <span class="filter-chip"        onclick="filterLeads('active')"       data-status="active">В воронке</span>
+        <span class="filter-chip"        onclick="filterLeads('engaged')"      data-status="engaged">Заинтересовались</span>
+        <span class="filter-chip"        onclick="filterLeads('converted')"    data-status="converted">Конвертированы</span>
+        <span class="filter-chip"        onclick="filterLeads('unsubscribed')" data-status="unsubscribed">Отписались</span>
+      </div>
+
+      <div id="leads-container">
+        <div class="loading"><div class="spinner"></div>Загружаю лиды…</div>
+      </div>
+
+      <div class="pagination" id="leads-pagination"></div>
+    </div>
   </div>
 </div>
 
@@ -470,6 +555,142 @@
   setInterval(() => {
     if (SECRET) loadSubs(false);
   }, 60000);
+
+  // ── TABS ────────────────────────────────────────────────────────────────
+  function switchTab(name) {
+    ['subs', 'leads'].forEach(t => {
+      document.getElementById(`tab-${t}`).classList.toggle('active', t === name);
+      document.getElementById(`tab-${t}-btn`).classList.toggle('active', t === name);
+    });
+    if (name === 'leads' && leadsData.length === 0) loadLeads();
+  }
+
+  // ── LEADS TAB ────────────────────────────────────────────────────────────
+  let leadsData    = [];
+  let leadsTotal   = 0;
+  let leadsOffset  = 0;
+  let leadsStatus  = '';
+  const LEADS_PAGE = 20;
+
+  async function loadLeads(offset = 0, status = leadsStatus) {
+    leadsOffset = offset;
+    leadsStatus = status;
+    document.getElementById('leads-container').innerHTML =
+      '<div class="loading"><div class="spinner"></div>Загружаю лиды…</div>';
+
+    try {
+      let url = `/api/leads-admin?secret=${encodeURIComponent(SECRET)}&limit=${LEADS_PAGE}&offset=${offset}`;
+      if (status) url += `&status=${status}`;
+      const r = await fetch(url);
+      if (r.status === 401) { logout(); return; }
+      const data = await r.json();
+      leadsData  = data.items || [];
+      leadsTotal = data.total || 0;
+      updateLeadsStats();
+      renderLeads();
+    } catch(e) {
+      document.getElementById('leads-container').innerHTML =
+        '<div class="empty-state" style="color:var(--red)">Ошибка загрузки. Возможно, БД не подключена.</div>';
+    }
+  }
+
+  async function updateLeadsStats() {
+    try {
+      const r = await fetch(`/api/leads-admin?secret=${encodeURIComponent(SECRET)}&limit=1000`);
+      const d = await r.json();
+      const all = d.items || [];
+      document.getElementById('ls-total').textContent   = d.total || 0;
+      document.getElementById('ls-active').textContent  = all.filter(l => l.status === 'active').length;
+      document.getElementById('ls-engaged').textContent = all.filter(l => l.status === 'engaged').length;
+      document.getElementById('ls-conv').textContent    = all.filter(l => l.status === 'converted').length;
+    } catch(e) {}
+  }
+
+  function filterLeads(status) {
+    document.querySelectorAll('#lead-filters .filter-chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.status === status);
+    });
+    loadLeads(0, status);
+  }
+
+  function renderLeads() {
+    const container = document.getElementById('leads-container');
+    if (leadsData.length === 0) {
+      container.innerHTML = '<div class="empty-state">Лидов нет</div>';
+      document.getElementById('leads-pagination').innerHTML = '';
+      return;
+    }
+
+    container.innerHTML = '<div class="subs-list">' +
+      leadsData.map(renderLeadCard).join('') +
+    '</div>';
+
+    const totalPages = Math.ceil(leadsTotal / LEADS_PAGE);
+    const page       = Math.floor(leadsOffset / LEADS_PAGE);
+    const pag        = document.getElementById('leads-pagination');
+    if (totalPages <= 1) { pag.innerHTML = ''; return; }
+    pag.innerHTML = `
+      <button class="page-btn" onclick="loadLeads(${leadsOffset - LEADS_PAGE})" ${leadsOffset === 0 ? 'disabled' : ''}>← Назад</button>
+      <span class="page-info">Стр. ${page + 1} / ${totalPages}</span>
+      <button class="page-btn" onclick="loadLeads(${leadsOffset + LEADS_PAGE})" ${leadsOffset + LEADS_PAGE >= leadsTotal ? 'disabled' : ''}>Вперёд →</button>
+    `;
+  }
+
+  function renderLeadCard(l) {
+    const initials  = (l.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const date      = new Date(l.created_at);
+    const dateStr   = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    const step      = l.current_step != null ? `Шаг ${l.current_step}` : 'Не открыл бот';
+    const answers   = l.quiz_answers ? Object.entries(l.quiz_answers)
+      .map(([k, v]) => `<div class="answer-item"><div class="answer-q">${escHtml(k)}</div><div class="answer-a">${escHtml(v)}</div></div>`)
+      .join('') : '';
+
+    return `
+      <div class="sub-card" id="lead-${l.id}" onclick="toggleCard('lead-${l.id}')">
+        <div class="sub-header">
+          <div class="sub-avatar">${initials}</div>
+          <div class="sub-info">
+            <div class="sub-name">${escHtml(l.name || 'Без имени')}</div>
+            <div class="sub-tg">${escHtml(l.tg_handle || '—')}</div>
+          </div>
+          <div class="sub-meta">
+            <span class="lead-status ${l.status}">${statusLabel(l.status)}</span>
+            <span class="sub-time">${dateStr} · ${step}</span>
+          </div>
+          <span class="sub-chevron">▾</span>
+        </div>
+        <div class="sub-body">
+          <div class="sub-details-row">
+            <div class="sub-detail"><div class="sub-detail-label">Telegram</div><div class="sub-detail-value">${escHtml(l.tg_handle || '—')}</div></div>
+            <div class="sub-detail"><div class="sub-detail-label">Доход</div><div class="sub-detail-value">${escHtml(l.income || '—')}</div></div>
+            <div class="sub-detail"><div class="sub-detail-label">Сообщений отправлено</div><div class="sub-detail-value">${l.msgs_sent || 0} / 7</div></div>
+            ${l.utm_source ? `<div class="sub-detail"><div class="sub-detail-label">UTM</div><div class="sub-detail-value">${escHtml(l.utm_source)}</div></div>` : ''}
+          </div>
+          ${answers ? `<div class="answers-section"><div class="answers-title">📝 Ответы на диагностику</div>${answers}</div>` : ''}
+          <div class="lead-actions">
+            ${l.status !== 'converted' ? `<button class="lead-btn success" onclick="leadAction('${l.id}','convert',event)">✅ Конвертирован</button>` : ''}
+            <button class="lead-btn" onclick="leadAction('${l.id}','pause',event)">⏸ Пауза</button>
+            <button class="lead-btn" onclick="leadAction('${l.id}','resume',event)">▶ Продолжить</button>
+            <button class="lead-btn danger" onclick="leadAction('${l.id}','delete',event)">🗑 Удалить</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function statusLabel(s) {
+    return { new: 'Новый', active: 'В воронке', engaged: 'Заинтересован', converted: 'Конвертирован', unsubscribed: 'Отписался', cold: 'Холодный' }[s] || s;
+  }
+
+  async function leadAction(id, action, e) {
+    e.stopPropagation();
+    if (action === 'delete' && !confirm('Удалить лида и всё его расписание?')) return;
+    try {
+      const r = await fetch(`/api/leads-admin?secret=${encodeURIComponent(SECRET)}&action=${action}&lead_id=${id}`);
+      const d = await r.json();
+      if (d.ok) loadLeads(leadsOffset);
+    } catch(e) { alert('Ошибка'); }
+  }
 </script>
 </body>
 </html>

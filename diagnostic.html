@@ -1747,20 +1747,26 @@
       question: q.text,
       answer: answers[bi][qi] || ''
     })));
+    let botDeeplink = '';
     try {
       const payload = new URLSearchParams({
         name, telegram: tg, website,
         format: selectedFormat,
-        sphere: 'диагностика',
+        income: '',
         utm_source:   sessionStorage.getItem('utm_source')   || '',
         utm_medium:   sessionStorage.getItem('utm_medium')   || '',
         utm_campaign: sessionStorage.getItem('utm_campaign') || '',
-        answers_json: JSON.stringify(flatAnswers),
       });
       flatAnswers.forEach((item, i) => {
         payload.append(`q${i+1}`, `[${item.block}] ${item.question}\n${item.answer}`);
       });
-      await fetch('/api/notify', { method: 'POST', body: payload });
+      const resp = await fetch('/api/submit-diagnostic', { method: 'POST', body: payload });
+      const data = await resp.json();
+      if (data.bot_deeplink) {
+        botDeeplink = data.bot_deeplink;
+        sessionStorage.setItem('bot_deeplink', botDeeplink);
+        sessionStorage.setItem('lead_name', name);
+      }
     } catch(e) {}
 
     if (typeof ym !== 'undefined') ym(108665262, 'reachGoal', 'quiz_submit');
