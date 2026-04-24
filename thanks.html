@@ -129,33 +129,56 @@
       margin-bottom: 28px;
     }
 
-    /* ── COMPARE TABLE ── */
-    .compare {
-      background: var(--bg);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 28px;
+    /* ── COMPARE V2 — two columns ── */
+    .compare-v2 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 28px;
+    }
+    .compare-col {
+      border-radius: 14px; overflow: hidden;
       border: 1px solid var(--border);
     }
-    .compare-row {
-      display: grid; grid-template-columns: 1fr 1fr;
+    .compare-col-paid {
+      border-color: rgba(200,134,10,.28);
+      box-shadow: 0 2px 16px rgba(200,134,10,.08);
     }
-    .compare-row + .compare-row { border-top: 1px solid var(--border); }
-    .compare-cell {
-      padding: 12px 16px;
-      font-size: .85rem; line-height: 1.5;
-    }
-    .compare-cell:first-child { border-right: 1px solid var(--border); }
-    .compare-head {
+    .col-head {
       font-size: .7rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
-      padding: 10px 16px;
-      background: var(--bg2);
+      padding: 10px 14px; background: var(--bg2);
     }
-    .compare-head:first-child { color: var(--text3); border-right: 1px solid var(--border); }
-    .compare-head:last-child { color: var(--gold2); }
-    .dim-cell { color: var(--text3); }
-    .good-cell { color: var(--text); font-weight: 600; }
-    .good-cell::before { content: '✓ '; color: var(--green); }
+    .compare-col-free .col-head  { color: var(--text3); }
+    .compare-col-paid .col-head  { color: var(--gold2); background: rgba(200,134,10,.06); }
+    .col-list { list-style: none; padding: 12px 14px; display: flex; flex-direction: column; gap: 9px; }
+    .col-item { font-size: .83rem; line-height: 1.45; display: flex; gap: 7px; align-items: flex-start; }
+    .col-item::before { flex-shrink: 0; margin-top: 1px; font-size: .75rem; }
+    .col-dim { color: var(--text3); }
+    .col-dim::before { content: '—'; color: var(--text3); }
+    .col-good { color: var(--text); font-weight: 500; }
+    .col-good::before { content: '✓'; color: var(--green); font-weight: 700; }
+
+    /* ── NO MONEY BLOCK ── */
+    .nomoney-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+    }
+    .nomoney-title {
+      font-size: .9rem; font-weight: 800; margin-bottom: 10px;
+    }
+    .nomoney-text {
+      font-size: .86rem; color: var(--text2); line-height: 1.65; margin-bottom: 8px;
+    }
+    .nomoney-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 6px;
+      font-size: .85rem; font-weight: 700; color: var(--gold2);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nomoney-cta:hover { opacity: .75; }
 
     /* ── PRICE BLOCK ── */
     .price-block {
@@ -285,7 +308,9 @@
 
     @media(max-width:580px){
       .upsell-card { padding: 28px 22px; }
-      .compare-cell { font-size: .8rem; padding: 10px 12px; }
+      .compare-v2 { grid-template-columns: 1fr; gap: 8px; }
+      .compare-col-free { order: 2; }
+      .compare-col-paid { order: 1; }
     }
   </style>
 </head>
@@ -313,35 +338,34 @@
 
   <!-- UPSELL CARD -->
   <div class="upsell-card">
-    <div class="upsell-eyebrow">Пока Шамиль читает — важный вопрос</div>
+    <div class="upsell-eyebrow">Пока Шамиль читает твои ответы</div>
 
-    <h1 class="upsell-h1">Хочешь знать <em>где именно</em><br>ты теряешь деньги?</h1>
+    <h1 class="upsell-h1">Что ты получишь<br><em>в ответ</em> — зависит от формата</h1>
 
     <p class="upsell-sub">
-      Бесплатно я напишу общий барьер. За 990 ₽ — детальный разбор: конкретные точки потерь, что делать прямо сейчас, и план на первые 30 дней. Лично. Письменно. Без созвона.
+      Ты описал ситуацию честно. Разница в том, насколько конкретным будет ответ.
     </p>
 
-    <!-- COMPARE -->
-    <div class="compare">
-      <div class="compare-row">
-        <div class="compare-head">Бесплатно</div>
-        <div class="compare-head">За 990 ₽</div>
+    <!-- COMPARE V2 -->
+    <div class="compare-v2">
+      <div class="compare-col compare-col-free">
+        <div class="col-head">Бесплатно</div>
+        <ul class="col-list">
+          <li class="col-item col-dim">Один главный барьер — без деталей</li>
+          <li class="col-item col-dim">«У тебя, скорее всего, проблема с X»</li>
+          <li class="col-item col-dim">Направление куда двигаться в целом</li>
+          <li class="col-item col-dim">2-3 абзаца в Telegram</li>
+        </ul>
       </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-cell">Общий барьер роста</div>
-        <div class="compare-cell good-cell">Конкретные точки потерь</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-cell">Общее направление</div>
-        <div class="compare-cell good-cell">Что сделать на этой неделе</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-cell">—</div>
-        <div class="compare-cell good-cell">План на 30 дней под тебя</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-cell dim-cell">—</div>
-        <div class="compare-cell good-cell">Разбор твоих ошибок в продажах</div>
+      <div class="compare-col compare-col-paid">
+        <div class="col-head">За 990 ₽</div>
+        <ul class="col-list">
+          <li class="col-item col-good">3-5 точек где прямо сейчас уходят деньги — из твоих ответов</li>
+          <li class="col-item col-good">Что написать следующему клиенту — конкретные формулировки</li>
+          <li class="col-item col-good">Приоритет №1 на эту неделю: что сделать чтобы деньги пришли быстрее</li>
+          <li class="col-item col-good">Разбор твоей конкретной ситуации, не общие советы</li>
+          <li class="col-item col-good">30-дневный план под твою нишу</li>
+        </ul>
       </div>
     </div>
 
@@ -349,7 +373,7 @@
     <div class="price-block">
       <div class="price-big">990 ₽</div>
       <div class="price-note">
-        <strong>Это 1–2 часа работы.</strong> Первая же сделка с новым пониманием окупит это десятикратно. Если ценности нет — вернём деньги без вопросов.
+        <strong>Меньше часа твоей работы.</strong> Первая сделка с конкретным планом окупит это в 10-50 раз. Не устроит — вернём без вопросов.
       </div>
     </div>
 
@@ -383,6 +407,20 @@
         <div class="proof-role">B2B продажи · до этого 6 месяцев «сам разберусь»</div>
       </div>
     </div>
+  </div>
+
+  <!-- NO MONEY BLOCK -->
+  <div class="nomoney-card">
+    <div class="nomoney-title">Если прямо сейчас нет лишних 990 ₽</div>
+    <p class="nomoney-text">
+      Это самая честная причина взять разбор. Человек, у которого на карте почти ноль — сидит именно в той точке, из которой выходят конкретными действиями, а не общим направлением.
+    </p>
+    <p class="nomoney-text">
+      Напиши Шамилю — договоритесь. Без давления.
+    </p>
+    <a href="https://t.me/vodasolenaya" target="_blank" class="nomoney-cta" onclick="ym && ym(108665262,'reachGoal','nomoney_click')">
+      Написать Шамилю →
+    </a>
   </div>
 
   <!-- FREE / WAIT SECTION -->
