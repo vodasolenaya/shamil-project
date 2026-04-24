@@ -17,15 +17,16 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const b = req.body;
-  let name, telegram, email;
+  let name, telegram, email, lead_id;
   if (b && typeof b === 'object' && !Buffer.isBuffer(b)) {
-    ({ name, telegram, email } = b);
+    ({ name, telegram, email, lead_id } = b);
   } else {
     const raw = Buffer.isBuffer(b) ? b.toString() : (typeof b === 'string' ? b : '');
     const p = new URLSearchParams(raw);
     name     = p.get('name');
     telegram = p.get('telegram');
     email    = p.get('email');
+    lead_id  = p.get('lead_id');
   }
 
   const TERMINAL_KEY = process.env.TINKOFF_TERMINAL_KEY;
@@ -36,7 +37,10 @@ export default async function handler(req, res) {
     return res.status(200).json({ fallback: true });
   }
 
-  const orderId = `quiz-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  // Формат orderId: <lead_id>__<timestamp> — разделитель __ чтобы распарсить в webhook
+  const orderId = lead_id
+    ? `${lead_id}__${Date.now()}`
+    : `anon__${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
 
   // Нормализуем email или используем заглушку для чека
   const emailNorm = (email || '');
@@ -48,8 +52,8 @@ export default async function handler(req, res) {
     OrderId:      orderId,
     Description:  'Письменный разбор продаж — artofsales.art',
     CustomerKey:  (telegram || 'anon').replace(/[^a-zA-Z0-9_@]/g, '').slice(0, 36),
-    SuccessURL:   'https://artofsales.art/diagnostic?paid=ok',
-    FailURL:      'https://artofsales.art/diagnostic?paid=fail',
+    SuccessURL:   'https://artofsales.art/thanks?paid=ok',
+    FailURL:      'https://artofsales.art/thanks?paid=fail',
   };
 
   params.Token = buildToken(params, SECRET);

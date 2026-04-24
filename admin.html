@@ -759,6 +759,15 @@
           </div>
           ${answers ? `<div class="answers-section"><div class="answers-title">📝 Ответы на диагностику</div>${answers}</div>` : ''}
 
+          <!-- COPY FOR CLAUDE -->
+          ${l.quiz_answers && Object.keys(l.quiz_answers).length > 0 ? `
+          <div style="margin:10px 0 4px;">
+            <button class="lead-btn" style="background:rgba(99,102,241,.12);color:#818cf8;border-color:rgba(99,102,241,.25);"
+              onclick="copyForClaude('${l.id}',event)">
+              📋 Скопировать для Claude → вставь в чат и получи черновик
+            </button>
+          </div>` : ''}
+
           <!-- DIRECT-ASSIST: загружается при открытии -->
           <div id="da-${l.id}" style="display:none;">
             <div class="da-section">
@@ -1071,6 +1080,46 @@
       if (d.ok) { delete leadDetails[id]; loadLeads(leadsOffset); }
       else alert('Ошибка: ' + (d.error || 'неизвестная'));
     } catch(ex) { alert('Ошибка'); }
+  }
+
+  // ── Copy for Claude ──────────────────────────────────────────────────────
+  const Q_LABELS = {
+    q1:'Сколько зарабатываешь сейчас', q2:'Сколько хочешь зарабатывать',
+    q3:'Что делал для роста', q4:'Что даёшь клиентам',
+    q5:'Кому это нужно / что тебя тормозит', q6:'Где обрывается путь к деньгам',
+    q7:'Что чувствуешь называя цену', q8:'Что происходит когда клиент говорит «дорого»',
+    q9:'Как относишься к более успешному коллеге',
+    q10:'Последний раз когда называл цену — как было',
+    q11:'Потерянный клиент — что произошло', q12:'Решения о которых жалеешь',
+    q13:'Люди вокруг — кто они', q14:'Жизнь через год', q15:'Что мешает прямо сейчас',
+  };
+
+  function copyForClaude(leadId, e) {
+    e.stopPropagation();
+    const l = leadsData.find(x => x.id === leadId);
+    if (!l) { alert('Данные лида не найдены'); return; }
+    const qa = l.quiz_answers || {};
+    const lines = [
+      'Шамиль, сгенерируй черновик FREE-разбора для отправки клиенту в Telegram.',
+      '',
+      `Имя: ${l.name || 'не указано'}`,
+      `Telegram: ${l.tg_handle || 'не указан'}`,
+      `Доход сейчас: ${l.income || 'не указан'}`,
+      '',
+      'Ответы на диагностику:',
+    ];
+    for (let i = 1; i <= 15; i++) {
+      const v = qa[`q${i}`];
+      if (v) lines.push(`${i}. ${Q_LABELS[`q${i}`] || `Вопрос ${i}`}: ${v}`);
+    }
+    lines.push('', '---');
+    lines.push('Структура ответа: обращение по имени + типаж (A/B/C) + 3 маркера с цитатами + кейс ученика + 1 шаг на неделю + CTA «если откликнулось — созвонимся 30 минут» + подпись «— Шамиль».');
+    lines.push('Стиль: прямой, без инфобизнесовых слов. Не писать «трансформация», «прорыв», «масштабирование». Короткие абзацы.');
+    lines.push('Кейсы только из этих пяти: Олег (B2B, 420к/11дней), Марат (дизайнер, 600к), Самат (таргетолог, 460к), Фёдор (веб, Новосибирск, 300к+), Егор (с нуля, 100к).');
+    const text = lines.join('\n');
+    navigator.clipboard.writeText(text)
+      .then(() => alert('✅ Скопировано! Вставь в чат с Claude и получи черновик.'))
+      .catch(() => { prompt('Скопируй вручную:', text); });
   }
 
   // Legacy compat
