@@ -1383,41 +1383,6 @@
         Шамиль читает ответы лично — обрабатывается вручную
       </div>
 
-      <div class="format-chooser">
-
-        <!-- FREE -->
-        <div class="format-card active" id="fc-free" onclick="selectFormat('free')">
-          <div class="fc-check"></div>
-          <div class="fc-badge">Базовый</div>
-          <div class="fc-title">Найти барьер</div>
-          <div class="fc-free-price">Бесплатно</div>
-          <div class="fc-divider"></div>
-          <ul class="fc-list">
-            <li class="yes"><span class="fc-ico">✓</span> Шамиль называет главный барьер</li>
-            <li class="no"><span class="fc-ico">—</span> Без плана действий</li>
-            <li class="no"><span class="fc-ico">—</span> Без конкретных шагов</li>
-            <li class="no"><span class="fc-ico">—</span> Без разбора ошибок</li>
-          </ul>
-        </div>
-
-        <!-- PAID -->
-        <div class="format-card fc-paid-card" id="fc-paid" onclick="selectFormat('paid')">
-          <div class="fc-check"></div>
-          <div class="fc-recommended">Рекомендуем</div>
-          <div class="fc-title">Убрать барьер</div>
-          <div class="fc-price">990 ₽</div>
-          <div class="fc-divider"></div>
-          <ul class="fc-list">
-            <li class="yes"><span class="fc-ico">✓</span> Шамиль называет барьер</li>
-            <li class="yes"><span class="fc-ico">✓</span> Конкретные точки потерь</li>
-            <li class="yes"><span class="fc-ico">✓</span> Что сделать на этой неделе</li>
-            <li class="yes"><span class="fc-ico">✓</span> Разбор ошибок в продажах</li>
-            <li class="yes"><span class="fc-ico">✓</span> План на 30 дней</li>
-          </ul>
-        </div>
-
-      </div>
-
       <div class="field-group">
         <label>Имя</label>
         <input type="text" id="lf-name" placeholder="Как тебя зовут" />
@@ -1426,12 +1391,8 @@
         <label>Telegram</label>
         <input type="text" id="lf-tg" placeholder="@username" />
       </div>
-      <div class="field-group" id="email-field-group" style="display:none">
-        <label>Email <span style="font-size:.78rem;color:var(--text3);font-weight:400;">(для чека об оплате)</span></label>
-        <input type="email" id="lf-email" placeholder="you@example.com" />
-      </div>
       <input type="text" id="lf-website" style="display:none" tabindex="-1" autocomplete="off" />
-      <button class="btn-submit" id="btn-submit" onclick="submitLead()">Получить общий ответ бесплатно →</button>
+      <button class="btn-submit" id="btn-submit" onclick="submitLead()">Отправить ответы Шамилю →</button>
       <p class="privacy-note">Данные не передаются третьим лицам. Без спама.</p>
       <div class="success-msg" id="success-msg">
         <h3>✅ Готово — ответы у Шамиля</h3>
@@ -1492,24 +1453,16 @@
 
     <div class="faq-list reveal">
       <div class="faq-item">
-        <button class="faq-q">Что приходит в бесплатном ответе?</button>
-        <div class="faq-a">Шамиль читает твои ответы и пишет в Telegram — какой у тебя главный барьер роста. Без детального плана и конкретных шагов — это общий вывод по ситуации.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Что входит в детальный разбор за 990 ₽?</button>
-        <div class="faq-a">Конкретные точки где ты теряешь деньги прямо сейчас, что сделать на этой неделе, план на 30 дней под твою ситуацию и разбор ошибок в твоих продажах — всё письменно в Telegram лично от Шамиля.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Что будет после разбора?</button>
-        <div class="faq-a">Уйдёшь с пониманием своего конкретного барьера и что с ним делать. Дальше — или начнём работать глубже (созвон 5 000 ₽ или полная программа), или нет. Без давления.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Зачем платить 990 ₽ — если есть бесплатный вариант?</button>
-        <div class="faq-a">Бесплатно — это общий барьер, одна фраза. За 990 ₽ — детальный разбор твоей конкретной ситуации с планом. Большинство окупают это первой же сделкой на новый чек. Если ценности нет — вернём деньги.</div>
+        <button class="faq-q">Что будет после того как я отправлю ответы?</button>
+        <div class="faq-a">Шамиль читает лично и пишет в Telegram в течение 24 часов. Назовёт главный барьер и предложит следующий шаг под твою ситуацию. Без давления — уйдёшь с ясностью в любом случае.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Подходит для моей ниши?</button>
         <div class="faq-a">Да. Работали SMM-щики, таргетологи, дизайнеры, веб-разработчики, копирайтеры, видеомонтажёры, маркетологи. Барьеры в продажах у всех похожи — меняются детали, не суть.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Это точно не продажа?</button>
+        <div class="faq-a">Нет. Диагностика — это диагностика. Шамиль даёт обратную связь по твоей ситуации. Если после этого захочешь работать глубже — будет разговор. Если нет — ок.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Кейсы настоящие?</button>
@@ -1517,7 +1470,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">Нет времени. Можно позже?</button>
-        <div class="faq-a">Диагностика занимает 5–10 минут. Это не курс на месяц. Если совсем некогда — выбери письменный формат за 990 ₽, Шамиль пришлёт детальный разбор текстом в Telegram.</div>
+        <div class="faq-a">Диагностика занимает 5–10 минут. Начни — сохранишь прогресс и можно вернуться. Чем дольше откладываешь, тем дольше барьер стоит на месте.</div>
       </div>
     </div>
   </div>
@@ -1812,15 +1765,7 @@
     document.getElementById('lead-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function selectFormat(f) {
-    selectedFormat = f;
-    document.getElementById('fc-free').classList.toggle('active', f === 'free');
-    document.getElementById('fc-paid').classList.toggle('active', f === 'paid');
-    document.getElementById('btn-submit').textContent = f === 'free'
-      ? 'Получить общий ответ бесплатно →'
-      : 'Получить детальный разбор за 990 ₽ →';
-    document.getElementById('email-field-group').style.display = f === 'paid' ? '' : 'none';
-  }
+  // Format chooser removed — always free flow, upsell shown on /thanks page
 
   /* ── UTM ── */
   (function(){
@@ -1848,7 +1793,7 @@
 
     const btn = document.getElementById('btn-submit');
     btn.disabled = true;
-    btn.textContent = selectedFormat === 'paid' ? 'Создаю платёж...' : 'Отправляю...';
+    btn.textContent = 'Отправляю...';
 
     // 1. Send quiz answers to Shamil regardless of format
     const flatAnswers = BLOCKS.flatMap((b, bi) => b.questions.map((q, qi) => ({
@@ -1874,29 +1819,7 @@
 
     if (typeof ym !== 'undefined') ym(108665262, 'reachGoal', 'quiz_submit');
 
-    // 2. Paid flow → create payment and redirect
-    if (selectedFormat === 'paid') {
-      try {
-        const payResp = await fetch('/api/create-payment', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ name, telegram: tg, email }),
-        });
-        const payData = await payResp.json();
-        if (payData.url) {
-          btn.textContent = 'Перехожу к оплате...';
-          window.location.href = payData.url;
-          return; // Tinkoff handles success from here
-        }
-      } catch(e) {}
-      // Fallback: Tinkoff недоступен — показываем инструкцию и разблокируем кнопку
-      btn.disabled = false;
-      btn.textContent = 'Попробовать ещё раз';
-      document.getElementById('success-text').textContent =
-        'Шамиль напишет тебе реквизиты в Telegram в течение часа. Письменный разбор — в течение 24 часов.';
-    }
-
-    // 3. Free flow (or paid fallback) — clear progress and redirect to /thanks
+    // Redirect to thanks page (upsell 990₽ shown there)
     btn.textContent = '✅ Отправлено';
     clearProgress();
     window.location.href = '/thanks.html';
