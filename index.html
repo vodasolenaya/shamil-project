@@ -43,20 +43,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --bg2: #111111;
-      --card: #111111;
-      --card2: #111111;
-      --border: rgba(255,255,255,.06);
-      --border2: rgba(255,255,255,.12);
+      --bg: #fafaf8;
+      --bg2: #f2f1ed;
+      --card: #ffffff;
+      --card2: #f7f6f3;
+      --border: rgba(0,0,0,.08);
+      --border2: rgba(0,0,0,.15);
       --gold: #C9A84C;
       --gold2: #b8944a;
       --gold-glow: rgba(201,168,76,.18);
       --gold-faint: rgba(201,168,76,.08);
-      --text: #ffffff;
-      --text2: #cccccc;
-      --text3: #aaaaaa;
-      --green: #4ade80;
+      --text: #0d0d0d;
+      --text2: #555555;
+      --text3: #888888;
+      --green: #16a34a;
       --r: 14px;
       --r2: 20px;
     }
@@ -70,12 +70,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
     body::after {
-      content: '';
-      position: fixed; inset: 0; z-index: 9999;
-      pointer-events: none;
-      opacity: .028;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
+      display: none;
     }
     /* ── SCROLL PROGRESS ── */
     #scroll-bar {
@@ -89,8 +84,8 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px; height: 64px;
-      background: #0d0d0d;
-      border-bottom: 1px solid #1e1e1e;
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0,0,0,.1);
     }
     .nav-logo {
       font-weight: 900; font-size: .95rem; letter-spacing: -.3px;
@@ -99,17 +94,17 @@
     }
     .nav-logo-dot {
       width: 28px; height: 28px; border-radius: 50%;
-      background: #111;
+      background: #f7f6f3;
       display: flex; align-items: center; justify-content: center;
       font-size: .85rem; flex-shrink: 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
     }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a:not(.nav-cta) {
       color: #888888; font-size: .87rem; text-decoration: none;
       transition: color .2s; font-weight: 500;
     }
-    .nav-links a:not(.nav-cta):hover { color: #ffffff; }
+    .nav-links a:not(.nav-cta):hover { color: #0d0d0d; }
     .nav-cta {
       background: var(--gold); color: #000;
       padding: 9px 22px; border-radius: 0;
@@ -214,13 +209,12 @@
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(201,168,76,.06) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 45% at 85% 20%, rgba(201,168,76,.05) 0%, transparent 60%),
-        #0d0d0d;
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(201,168,76,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 45% at 85% 20%, rgba(201,168,76,.06) 0%, transparent 60%),
+        #fafaf8;
     }
     .hero-noise {
-      position: absolute; inset: 0; z-index: 1; opacity: .025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      display: none;
     }
     .hero > * { position: relative; z-index: 2; }
     .hero-eyebrow {
@@ -282,8 +276,8 @@
     .hero-grid {
       position: absolute; inset: 0; z-index: 1;
       background-image:
-        linear-gradient(rgba(200,134,10,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,134,10,.05) 1px, transparent 1px);
+        linear-gradient(rgba(200,134,10,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,134,10,.03) 1px, transparent 1px);
       background-size: 80px 80px;
       -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,0,0,.7) 0%, transparent 75%);
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,0,0,.7) 0%, transparent 75%);
@@ -299,7 +293,7 @@
     .hero-avatar {
       width: 32px; height: 32px; border-radius: 50%;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
-      border: 2px solid #0d0d0d;
+      border: 2px solid #ffffff;
       display: flex; align-items: center; justify-content: center;
       font-size: .72rem; font-weight: 900; color: #000;
     }
@@ -310,8 +304,8 @@
     /* ── STICKY BAR ── */
     .sticky-bar {
       position: fixed; top: 64px; left: 0; right: 0; z-index: 89;
-      background: #0d0d0d;
-      border-bottom: 1px solid #1e1e1e;
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0,0,0,.08);
       padding: 10px 40px;
       transform: translateY(-110%);
       transition: transform .4s cubic-bezier(.16,1,.3,1);
@@ -369,7 +363,7 @@
     /* ── SECTIONS ── */
     .section { padding: 120px 24px; }
     .section + .section {
-      border-top: 1px solid rgba(255,255,255,.04);
+      border-top: 1px solid rgba(0,0,0,.05);
     }
     .section-inner { max-width: 1080px; margin: 0 auto; }
     .section-inner.wide { max-width: 1200px; }
@@ -393,11 +387,11 @@
 
     /* ── PAIN BENTO ── */
     .pain, .steps-section, .about-section {
-      background: linear-gradient(180deg, #111111 0%, #0f0e0c 100%);
+      background: linear-gradient(180deg, #f2f1ed 0%, #ede9e0 100%);
     }
     .bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
     .bento-card {
-      background: var(--card); border: 1px solid rgba(255,255,255,.06);
+      background: var(--card); border: 1px solid var(--border);
       border-radius: var(--r2); padding: 32px 28px;
       transition: box-shadow .25s, transform .25s;
       box-shadow: 0 2px 12px rgba(28,20,8,.05);
@@ -441,7 +435,7 @@
     .program-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media(max-width:768px){ .program-blocks { grid-template-columns: 1fr; } }
     .prog-card {
-      background: #111111; border: 1px solid #1e1e1e;
+      background: #ffffff; border: 1px solid rgba(0,0,0,.1);
       border-radius: 0; padding: 36px 32px; position: relative;
     }
     .prog-card::after { display: none; }
@@ -450,22 +444,22 @@
       color: var(--gold); margin-bottom: 16px;
       display: inline-block; border-bottom: 1px solid rgba(201,168,76,.3); padding-bottom: 10px;
     }
-    .prog-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -.3px; color: #ffffff; line-height: 1.4; }
+    .prog-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -.3px; color: var(--text); line-height: 1.4; }
     .prog-items { display: flex; flex-direction: column; gap: 8px; }
     .prog-item {
-      background: #161616; border: 1px solid #2a2a2a;
+      background: var(--bg2); border: 1px solid rgba(0,0,0,.08);
       padding: 14px 18px;
       font-size: .93rem; color: var(--text2); line-height: 1.6;
-      border-left: 2px solid rgba(201,168,76,.25);
+      border-left: 2px solid rgba(201,168,76,.35);
     }
-    .prog-item strong { color: #ffffff; }
+    .prog-item strong { color: var(--text); }
     .prog-formats {
       display: flex; flex-wrap: wrap; gap: 8px;
       margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
     }
     .prog-format-tag {
       font-size: .76rem; color: var(--text2);
-      background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      background: rgba(0,0,0,.04); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 10px;
     }
     @media(max-width:680px){
@@ -621,7 +615,7 @@
       position: relative; text-align: center;
       transform: translateY(20px) scale(.97);
       transition: transform .3s cubic-bezier(.16,1,.3,1);
-      box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 0 60px rgba(240,192,64,.08);
+      box-shadow: 0 32px 80px rgba(0,0,0,.15), 0 0 60px rgba(240,192,64,.08);
     }
     .exit-overlay.show .exit-modal { transform: none; }
     .exit-close {
@@ -817,7 +811,7 @@
       pointer-events: none; z-index: 0;
     }
     .price-card > * { position: relative; z-index: 1; }
-    .price-card:hover { border-color: rgba(240,192,64,.25); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.3); }
+    .price-card:hover { border-color: rgba(240,192,64,.25); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
     .price-card.featured {
       background: linear-gradient(160deg, rgba(200,134,10,.12) 0%, var(--card) 50%);
       border-color: rgba(240,192,64,.4);
@@ -857,7 +851,7 @@
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
     }
     .pf-icon.yes { background: rgba(34,197,94,.15); color: var(--green); }
-    .pf-icon.no  { background: rgba(255,255,255,.05); color: var(--text3); }
+    .pf-icon.no  { background: rgba(0,0,0,.05); color: var(--text3); }
     .price-features li.dim { opacity: .45; }
     .price-cta {
       display: block; text-align: center; font-weight: 800; font-size: .92rem;
@@ -948,9 +942,9 @@
     /* ── NAV SCROLLED STATE ── */
     nav { transition: background .3s, border-color .3s, box-shadow .3s; }
     nav.scrolled {
-      background: #0d0d0d;
-      border-bottom-color: #1e1e1e;
-      box-shadow: 0 4px 24px rgba(0,0,0,.5);
+      background: #ffffff;
+      border-bottom-color: rgba(0,0,0,.1);
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
     }
 
     /* ── STAT-NUM GLOW ON ANIMATE ── */
@@ -965,10 +959,10 @@
     @media(max-width:680px){ .prog-mechanics-grid { grid-template-columns: 1fr 1fr !important; } }
     @media(max-width:480px){ .prog-mechanics-grid { grid-template-columns: 1fr !important; } }
 
-    /* Dark overrides */
+    /* Light overrides */
     .hero { text-align: left; }
-    .nav-links a:not(.nav-cta) { color: #888888; }
-    .nav-links a:not(.nav-cta):hover { color: #ffffff; }
+    .nav-links a:not(.nav-cta) { color: #666666; }
+    .nav-links a:not(.nav-cta):hover { color: #0d0d0d; }
     .hero-badge { background: transparent !important; border: 1px solid rgba(201,168,76,.4) !important; border-radius: 0 !important; }
     .hero-note { color: var(--text2); }
     .hero-proof-text { color: var(--text2); }
@@ -1034,11 +1028,11 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <div class="hero-note">
-          <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 15 вопросов</span>
+          <span>15 вопросов</span>
           <span class="hero-note-sep">·</span>
-          <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Бесплатно</span>
+          <span>Бесплатно</span>
           <span class="hero-note-sep">·</span>
-          <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Шамиль читает лично</span>
+          <span>Шамиль читает лично</span>
         </div>
         <div class="hero-social-proof">
           <div class="hero-avatars">
@@ -1286,9 +1280,9 @@
         <p>Попробовал стартап — не пошло, ушёл без денег. Вернулся во фриланс: за первую неделю — <strong>500 000 ₽ на сайтах.</strong></p>
         <p>С тех пор обучаю фрилансеров продажам. Не теории — тому что сработало на мне. <strong>Ученики выходят на x2–x3 к доходу за 1 месяц.</strong></p>
         <div class="about-facts">
-          <div class="fact-chip">⚡ 1.5 млн выручки за 3 месяца</div>
-          <div class="fact-chip">🏆 Кейсы до 1 млн/мес</div>
-          <div class="fact-chip">💎 Вложил 2+ млн в развитие</div>
+          <div class="fact-chip">1.5 млн выручки за 3 месяца</div>
+          <div class="fact-chip">Кейсы до 1 млн/мес</div>
+          <div class="fact-chip">Вложил 2+ млн в развитие</div>
         </div>
         <a href="/story" class="btn-secondary" style="margin-top:20px;display:inline-flex;">Читать мою историю →</a>
       </div>
@@ -1523,15 +1517,12 @@
       </a>
       <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;">
         <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           15 вопросов — 5 минут
         </div>
         <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Шамиль читает лично
         </div>
         <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Без обязательств
         </div>
       </div>
