@@ -7,6 +7,7 @@
 
 import { getDb, genId } from '../lib/db.js';
 import { getMessage } from '../lib/messages.js';
+import { buildCallFollowup } from '../lib/message-templates.js';
 
 async function tgSend(token, chatId, text, reply_markup) {
   const body = { chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true };
@@ -40,23 +41,32 @@ export default async function handler(req, res) {
 
   const sql = getDb();
 
-  // Ищем все pending сообщения
+  // Ищем все pending сообщения (drip + call_reminder + call_followup)
   const pending = await sql`
     SELECT
       ds.id          AS drip_id,
       ds.lead_id,
       ds.step,
       ds.message_key,
+      ds.type        AS ds_type,
       l.tg_user_id,
       l.name,
       l.quiz_answers,
-      l.status       AS lead_status
+      l.status       AS lead_status,
+      l.call_zoom_url,
+      l.call_scheduled_at,
+      l.call_completed,
+      l.final_answer,
+      (SELECT payload FROM events
+       WHERE lead_id = l.id AND type = 'call_reminder_created'
+         AND payload->>'reminder_type' = regexp_replace(ds.message_key, 'call_reminder_', '')
+       ORDER BY created_at DESC LIMIT 1) AS reminder_payload
     FROM drip_schedule ds
     JOIN leads l ON l.id = ds.lead_id
     WHERE ds.sent_at IS NULL
       AND ds.paused   = FALSE
       AND ds.send_at <= NOW()
-      AND l.status NOT IN ('unsubscribed', 'converted')
+      AND l.status NOT IN ('unsubscribed', 'converted', 'paid')
       AND l.tg_user_id IS NOT NULL
     ORDER BY ds.send_at ASC
     LIMIT 100
@@ -66,34 +76,58 @@ export default async function handler(req, res) {
   let failed = 0;
 
   for (const row of pending) {
-    const step = parseInt(row.step, 10);
-    const m    = getMessage(step, {
-      name           : row.name || '',
-      quiz_q5_short  : row.quiz_answers?.q5 || '',
-    });
+    const step   = parseInt(row.step, 10);
+    const dsType = row.ds_type || 'drip';
+    let msgText  = null;
+    let markup   = null;
 
-    if (!m) {
-      // Нет контента — просто помечаем как отправленное
+    // ── Определяем текст сообщения по типу ──────────────────────────────
+    if (dsType === 'drip') {
+      const m = getMessage(step, {
+        name          : row.name || '',
+        quiz_q5_short : row.quiz_answers?.q5 || '',
+      });
+      if (m) { msgText = m.text; markup = m.reply_markup; }
+
+    } else if (dsType === 'call_reminder') {
+      // Текст берём из events (сохранили при создании)
+      const payload = row.reminder_payload;
+      if (payload) {
+        const parsed = typeof payload === 'string' ? JSON.parse(payload) : payload;
+        msgText = parsed.text;
+      }
+
+    } else if (dsType === 'call_followup') {
+      // Не отправляем если уже paid/lost/converted
+      if (['paid', 'converted', 'lost'].includes(row.lead_status)) {
+        await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
+        continue;
+      }
+      msgText = buildCallFollowup({ name: row.name || '' });
+    }
+
+    if (!msgText) {
       await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
       continue;
     }
 
-    const result = await tgSend(BOT_TOKEN, row.tg_user_id, m.text, m.reply_markup);
+    const result = await tgSend(BOT_TOKEN, row.tg_user_id, msgText, markup);
 
     if (result?.ok) {
       await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
       await sql`
         INSERT INTO events (id, lead_id, type, payload)
-        VALUES (${genId('ev')}, ${row.lead_id}, 'message_sent', ${JSON.stringify({ step })}::jsonb)
+        VALUES (${genId('ev')}, ${row.lead_id}, 'message_sent',
+                ${JSON.stringify({ step, ds_type: dsType })}::jsonb)
       `;
       sent++;
 
-      // После последнего сообщения (шаг 7) — помечаем лида как cold
-      if (step === 7) {
-        await sql`UPDATE leads SET status = 'cold' WHERE id = ${row.lead_id}`;
+      // После последнего drip-сообщения (шаг 7) — помечаем лида как cold
+      if (dsType === 'drip' && step === 7) {
+        await sql`UPDATE leads SET status = 'cold' WHERE id = ${row.lead_id} AND status = 'active'`;
       }
     } else {
-      console.error(`Failed to send step ${step} to lead ${row.lead_id}`);
+      console.error(`Failed to send ${dsType} step ${step} to lead ${row.lead_id}`);
       failed++;
     }
   }

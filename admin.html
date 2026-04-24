@@ -248,12 +248,17 @@
       letter-spacing: .5px; text-transform: uppercase;
       padding: 3px 8px; border-radius: 6px;
     }
-    .lead-status.new         { background: rgba(255,255,255,.05); color: var(--text3); border: 1px solid var(--border); }
-    .lead-status.active      { background: rgba(201,168,76,.12); color: var(--gold); border: 1px solid rgba(201,168,76,.2); }
-    .lead-status.engaged     { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
-    .lead-status.converted   { background: rgba(34,197,94,.2); color: #4ade80; border: 1px solid rgba(34,197,94,.4); }
-    .lead-status.unsubscribed{ background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
-    .lead-status.cold        { background: rgba(255,255,255,.03); color: var(--text3); border: 1px solid var(--border); }
+    .lead-status.new                        { background: rgba(255,255,255,.05); color: var(--text3); border: 1px solid var(--border); }
+    .lead-status.active                     { background: rgba(201,168,76,.12); color: var(--gold); border: 1px solid rgba(201,168,76,.2); }
+    .lead-status.engaged                    { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+    .lead-status.reached_out                { background: rgba(99,102,241,.12); color: #818cf8; border: 1px solid rgba(99,102,241,.2); }
+    .lead-status.call_scheduled             { background: rgba(251,191,36,.12); color: #fbbf24; border: 1px solid rgba(251,191,36,.2); }
+    .lead-status.call_reschedule_requested  { background: rgba(251,191,36,.08); color: #fbbf24; border: 1px solid rgba(251,191,36,.15); }
+    .lead-status.call_done                  { background: rgba(99,102,241,.1); color: #818cf8; border: 1px solid rgba(99,102,241,.15); }
+    .lead-status.converted, .lead-status.paid { background: rgba(34,197,94,.2); color: #4ade80; border: 1px solid rgba(34,197,94,.4); }
+    .lead-status.lost                       { background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+    .lead-status.unsubscribed               { background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+    .lead-status.cold                       { background: rgba(255,255,255,.03); color: var(--text3); border: 1px solid var(--border); }
 
     .lead-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
     .lead-btn {
@@ -264,6 +269,77 @@
     .lead-btn:hover { border-color: var(--gold); color: var(--gold); }
     .lead-btn.danger:hover { border-color: #ef4444; color: #ef4444; }
     .lead-btn.success { border-color: rgba(34,197,94,.4); color: var(--green); }
+    .lead-btn.primary { background: var(--gold); color: #000; border-color: var(--gold); }
+    .lead-btn.primary:hover { background: var(--gold2); border-color: var(--gold2); }
+
+    /* ── Direct-assist sections ── */
+    .da-section {
+      margin-top: 20px; padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .da-section-title {
+      font-size: .75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px;
+    }
+    .case-rec {
+      background: rgba(201,168,76,.06); border: 1px solid rgba(201,168,76,.15);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 16px;
+      font-size: .85rem; line-height: 1.6;
+    }
+    .case-rec-name { font-weight: 800; color: var(--gold); margin-bottom: 2px; }
+    .case-rec-result { color: var(--text); }
+    .case-rec-before { color: var(--text2); font-size: .82rem; }
+
+    .template-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+    .template-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+    .template-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; cursor: pointer;
+    }
+    .template-label { font-size: .78rem; font-weight: 700; color: var(--text2); }
+    .template-toggle { font-size: .72rem; color: var(--text3); }
+    .template-body { display: none; padding: 0 14px 14px; }
+    .template-textarea {
+      width: 100%; min-height: 160px; background: var(--card);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px; color: var(--text); font-size: .85rem;
+      line-height: 1.6; resize: vertical; font-family: inherit;
+      margin-bottom: 10px; outline: none;
+    }
+    .template-textarea:focus { border-color: var(--gold); }
+    .template-actions { display: flex; gap: 8px; }
+
+    /* ── Call scheduling ── */
+    .call-form { display: flex; flex-direction: column; gap: 12px; }
+    .call-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .call-input {
+      width: 100%; background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px; color: var(--text);
+      font-size: .85rem; outline: none; font-family: inherit;
+    }
+    .call-input:focus { border-color: var(--gold); }
+    .call-label { font-size: .75rem; color: var(--text2); margin-bottom: 5px; display: block; }
+
+    /* ── AI analysis ── */
+    .ai-block { background: var(--bg2); border-radius: 10px; padding: 14px 16px; }
+    .ai-draft-area {
+      width: 100%; min-height: 200px; background: var(--card);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px; color: var(--text); font-size: .85rem;
+      line-height: 1.6; resize: vertical; font-family: inherit;
+      margin: 12px 0 10px; outline: none;
+    }
+    .ai-draft-area:focus { border-color: var(--gold); }
+    .typology-badge {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px; margin-left: 8px;
+    }
+    .typology-A { background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+    .typology-B { background: rgba(99,102,241,.1); color: #818cf8; border: 1px solid rgba(99,102,241,.2); }
+    .typology-C { background: rgba(34,197,94,.1); color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
 
     /* Stat filters */
     .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -338,12 +414,15 @@
       </div>
 
       <div class="filter-row" id="lead-filters">
-        <span class="filter-chip active" onclick="filterLeads('')"   data-status="">Все</span>
-        <span class="filter-chip"        onclick="filterLeads('new')"          data-status="new">Новые</span>
-        <span class="filter-chip"        onclick="filterLeads('active')"       data-status="active">В воронке</span>
-        <span class="filter-chip"        onclick="filterLeads('engaged')"      data-status="engaged">Заинтересовались</span>
-        <span class="filter-chip"        onclick="filterLeads('converted')"    data-status="converted">Конвертированы</span>
-        <span class="filter-chip"        onclick="filterLeads('unsubscribed')" data-status="unsubscribed">Отписались</span>
+        <span class="filter-chip active" onclick="filterLeads('')"                   data-status="">Все</span>
+        <span class="filter-chip"        onclick="filterLeads('new')"               data-status="new">Новые</span>
+        <span class="filter-chip"        onclick="filterLeads('active')"            data-status="active">В воронке</span>
+        <span class="filter-chip"        onclick="filterLeads('engaged')"           data-status="engaged">Заинтересовались</span>
+        <span class="filter-chip"        onclick="filterLeads('reached_out')"       data-status="reached_out">Написал</span>
+        <span class="filter-chip"        onclick="filterLeads('call_scheduled')"    data-status="call_scheduled">Созвон</span>
+        <span class="filter-chip"        onclick="filterLeads('call_done')"         data-status="call_done">После созвона</span>
+        <span class="filter-chip"        onclick="filterLeads('converted')"         data-status="converted">Конвертированы</span>
+        <span class="filter-chip"        onclick="filterLeads('unsubscribed')"      data-status="unsubscribed">Отписались</span>
       </div>
 
       <div id="leads-container">
@@ -636,21 +715,32 @@
     `;
   }
 
+  // Детальные данные лидов кешируем при раскрытии карточки
+  const leadDetails = {};
+
   function renderLeadCard(l) {
-    const initials  = (l.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    const date      = new Date(l.created_at);
-    const dateStr   = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
-    const step      = l.current_step != null ? `Шаг ${l.current_step}` : 'Не открыл бот';
-    const answers   = l.quiz_answers ? Object.entries(l.quiz_answers)
+    const initials = (l.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const date     = new Date(l.created_at);
+    const dateStr  = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    const step     = l.current_step != null ? `Шаг ${l.current_step}` : 'Не открыл бот';
+    const answers  = l.quiz_answers ? Object.entries(l.quiz_answers)
       .map(([k, v]) => `<div class="answer-item"><div class="answer-q">${escHtml(k)}</div><div class="answer-a">${escHtml(v)}</div></div>`)
       .join('') : '';
 
+    const callInfo = l.call_scheduled_at
+      ? `<div class="sub-detail"><div class="sub-detail-label">Созвон</div><div class="sub-detail-value" style="color:var(--gold)">
+           ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Moscow' })} МСК
+         </div></div>` : '';
+
+    const typologyBadge = l.typology && l.typology !== 'unknown'
+      ? `<span class="typology-badge typology-${l.typology}">Типаж ${l.typology}</span>` : '';
+
     return `
-      <div class="sub-card" id="lead-${l.id}" onclick="toggleCard('lead-${l.id}')">
+      <div class="sub-card" id="lead-${l.id}" onclick="toggleLeadCard('${l.id}', event)">
         <div class="sub-header">
           <div class="sub-avatar">${initials}</div>
           <div class="sub-info">
-            <div class="sub-name">${escHtml(l.name || 'Без имени')}</div>
+            <div class="sub-name">${escHtml(l.name || 'Без имени')}${typologyBadge}</div>
             <div class="sub-tg">${escHtml(l.tg_handle || '—')}</div>
           </div>
           <div class="sub-meta">
@@ -659,19 +749,83 @@
           </div>
           <span class="sub-chevron">▾</span>
         </div>
-        <div class="sub-body">
+        <div class="sub-body" id="lead-body-${l.id}">
           <div class="sub-details-row">
             <div class="sub-detail"><div class="sub-detail-label">Telegram</div><div class="sub-detail-value">${escHtml(l.tg_handle || '—')}</div></div>
             <div class="sub-detail"><div class="sub-detail-label">Доход</div><div class="sub-detail-value">${escHtml(l.income || '—')}</div></div>
-            <div class="sub-detail"><div class="sub-detail-label">Сообщений отправлено</div><div class="sub-detail-value">${l.msgs_sent || 0} / 7</div></div>
+            <div class="sub-detail"><div class="sub-detail-label">Сообщений</div><div class="sub-detail-value">${l.msgs_sent || 0} / 7</div></div>
+            ${callInfo}
             ${l.utm_source ? `<div class="sub-detail"><div class="sub-detail-label">UTM</div><div class="sub-detail-value">${escHtml(l.utm_source)}</div></div>` : ''}
           </div>
           ${answers ? `<div class="answers-section"><div class="answers-title">📝 Ответы на диагностику</div>${answers}</div>` : ''}
+
+          <!-- DIRECT-ASSIST: загружается при открытии -->
+          <div id="da-${l.id}" style="display:none;">
+            <div class="da-section">
+              <div class="da-section-title">🎯 Рекомендованный кейс</div>
+              <div id="da-case-${l.id}"><div class="loading" style="padding:12px 0;"><div class="spinner" style="width:16px;height:16px;"></div></div></div>
+            </div>
+            <div class="da-section">
+              <div class="da-section-title">✉️ Заготовки первого сообщения</div>
+              <div class="template-cards" id="da-tpl-${l.id}"></div>
+            </div>
+            <div class="da-section">
+              <div class="da-section-title">🤖 AI-разбор</div>
+              <div class="ai-block" id="da-ai-${l.id}">
+                ${l.ai_draft
+                  ? `<textarea class="ai-draft-area" id="draft-${l.id}" onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft)}</textarea>
+                     <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                       <button class="lead-btn" onclick="generateDraft('${l.id}','free',event)">↻ Regenerate FREE</button>
+                       <button class="lead-btn" onclick="generateDraft('${l.id}','paid',event)">↻ Regenerate PAID</button>
+                       <button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>
+                     </div>`
+                  : `<div style="display:flex;gap:8px;flex-wrap:wrap;">
+                       <button class="lead-btn" onclick="generateDraft('${l.id}','free',event)">✨ Сгенерировать FREE-разбор</button>
+                       <button class="lead-btn" onclick="generateDraft('${l.id}','paid',event)">✨ Сгенерировать PAID-разбор</button>
+                     </div>
+                     <div id="draft-area-${l.id}" style="margin-top:12px;"></div>`
+                }
+              </div>
+            </div>
+            <div class="da-section">
+              <div class="da-section-title">📅 Назначить созвон</div>
+              ${l.call_scheduled_at && l.status !== 'call_done'
+                ? `<div style="font-size:.85rem;color:var(--gold);margin-bottom:12px;">
+                     Созвон назначен: ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })} МСК
+                     · <a href="${escHtml(l.call_zoom_url || '#')}" target="_blank" style="color:var(--gold);">Zoom</a>
+                   </div>
+                   <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                     <button class="lead-btn success" onclick="markCallCompleted('${l.id}',event)">✅ Созвон прошёл</button>
+                     <button class="lead-btn" onclick="cancelCall('${l.id}',event)">Отменить</button>
+                   </div>`
+                : `<div class="call-form" id="call-form-${l.id}">
+                     <div class="call-form-row">
+                       <div>
+                         <label class="call-label">Дата и время (МСК)</label>
+                         <input type="datetime-local" class="call-input" id="call-time-${l.id}" />
+                       </div>
+                       <div>
+                         <label class="call-label">Ссылка Zoom / Meet</label>
+                         <input type="url" class="call-input" id="call-zoom-${l.id}" placeholder="https://zoom.us/j/..." />
+                       </div>
+                     </div>
+                     <div>
+                       <label class="call-label">Заметка (опционально)</label>
+                       <input type="text" class="call-input" id="call-note-${l.id}" placeholder="О чём говорим..." />
+                     </div>
+                     <button class="lead-btn primary" onclick="scheduleCall('${l.id}',event)" style="align-self:flex-start;">Назначить созвон →</button>
+                   </div>`
+              }
+            </div>
+          </div>
+
           <div class="lead-actions">
-            ${l.status !== 'converted' ? `<button class="lead-btn success" onclick="leadAction('${l.id}','convert',event)">✅ Конвертирован</button>` : ''}
-            <button class="lead-btn" onclick="leadAction('${l.id}','pause',event)">⏸ Пауза</button>
-            <button class="lead-btn" onclick="leadAction('${l.id}','resume',event)">▶ Продолжить</button>
-            <button class="lead-btn danger" onclick="leadAction('${l.id}','delete',event)">🗑 Удалить</button>
+            ${!['converted','paid'].includes(l.status) ? `<button class="lead-btn success" onclick="leadPostAction('${l.id}','convert',event)">✅ Конвертирован</button>` : ''}
+            ${l.status !== 'paid' ? `<button class="lead-btn success" onclick="leadPostAction('${l.id}','paid',event)" style="color:#4ade80;">💰 Оплатил</button>` : ''}
+            <button class="lead-btn" onclick="leadPostAction('${l.id}','pause',event)">⏸ Пауза</button>
+            <button class="lead-btn" onclick="leadPostAction('${l.id}','resume',event)">▶ Продолжить</button>
+            <button class="lead-btn" onclick="leadPostAction('${l.id}','lost',event)">❌ Потерян</button>
+            <button class="lead-btn danger" onclick="leadPostAction('${l.id}','delete',event)">🗑 Удалить</button>
           </div>
         </div>
       </div>
@@ -679,18 +833,251 @@
   }
 
   function statusLabel(s) {
-    return { new: 'Новый', active: 'В воронке', engaged: 'Заинтересован', converted: 'Конвертирован', unsubscribed: 'Отписался', cold: 'Холодный' }[s] || s;
+    return {
+      new: 'Новый', active: 'В воронке', engaged: 'Заинтересован',
+      reached_out: 'Написал', call_scheduled: 'Созвон назначен',
+      call_reschedule_requested: 'Перенос созвона', call_done: 'Созвон прошёл',
+      converted: 'Конвертирован', paid: 'Оплатил',
+      lost: 'Потерян', unsubscribed: 'Отписался', cold: 'Холодный',
+    }[s] || s;
   }
 
-  async function leadAction(id, action, e) {
+  async function toggleLeadCard(id, e) {
+    if (e.target.closest('button, input, textarea, a')) return;
+    const card = document.getElementById(`lead-${id}`);
+    const body = document.getElementById(`lead-body-${id}`);
+    const da   = document.getElementById(`da-${id}`);
+    const isExpanded = card.classList.contains('expanded');
+    card.classList.toggle('expanded');
+    if (body) body.style.display = isExpanded ? 'none' : 'block';
+    if (!isExpanded && da) {
+      da.style.display = 'block';
+      loadLeadDetail(id);
+    }
+  }
+
+  async function loadLeadDetail(id) {
+    if (leadDetails[id]) { renderLeadDetail(id, leadDetails[id]); return; }
+    try {
+      const r = await fetch(`/api/leads-admin?secret=${encodeURIComponent(SECRET)}&lead_id=${id}`);
+      const d = await r.json();
+      if (d.lead) { leadDetails[id] = d; renderLeadDetail(id, d); }
+    } catch(e) { console.error('loadLeadDetail error:', e); }
+  }
+
+  function renderLeadDetail(id, data) {
+    const { recommended_case: rc, templates } = data;
+
+    // Рендер рекомендованного кейса
+    const caseEl = document.getElementById(`da-case-${id}`);
+    if (caseEl && rc) {
+      caseEl.innerHTML = `
+        <div class="case-rec">
+          <div class="case-rec-name">${escHtml(rc.name)} · ${escHtml(rc.role)}</div>
+          <div class="case-rec-result">Результат: ${escHtml(rc.result)}</div>
+          <div class="case-rec-before">До: ${escHtml(rc.before)}</div>
+          <div style="font-size:.82rem;color:var(--text3);margin-top:6px;font-style:italic;">"${escHtml(rc.quote)}"</div>
+        </div>`;
+    }
+
+    // Рендер шаблонов
+    const tplEl = document.getElementById(`da-tpl-${id}`);
+    if (tplEl && templates) {
+      tplEl.innerHTML = templates.map((t, i) => `
+        <div class="template-card">
+          <div class="template-head" onclick="toggleTemplate('tpl-${id}-${i}')">
+            <span class="template-label">${escHtml(t.label)}</span>
+            <span class="template-toggle" id="tpl-toggle-${id}-${i}">▾ показать</span>
+          </div>
+          <div class="template-body" id="tpl-${id}-${i}">
+            <textarea class="template-textarea" id="tpl-text-${id}-${i}">${escHtml(t.text)}</textarea>
+            <div class="template-actions">
+              <button class="lead-btn primary" onclick="sendTemplate('${id}','tpl-text-${id}-${i}',event)">Отправить →</button>
+              <button class="lead-btn" onclick="copyTemplate('tpl-text-${id}-${i}',event)">Скопировать</button>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+  }
+
+  function toggleTemplate(elId) {
+    const body   = document.getElementById(elId);
+    const toggle = document.getElementById('tpl-toggle-' + elId.slice(4));
+    if (!body) return;
+    const shown = body.style.display === 'block';
+    body.style.display = shown ? 'none' : 'block';
+    if (toggle) toggle.textContent = shown ? '▾ показать' : '▴ скрыть';
+  }
+
+  async function sendTemplate(leadId, textareaId, e) {
+    e.stopPropagation();
+    const text = document.getElementById(textareaId)?.value?.trim();
+    if (!text) return;
+    if (!confirm('Отправить это сообщение клиенту через бот?')) return;
+    try {
+      const r = await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, action: 'send_message', lead_id: leadId, text }),
+      });
+      const d = await r.json();
+      if (d.ok) { alert('Сообщение отправлено!'); loadLeads(leadsOffset); }
+      else alert('Ошибка: ' + (d.error || 'неизвестная'));
+    } catch(ex) { alert('Ошибка сети'); }
+  }
+
+  function copyTemplate(textareaId, e) {
+    e.stopPropagation();
+    const ta = document.getElementById(textareaId);
+    if (!ta) return;
+    navigator.clipboard.writeText(ta.value).then(() => alert('Скопировано!')).catch(() => {
+      ta.select(); document.execCommand('copy'); alert('Скопировано!');
+    });
+  }
+
+  async function generateDraft(leadId, format, e) {
+    e.stopPropagation();
+    const aiEl = document.getElementById(`da-ai-${leadId}`);
+    if (!aiEl) return;
+    const origHtml = aiEl.innerHTML;
+    aiEl.innerHTML = '<div class="loading" style="padding:16px 0;"><div class="spinner"></div>Генерирую черновик (до 60 сек)…</div>';
+    try {
+      const r = await fetch('/api/generate-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, lead_id: leadId, format }),
+      });
+      const d = await r.json();
+      if (d.ok) {
+        const typBadge = d.typology && d.typology !== 'unknown'
+          ? `<span class="typology-badge typology-${d.typology}">Типаж ${d.typology}</span>` : '';
+        aiEl.innerHTML = `
+          <div style="font-size:.78rem;color:var(--text2);margin-bottom:8px;">Черновик AI ${typBadge}</div>
+          <textarea class="ai-draft-area" id="draft-${leadId}" onchange="saveDraft('${leadId}', this.value)">${escHtml(d.draft)}</textarea>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="lead-btn" onclick="generateDraft('${leadId}','free',event)">↻ FREE</button>
+            <button class="lead-btn" onclick="generateDraft('${leadId}','paid',event)">↻ PAID</button>
+            <button class="lead-btn primary" onclick="sendFinal('${leadId}',event)">Отправить клиенту →</button>
+          </div>`;
+      } else {
+        aiEl.innerHTML = `<div style="color:var(--red);font-size:.85rem;">${escHtml(d.error || 'Ошибка')}</div>
+          <button class="lead-btn" onclick="generateDraft('${leadId}','free',event)" style="margin-top:10px;">↻ Повторить</button>`;
+      }
+    } catch(ex) {
+      aiEl.innerHTML = origHtml;
+      alert('Ошибка сети: ' + ex.message);
+    }
+  }
+
+  async function saveDraft(leadId, text) {
+    await fetch('/api/leads-admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: SECRET, action: 'save_draft', lead_id: leadId, draft: text }),
+    });
+  }
+
+  async function sendFinal(leadId, e) {
+    e.stopPropagation();
+    const draft = document.getElementById(`draft-${leadId}`)?.value?.trim();
+    if (!draft) { alert('Нет текста для отправки'); return; }
+    if (!confirm('Отправить этот разбор клиенту?')) return;
+    try {
+      // Сначала сохраняем как final_answer
+      await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, action: 'save_final', lead_id: leadId, final_answer: draft }),
+      });
+      const r = await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, action: 'send_final', lead_id: leadId }),
+      });
+      const d = await r.json();
+      if (d.ok) { alert('Разбор отправлен!'); loadLeads(leadsOffset); }
+      else alert('Ошибка: ' + (d.error || 'неизвестная'));
+    } catch(ex) { alert('Ошибка: ' + ex.message); }
+  }
+
+  async function scheduleCall(leadId, e) {
+    e.stopPropagation();
+    const callTimeInput = document.getElementById(`call-time-${leadId}`);
+    const zoomInput     = document.getElementById(`call-zoom-${leadId}`);
+    const noteInput     = document.getElementById(`call-note-${leadId}`);
+    if (!callTimeInput?.value || !zoomInput?.value) {
+      alert('Заполни дату/время и ссылку Zoom');
+      return;
+    }
+    // Конвертируем datetime-local МСК → UTC ISO
+    const localTime  = callTimeInput.value; // "2026-04-25T14:00"
+    const mskOffset  = 3 * 60; // UTC+3
+    const localDate  = new Date(localTime);
+    const utcDate    = new Date(localDate.getTime() - mskOffset * 60000);
+    try {
+      const r = await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: SECRET, action: 'schedule_call', lead_id: leadId,
+          call_time_iso: utcDate.toISOString(),
+          zoom_url: zoomInput.value,
+          call_note: noteInput?.value || '',
+        }),
+      });
+      const d = await r.json();
+      if (d.ok) { alert('Созвон назначен! Напоминания созданы.'); delete leadDetails[leadId]; loadLeads(leadsOffset); }
+      else alert('Ошибка: ' + (d.error || 'неизвестная'));
+    } catch(ex) { alert('Ошибка: ' + ex.message); }
+  }
+
+  async function markCallCompleted(leadId, e) {
+    e.stopPropagation();
+    if (!confirm('Отметить созвон как состоявшийся? Follow-up придёт через 24 часа.')) return;
+    try {
+      const r = await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, action: 'call_completed', lead_id: leadId }),
+      });
+      const d = await r.json();
+      if (d.ok) { delete leadDetails[leadId]; loadLeads(leadsOffset); }
+      else alert('Ошибка: ' + (d.error || 'неизвестная'));
+    } catch(ex) { alert('Ошибка: ' + ex.message); }
+  }
+
+  async function cancelCall(leadId, e) {
+    e.stopPropagation();
+    if (!confirm('Отменить созвон? Напоминания будут удалены.')) return;
+    try {
+      const r = await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, action: 'cancel_call', lead_id: leadId }),
+      });
+      const d = await r.json();
+      if (d.ok) { delete leadDetails[leadId]; loadLeads(leadsOffset); }
+    } catch(ex) { alert('Ошибка: ' + ex.message); }
+  }
+
+  async function leadPostAction(id, action, e) {
     e.stopPropagation();
     if (action === 'delete' && !confirm('Удалить лида и всё его расписание?')) return;
+    if (action === 'lost'   && !confirm('Отметить как потерянного?')) return;
     try {
-      const r = await fetch(`/api/leads-admin?secret=${encodeURIComponent(SECRET)}&action=${action}&lead_id=${id}`);
+      const r = await fetch('/api/leads-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ secret: SECRET, action, lead_id: id }),
+      });
       const d = await r.json();
-      if (d.ok) loadLeads(leadsOffset);
-    } catch(e) { alert('Ошибка'); }
+      if (d.ok) { delete leadDetails[id]; loadLeads(leadsOffset); }
+      else alert('Ошибка: ' + (d.error || 'неизвестная'));
+    } catch(ex) { alert('Ошибка'); }
   }
+
+  // Legacy compat
+  function leadAction(id, action, e) { leadPostAction(id, action, e); }
 </script>
 </body>
 </html>
