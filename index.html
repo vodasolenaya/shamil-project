@@ -70,9 +70,6 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    body::after {
-      display: none;
-    }
     /* ── SCROLL PROGRESS ── */
     #scroll-bar {
       position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
@@ -139,7 +136,6 @@
       flex-direction: column;
       align-items: center;
     }
-    .hero-photo-glow { display: none; }
     .hero-photo-circle-big {
       width: 340px; height: 460px;
       border-radius: 16px;
@@ -218,9 +214,6 @@
         radial-gradient(ellipse 55% 45% at 85% 20%, rgba(201,168,76,.06) 0%, transparent 60%),
         #fafaf8;
     }
-    .hero-noise {
-      display: none;
-    }
     .hero > * { position: relative; z-index: 2; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
@@ -267,16 +260,6 @@
     .hero-note { font-size: .93rem; color: var(--text2); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .hero-note-sep { color: var(--border2); }
     .hero-note span { display: flex; align-items: center; gap: 5px; }
-    .hero-scroll {
-      display: none;
-    }
-    .hero-scroll-line {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-    @keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
-
     /* ── HERO ANIMATED GRID ── */
     .hero-grid {
       position: absolute; inset: 0; z-index: 1;
@@ -367,9 +350,6 @@
 
     /* ── SECTIONS ── */
     .section { padding: 120px 24px; }
-    .section + .section {
-      border-top: 1px solid rgba(0,0,0,.08);
-    }
     .section-inner { max-width: 1080px; margin: 0 auto; }
     .section-inner.wide { max-width: 1200px; }
     .section-label {
@@ -1057,7 +1037,6 @@
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-noise"></div>
   <div class="hero-grid"></div>
 
   <div class="hero-inner">
@@ -1097,16 +1076,12 @@
 
     <!-- ФОТО -->
     <div class="hero-photo-wrap">
-      <div class="hero-photo-glow"></div>
-      <div class="hero-photo-circle-big">
+          <div class="hero-photo-circle-big">
         <img src="shamil-hero.jpg" alt="Шамиль Мухаметзянов" style="" />
       </div>
     </div>
   </div>
 
-  <div class="hero-scroll" style="z-index:2;">
-    <div class="hero-scroll-line"></div>
-  </div>
 </section>
 
 <!-- STATS -->
