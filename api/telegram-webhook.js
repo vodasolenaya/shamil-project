@@ -62,6 +62,30 @@ export default async function handler(req, res) {
     try { sql = getDb(); } catch(e) { console.error('DB init error:', e.message); }
   }
 
+  // ── /voice_for_<lead_id> — Шамиль привязывает голосовое к лиду ──────────
+  // Шамиль пишет голосовое с подписью /voice_for_abc123 в свой личный чат с ботом
+  if (text.startsWith('/voice_for_')) {
+    const leadId  = text.replace('/voice_for_', '').trim();
+    // Ищем voice в сообщении
+    const voice   = msg.voice;
+    const audio   = msg.audio;
+    const fileId  = voice?.file_id || audio?.file_id;
+
+    if (!fileId || !leadId || !sql) {
+      await tgSend(BOT_TOKEN, chatId, `⚠️ Голосовое не найдено. Отправь голосовое (не аудио файл) с подписью /voice_for_${leadId}`);
+      return res.status(200).end();
+    }
+
+    try {
+      await sql`UPDATE leads SET voice_file_id = ${fileId} WHERE id = ${leadId}`;
+      const duration = voice?.duration || audio?.duration || '?';
+      await tgSend(BOT_TOKEN, chatId, `✅ Голосовое (${duration}сек) привязано к лиду ${leadId}`);
+    } catch(e) {
+      await tgSend(BOT_TOKEN, chatId, `❌ Ошибка БД: ${e.message}`);
+    }
+    return res.status(200).end();
+  }
+
   // ── /start <lead_id> ─────────────────────────────────────────────────────
   if (text.startsWith('/start')) {
     const parts  = msg.text.trim().split(' ');
