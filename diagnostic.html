@@ -499,60 +499,6 @@
     .q-textarea::placeholder { color: var(--text3); font-size: .88rem; }
     .q-char-hint { font-size: .75rem; color: var(--text2); margin-top: 6px; text-align: right; }
 
-    /* ── FORMAT CHOOSER ── */
-    .format-chooser { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; align-items: start; }
-    @media(max-width:520px){ .format-chooser { grid-template-columns: 1fr; } }
-    .format-card {
-      border: 1.5px solid var(--border2); border-radius: 14px; padding: 20px 18px;
-      cursor: pointer; transition: border-color .2s, background .2s, box-shadow .2s;
-      text-align: left; position: relative; background: var(--card);
-    }
-    .format-card:hover { border-color: rgba(240,192,64,.4); }
-    .format-card.active { border-color: var(--gold); background: rgba(240,192,64,.05); }
-    .format-card.fc-paid-card {
-      border-color: rgba(200,134,10,.3);
-      box-shadow: 0 4px 20px rgba(200,134,10,.1);
-    }
-    .format-card.fc-paid-card.active {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 1px var(--gold), 0 4px 24px rgba(200,134,10,.2);
-    }
-    .fc-recommended {
-      display: inline-block;
-      font-size: .72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; border-radius: 100px; padding: 3px 9px; margin-bottom: 10px;
-    }
-    .format-card .fc-badge {
-      font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-      color: var(--text3); margin-bottom: 8px;
-    }
-    .format-card.active .fc-badge { color: var(--gold-text); }
-    .format-card .fc-title { font-size: 1.05rem; font-weight: 900; color: var(--text); margin-bottom: 6px; letter-spacing: -.3px; }
-    .format-card .fc-price {
-      font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;
-      background: linear-gradient(135deg, #8B6914, #7A5810);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 12px; line-height: 1;
-    }
-    .format-card .fc-free-price {
-      font-size: 1.4rem; font-weight: 900; letter-spacing: -1px;
-      color: var(--text3); margin-bottom: 12px; line-height: 1;
-    }
-    .format-card .fc-divider { height: 1px; background: var(--border); margin-bottom: 12px; }
-    .fc-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin: 0; padding: 0; }
-    .fc-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .8rem; line-height: 1.45; }
-    .fc-list li.yes { color: var(--text); }
-    .fc-list li.no  { color: var(--text3); }
-    .fc-list li .fc-ico { flex-shrink: 0; margin-top: 1px; font-size: .75rem; width: 16px; }
-    .format-card .fc-check {
-      position: absolute; top: 14px; right: 14px; width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid var(--border2); display: flex; align-items: center; justify-content: center;
-      transition: border-color .2s, background .2s; flex-shrink: 0;
-    }
-    .format-card.active .fc-check { border-color: var(--gold); background: var(--gold); }
-    .format-card.active .fc-check::after { content: ''; display: block; width: 7px; height: 7px; background: #000; border-radius: 50%; }
-
     /* sheen on quiz buttons */
     .btn-next::before {
       content: ''; position: absolute;
@@ -1627,12 +1573,12 @@
   let currentBlock = 0;
   // answers[blockIndex][questionIndex]
   let answers = BLOCKS.map(b => b.questions.map(() => ''));
-  let selectedFormat = 'free';
+  const selectedFormat = 'free';
 
   /* ── LOCALSTORAGE ── */
   function saveProgress() {
     try {
-      localStorage.setItem('quiz_progress_v2', JSON.stringify({ currentBlock, answers, selectedFormat }));
+      localStorage.setItem('quiz_progress_v2', JSON.stringify({ currentBlock, answers }));
     } catch(e) {}
   }
 
@@ -1661,7 +1607,7 @@
     if (!d) return;
     currentBlock = d.currentBlock || 0;
     answers = d.answers;
-    selectedFormat = d.selectedFormat || 'free';
+    // selectedFormat is always 'free'
     document.getElementById('restore-banner').classList.remove('show');
     const fc = document.querySelector('.float-cta');
     if (fc) fc.style.display = 'none';
