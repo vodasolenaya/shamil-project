@@ -56,14 +56,19 @@ export default async function handler(req, res) {
   const text      = (msg.text || '').trim().toLowerCase();
   const firstName = msg.from?.first_name || '';
 
-  const sql = getDb();
+  // Если БД не настроена — работаем в режиме без БД (только базовые ответы)
+  const hasDb = !!process.env.DATABASE_URL;
+  let sql;
+  if (hasDb) {
+    try { sql = getDb(); } catch(e) { console.error('DB init error:', e.message); }
+  }
 
   // ── /start <lead_id> ─────────────────────────────────────────────────────
   if (text.startsWith('/start')) {
     const parts  = msg.text.trim().split(' ');
     const leadId = parts[1] || '';
 
-    if (leadId) {
+    if (leadId && sql) {
       // Пытаемся связать tg_user_id с лидом
       const rows = await sql`
         SELECT * FROM leads WHERE id = ${leadId} LIMIT 1
@@ -120,10 +125,13 @@ export default async function handler(req, res) {
   }
 
   // ── Найти лида по tg_user_id ──────────────────────────────────────────────
-  const leads = await sql`
-    SELECT * FROM leads WHERE tg_user_id = ${tgUserId} AND status != 'unsubscribed' LIMIT 1
-  `;
-  const lead = leads[0];
+  let lead = null;
+  if (sql) {
+    const leads = await sql`
+      SELECT * FROM leads WHERE tg_user_id = ${tgUserId} AND status != 'unsubscribed' LIMIT 1
+    `;
+    lead = leads[0] || null;
+  }
 
   // ── Стоп-слова ───────────────────────────────────────────────────────────
   if (STOP_WORDS.some(w => text.includes(w))) {
