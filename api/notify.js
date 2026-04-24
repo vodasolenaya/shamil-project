@@ -1,9 +1,39 @@
+const GITHUB_REPO = 'vodasolenaya/artofsales-data';
+const GITHUB_API  = 'https://api.github.com';
+
+async function saveToGitHub(submission) {
+  const token = process.env.GITHUB_DB_TOKEN;
+  if (!token) throw new Error('GITHUB_DB_TOKEN not set');
+
+  const path    = `submissions/${submission.id}.json`;
+  const content = Buffer.from(JSON.stringify(submission, null, 2)).toString('base64');
+
+  const res = await fetch(`${GITHUB_API}/repos/${GITHUB_REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': 'artofsales-bot',
+    },
+    body: JSON.stringify({
+      message: `submission: ${submission.name} (${submission.telegram})`,
+      content,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || 'GitHub write failed');
+  }
+  return true;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // Parse body — Vercel may pass parsed object or raw Buffer/string
+  // Parse body
   const b = req.body;
   let p;
   if (b && typeof b === 'object' && !Buffer.isBuffer(b)) {
@@ -28,21 +58,16 @@ export default async function handler(req, res) {
   // Honeypot
   if (website) return res.status(200).json({ ok: true });
 
-  // Собираем все ответы q1..q20
-  // Формат каждого: "[Блок] Текст вопроса\nОтвет пользователя"
+  // Собираем ответы q1..q20
   const quizAnswers = [];
   for (let i = 1; i <= 20; i++) {
     const v = p.get(`q${i}`);
     if (!v || !v.trim()) continue;
-
     const raw = v.trim();
     const newlineIdx = raw.indexOf('\n');
-
     if (newlineIdx !== -1) {
-      // Разделяем заголовок вопроса и ответ
-      const header = raw.slice(0, newlineIdx).trim();
-      const answer = raw.slice(newlineIdx + 1).trim();
-      // Убираем "[Блок X] " из заголовка если есть
+      const header     = raw.slice(0, newlineIdx).trim();
+      const answer     = raw.slice(newlineIdx + 1).trim();
       const questionText = header.replace(/^\[.*?\]\s*/, '');
       quizAnswers.push({ n: i, question: questionText, answer });
     } else {
@@ -50,6 +75,32 @@ export default async function handler(req, res) {
     }
   }
 
+  // ─── ФОРМИРУЕМ ОБЪЕКТ ЗАЯВКИ ───────────────────────────────────────────────
+  const submission = {
+    id:            `sub_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+    created_at:    new Date().toISOString(),
+    name,
+    telegram,
+    income,
+    sphere,
+    type,
+    format,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    answers:       quizAnswers,
+  };
+
+  // ─── СОХРАНЯЕМ В GITHUB ────────────────────────────────────────────────────
+  let savedToDb = false;
+  try {
+    await saveToGitHub(submission);
+    savedToDb = true;
+  } catch (dbErr) {
+    console.error('GitHub save error:', dbErr.message);
+  }
+
+  // ─── TELEGRAM ──────────────────────────────────────────────────────────────
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const CHAT_ID   = process.env.TELEGRAM_CHAT_ID;
 
@@ -62,7 +113,25 @@ export default async function handler(req, res) {
   if (format === 'free') formatLine = '\n🎯 Формат: Найти барьер (бесплатно)';
   if (format === 'paid') formatLine = '\n💳 Формат: Убрать барьер (990 ₽)';
 
-  // Блок с ответами — чисто: вопрос жирным, ответ под ним
+  const incomeLine = income  ? `\n💰 Доход: ${income}`  : '';
+  const sphereLine = sphere && !isDiag ? `\n🎯 Ниша: ${sphere}` : '';
+  const typeLine   = type    ? `\n🏷 Тип: ${type}`      : '';
+  const dbBadge    = savedToDb ? '\n✅ Сохранено в базу' : '\n⚠️ Только Telegram (ошибка базы)';
+
+  const source = isDiag
+    ? '🧪 <b>Диагностика</b>'
+    : '📋 <b>Основной лендинг</b>';
+
+  const header =
+    `🔥 <b>Новая заявка!</b>\n` +
+    `${source}\n\n` +
+    `👤 ${name}\n` +
+    `📱 ${telegram}` +
+    `${incomeLine}${sphereLine}${typeLine}${formatLine}${utmLine}` +
+    `${dbBadge}\n\n` +
+    `⚡️ Свяжись пока горячий!`;
+
+  // Блок с ответами
   let answersBlock = '';
   if (quizAnswers.length > 0) {
     answersBlock = '\n\n' + '─'.repeat(30) + '\n📝 <b>Ответы на диагностику:</b>\n\n';
@@ -71,36 +140,51 @@ export default async function handler(req, res) {
     ).join('\n\n');
   }
 
-  const incomeLine = income ? `\n💰 Доход: ${income}` : '';
-  const sphereLine = sphere && !isDiag ? `\n🎯 Ниша: ${sphere}` : '';
-  const typeLine   = type   ? `\n🏷 Тип: ${type}`    : '';
+  // ─── РАЗБИВКА ДЛИННЫХ СООБЩЕНИЙ (лимит Telegram 4096 символов) ─────────────
+  const MAX_LEN = 3900;
+  const messages = [];
 
-  const source = isDiag
-    ? '🧪 <b>Диагностика</b>'
-    : '📋 <b>Основной лендинг</b>';
-
-  const text =
-    `🔥 <b>Новая заявка!</b>\n` +
-    `${source}\n\n` +
-    `👤 ${name}\n` +
-    `📱 ${telegram}` +
-    `${incomeLine}` +
-    `${sphereLine}` +
-    `${typeLine}` +
-    `${formatLine}` +
-    `${utmLine}` +
-    `${answersBlock}\n\n` +
-    `⚡️ Свяжись пока горячий!`;
-
-  try {
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' }),
-    });
-  } catch (e) {
-    console.error('Telegram error:', e);
+  if ((header + answersBlock).length <= MAX_LEN) {
+    messages.push(header + answersBlock);
+  } else {
+    messages.push(header);
+    if (quizAnswers.length > 0) {
+      let chunk = '📝 <b>Ответы на диагностику:</b>\n\n';
+      for (const { n, question, answer } of quizAnswers) {
+        const line = `<b>${n}. ${question}</b>\n${answer || '—'}\n\n`;
+        if ((chunk + line).length > MAX_LEN) {
+          messages.push(chunk.trim());
+          chunk = line;
+        } else {
+          chunk += line;
+        }
+      }
+      if (chunk.trim()) messages.push(chunk.trim());
+    }
   }
 
-  return res.status(200).json({ ok: true });
+  // ─── ОТПРАВКА С RETRY ──────────────────────────────────────────────────────
+  async function sendTg(text, attempt = 1) {
+    try {
+      const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' }),
+      });
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.description);
+    } catch (e) {
+      if (attempt < 3) {
+        await new Promise(ok => setTimeout(ok, 1000 * attempt));
+        return sendTg(text, attempt + 1);
+      }
+      console.error('Telegram error after retries:', e.message);
+    }
+  }
+
+  for (const msg of messages) {
+    await sendTg(msg);
+  }
+
+  return res.status(200).json({ ok: true, saved: savedToDb, id: submission.id });
 }
