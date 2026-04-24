@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     WHERE ds.sent_at IS NULL
       AND ds.paused   = FALSE
       AND ds.send_at <= NOW()
-      AND l.status NOT IN ('unsubscribed', 'converted', 'paid')
+      AND l.status NOT IN ('unsubscribed', 'converted', 'paid', 'lost')
       AND l.tg_user_id IS NOT NULL
     ORDER BY ds.send_at ASC
     LIMIT 100
@@ -132,9 +132,10 @@ export default async function handler(req, res) {
     }
   }
 
-  // Еженедельная сводка Шамилю — по понедельникам в 10:00 UTC (13:00 МСК)
+  // Еженедельная сводка Шамилю — по понедельникам в 08:00 UTC (11:00 МСК)
+  // Cron запускается в 08:00 и 15:00 UTC — берём утренний запуск понедельника
   const now = new Date();
-  if (now.getUTCDay() === 1 && now.getUTCHours() === 10) {
+  if (now.getUTCDay() === 1 && now.getUTCHours() === 8) {
     await sendWeeklySummary(sql, BOT_TOKEN);
   }
 

@@ -723,8 +723,17 @@
     const date     = new Date(l.created_at);
     const dateStr  = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
     const step     = l.current_step != null ? `Шаг ${l.current_step}` : 'Не открыл бот';
+    const QLABELS  = {
+      q1:'Доход сейчас',q2:'Хочу зарабатывать',q3:'Что делал для роста',
+      q4:'Что даёшь клиентам',q5:'Кому нужно / что тормозит',
+      q6:'Где обрывается путь к деньгам',q7:'Чувствуешь когда называешь цену',
+      q8:'Когда клиент говорит «дорого»',q9:'Про более успешного коллегу',
+      q10:'Последний раз называл цену',q11:'Потерянный клиент',
+      q12:'Решения о которых жалеешь',q13:'Люди вокруг',
+      q14:'Жизнь через год',q15:'Что мешает прямо сейчас',
+    };
     const answers  = l.quiz_answers ? Object.entries(l.quiz_answers)
-      .map(([k, v]) => `<div class="answer-item"><div class="answer-q">${escHtml(k)}</div><div class="answer-a">${escHtml(v)}</div></div>`)
+      .map(([k, v]) => `<div class="answer-item"><div class="answer-q">${escHtml(QLABELS[k] || k)}</div><div class="answer-a">${escHtml(v)}</div></div>`)
       .join('') : '';
 
     const callInfo = l.call_scheduled_at
@@ -781,11 +790,17 @@
             <div class="da-section">
               <div class="da-section-title">✍️ Черновик ответа</div>
               <div class="ai-block" id="da-ai-${l.id}">
-                <div style="font-size:.78rem;color:var(--text2);margin-bottom:10px;">
-                  Напиши разбор вручную — здесь сохраняется автоматически. Потом отправь клиенту одной кнопкой.
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+                  <button class="lead-btn" style="background:rgba(99,102,241,.15);color:#a5b4fc;border-color:rgba(99,102,241,.3);"
+                    onclick="generateInAdmin('${l.id}',event)">
+                    ✨ Сгенерировать черновик
+                  </button>
+                  ${l.typology && l.typology !== 'unknown'
+                    ? `<span class="typology-badge typology-${l.typology}">Типаж ${l.typology}</span>`
+                    : ''}
                 </div>
                 <textarea class="ai-draft-area" id="draft-${l.id}"
-                  placeholder="Имя, вот что я вижу в твоих ответах…&#10;&#10;[Типаж и почему — 2-3 предложения]&#10;[3 маркера с цитатами из ответов]&#10;[Кейс ученика похожей ситуации]&#10;[1 конкретный шаг на неделю]&#10;&#10;— Шамиль"
+                  placeholder="Нажми «Сгенерировать» — черновик появится здесь. Потом отредактируй и отправь."
                   onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft || '')}</textarea>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
                   <button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>
@@ -941,39 +956,48 @@
     });
   }
 
-  async function generateDraft(leadId, format, e) {
+  async function generateInAdmin(leadId, e) {
     e.stopPropagation();
-    const aiEl = document.getElementById(`da-ai-${leadId}`);
-    if (!aiEl) return;
-    const origHtml = aiEl.innerHTML;
-    aiEl.innerHTML = '<div class="loading" style="padding:16px 0;"><div class="spinner"></div>Генерирую черновик (до 60 сек)…</div>';
+    const btn = e.currentTarget;
+    const ta  = document.getElementById(`draft-${leadId}`);
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '⏳ Генерирую…';
     try {
-      const r = await fetch('/api/generate-analysis', {
-        method: 'POST',
+      const r = await fetch('/api/generate-draft', {
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ secret: SECRET, lead_id: leadId, format }),
+        body:    JSON.stringify({ secret: SECRET, lead_id: leadId }),
       });
       const d = await r.json();
-      if (d.ok) {
-        const typBadge = d.typology && d.typology !== 'unknown'
-          ? `<span class="typology-badge typology-${d.typology}">Типаж ${d.typology}</span>` : '';
-        aiEl.innerHTML = `
-          <div style="font-size:.78rem;color:var(--text2);margin-bottom:8px;">Черновик AI ${typBadge}</div>
-          <textarea class="ai-draft-area" id="draft-${leadId}" onchange="saveDraft('${leadId}', this.value)">${escHtml(d.draft)}</textarea>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="lead-btn" onclick="generateDraft('${leadId}','free',event)">↻ FREE</button>
-            <button class="lead-btn" onclick="generateDraft('${leadId}','paid',event)">↻ PAID</button>
-            <button class="lead-btn primary" onclick="sendFinal('${leadId}',event)">Отправить клиенту →</button>
-          </div>`;
+      if (d.ok && d.draft) {
+        if (ta) { ta.value = d.draft; }
+        // Показываем типаж-бейдж
+        if (d.typology && d.typology !== 'unknown') {
+          const container = btn.parentElement;
+          let badge = container.querySelector('.typology-badge');
+          if (!badge) {
+            badge = document.createElement('span');
+            badge.className = `typology-badge typology-${d.typology}`;
+            container.appendChild(badge);
+          }
+          badge.textContent = `Типаж ${d.typology}`;
+        }
+        // Автосохраняем
+        saveDraft(leadId, d.draft);
       } else {
-        aiEl.innerHTML = `<div style="color:var(--red);font-size:.85rem;">${escHtml(d.error || 'Ошибка')}</div>
-          <button class="lead-btn" onclick="generateDraft('${leadId}','free',event)" style="margin-top:10px;">↻ Повторить</button>`;
+        alert('Ошибка: ' + (d.error || 'неизвестная'));
       }
     } catch(ex) {
-      aiEl.innerHTML = origHtml;
       alert('Ошибка сети: ' + ex.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = origText;
     }
   }
+
+  // Legacy — оставляем для совместимости
+  async function generateDraft(leadId, format, e) { return generateInAdmin(leadId, e); }
 
   async function saveDraft(leadId, text) {
     await fetch('/api/leads-admin', {
