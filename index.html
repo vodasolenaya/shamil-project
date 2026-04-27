@@ -888,32 +888,97 @@
     .whom-item span { font-size: .95rem; line-height: 1.55; }
 
     /* ── ABOUT ── */
-    .about { background: var(--bg2); }
+    .about-section {
+      background: #0d0d0d;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .about-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
     .about-inner {
-      display: grid; grid-template-columns: 320px 1fr; gap: 64px; align-items: start;
+      position: relative; z-index: 2;
+      max-width: 1180px; margin: 0 auto;
     }
-    .about-photo-wrap { position: sticky; top: 100px; }
-    .about-photo-circle {
-      width: 280px; height: 370px; border-radius: 16px;
-      overflow: hidden; margin-bottom: 20px; flex-shrink: 0;
-      box-shadow: 0 24px 60px rgba(28,20,8,.18), 0 6px 20px rgba(28,20,8,.08);
+    .about-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 56px;
     }
-    .about-photo-circle img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    .about-name { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
-    .about-role { font-size: .85rem; color: var(--text2); }
-    .about-text p { color: var(--text2); font-size: .97rem; line-height: 1.75; margin-bottom: 18px; }
-    .about-text p strong { color: var(--text); }
-    .about-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .fact-chip {
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.3);
-      color: var(--gold-text); border-radius: 6px; padding: 8px 14px;
-      font-size: .85rem; font-weight: 700;
+    .about-grid {
+      display: grid; grid-template-columns: 480px 1fr;
+      gap: 64px; align-items: end;
     }
-    @media(max-width:768px){
-      .about-inner { grid-template-columns: 1fr; }
-      .about-photo-wrap { position: static; display: flex; flex-direction: column; align-items: flex-start; }
-      .about-photo-circle { width: 200px; height: 260px; }
+    .about-photo { display: flex; align-items: end; justify-content: center; }
+    .about-photo img { width: 100%; max-width: 480px; height: auto; display: block; }
+
+    .about-content { padding-bottom: 16px; }
+    .about-name {
+      font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+      font-weight: 500; letter-spacing: -.5px; line-height: 1.2;
+      color: #fff; margin: 0 0 6px;
+    }
+    .about-role {
+      font-size: .92rem; color: #C9A84C;
+      letter-spacing: .5px; margin: 0 0 28px;
+    }
+    .about-story p {
+      font-size: .98rem; line-height: 1.7;
+      color: rgba(255,255,255,.78);
+      margin: 0 0 16px;
+    }
+    .about-story p strong { color: #fff; font-weight: 500; }
+    .about-story p:last-of-type { margin-bottom: 32px; }
+
+    .about-facts {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 22px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 28px;
+    }
+    .about-fact { display: flex; flex-direction: column; gap: 4px; }
+    .fact-num {
+      font-size: 1.15rem; font-weight: 600; letter-spacing: -.5px;
+      color: #C9A84C;
+    }
+    .fact-label {
+      font-size: .78rem; line-height: 1.4;
+      color: rgba(255,255,255,.55);
+    }
+
+    .about-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: #C9A84C; font-size: .92rem; font-weight: 500;
+      text-decoration: none; transition: opacity .2s;
+      letter-spacing: -.1px;
+    }
+    .about-link:hover { opacity: .8; }
+    .about-link-arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,.35);
+      transition: transform .2s, background .2s;
+    }
+    .about-link:hover .about-link-arrow {
+      transform: translateX(3px);
+      background: rgba(201,168,76,.1);
+    }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; align-items: center; }
+      .about-photo img { max-width: 320px; margin: 0 auto; }
+    }
+    @media (max-width: 600px) {
+      .about-section { padding: 72px 20px; }
+      .about-facts { grid-template-columns: 1fr; gap: 12px; }
     }
 
     /* ── EXIT POPUP ── */
@@ -1598,28 +1663,53 @@
 
 
 <!-- ABOUT -->
-<section class="section about" id="about">
-  <div class="section-inner">
-    <div class="about-inner">
-      <div class="about-photo-wrap reveal">
-        <div class="about-photo-circle">
-          <img src="shamil-cutout.png" alt="Шамиль" style="" />
-        </div>
-        <div class="about-name">Шамиль Мухаметзянов</div>
-        <div class="about-role">Эксперт по продажам для фрилансеров</div>
+<section class="about-section" id="about">
+  <div class="about-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="about-inner">
+    <div class="about-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>О ШАМИЛЕ</span>
+      <span class="manifesto-line"></span>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" />
       </div>
-      <div class="about-text reveal reveal-delay-1">
-        <div class="section-label" style="margin-bottom:20px;">Кто такой Шамиль</div>
-        <p><strong>4 года армия — 40 000 ₽/мес.</strong> Потом банк, продажи — <strong>80–100к.</strong> Летом потерял <strong>500 000 ₽ на крипте.</strong> Это был удар, от которого меня реально выкосило — несколько дней просто не мог встать с кровати. Потом встал — и начал продавать больше, чем когда-либо до этого.</p>
-        <p>В сентябре, без денег, купил курс по маркетингу — не от уверенности, от необходимости. К зиме — <strong>1 500 000 ₽ выручки. Топ-1 на потоке.</strong></p>
-        <p>Попробовал стартап — не пошло, ушёл без денег. Вернулся во фриланс: за первую неделю — <strong>500 000 ₽ на сайтах.</strong></p>
-        <p>С тех пор обучаю фрилансеров продажам. Не теории — тому что сработало на мне. <strong>Ученики выходят на x2–x3 к доходу за 1 месяц.</strong></p>
-        <div class="about-facts">
-          <div class="fact-chip">⚡ 1.5 млн выручки за 3 месяца</div>
-          <div class="fact-chip">📈 Кейсы до 1 млн/мес</div>
-          <div class="fact-chip">💎 Вложил 2+ млн в развитие</div>
+
+      <div class="about-content">
+        <h2 class="about-name">Шамиль Мухаметзянов</h2>
+        <p class="about-role">Эксперт по продажам для digital-фрилансеров</p>
+
+        <div class="about-story">
+          <p><strong>4 года армия — 40 000 ₽/мес.</strong> Потом банк, продажи — <strong>80–100к.</strong> Летом потерял <strong>500 000 ₽ на крипте.</strong> Это был удар, от которого меня реально выкосило — несколько дней просто не мог встать с кровати. Потом встал — и начал продавать больше, чем когда-либо до этого.</p>
+
+          <p>В сентябре, без денег, купил курс по маркетингу — не от уверенности, от необходимости. К зиме — <strong>1 500 000 ₽ выручки. Топ-1 на потоке.</strong></p>
+
+          <p>Попробовал стартап — не пошло, ушёл без денег. Вернулся во фриланс: за первую неделю — <strong>500 000 ₽ на сайтах.</strong></p>
+
+          <p>С тех пор обучаю фрилансеров продажам. Не теории — тому что сработало на мне. <strong>Ученики выходят на x2–x3 к доходу за 1 месяц.</strong></p>
         </div>
-        <a href="/story" class="btn-secondary" style="margin-top:20px;display:inline-flex;">Читать мою историю →</a>
+
+        <div class="about-facts">
+          <div class="about-fact"><span class="fact-num">1.5 млн</span><span class="fact-label">выручки за 3 месяца</span></div>
+          <div class="about-fact"><span class="fact-num">80+</span><span class="fact-label">учеников · кейсы до 1 млн/мес</span></div>
+          <div class="about-fact"><span class="fact-num">2+ млн</span><span class="fact-label">вложил в своё развитие</span></div>
+        </div>
+
+        <a href="/story" class="about-link">
+          <span>Читать мою историю</span>
+          <span class="about-link-arrow">→</span>
+        </a>
       </div>
     </div>
   </div>
