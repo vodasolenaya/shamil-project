@@ -117,6 +117,19 @@ export default async function handler(req, res) {
       const lead = rows[0];
 
       if (lead) {
+        // Проверяем — был ли уже отправлен msg #0 этому лиду
+        const alreadySent = await sql`
+          SELECT 1 FROM events
+          WHERE lead_id = ${leadId}
+            AND type = 'message_sent'
+            AND payload->>'step' = '0'
+          LIMIT 1
+        `;
+        if (alreadySent.length > 0) {
+          // /start от уже подписанного лида — тихо выходим, не дублируем сообщение
+          return res.status(200).end();
+        }
+
         // Обновляем лида
         await sql`
           UPDATE leads
@@ -124,12 +137,16 @@ export default async function handler(req, res) {
           WHERE id = ${leadId}
         `;
 
-        // Создаём расписание (шаги 1..7)
+        // Создаём расписание (шаги 1..7) — защищаемся от дублей через WHERE NOT EXISTS
+        // на случай если UNIQUE constraint в БД ещё не применён (см. db/migration_v3.sql)
         for (const { step, daysOffset, hourUTC } of DRIP_SCHEDULE) {
           await sql`
-            INSERT INTO drip_schedule (id, lead_id, step, send_at, message_key)
-            VALUES (${genId('drip')}, ${leadId}, ${step}, ${calcSendAt(daysOffset, hourUTC)}, ${`msg_${step}`})
-            ON CONFLICT DO NOTHING
+            INSERT INTO drip_schedule (id, lead_id, step, send_at, message_key, type)
+            SELECT ${genId('drip')}, ${leadId}, ${step}, ${calcSendAt(daysOffset, hourUTC)}, ${`msg_${step}`}, 'drip'
+            WHERE NOT EXISTS (
+              SELECT 1 FROM drip_schedule
+              WHERE lead_id = ${leadId} AND step = ${step} AND COALESCE(type, 'drip') = 'drip'
+            )
           `;
         }
 
@@ -139,18 +156,19 @@ export default async function handler(req, res) {
           VALUES (${genId('ev')}, ${leadId}, 'subscribed', ${JSON.stringify({ tg_user_id: tgUserId })}::jsonb)
         `;
 
-        // Шлём сообщение #0 — сразу (используем q15 «что мешает прямо сейчас»)
-        const q15raw = lead.quiz_answers?.q15 || lead.quiz_answers?.q5 || '';
-        const m0     = getMessage(0, { name: lead.name || firstName, quiz_q15_short: q15raw });
-        if (m0) await tgSend(BOT_TOKEN, chatId, m0.text, m0.reply_markup);
-
-        // Помечаем шаг 0 как отправленный (он вне расписания)
+        // Помечаем шаг 0 как отправленный ДО фактической отправки —
+        // это блокирует параллельные webhook-вызовы (race condition fix)
         await sql`
           INSERT INTO events (id, lead_id, type, payload)
           VALUES (${genId('ev')}, ${leadId}, 'message_sent', ${JSON.stringify({ step: 0 })}::jsonb)
         `;
 
-        return;
+        // Шлём сообщение #0 — сразу (используем q15 «что мешает прямо сейчас»)
+        const q15raw = lead.quiz_answers?.q15 || lead.quiz_answers?.q5 || '';
+        const m0     = getMessage(0, { name: lead.name || firstName, quiz_q15_short: q15raw });
+        if (m0) await tgSend(BOT_TOKEN, chatId, m0.text, m0.reply_markup);
+
+        return res.status(200).end();
       }
     }
 

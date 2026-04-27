@@ -246,28 +246,21 @@
     .hero > * { position: relative; z-index: 2; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: .75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--gold-text); margin-bottom: 28px;
-      background: transparent; border: 1px solid #C9A84C;
-      border-radius: 6px; padding: 6px 16px;
+      font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold-text); margin-bottom: 24px;
+      background: transparent; border: 1px solid rgba(201,168,76,.4);
+      border-radius: 100px; padding: 7px 16px;
     }
     .hero h1 {
-      font-size: clamp(2.6rem, 4.2vw, 4rem);
-      font-weight: 900; line-height: 1.06; letter-spacing: -2px;
-      max-width: 600px; margin: 0 0 28px;
+      font-size: clamp(1.95rem, 3.4vw, 3rem);
+      font-weight: 800; line-height: 1.18; letter-spacing: -1px;
+      max-width: 580px; margin: 0 0 24px;
       text-shadow: none;
     }
     .hero h1 em {
       font-style: normal;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 40%, #ffaa30 70%, var(--gold) 100%);
-      background-size: 250% 100%;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      animation: gradientFlow 5s ease infinite;
-    }
-    @keyframes gradientFlow {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      color: var(--gold-text);
+      font-weight: 800;
     }
     .hero-sub {
       font-size: clamp(1rem, 1.6vw, 1.1rem); color: var(--text2);
@@ -350,20 +343,20 @@
     .section-inner.wide { max-width: 1200px; }
     .section-label {
       display: inline-flex; align-items: center;
-      color: var(--gold-text); font-size: .74rem; font-weight: 700;
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 20px;
-      background: rgba(201,168,76,.08); border: 1px solid rgba(139,105,20,.35);
-      border-radius: 6px; padding: 5px 14px;
+      color: var(--gold-text); font-size: .72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px;
+      background: transparent; border: 1px solid rgba(201,168,76,.4);
+      border-radius: 100px; padding: 6px 14px;
     }
     .section-label::before { display: none; }
     h2.section-title {
-      font-size: clamp(2.4rem, 4.8vw, 3.8rem);
-      font-weight: 900; letter-spacing: -2px; line-height: 1.08;
-      margin-bottom: 20px;
+      font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+      font-weight: 800; letter-spacing: -1px; line-height: 1.15;
+      margin-bottom: 18px;
     }
     .section-sub {
-      font-size: 1.05rem; color: #222222; max-width: 520px; line-height: 1.7;
-      margin: 0 auto 56px;
+      font-size: 1rem; color: var(--text2); max-width: 560px; line-height: 1.65;
+      margin: 0 auto 44px;
     }
 
     /* ── PAIN BENTO ── */
@@ -891,7 +884,6 @@
     <a href="#program">Программа</a>
     <a href="#cases">Кейсы</a>
     <a href="#about">О Шамиле</a>
-    <a href="/diagnostic.html">Диагностика</a>
     <a href="/diagnostic.html" class="nav-cta">Найти свой барьер →</a>
   </div>
 </nav>
