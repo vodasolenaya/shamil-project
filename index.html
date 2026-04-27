@@ -1603,12 +1603,14 @@
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
     .faq-a {
       max-height: 0; overflow: hidden;
-      transition: max-height .26s cubic-bezier(0.4,0,0.2,1);
       font-size: .95rem; color: rgba(255,255,255,.7);
       line-height: 1.65;
       padding: 0 32px;
     }
-    .faq-item.open .faq-a { padding: 32px !important; }
+    .faq-item.open .faq-a {
+      max-height: 2000px;
+      padding: 32px !important;
+    }
     .faq-a a { color: #C9A84C; text-decoration: none; }
     .faq-a a:hover { text-decoration: underline; }
 
@@ -2692,20 +2694,9 @@
       // close all
       document.querySelectorAll('.faq-item.open').forEach(o => {
         o.classList.remove('open');
-        o.querySelector('.faq-a').style.maxHeight = '0';
       });
       if (!isOpen) {
         item.classList.add('open');
-        // Force padding to apply BEFORE measuring scrollHeight
-        // (.faq-item.open .faq-a меняет padding с 0/32 на 32 со всех сторон)
-        answer.style.paddingTop = '32px';
-        answer.style.paddingBottom = '32px';
-        void answer.offsetHeight;
-        const fullHeight = answer.scrollHeight;
-        // Снимаем inline-padding чтобы CSS-правило управляло
-        answer.style.removeProperty('padding-top');
-        answer.style.removeProperty('padding-bottom');
-        answer.style.maxHeight = (fullHeight + 20) + 'px';
       }
     });
   });
