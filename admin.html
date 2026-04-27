@@ -1369,7 +1369,7 @@
       const qa      = l.quiz_answers || {};
       const barrier = (qa.q15 || qa.q5 || '').trim();
       const handle  = l.tg_handle || '';
-      const tgUrl   = handle.startsWith('@') ? `https://t.me/${handle.slice(1)}` : 'https://t.me/vodasolenaya';
+      const tgBase  = handle.startsWith('@') ? `https://t.me/${handle.slice(1)}` : 'https://t.me/vodasolenaya';
       const bshort  = barrier.length > 100 ? barrier.slice(0, 100) + '…' : barrier;
       return `
         <div class="outreach-item">
@@ -1379,16 +1379,22 @@
             <div class="outreach-barrier">${bshort ? '«' + escHtml(bshort) + '»' : '—'}</div>
             <button class="outreach-btn" id="obtn-${l.id}"
               data-lead-id="${escHtml(l.id)}"
-              data-tg-url="${escHtml(tgUrl)}"
+              data-tg-base="${escHtml(tgBase)}"
               onclick="outreachGenerate(this, event)">
               ✨ Написать
             </button>
           </div>
           <div class="outreach-preview" id="oprev-${l.id}">
-            <textarea class="outreach-textarea" id="omsg-${l.id}"></textarea>
+            <textarea class="outreach-textarea" id="omsg-${l.id}"
+              oninput="outreachSyncBtn('${escHtml(l.id)}')"></textarea>
             <div class="outreach-preview-btns">
-              <button class="lead-btn primary" onclick="outreachCopyMsg('${l.id}', this, event)">📋 Скопировать</button>
-              <a class="tg-manual-link" href="${escHtml(tgUrl)}" target="_blank" onclick="event.stopPropagation()">💬 Открыть чат →</a>
+              <button class="lead-btn primary" id="osend-${l.id}"
+                data-tg-base="${escHtml(tgBase)}"
+                onclick="outreachOpenInTg('${escHtml(l.id)}', event)">
+                📨 Отправить в Telegram →
+              </button>
+              <button class="lead-btn" style="font-size:.75rem;padding:5px 10px;"
+                onclick="outreachCopyMsg('${l.id}', this, event)">📋 Скопировать</button>
             </div>
           </div>
         </div>`;
@@ -1396,19 +1402,20 @@
 
     panel.innerHTML = `
       <div class="outreach-panel">
-        <div class="outreach-title">🎯 Не открыли бота — ${leads.length} чел. &nbsp;·&nbsp; Нажми «Написать» → скопируй → открой чат → Ctrl+V → отправить</div>
+        <div class="outreach-title">🎯 Не открыли бота — ${leads.length} чел. &nbsp;·&nbsp; Нажми «Написать» — Telegram откроется с готовым текстом, останется нажать «Отправить»</div>
         <div class="outreach-list">${items}</div>
       </div>`;
     panel.style.display = 'block';
   }
 
-  // Генерируем персональное сообщение через API
+  // Генерируем и сразу открываем Telegram с подставленным текстом
   async function outreachGenerate(btn, e) {
     e.stopPropagation();
     const leadId   = btn.dataset.leadId;
+    const tgBase   = btn.dataset.tgBase;
     const origText = btn.textContent;
     btn.disabled   = true;
-    btn.textContent = '⏳…';
+    btn.textContent = '⏳ Генерирую…';
     try {
       const r = await fetch('/api/generate-draft', {
         method:  'POST',
@@ -1417,11 +1424,15 @@
       });
       const d = await r.json();
       if (d.ok && d.draft) {
+        // Показываем preview
         const ta = document.getElementById(`omsg-${leadId}`);
         const pv = document.getElementById(`oprev-${leadId}`);
         if (ta) ta.value = d.draft;
         if (pv) pv.style.display = 'block';
         btn.textContent = '✅ Готово';
+        // Сразу открываем Telegram с текстом
+        const url = tgBase + '?text=' + encodeURIComponent(d.draft);
+        window.open(url, '_blank');
       } else {
         btn.textContent = origText;
         alert('Ошибка: ' + (d.error || 'неизвестная'));
@@ -1434,7 +1445,25 @@
     }
   }
 
-  // Копирует готовое сообщение
+  // Открывает Telegram с текущим текстом из поля (если отредактировали)
+  function outreachOpenInTg(leadId, e) {
+    e.stopPropagation();
+    const ta      = document.getElementById(`omsg-${leadId}`);
+    const sendBtn = document.getElementById(`osend-${leadId}`);
+    const tgBase  = sendBtn?.dataset.tgBase;
+    if (!ta || !tgBase) return;
+    const text = ta.value.trim();
+    if (!text) { alert('Нет текста — нажми «✨ Написать» сначала'); return; }
+    window.open(tgBase + '?text=' + encodeURIComponent(text), '_blank');
+  }
+
+  // Синхронизирует кнопку отправки при редактировании textarea (визуальный намёк)
+  function outreachSyncBtn(leadId) {
+    const sendBtn = document.getElementById(`osend-${leadId}`);
+    if (sendBtn) sendBtn.textContent = '📨 Отправить в Telegram →';
+  }
+
+  // Копирует текст (запасной вариант)
   function outreachCopyMsg(leadId, btn, e) {
     e.stopPropagation();
     const ta = document.getElementById(`omsg-${leadId}`);
