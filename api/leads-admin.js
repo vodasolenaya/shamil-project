@@ -310,25 +310,28 @@ export default async function handler(req, res) {
       ? await sql`SELECT COUNT(*) AS total FROM leads WHERE status = ${statusFilter}`
       : await sql`SELECT COUNT(*) AS total FROM leads`;
 
+    // Используем message_key LIKE 'msg_%' вместо ds.type = 'drip'
+    // — работает и без migration_v2.sql (колонки type может не быть)
     const leads = statusFilter
       ? await sql`
           SELECT l.*,
-            (SELECT COUNT(*) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.type = 'drip') AS msgs_sent,
-            (SELECT MAX(ds.step) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.type = 'drip') AS current_step
+            (SELECT COUNT(*) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.message_key LIKE 'msg_%') AS msgs_sent,
+            (SELECT MAX(ds.step) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.message_key LIKE 'msg_%') AS current_step
           FROM leads l WHERE l.status = ${statusFilter}
           ORDER BY l.created_at DESC LIMIT ${limit} OFFSET ${offset}
         `
       : await sql`
           SELECT l.*,
-            (SELECT COUNT(*) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.type = 'drip') AS msgs_sent,
-            (SELECT MAX(ds.step) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.type = 'drip') AS current_step
+            (SELECT COUNT(*) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.message_key LIKE 'msg_%') AS msgs_sent,
+            (SELECT MAX(ds.step) FROM drip_schedule ds WHERE ds.lead_id = l.id AND ds.sent_at IS NOT NULL AND ds.message_key LIKE 'msg_%') AS current_step
           FROM leads l
           ORDER BY l.created_at DESC LIMIT ${limit} OFFSET ${offset}
         `;
 
     return res.status(200).json({ total: Number(total), offset, limit, items: leads });
   } catch (err) {
-    console.error('leads-admin error:', err.message);
-    return res.status(500).json({ error: err.message });
+    console.error('leads-admin GET error:', err.message);
+    // Возвращаем ошибку с деталями чтобы видеть в браузере что именно сломалось
+    return res.status(500).json({ error: err.message, hint: 'Проверь DATABASE_URL в Vercel и запусти db/migration_v2.sql в Neon SQL Editor' });
   }
 }

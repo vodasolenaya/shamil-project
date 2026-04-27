@@ -669,7 +669,14 @@
       renderLeads();
     } catch(e) {
       document.getElementById('leads-container').innerHTML =
-        '<div class="empty-state" style="color:var(--red)">Ошибка загрузки. Возможно, БД не подключена.</div>';
+        `<div class="empty-state" style="color:var(--red);line-height:1.7;">
+          ❌ Ошибка загрузки лидов<br>
+          <span style="font-size:.82rem;color:var(--text3);">
+            Открой DevTools → Console и посмотри ошибку.<br>
+            Скорее всего: не задан <code>DATABASE_URL</code> в Vercel,
+            или не запущен <code>db/migration_v2.sql</code> в Neon SQL Editor.
+          </span>
+        </div>`;
     }
   }
 
