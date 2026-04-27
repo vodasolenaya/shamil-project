@@ -72,14 +72,42 @@
     }
     /* ── SCROLL PROGRESS ── */
     #scroll-bar {
-      position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 300;
       background: linear-gradient(90deg, var(--gold), var(--gold2));
       width: 0%; transition: width .1s linear;
     }
 
+    /* ── STICKY TOP BAR ── */
+    .sticky-top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+      background: var(--text); color: var(--bg);
+      padding: 10px 24px; font-size: .85rem;
+    }
+    .sticky-top-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .sticky-top-bar-text { color: rgba(255,255,255,.85); }
+    .sticky-top-bar-text strong { color: var(--gold); font-weight: 700; }
+    .sticky-top-bar-cta {
+      background: var(--gold); color: #000;
+      padding: 7px 16px; border-radius: 8px;
+      font-size: .82rem; font-weight: 700;
+      text-decoration: none; white-space: nowrap;
+      transition: opacity .2s;
+    }
+    .sticky-top-bar-cta:hover { opacity: .9; }
+    @media(max-width:680px) {
+      .sticky-top-bar { padding: 8px 14px; font-size: .76rem; }
+      .sticky-top-bar-inner { gap: 12px; }
+      .sticky-top-bar-cta { padding: 6px 12px; font-size: .76rem; }
+      nav { top: 38px; }
+      .hero { padding-top: 118px; }
+    }
+
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 42px; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px; height: 64px;
       background: #ffffff;
@@ -198,7 +226,7 @@
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: left; padding: 80px 24px 80px;
+      text-align: left; padding: 122px 24px 80px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -986,6 +1014,13 @@
 
       /* Hero badge — reduce letter-spacing so it doesn't span nearly full width */
       .hero-eyebrow { letter-spacing: .5px; font-size: .7rem; }
+
+      /* Format + Not grid — single column on mobile */
+      .format-grid { grid-template-columns: 1fr 1fr !important; }
+      .not-grid { grid-template-columns: 1fr !important; }
+    }
+    @media(max-width:480px){
+      .format-grid { grid-template-columns: 1fr !important; }
     }
 
     /* ── SECTION DIVIDERS — visual breathing room ── */
@@ -1006,6 +1041,16 @@
 <body>
 
 <div id="scroll-bar"></div>
+
+<!-- STICKY TOP BAR -->
+<div class="sticky-top-bar">
+  <div class="sticky-top-bar-inner">
+    <span class="sticky-top-bar-text">
+      <strong>30 дней до дохода от 300 000 ₽/мес</strong> · программа усиления сильного фрилансера
+    </span>
+    <a href="/diagnostic.html" class="sticky-top-bar-cta">Найти свой барьер →</a>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1084,6 +1129,15 @@
 
 </section>
 
+<!-- MANIFESTO -->
+<section class="manifesto-section" style="padding:60px 24px;background:var(--bg);text-align:center;">
+  <div class="section-inner" style="max-width:780px;margin:0 auto;">
+    <p class="reveal" style="font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.55;color:var(--text);font-weight:500;letter-spacing:-.3px;">
+      В 2026 году либо у тебя есть <strong style="color:var(--gold-text);">система продаж и команда</strong> — либо ты делаешь всё руками и упираешься в потолок дохода. Третьего нет.
+    </p>
+  </div>
+</section>
+
 <!-- STATS -->
 <div class="stats-wrap">
   <div class="stats-inner">
@@ -1109,9 +1163,9 @@
 <!-- PAIN -->
 <section class="section pain">
   <div class="section-inner wide">
-    <div class="section-label reveal">Узнай себя</div>
-    <h2 class="section-title reveal">Мысли, которые крутятся в голове</h2>
-    <p class="section-sub reveal">Если хотя бы 3 пункта — про тебя, ты попал куда надо.</p>
+    <div class="section-label reveal">Знакомо?</div>
+    <h2 class="section-title reveal">Узнаёшь себя?</h2>
+    <p class="section-sub reveal">Если хотя бы 3 пункта — про тебя, продолжай читать.</p>
 
     <div class="bento">
       <div class="bento-card reveal">
@@ -1219,6 +1273,38 @@
           <div style="font-size:.82rem;font-weight:700;margin-bottom:4px;">Разбор твоих сделок</div>
           <div style="font-size:.85rem;color:var(--text3);line-height:1.5;">Показываю где именно теряешь деньги в своих переговорах</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT -->
+<section class="section format-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Формат</div>
+    <h2 class="section-title reveal">Как проходит программа</h2>
+    <p class="section-sub reveal">Полностью онлайн, с живым присутствием Шамиля.</p>
+
+    <div class="format-grid reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:40px auto 0;">
+      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:10px;">📅</div>
+        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">30 дней</h3>
+        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Длительность программы. Старт — после диагностики и созвона.</p>
+      </div>
+      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
+        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">1-2 созвона в неделю</h3>
+        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Живые Zoom-разборы с Шамилём плюс работа в группе.</p>
+      </div>
+      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:10px;">📹</div>
+        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">40-50 видеоуроков</h3>
+        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Короткие модули по 5-15 минут. Доступ навсегда.</p>
+      </div>
+      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
+        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">Ежедневные отчёты</h3>
+        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Шамиль видит каждое твоё действие — поправляет где застрял.</p>
       </div>
     </div>
   </div>
@@ -1521,6 +1607,38 @@
       <a href="https://t.me/ozareniecases" target="_blank" style="font-size:.87rem;color:var(--gold-text);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(139,105,20,.3);">
         Смотреть доказательства →
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ЧТО МЫ НЕ ДЕЛАЕМ -->
+<section class="section" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="section-label reveal">Честно</div>
+    <h2 class="section-title reveal">Чего НЕ будет в программе</h2>
+    <p class="section-sub reveal">Чтобы ты сразу понимал, на что подписываешься.</p>
+
+    <div class="not-grid reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:40px auto 0;">
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Скриптов «как впарить»</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Манипулятивные техники работают один раз. Клиент возвращается со скандалом или просто не возвращается.</p>
+      </div>
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Обещаний результата без действия</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Если не делаешь — никакая программа не даст 300к. Это правда, без неё нечестно.</p>
+      </div>
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Абстрактного «работай над собой»</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Только конкретные инструменты под твою ситуацию: разбор сделок, переговоры, система ценообразования.</p>
+      </div>
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Курса для нулёвых с нуля</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Программа усиления сильного — для тех, у кого уже есть клиенты, опыт, поток. Если только начинаешь — приходи позже.</p>
+      </div>
     </div>
   </div>
 </section>
