@@ -143,11 +143,11 @@
       .nav-links { display: none; }
     }
 
-    /* ── HERO (gleb-style, photo dominant) ── */
+    /* ── HERO (text-left, photo-right, 3 value-cards) ── */
     .hero {
       position: relative;
       background: #0a0a0a;
-      padding: 120px 24px 80px;
+      padding: 110px 24px 72px;
       min-height: auto;
       overflow: hidden;
     }
@@ -169,19 +169,11 @@
     .hero-container {
       position: relative; z-index: 2;
       max-width: 1240px; margin: 0 auto;
-      display: grid; grid-template-columns: 460px 1fr;
+      display: grid; grid-template-columns: 1fr 460px;
       gap: 70px; align-items: center;
     }
-    .hero-photo { display: flex; justify-content: center; align-items: end; }
-    .hero-photo img { width: 100%; max-width: 460px; height: auto; display: block; }
 
     .hero-text { display: flex; flex-direction: column; align-items: flex-start; }
-    .hero-eyebrow {
-      font-size: .72rem; font-weight: 600; letter-spacing: 2px;
-      color: #C9A84C; margin-bottom: 28px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .hero-eyebrow span { color: rgba(255,255,255,.25); font-weight: 400; }
 
     .hero h1 {
       font-size: clamp(1.7rem, 2.8vw, 2.6rem);
@@ -195,8 +187,9 @@
 
     .hero-values {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px; margin-bottom: 40px;
-      padding: 24px 0; border-top: 0.5px solid rgba(255,255,255,.1);
+      gap: 22px; margin-bottom: 36px;
+      padding: 26px 0; border-top: 0.5px solid rgba(255,255,255,.1);
+      width: 100%; max-width: 700px;
     }
     .hero-value { display: flex; flex-direction: column; gap: 6px; }
     .hero-value-title {
@@ -239,15 +232,17 @@
     .hero-proof-text { font-size: .85rem; color: rgba(255,255,255,.65); }
     .hero-proof-text strong { color: #C9A84C; font-weight: 600; }
 
+    .hero-photo { display: flex; justify-content: center; align-items: center; }
+    .hero-photo img { width: 100%; max-width: 460px; height: auto; display: block; }
+
     @media (max-width: 900px) {
       .hero { padding: 100px 20px 56px; }
       .hero-container { grid-template-columns: 1fr; gap: 32px; text-align: center; }
       .hero-photo { order: -1; }
       .hero-photo img { max-width: 280px; }
       .hero-text { align-items: center; }
-      .hero-eyebrow { justify-content: center; }
       .hero h1 { text-align: center; }
-      .hero-values { grid-template-columns: 1fr; gap: 16px; }
+      .hero-values { grid-template-columns: 1fr; gap: 16px; max-width: 100%; }
       .hero-value { align-items: center; text-align: center; }
       .hero-social-proof { justify-content: center; }
     }
@@ -717,7 +712,6 @@
       .stage-item { text-align: left; }
 
       /* Hero badge — reduce letter-spacing so it doesn't span nearly full width */
-      .hero-eyebrow { letter-spacing: .5px; font-size: .7rem; }
 
       /* Format + Not grid — single column on mobile */
       .format-grid { grid-template-columns: 1fr 1fr !important; }
@@ -766,13 +760,7 @@
 
   <div class="hero-container">
 
-    <div class="hero-photo">
-      <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" />
-    </div>
-
     <div class="hero-text">
-      <div class="hero-eyebrow">ИСКУССТВО ПРОДАЖ <span>·</span> ШАМИЛЬ МУХАМЕТЗЯНОВ</div>
-
       <h1>Узнайте, как фрилансеру выйти на <em>доход от 300 000 ₽/мес</em> через систему продаж и делегирования</h1>
 
       <div class="hero-values">
@@ -786,7 +774,7 @@
         </div>
         <div class="hero-value">
           <div class="hero-value-title">За 30 дней</div>
-          <div class="hero-value-text">Первая сделка на новый чек — обычно в первые 1-2 недели программы</div>
+          <div class="hero-value-text">Первая сделка на новый чек — обычно в первые 1–2 недели программы</div>
         </div>
       </div>
 
@@ -804,6 +792,10 @@
         </div>
         <div class="hero-proof-text"><strong>80+ фрилансеров</strong> уже выросли в доходе</div>
       </div>
+    </div>
+
+    <div class="hero-photo">
+      <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" />
     </div>
 
   </div>
