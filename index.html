@@ -1147,28 +1147,76 @@
     .reveal-delay-4 { transition-delay: .4s; }
 
     /* ── TESTIMONIALS ── */
+    /* ── TESTIMONIALS ── */
+    .testi-section {
+      background: #0d0d0d;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .testi-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .testi-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .testi-inner {
+      position: relative; z-index: 2;
+      max-width: 1320px; margin: 0 auto;
+    }
+    .testi-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .testi-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 14px;
+    }
+    .testi-sub {
+      font-size: 1rem; color: rgba(255,255,255,.6);
+      text-align: center; margin: 0 auto 56px;
+      max-width: 540px;
+    }
     .testi-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
     }
     .testi-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r2); padding: 24px 22px;
-      position: relative; transition: border-color .25s, transform .25s;
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+      padding: 26px 22px;
+      display: flex; flex-direction: column;
+      gap: 18px;
     }
-    .testi-card:hover { border-color: rgba(240,192,64,.2); transform: translateY(-2px); }
-    /* testi-card::before quote removed for cleaner look */
-    .testi-quote { font-size: .95rem; color: var(--text); line-height: 1.65; margin-bottom: 18px; }
-    .testi-author { display: flex; align-items: center; gap: 10px; }
-    .testi-avatar {
-      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      display: flex; align-items: center; justify-content: center;
-      font-size: .8rem; font-weight: 800; color: #000;
+    .testi-quote {
+      font-size: .92rem; line-height: 1.55; color: #fff;
+      flex-grow: 1;
     }
-    .testi-name { font-size: .87rem; font-weight: 700; margin-bottom: 2px; }
-    .testi-role { font-size: .82rem; color: var(--text2); }
-    @media(max-width:900px){ .testi-grid { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:580px){ .testi-grid { grid-template-columns: 1fr; } }
+    .testi-author {
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .testi-name {
+      font-size: .92rem; font-weight: 500; color: #fff;
+    }
+    .testi-role {
+      font-size: .8rem; color: #C9A84C; letter-spacing: .3px;
+    }
+    @media (max-width: 1100px) {
+      .testi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .testi-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .testi-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── CIRCLE VIDEOS ── */
     .circle-video-section { background: var(--bg2); }
@@ -1858,48 +1906,68 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="section">
-  <div class="section-inner wide">
-    <div class="section-label reveal">Голоса учеников</div>
-    <h2 class="section-title reveal">Как они рассказывают о результате</h2>
-    <p class="section-sub reveal">Это не мои слова. Это их слова. Из чата группы, без фильтра.</p>
+<section class="testi-section">
+  <div class="testi-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="testi-inner">
+    <div class="testi-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ГОЛОСА УЧЕНИКОВ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="testi-title">Как они рассказывают о результате</h2>
+    <p class="testi-sub">Это не мои слова. Это их слова. Из чата группы, без фильтра.</p>
 
     <div class="testi-grid">
+
       <div class="testi-card reveal">
-        <p class="testi-quote">«Полгода прокрастинировал, ничего не мог продать. За 11 дней после старта закрыл на 420 000 ₽. Каждый день вижу новые возможности — и это не останавливается.»</p>
+        <div class="testi-quote">«Полгода прокрастинировал, ничего не мог продать. За 11 дней после старта закрыл на 420 000 ₽. Каждый день вижу новые возможности — и это не останавливается.»</div>
         <div class="testi-author">
-          <div class="testi-avatar">О</div>
-          <div><div class="testi-name">Олег</div><div class="testi-role">B2B продажи</div></div>
+          <div class="testi-name">Олег</div>
+          <div class="testi-role">Digital-агентство</div>
         </div>
       </div>
+
       <div class="testi-card reveal reveal-delay-1">
-        <p class="testi-quote">«Не верил что моя работа может стоить дорого. За месяц — 600 000 ₽, запустил своё обучение по дизайну и нанял людей. Даже не думал что так можно.»</p>
+        <div class="testi-quote">«Не верил что моя работа может стоить дорого. За месяц — 600 000 ₽, запустил своё обучение по дизайну и нанял людей. Даже не думал что так можно.»</div>
         <div class="testi-author">
-          <div class="testi-avatar">М</div>
-          <div><div class="testi-name">Марат</div><div class="testi-role">Дизайнер</div></div>
+          <div class="testi-name">Марат</div>
+          <div class="testi-role">Дизайнер</div>
         </div>
       </div>
+
       <div class="testi-card reveal reveal-delay-2">
-        <p class="testi-quote">«Первый раз в жизни точно знаю откуда возьмутся деньги в следующем месяце. Это ощущение спокойствия — бесценно.»</p>
+        <div class="testi-quote">«Первый раз в жизни точно знаю откуда возьмутся деньги в следующем месяце. Это ощущение спокойствия — бесценно.»</div>
         <div class="testi-author">
-          <div class="testi-avatar">С</div>
-          <div><div class="testi-name">Самат</div><div class="testi-role">Таргетолог</div></div>
+          <div class="testi-name">Самат</div>
+          <div class="testi-role">Веб-разработчик</div>
         </div>
       </div>
+
       <div class="testi-card reveal">
-        <p class="testi-quote">«Пробил отметку 300к. Страх называть цену — ушёл полностью. Теперь говорю цифру спокойно и клиент соглашается.»</p>
+        <div class="testi-quote">«Пробил отметку 300к. Страх называть цену — ушёл полностью. Теперь говорю цифру спокойно и клиент соглашается.»</div>
         <div class="testi-author">
-          <div class="testi-avatar">Ф</div>
-          <div><div class="testi-name">Фёдор</div><div class="testi-role">Веб-разработчик, Новосибирск</div></div>
+          <div class="testi-name">Фёдор</div>
+          <div class="testi-role">Веб-разработчик</div>
         </div>
       </div>
+
       <div class="testi-card reveal reveal-delay-1">
-        <p class="testi-quote">«Пришёл с полным нулём по продажам. Через месяц — 100 000 ₽ с холодных заявок. Научился ставить цели и каждый день иду к ним.»</p>
+        <div class="testi-quote">«Пришёл с полным нулём по продажам. Через месяц — 100 000 ₽ с холодных заявок. Научился ставить цели и каждый день иду к ним.»</div>
         <div class="testi-author">
-          <div class="testi-avatar">Е</div>
-          <div><div class="testi-name">Егор</div><div class="testi-role">Маркетолог</div></div>
+          <div class="testi-name">Егор</div>
+          <div class="testi-role">Геомаркетинг</div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
