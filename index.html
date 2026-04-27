@@ -152,7 +152,7 @@
       overflow: hidden;
     }
     .hero-bg-decor {
-      position: absolute; inset: 0; pointer-events: none;
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
       background:
         radial-gradient(ellipse 50% 60% at 92% 28%, rgba(201,168,76,.16) 0%, transparent 60%),
         radial-gradient(ellipse 40% 50% at 8% 88%, rgba(201,168,76,.08) 0%, transparent 65%);
@@ -165,6 +165,25 @@
       background-size: 48px 48px;
       -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0,0,0,.5) 0%, transparent 80%);
               mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(0,0,0,.5) 0%, transparent 80%);
+    }
+    .hero-coins {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-coin {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #d8b860 0%, #C9A84C 35%, #8B6914 75%, #5a4408 100%);
+      box-shadow: inset -3px -3px 6px rgba(0,0,0,.35), inset 3px 3px 6px rgba(255,220,140,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: rgba(0,0,0,.42);
+      opacity: .35;
+    }
+    .hero-coin.c1 { width: 86px; height: 86px; top: 12%; left: 4%; transform: rotate(-12deg); font-size: 28px; opacity: .28; }
+    .hero-coin.c2 { width: 54px; height: 54px; top: 56%; left: 8%; transform: rotate(8deg); font-size: 18px; opacity: .22; }
+    .hero-coin.c3 { width: 42px; height: 42px; top: 18%; left: 38%; transform: rotate(15deg); font-size: 14px; opacity: .18; }
+    .hero-coin.c4 { width: 64px; height: 64px; top: 76%; left: 44%; transform: rotate(-8deg); font-size: 22px; opacity: .2; }
+    .hero-coin.c5 { width: 38px; height: 38px; top: 8%; left: 52%; transform: rotate(20deg); font-size: 13px; opacity: .15; }
+    @media (max-width: 900px) {
+      .hero-coin.c3, .hero-coin.c4, .hero-coin.c5 { display: none; }
     }
     .hero-container {
       position: relative; z-index: 2;
@@ -757,6 +776,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg-decor"></div>
+  <div class="hero-coins">
+    <div class="hero-coin c1">₽</div>
+    <div class="hero-coin c2">₽</div>
+    <div class="hero-coin c3">₽</div>
+    <div class="hero-coin c4">₽</div>
+    <div class="hero-coin c5">₽</div>
+  </div>
 
   <div class="hero-container">
 
@@ -770,7 +796,7 @@
         </div>
         <div class="hero-value">
           <div class="hero-value-title">Без давления</div>
-          <div class="hero-value-text">Без манипуляций. Клиент покупает через смысл</div>
+          <div class="hero-value-text">Без давления. Клиент сам хочет купить</div>
         </div>
         <div class="hero-value">
           <div class="hero-value-title">За 30 дней</div>
