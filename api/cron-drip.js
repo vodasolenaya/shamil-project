@@ -81,22 +81,47 @@ export default async function handler(req, res) {
   let sent = 0;
   let failed = 0;
 
+  // ── Дедупликация по lead_id: не более 1 drip-сообщения на лида за запуск ──
+  // Защищает от ситуации когда у лида накопилось несколько просроченных записей
+  const seenLeadDrip = new Set();
+  const dedupedPending = [];
   for (const row of pending) {
+    if ((row.ds_type || 'drip') === 'drip') {
+      if (seenLeadDrip.has(row.lead_id)) continue;
+      seenLeadDrip.add(row.lead_id);
+    }
+    dedupedPending.push(row);
+  }
+
+  for (const row of dedupedPending) {
     const step   = parseInt(row.step, 10);
     const dsType = row.ds_type || 'drip';
-    let msgText  = null;
-    let markup   = null;
+
+    // ── Атомарный захват строки: только один экземпляр крона отправит её ──
+    // Vercel иногда запускает cron дважды — этот UPDATE гарантирует идемпотентность
+    const claimed = await sql`
+      UPDATE drip_schedule SET sent_at = NOW()
+      WHERE id = ${row.drip_id} AND sent_at IS NULL
+      RETURNING id
+    `;
+    if (claimed.length === 0) {
+      // Другой экземпляр крона уже захватил эту запись — пропускаем
+      continue;
+    }
+
+    let msgText = null;
+    let markup  = null;
 
     // ── Определяем текст сообщения по типу ──────────────────────────────
     if (dsType === 'drip') {
       const m = getMessage(step, {
         name          : row.name || '',
-        quiz_q5_short : row.quiz_answers?.q5 || '',
+        quiz_q15_short: row.quiz_answers?.q15 || '',
+        quiz_q5_short : row.quiz_answers?.q5  || '',
       });
       if (m) { msgText = m.text; markup = m.reply_markup; }
 
     } else if (dsType === 'call_reminder') {
-      // Текст берём из events (сохранили при создании)
       const payload = row.reminder_payload;
       if (payload) {
         const parsed = typeof payload === 'string' ? JSON.parse(payload) : payload;
@@ -104,21 +129,17 @@ export default async function handler(req, res) {
       }
 
     } else if (dsType === 'call_followup') {
-      // Не отправляем если уже lost/converted
       if (['converted', 'lost'].includes(row.lead_status)) {
-        await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
+        // sent_at уже проставлен выше — просто пропускаем
         continue;
       }
       msgText = buildCallFollowup({ name: row.name || '' });
 
     } else if (dsType === 'tripwire_pitch') {
-      // Питч трипваера (3 000₽) через 48ч после оплаты разбора (990₽)
       if (['converted', 'lost', 'unsubscribed'].includes(row.lead_status)) {
-        await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
         continue;
       }
       msgText = buildTripwirePitch({ name: row.name || '' });
-      // Кнопка оплаты — прямой редирект на Tinkoff
       markup = {
         inline_keyboard: [[{
           text: 'Купить за 3 000₽ →',
@@ -127,40 +148,40 @@ export default async function handler(req, res) {
       };
 
     } else if (dsType === 'tripwire_access') {
-      // Подтверждение доступа к урокам после оплаты трипваера
       msgText = buildTripwireAccess({ name: row.name || '' });
 
     } else if (dsType === 'call_pitch') {
-      // Питч созвона (5 000₽) через 3 дня после трипваера
       if (['converted', 'lost', 'unsubscribed'].includes(row.lead_status)) {
-        await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
         continue;
       }
       msgText = buildCallPitch({ name: row.name || '' });
     }
 
     if (!msgText) {
-      await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
+      // Нет текста — sent_at уже проставлен, просто идём дальше
       continue;
     }
 
+    // ── Отправляем через Telegram ────────────────────────────────────────
     const result = await tgSend(BOT_TOKEN, row.tg_user_id, msgText, markup);
 
     if (result?.ok) {
-      await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
+      // sent_at уже проставлен атомарным UPDATE выше
       await sql`
         INSERT INTO events (id, lead_id, type, payload)
         VALUES (${genId('ev')}, ${row.lead_id}, 'message_sent',
                 ${JSON.stringify({ step, ds_type: dsType })}::jsonb)
       `;
+      await sql`UPDATE leads SET updated_at = NOW() WHERE id = ${row.lead_id}`;
       sent++;
 
-      // После последнего drip-сообщения (шаг 7) — помечаем лида как cold
       if (dsType === 'drip' && step === 7) {
         await sql`UPDATE leads SET status = 'cold' WHERE id = ${row.lead_id} AND status = 'active'`;
       }
     } else {
-      console.error(`Failed to send ${dsType} step ${step} to lead ${row.lead_id}`);
+      // Telegram вернул ошибку — откатываем sent_at чтобы попробовать снова
+      console.error(`Failed to send ${dsType} step ${step} to lead ${row.lead_id}:`, result?.description);
+      await sql`UPDATE drip_schedule SET sent_at = NULL WHERE id = ${row.drip_id}`;
       failed++;
     }
   }
