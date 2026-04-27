@@ -224,11 +224,13 @@
       
     .hero-promo-pill {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px; border-radius: 100px;
-      border: 0.5px solid rgba(201,168,76,0.4);
+      padding: 7px 16px; border-radius: 100px;
+      border: 0.5px solid rgba(201,168,76,.45);
       font-size: .72rem; color: #C9A84C;
-      letter-spacing: .8px; text-transform: uppercase;
-      margin-bottom: 24px;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 26px;
+      white-space: nowrap;
+      background: rgba(201,168,76,.06);
     }
     .hero-promo-dot {
       display: inline-block; width: 5px; height: 5px;
@@ -280,7 +282,7 @@
       border-radius: 100px; padding: 7px 16px;
     }
     .hero h1 {
-      font-size: clamp(1.7rem, 2.4vw, 2.15rem);
+      font-size: clamp(1.5rem, 2.1vw, 1.95rem);
       font-weight: 500; line-height: 1.2; letter-spacing: -.4px;
       max-width: 540px; margin: 0 0 18px;
       color: #ffffff;
@@ -331,8 +333,9 @@
 
     /* ── STATS ── */
     .stats-wrap {
-      background: var(--bg2);
-      padding: 0 24px;
+      background: #0a0a0a;
+      padding: 32px 24px 80px;
+      border-bottom: 1px solid rgba(201,168,76,.08);
     }
     .stats-inner {
       max-width: 960px; margin: 0 auto;
@@ -342,12 +345,12 @@
       padding: 40px 24px; text-align: center; position: relative;
     }
     .stat-num {
-      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; letter-spacing: -1px;
-      background: linear-gradient(135deg, #8B6914, #7A5810);
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -1px;
+      background: linear-gradient(135deg, #C9A84C, #b8944a);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       line-height: 1; margin-bottom: 6px;
     }
-    .stat-label { font-size: .88rem; color: var(--text2); line-height: 1.4; }
+    .stat-label { font-size: .88rem; color: rgba(255,255,255,.65); line-height: 1.4; }
     @media(max-width:680px){
       .stats-inner { grid-template-columns: repeat(2,1fr); }
       .stat-item:nth-child(2)::after { display: none; }
@@ -922,10 +925,10 @@
 </section>
 
 <!-- MANIFESTO -->
-<section class="manifesto-section" style="padding:60px 24px;background:var(--bg);text-align:center;">
+<section class="manifesto-section" style="padding:80px 24px;background:#0a0a0a;text-align:center;border-top:1px solid rgba(201,168,76,.08);">
   <div class="section-inner" style="max-width:780px;margin:0 auto;">
-    <p class="reveal" style="font-size:clamp(1.2rem,2.2vw,1.55rem);line-height:1.55;color:var(--text);font-weight:500;letter-spacing:-.3px;">
-      В 2026 году либо у тебя есть <strong style="color:var(--gold-text);">система продаж и команда</strong> — либо ты делаешь всё руками и упираешься в потолок дохода. Третьего нет.
+    <p class="reveal" style="font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.55;color:rgba(255,255,255,.85);font-weight:400;letter-spacing:-.2px;">
+      В 2026 году либо у тебя есть <strong style="color:#C9A84C;font-weight:500;">система продаж и команда</strong> — либо ты делаешь всё руками и упираешься в потолок дохода. Третьего нет.
     </p>
   </div>
 </section>
