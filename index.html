@@ -250,7 +250,8 @@
       -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,.5) 0%, transparent 80%);
               mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,.5) 0%, transparent 80%);
     }
-    .hero > * { position: relative; z-index: 2; }
+    .hero-inner { position: relative; z-index: 3; }
+    .hero::before { z-index: 2; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
@@ -268,6 +269,7 @@
       font-style: normal;
       color: var(--gold-text);
       font-weight: 700;
+      white-space: nowrap;
     }
     .hero-sub {
       font-size: clamp(.97rem, 1.3vw, 1.05rem); color: var(--text2);
