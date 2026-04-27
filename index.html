@@ -35,7 +35,7 @@
   <!-- /Yandex.Metrika counter -->
 
   <!-- Inter font — preconnect для скорости -->
-  <link rel="preload" as="image" href="shamil-cutout.png">
+  <link rel="preload" as="image" href="shamil-hero.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -146,10 +146,10 @@
     /* ── HERO 2-COLUMN LAYOUT ── */
     .hero-inner {
       display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 56px;
-      align-items: end;
-      max-width: 1180px;
+      grid-template-columns: 1fr 360px;
+      gap: 64px;
+      align-items: center;
+      max-width: 1080px;
       width: 100%;
       position: relative;
       z-index: 2;
@@ -164,18 +164,18 @@
       align-items: center;
     }
     .hero-photo-circle-big {
-      width: 100%; max-width: 560px; height: auto;
+      width: 100%; max-width: 460px; height: auto;
       position: relative; z-index: 1;
       border: none;
       display: flex; align-items: flex-end; justify-content: center;
-      margin-left: auto; margin-right: -40px;
+      margin-left: auto;
     }
     .hero-photo-circle-big img {
       width: 100%; height: auto;
       display: block;
     }
-    @media(max-width:768px){
-      .hero-photo-circle-big { max-width: 360px; margin: 0 auto; }
+    @media(max-width: 768px) {
+      .hero-photo-circle-big { max-width: 300px; margin: 0 auto; }
     }
     .hero-result-float {
       position: absolute;
@@ -807,6 +807,16 @@
 
 <div id="scroll-bar"></div>
 
+<!-- STICKY TOP BAR -->
+<div class="sticky-top-bar">
+  <div class="sticky-top-bar-inner">
+    <span class="sticky-top-bar-text">
+      <strong>30 дней до дохода от 300 000 ₽/мес</strong> · для digital-фрилансеров
+    </span>
+    <a href="/diagnostic.html" class="sticky-top-bar-cta">Найти свой барьер →</a>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
@@ -895,7 +905,7 @@
     <!-- ФОТО -->
     <div class="hero-photo-wrap">
           <div class="hero-photo-circle-big">
-        <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" />
+        <img src="shamil-hero.jpg" alt="Шамиль Мухаметзянов" style="" />
       </div>
     </div>
   </div>
