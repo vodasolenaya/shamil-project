@@ -267,7 +267,8 @@
       cursor: pointer; font-weight: 600; transition: all .15s;
     }
     .lead-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .lead-btn.danger:hover { border-color: #ef4444; color: #ef4444; }
+    .lead-btn.danger { color: rgba(239,68,68,.5); border-color: rgba(239,68,68,.15); }
+    .lead-btn.danger:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,.08); }
     .lead-btn.success { border-color: rgba(34,197,94,.4); color: var(--green); }
     .lead-btn.primary { background: var(--gold); color: #000; border-color: var(--gold); }
     .lead-btn.primary:hover { background: var(--gold2); border-color: var(--gold2); }
@@ -350,6 +351,31 @@
       cursor: pointer; transition: all .15s;
     }
     .filter-chip.active { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Next step hint ── */
+    .next-step {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.2);
+      border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;
+    }
+    .next-step-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .next-step-body { flex: 1; min-width: 0; }
+    .next-step-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .8px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 3px;
+    }
+    .next-step-text { font-size: .85rem; color: var(--text); line-height: 1.5; }
+
+    /* ── Action groups ── */
+    .lead-actions-wrap { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .lead-actions-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .lead-actions-sep {
+      height: 1px; background: var(--border); margin: 10px 0;
+    }
+    .lead-actions-danger { display: flex; gap: 8px; flex-wrap: wrap; }
+    .actions-hint {
+      font-size: .72rem; color: var(--text3); margin-bottom: 8px;
+    }
 
     /* ── No-bot badge ── */
     .no-bot-badge {
@@ -800,6 +826,34 @@
   // Детальные данные лидов кешируем при раскрытии карточки
   const leadDetails = {};
 
+  function nextStepHint(l) {
+    const name = (l.name || '').split(' ')[0] || 'он';
+    switch (l.status) {
+      case 'new':
+        return `${name} прошёл диагностику, но бот <b>не открыл</b>. Напиши ему вручную — в панели выше нажми «✨ Написать», скопируй и отправь из своего Telegram.`;
+      case 'active':
+        return `${name} открыл бота, drip идёт автоматически. Посмотри ответы диагностики — можешь сгенерировать черновик заранее.`;
+      case 'engaged':
+        return `${name} проявил интерес! Самое время отправить разбор. <b>Сгенерируй черновик ↓ → отредактируй → нажми «Отправить клиенту».</b>`;
+      case 'reached_out':
+        return `Разбор отправлен. Жди реакции. Если пишет — назначь созвон. Если молчит больше 3 дней — можно отметить «Не купит».`;
+      case 'call_scheduled':
+        return `Созвон назначен — всё готово. После звонка нажми <b>«✅ Созвон прошёл»</b> — статус обновится и через 24ч уйдёт follow-up.`;
+      case 'call_done':
+        return `Созвон прошёл. Выбери результат: нажми <b>«✅ Купил программу»</b> если купил — или <b>«❌ Не купит»</b> если нет.`;
+      case 'paid':
+        return `Оплатил 990₽ — разбор у него есть. Drip автоматически предложит уроки через 48ч. Следи за реакцией.`;
+      case 'converted':
+        return `Конвертирован в программу. Ничего делать не нужно — следи за процессом обучения.`;
+      case 'lost':
+        return `Помечен как потерянный. Воронка остановлена. Можно удалить из базы.`;
+      case 'cold':
+        return `Давно не отвечает. Попробуй отправить что-то личное через «Заготовки» — или отметь «❌ Не купит».`;
+      default:
+        return `Посмотри ответы на диагностику и выбери следующий шаг.`;
+    }
+  }
+
   function renderLeadCard(l) {
     const initials = (l.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
     const date     = new Date(l.created_at);
@@ -863,23 +917,34 @@
           </div>
           ${answers ? `<div class="answers-section"><div class="answers-title">📝 Ответы на диагностику</div>${answers}</div>` : ''}
 
-          <!-- copy-for-claude removed — используй кнопку «Сгенерировать черновик» -->
+          <!-- NEXT STEP HINT -->
+          <div class="next-step" id="nshint-${l.id}">
+            <div class="next-step-icon">→</div>
+            <div class="next-step-body">
+              <div class="next-step-label">Следующий шаг</div>
+              <div class="next-step-text">${nextStepHint(l)}</div>
+            </div>
+          </div>
 
           <!-- DIRECT-ASSIST: загружается при открытии -->
           <div id="da-${l.id}" style="display:none;">
             <div class="da-section">
               <div class="da-section-title">🎯 Рекомендованный кейс</div>
+              <div class="actions-hint">Кейс ученика с похожей ситуацией — можно упомянуть в разборе</div>
               <div id="da-case-${l.id}"><div class="loading" style="padding:12px 0;"><div class="spinner" style="width:16px;height:16px;"></div></div></div>
             </div>
             <div class="da-section">
               <div class="da-section-title">✉️ Заготовки первого сообщения</div>
+              <div class="actions-hint">Готовые шаблоны — раскрой, отредактируй и отправь через бот</div>
               <div class="template-cards" id="da-tpl-${l.id}"></div>
             </div>
             <div class="da-section">
-              <div class="da-section-title">✍️ Черновик ответа</div>
+              <div class="da-section-title">✍️ Черновик разбора</div>
+              <div class="actions-hint">Нажми «Сгенерировать» → отредактируй → отправь клиенту через бот</div>
               <div class="ai-block" id="da-ai-${l.id}">
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
                   <button class="lead-btn" style="background:rgba(99,102,241,.15);color:#a5b4fc;border-color:rgba(99,102,241,.3);"
+                    title="Создаст персональный черновик разбора на основе ответов диагностики"
                     onclick="generateInAdmin('${l.id}',event)">
                     ✨ Сгенерировать черновик
                   </button>
@@ -892,20 +957,24 @@
                   onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft || '')}</textarea>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
                   ${sendOrManualBtn}
-                  <button class="lead-btn" onclick="copyTemplate('draft-${l.id}',event)">Скопировать</button>
+                  <button class="lead-btn" title="Копирует текст разбора в буфер обмена"
+                    onclick="copyTemplate('draft-${l.id}',event)">Скопировать текст</button>
                 </div>
               </div>
             </div>
             <div class="da-section">
-              <div class="da-section-title">📅 Назначить созвон</div>
+              <div class="da-section-title">📅 Созвон</div>
+              <div class="actions-hint">После созвона нажми «Созвон прошёл» — это отметит статус и запустит follow-up</div>
               ${l.call_scheduled_at && l.status !== 'call_done'
                 ? `<div style="font-size:.85rem;color:var(--gold);margin-bottom:12px;">
-                     Созвон назначен: ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })} МСК
-                     · <a href="${escHtml(l.call_zoom_url || '#')}" target="_blank" style="color:var(--gold);">Zoom</a>
+                     Назначен: ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })} МСК
+                     · <a href="${escHtml(l.call_zoom_url || '#')}" target="_blank" style="color:var(--gold);">Открыть Zoom →</a>
                    </div>
                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                     <button class="lead-btn success" onclick="markCallCompleted('${l.id}',event)">✅ Созвон прошёл</button>
-                     <button class="lead-btn" onclick="cancelCall('${l.id}',event)">Отменить</button>
+                     <button class="lead-btn success" title="Отмечает созвон как состоявшийся и создаёт follow-up через 24 часа"
+                       onclick="markCallCompleted('${l.id}',event)">✅ Созвон прошёл</button>
+                     <button class="lead-btn" title="Удаляет созвон и все напоминания"
+                       onclick="cancelCall('${l.id}',event)">Отменить созвон</button>
                    </div>`
                 : `<div class="call-form" id="call-form-${l.id}">
                      <div class="call-form-row">
@@ -922,19 +991,52 @@
                        <label class="call-label">Заметка (опционально)</label>
                        <input type="text" class="call-input" id="call-note-${l.id}" placeholder="О чём говорим..." />
                      </div>
-                     <button class="lead-btn primary" onclick="scheduleCall('${l.id}',event)" style="align-self:flex-start;">Назначить созвон →</button>
+                     <button class="lead-btn primary" title="Создаёт созвон, шлёт напоминание клиенту за 1 час"
+                       onclick="scheduleCall('${l.id}',event)" style="align-self:flex-start;">Назначить созвон →</button>
                    </div>`
               }
             </div>
           </div>
 
-          <div class="lead-actions">
-            ${!['converted','paid'].includes(l.status) ? `<button class="lead-btn success" onclick="leadPostAction('${l.id}','convert',event)">✅ Конвертирован</button>` : ''}
-            ${l.status !== 'paid' ? `<button class="lead-btn success" onclick="leadPostAction('${l.id}','paid',event)" style="color:#4ade80;">💰 Оплатил</button>` : ''}
-            <button class="lead-btn" onclick="leadPostAction('${l.id}','pause',event)">⏸ Пауза</button>
-            <button class="lead-btn" onclick="leadPostAction('${l.id}','resume',event)">▶ Продолжить</button>
-            <button class="lead-btn" onclick="leadPostAction('${l.id}','lost',event)">❌ Потерян</button>
-            <button class="lead-btn danger" onclick="leadPostAction('${l.id}','delete',event)">🗑 Удалить</button>
+          <!-- ACTION GROUPS -->
+          <div class="lead-actions-wrap">
+            <div class="actions-hint">Итог работы с лидом</div>
+            <div class="lead-actions-group">
+              ${!['converted','paid','call_scheduled','call_done'].includes(l.status)
+                ? `<button class="lead-btn success"
+                     title="Купил основную программу (не 990₽ — именно курс/наставничество)"
+                     onclick="leadPostAction('${l.id}','convert',event)">✅ Купил программу</button>`
+                : ''}
+              ${!['paid','converted'].includes(l.status)
+                ? `<button class="lead-btn success" style="color:#4ade80;"
+                     title="Оплатил 990₽ за письменный разбор (если Tinkoff не сработал)"
+                     onclick="leadPostAction('${l.id}','paid',event)">💰 Отметить оплату 990₽</button>`
+                : ''}
+            </div>
+
+            <div class="lead-actions-sep"></div>
+
+            <div class="actions-hint">Управление drip-ботом</div>
+            <div class="lead-actions-group">
+              <button class="lead-btn"
+                title="Ставит drip-бот на паузу — сообщения перестанут приходить пока не нажмёшь «Возобновить»"
+                onclick="leadPostAction('${l.id}','pause',event)">⏸ Пауза бота</button>
+              <button class="lead-btn"
+                title="Возобновляет drip-бот после паузы — сообщения продолжат приходить по расписанию"
+                onclick="leadPostAction('${l.id}','resume',event)">▶ Возобновить бота</button>
+            </div>
+
+            <div class="lead-actions-sep"></div>
+
+            <div class="actions-hint" style="color:rgba(239,68,68,.5);">Необратимые действия</div>
+            <div class="lead-actions-danger">
+              <button class="lead-btn danger"
+                title="Помечает лида как потерянного — воронка останавливается, лид остаётся в базе"
+                onclick="leadPostAction('${l.id}','lost',event)">❌ Не купит</button>
+              <button class="lead-btn danger"
+                title="Удаляет лида из базы полностью — вся история и расписание пропадут"
+                onclick="leadPostAction('${l.id}','delete',event)">🗑 Удалить из базы</button>
+            </div>
           </div>
         </div>
       </div>
