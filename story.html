@@ -31,10 +31,45 @@
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg); color: var(--text);
+      background:
+        radial-gradient(ellipse 50% 40% at 90% 5%, rgba(201,168,76,.10) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 5% 95%, rgba(201,168,76,.06) 0%, transparent 65%),
+        var(--bg);
+      color: var(--text);
       line-height: 1.7; overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
+    .story-bills {
+      position: fixed; inset: 0; pointer-events: none; overflow: hidden;
+      z-index: 0; opacity: .55;
+    }
+    .story-bills .hero-bill {
+      position: absolute;
+      width: 110px; height: 56px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #2f5e3d 0%, #3d7a4f 45%, #1d3d27 100%);
+      box-shadow: inset 0 0 0 1px rgba(160,220,180,.22), inset -2px -2px 8px rgba(0,0,0,.35);
+    }
+    .story-bills .hero-bill::before, .story-bills .hero-bill::after {
+      content: ''; position: absolute;
+      width: 14px; height: 14px;
+      border: 1px solid rgba(0,0,0,.45); border-radius: 50%;
+    }
+    .story-bills .hero-bill::before { top: 6px; left: 6px; }
+    .story-bills .hero-bill::after { bottom: 6px; right: 6px; }
+    .story-bills .hero-bill .num {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-weight: 800; font-size: 22px; color: rgba(180,230,200,.85);
+      letter-spacing: -1px;
+    }
+    .story-bills .hero-bill.b1 { top: 8%;  left: 3%;  transform: rotate(-14deg); opacity: .22; }
+    .story-bills .hero-bill.b2 { top: 25%; right: 5%; transform: rotate(8deg); opacity: .18; }
+    .story-bills .hero-bill.b3 { top: 50%; left: 4%;  transform: rotate(15deg) scale(.75); opacity: .15; }
+    .story-bills .hero-bill.b4 { top: 65%; right: 3%; transform: rotate(-8deg) scale(.85); opacity: .16; }
+    .story-bills .hero-bill.b5 { top: 88%; left: 8%;  transform: rotate(20deg) scale(.7); opacity: .14; }
+    .story-bills .hero-bill.b6 { top: 80%; right: 6%; transform: rotate(-12deg) scale(.8); opacity: .15; }
+    nav, .article-wrap { position: relative; z-index: 1; }
 
     /* ── NAV ── */
     nav {
@@ -51,10 +86,9 @@
     }
     .nav-logo-dot {
       width: 28px; height: 28px; border-radius: 50%;
-      background: #0d0d0d;
+      background: linear-gradient(135deg, #C9A84C, #8B6914);
       display: flex; align-items: center; justify-content: center;
-      font-size: .9rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,.18);
+      font-size: .85rem; flex-shrink: 0;
     }
     .nav-right { display: flex; align-items: center; gap: 20px; }
     .nav-back {
@@ -177,9 +211,18 @@
 </head>
 <body>
 
+<div class="story-bills">
+  <div class="hero-bill b1"><span class="num">₽</span></div>
+  <div class="hero-bill b2"><span class="num">₽</span></div>
+  <div class="hero-bill b3"><span class="num">₽</span></div>
+  <div class="hero-bill b4"><span class="num">₽</span></div>
+  <div class="hero-bill b5"><span class="num">₽</span></div>
+  <div class="hero-bill b6"><span class="num">₽</span></div>
+</div>
+
 <nav>
   <a href="/" class="nav-logo">
-    <div class="nav-logo-dot">🧲</div>
+    <div class="nav-logo-dot"></div>
     Искусство продаж
   </a>
   <div class="nav-right">
