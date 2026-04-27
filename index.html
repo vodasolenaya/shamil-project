@@ -1603,17 +1603,12 @@
     .faq-item.open .faq-q::after { transform: rotate(45deg); }
     .faq-a {
       max-height: 0; overflow: hidden;
-      transition: max-height .26s cubic-bezier(0.4,0,0.2,1), padding .2s ease;
+      transition: max-height .26s cubic-bezier(0.4,0,0.2,1);
       font-size: .95rem; color: rgba(255,255,255,.7);
       line-height: 1.65;
-      padding: 0 26px;
+      padding: 0 32px;
     }
-    .faq-item.open .faq-a {
-      padding-top: 32px;
-      padding-right: 32px;
-      padding-bottom: 32px;
-      padding-left: 32px;
-    }
+    .faq-item.open .faq-a { padding: 32px !important; }
     .faq-a a { color: #C9A84C; text-decoration: none; }
     .faq-a a:hover { text-decoration: underline; }
 
