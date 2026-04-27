@@ -417,6 +417,36 @@
     .about + .section { border-top: none; }
 
     
+    
+    .program-format {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 40px;
+    }
+    .format-pill {
+      background: rgba(201,168,76,.04);
+      border: 1px solid rgba(201,168,76,.18);
+      border-radius: 14px;
+      padding: 22px 24px;
+      display: flex; align-items: baseline;
+      gap: 14px;
+    }
+    .pill-num {
+      font-size: 1.7rem; font-weight: 600; line-height: 1;
+      color: #C9A84C; letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+    .pill-label {
+      font-size: .92rem; font-weight: 500; color: #fff;
+    }
+    .pill-sub {
+      font-size: .78rem; color: rgba(255,255,255,.5);
+      line-height: 1.4; margin-left: auto; text-align: right;
+    }
+    @media (max-width: 768px) {
+      .program-format { grid-template-columns: 1fr; gap: 12px; }
+      .pill-sub { margin-left: 12px; text-align: left; }
+    }
+
     /* ── PAIN ── */
     .pain-section {
       background: #0c0c0c;
@@ -739,6 +769,72 @@
       .stage-name { font-size: 1.3rem; }
       .stage-body { grid-template-columns: 1fr; gap: 22px; }
       .stage-head { flex-wrap: wrap; gap: 16px; }
+    }
+
+    
+    /* ── NOT (Чего не будет) ── */
+    .not-section {
+      background: #0c0c0c;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .not-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .not-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .not-inner {
+      position: relative; z-index: 2;
+      max-width: 1080px; margin: 0 auto;
+    }
+    .not-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .not-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 14px;
+    }
+    .not-sub {
+      font-size: 1rem; color: rgba(255,255,255,.6);
+      text-align: center; margin: 0 auto 56px;
+      max-width: 520px;
+    }
+    .not-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .not-card {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 32px 30px;
+      transition: border-color .25s;
+    }
+    .not-card:hover { border-color: rgba(220,80,80,.25); }
+    .not-tag {
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(220,80,80,.85);
+      margin-bottom: 14px;
+    }
+    .not-card h3 {
+      font-size: 1.1rem; font-weight: 500; line-height: 1.3;
+      color: #fff; margin: 0 0 10px; letter-spacing: -.2px;
+    }
+    .not-card p {
+      font-size: .92rem; line-height: 1.6;
+      color: rgba(255,255,255,.65); margin: 0;
+    }
+    @media (max-width: 768px) {
+      .not-section { padding: 72px 20px; }
+      .not-grid { grid-template-columns: 1fr; }
     }
 
     /* ── CASES ── */
@@ -1183,6 +1279,54 @@
   </div>
 </section>
 
+<!-- ЧЕГО НЕ БУДЕТ -->
+<section class="not-section">
+  <div class="not-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="not-inner">
+    <div class="not-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ЧЕСТНО</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="not-title">Чего НЕ будет в программе</h2>
+    <p class="not-sub">Чтобы ты сразу понимал, на что подписываешься.</p>
+
+    <div class="not-grid">
+      <div class="not-card reveal">
+        <div class="not-tag">— НЕТ</div>
+        <h3>Манипулятивных техник продаж</h3>
+        <p>Давление, ложная срочность, дефицит — это разрушение доверия. Закрываем из ценности, а не из страха потери.</p>
+      </div>
+      <div class="not-card reveal reveal-delay-1">
+        <div class="not-tag">— НЕТ</div>
+        <h3>Обещаний результата без действия</h3>
+        <p>Если не делаешь — никакая программа не даст 300к. Это правда, без неё нечестно.</p>
+      </div>
+      <div class="not-card reveal">
+        <div class="not-tag">— НЕТ</div>
+        <h3>Абстрактного «работай над собой»</h3>
+        <p>Только конкретные инструменты под твою ситуацию: разбор сделок, переговоры, целеполагание.</p>
+      </div>
+      <div class="not-card reveal reveal-delay-1">
+        <div class="not-tag">— НЕТ</div>
+        <h3>Курса для нулёвых с нуля</h3>
+        <p>Программа усиления сильного — для тех, у кого уже есть клиенты, опыт, поток. Если только начинаешь — приходи позже.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 <!-- STATS -->
 <section class="stats-section">
   <div class="stats-inner">
@@ -1439,35 +1583,17 @@
       </div>
 
     </div>
-  </div>
-</section>
 
-<!-- FORMAT -->
-<section class="section format-section">
-  <div class="section-inner">
-    <div class="section-label reveal">Формат</div>
-    <h2 class="section-title reveal">Как проходит программа</h2>
-    <p class="section-sub reveal">Полностью онлайн, с живым присутствием Шамиля.</p>
-
-    <div class="format-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:40px auto 0;">
-      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:10px;">📅</div>
-        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">30 дней</h3>
-        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Длительность программы. Старт — после диагностики и созвона.</p>
-      </div>
-      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
-        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">1-3 созвона в неделю</h3>
-        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Живые Zoom-разборы с Шамилём плюс работа в группе.</p>
-      </div>
-      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
-        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">Ежедневные отчёты</h3>
-        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Шамиль видит каждое твоё действие — поправляет где застрял.</p>
-      </div>
+    <div class="program-format">
+      <div class="format-pill"><span class="pill-num">30</span><span class="pill-label">дней</span><span class="pill-sub">длительность программы</span></div>
+      <div class="format-pill"><span class="pill-num">1–3</span><span class="pill-label">созвона</span><span class="pill-sub">в неделю · Zoom-разборы</span></div>
+      <div class="format-pill"><span class="pill-num">7/7</span><span class="pill-label">отчёты</span><span class="pill-sub">ежедневно · Шамиль видит каждое действие</span></div>
     </div>
+
   </div>
 </section>
+
+
 
 <!-- ABOUT -->
 <section class="section about" id="about">
@@ -1659,37 +1785,7 @@
   </div>
 </section>
 
-<!-- ЧТО МЫ НЕ ДЕЛАЕМ -->
-<section class="section" style="background:var(--bg2);">
-  <div class="section-inner">
-    <div class="section-label reveal">Честно</div>
-    <h2 class="section-title reveal">Чего НЕ будет в программе</h2>
-    <p class="section-sub reveal">Чтобы ты сразу понимал, на что подписываешься.</p>
 
-    <div class="not-grid reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:40px auto 0;">
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Манипулятивных техник продаж</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Давление, ложная срочность, дефицит — это разрушение доверия. Закрываем из ценности, а не из страха потери.</p>
-      </div>
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Обещаний результата без действия</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Если не делаешь — никакая программа не даст 300к. Это правда, без неё нечестно.</p>
-      </div>
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Абстрактного «работай над собой»</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Только конкретные инструменты под твою ситуацию: разбор сделок, переговоры, целеполагание.</p>
-      </div>
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Курса для нулёвых с нуля</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Программа усиления сильного — для тех, у кого уже есть клиенты, опыт, поток. Если только начинаешь — приходи позже.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- AFTER DIAGNOSTIC — what happens next, no prices -->
 <section class="section" id="after" style="background:var(--bg2);">
