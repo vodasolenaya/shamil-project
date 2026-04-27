@@ -146,10 +146,10 @@
     /* ── HERO 2-COLUMN LAYOUT ── */
     .hero-inner {
       display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 64px;
-      align-items: center;
-      max-width: 1080px;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 56px;
+      align-items: end;
+      max-width: 1180px;
       width: 100%;
       position: relative;
       z-index: 2;
@@ -164,14 +164,18 @@
       align-items: center;
     }
     .hero-photo-circle-big {
-      width: 420px; height: auto;
+      width: 100%; max-width: 560px; height: auto;
       position: relative; z-index: 1;
       border: none;
       display: flex; align-items: flex-end; justify-content: center;
+      margin-left: auto; margin-right: -40px;
     }
     .hero-photo-circle-big img {
       width: 100%; height: auto;
       display: block;
+    }
+    @media(max-width:768px){
+      .hero-photo-circle-big { max-width: 360px; margin: 0 auto; }
     }
     .hero-result-float {
       position: absolute;
@@ -802,16 +806,6 @@
 <body>
 
 <div id="scroll-bar"></div>
-
-<!-- STICKY TOP BAR -->
-<div class="sticky-top-bar">
-  <div class="sticky-top-bar-inner">
-    <span class="sticky-top-bar-text">
-      <strong>30 дней до дохода от 300 000 ₽/мес</strong> · для digital-фрилансеров
-    </span>
-    <a href="/diagnostic.html" class="sticky-top-bar-cta">Найти свой барьер →</a>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
