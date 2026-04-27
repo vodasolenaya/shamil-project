@@ -171,21 +171,7 @@
     .btn-primary:hover .btn-primary-arrow { transform: translateX(2px); }
 
     
-    /* ── BUTTON SHEEN (Сургай рекомендация) ── */
-    a.btn-primary { overflow: hidden; }
-    a.btn-primary::before {
-      content: ''; position: absolute;
-      top: 0; left: -120%; width: 55%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-      transform: skewX(-20deg);
-      animation: btnSheen 4.5s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes btnSheen {
-      0%, 60% { left: -120%; }
-      100%    { left: 200%; }
-    }
-    a.btn-primary > * { position: relative; z-index: 1; }
+    /* sheen animation removed — was glowing on whole block */
 
     /* ── HERO (text-left, photo-right, 3 value-cards) ── */
     .hero {
@@ -1194,6 +1180,8 @@
     .footer-logo-dot {
       width: 26px; height: 26px; border-radius: 50%;
       background: linear-gradient(135deg, #C9A84C, #8B6914);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; flex-shrink: 0;
     }
     .footer-links {
       display: flex; flex-wrap: wrap; gap: 24px 32px;
@@ -2591,7 +2579,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo-dot"></div>
+      <div class="footer-logo-dot">🧲</div>
       <span>Искусство продаж</span>
     </div>
 
