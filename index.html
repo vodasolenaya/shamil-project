@@ -287,31 +287,80 @@
       .hero-social-proof { justify-content: center; }
     }
 
-    /* ── STATS ── */
-    .stats-wrap {
-      background: #0a0a0a;
-      padding: 32px 24px 80px;
-      border-bottom: 1px solid rgba(201,168,76,.08);
+    
+    /* ── MANIFESTO ── */
+    .manifesto-section {
+      background: #0d0d0d;
+      padding: 96px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .manifesto-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.4), transparent);
+    }
+    .manifesto-inner { max-width: 820px; margin: 0 auto; }
+    .manifesto-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 32px;
+    }
+    .manifesto-line {
+      display: inline-block; width: 40px; height: 1px;
+      background: rgba(201,168,76,.35);
+    }
+    .manifesto-text {
+      font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+      line-height: 1.55; color: rgba(255,255,255,.88);
+      font-weight: 400; letter-spacing: -.25px;
+      max-width: 760px; margin: 0 auto;
+    }
+    .manifesto-text strong { color: #C9A84C; font-weight: 500; }
+
+/* ── STATS ── */
+    .stats-section {
+      background: #080808;
+      padding: 80px 24px;
+      position: relative;
+    }
+    .stats-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
     }
     .stats-inner {
-      max-width: 960px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4,1fr);
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
     }
     .stat-item {
-      padding: 40px 24px; text-align: center; position: relative;
+      flex: 1; text-align: center; padding: 8px;
+    }
+    .stat-divider {
+      width: 1px; height: 60px;
+      background: linear-gradient(180deg, transparent, rgba(201,168,76,.2), transparent);
     }
     .stat-num {
-      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -1px;
-      background: linear-gradient(135deg, #C9A84C, #b8944a);
+      font-size: clamp(1.6rem, 3.2vw, 2.5rem); font-weight: 600; letter-spacing: -1.2px;
+      background: linear-gradient(135deg, #d8b860, #C9A84C 50%, #8B6914);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      line-height: 1; margin-bottom: 6px;
+      line-height: 1; margin-bottom: 12px;
     }
-    .stat-label { font-size: .88rem; color: rgba(255,255,255,.65); line-height: 1.4; }
-    @media(max-width:680px){
-      .stats-inner { grid-template-columns: repeat(2,1fr); }
-      .stat-item:nth-child(2)::after { display: none; }
-      .stat-item:nth-child(odd):not(:last-child)::after { display: none; }
-      .stat-item:nth-child(1),.stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+    .stat-num .stat-unit {
+      font-size: .55em; font-weight: 500; opacity: .85;
+    }
+    .stat-num .stat-arrow {
+      font-size: .8em; opacity: .7; margin: 0 4px;
+    }
+    .stat-label {
+      font-size: .85rem; color: rgba(255,255,255,.62);
+      line-height: 1.5; letter-spacing: .1px;
+    }
+    @media(max-width: 768px){
+      .stats-inner { flex-wrap: wrap; gap: 20px 12px; }
+      .stat-item { flex: 1 1 calc(50% - 6px); }
+      .stat-divider { display: none; }
     }
 
     /* ── SECTIONS ── */
@@ -856,35 +905,43 @@
 </section>
 
 <!-- MANIFESTO -->
-<section class="manifesto-section" style="padding:80px 24px;background:#0a0a0a;text-align:center;border-top:1px solid rgba(201,168,76,.08);">
-  <div class="section-inner" style="max-width:780px;margin:0 auto;">
-    <p class="reveal" style="font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.55;color:rgba(255,255,255,.85);font-weight:400;letter-spacing:-.2px;">
-      В 2026 году либо у тебя есть <strong style="color:#C9A84C;font-weight:500;">система продаж и команда</strong> — либо ты делаешь всё руками и упираешься в потолок дохода. Третьего нет.
+<section class="manifesto-section">
+  <div class="manifesto-inner">
+    <div class="manifesto-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>МАНИФЕСТ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <p class="manifesto-text reveal">
+      В 2026 году либо у тебя есть <strong>система продаж и команда</strong> — либо ты делаешь всё руками и упираешься в потолок дохода. Третьего нет.
     </p>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-wrap">
+<section class="stats-section">
   <div class="stats-inner">
     <div class="stat-item reveal">
       <div class="stat-num" data-count="2" data-prefix="x">x2</div>
-      <div class="stat-label">рост дохода за месяц</div>
+      <div class="stat-label">рост дохода<br>за месяц</div>
     </div>
+    <div class="stat-divider"></div>
     <div class="stat-item reveal reveal-delay-1">
       <div class="stat-num">80+</div>
-      <div class="stat-label">фрилансеров прошли программу</div>
+      <div class="stat-label">фрилансеров<br>прошли программу</div>
     </div>
+    <div class="stat-divider"></div>
     <div class="stat-item reveal reveal-delay-2">
-      <div class="stat-num">1 млн/мес</div>
-      <div class="stat-label">лучшие кейсы учеников</div>
+      <div class="stat-num">1 млн<span class="stat-unit">/мес</span></div>
+      <div class="stat-label">лучшие кейсы<br>учеников</div>
     </div>
+    <div class="stat-divider"></div>
     <div class="stat-item reveal reveal-delay-3">
-      <div class="stat-num">100к→1.5млн</div>
-      <div class="stat-label">личный рост Шамиля за 1.5 года</div>
+      <div class="stat-num">100к<span class="stat-arrow">→</span>1.5млн</div>
+      <div class="stat-label">личный рост<br>Шамиля за 1.5 года</div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- PAIN -->
 <section class="section pain">
