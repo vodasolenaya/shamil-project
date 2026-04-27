@@ -35,7 +35,7 @@
   <!-- /Yandex.Metrika counter -->
 
   <!-- Inter font — preconnect для скорости -->
-  <link rel="preload" as="image" href="shamil-hero.jpg">
+  <link rel="preload" as="image" href="shamil-cutout.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -221,15 +221,30 @@
     @media(max-width: 768px) { .hero { padding-top: 120px; } }
     @media(max-width: 680px) {
       .hero { padding-top: 100px; }
-      .hero h1 { font-size: 1.85rem; letter-spacing: -1px; line-height: 1.12; }
+      
+    .hero-promo-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 100px;
+      border: 0.5px solid rgba(201,168,76,0.4);
+      font-size: .72rem; color: #C9A84C;
+      letter-spacing: .8px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-promo-dot {
+      display: inline-block; width: 5px; height: 5px;
+      border-radius: 50%; background: #C9A84C;
+      animation: heroPulse 2s ease-in-out infinite;
+    }
+    @keyframes heroPulse { 0%,100% {opacity:1;transform:scale(1)} 50% {opacity:.5;transform:scale(1.3)} }
+    .hero h1 { font-size: 1.85rem; letter-spacing: -1px; line-height: 1.12; }
       .hero-sub { font-size: .95rem; margin-bottom: 32px; }
     }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
+      min-height: auto;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: left; padding: 140px 24px 80px;
+      text-align: left; padding: 100px 24px 56px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -265,9 +280,9 @@
       border-radius: 100px; padding: 7px 16px;
     }
     .hero h1 {
-      font-size: clamp(1.85rem, 2.8vw, 2.5rem);
-      font-weight: 700; line-height: 1.2; letter-spacing: -.6px;
-      max-width: 620px; margin: 0 0 22px;
+      font-size: clamp(1.7rem, 2.4vw, 2.15rem);
+      font-weight: 500; line-height: 1.2; letter-spacing: -.4px;
+      max-width: 540px; margin: 0 0 18px;
       color: #ffffff;
       text-shadow: none;
     }
@@ -807,16 +822,6 @@
 
 <div id="scroll-bar"></div>
 
-<!-- STICKY TOP BAR -->
-<div class="sticky-top-bar">
-  <div class="sticky-top-bar-inner">
-    <span class="sticky-top-bar-text">
-      <strong>30 дней до дохода от 300 000 ₽/мес</strong> · для digital-фрилансеров
-    </span>
-    <a href="/diagnostic.html" class="sticky-top-bar-cta">Найти свой барьер →</a>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
@@ -872,6 +877,10 @@
   <div class="hero-inner">
     <!-- ТЕКСТ -->
     <div class="hero-text">
+      <div class="hero-promo-pill">
+        <span class="hero-promo-dot"></span>
+        <span>30 дней до дохода 300 000 ₽/мес</span>
+      </div>
       <h1>Узнайте, как фрилансеру выйти на <em>доход от 300 000 ₽/мес</em> через систему продаж и делегирования</h1>
 
       <p class="hero-sub">
@@ -905,7 +914,7 @@
     <!-- ФОТО -->
     <div class="hero-photo-wrap">
           <div class="hero-photo-circle-big">
-        <img src="shamil-hero.jpg" alt="Шамиль Мухаметзянов" style="" />
+        <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" style="" />
       </div>
     </div>
   </div>
@@ -1131,7 +1140,7 @@
     <div class="about-inner">
       <div class="about-photo-wrap reveal">
         <div class="about-photo-circle">
-          <img src="shamil-hero.jpg" alt="Шамиль" style="" />
+          <img src="shamil-cutout.png" alt="Шамиль" style="" />
         </div>
         <div class="about-name">Шамиль Мухаметзянов</div>
         <div class="about-role">Эксперт по продажам для фрилансеров</div>
