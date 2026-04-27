@@ -2708,7 +2708,9 @@
       });
       if (!isOpen) {
         item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
+        // Force reflow so padding changes apply before measuring
+        void answer.offsetHeight;
+        answer.style.maxHeight = (answer.scrollHeight + 40) + 'px';
       }
     });
   });
