@@ -35,7 +35,7 @@
   <!-- /Yandex.Metrika counter -->
 
   <!-- Inter font — preconnect для скорости -->
-  <link rel="preload" as="image" href="shamil-hero.jpg">
+  <link rel="preload" as="image" href="shamil-cutout.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -164,23 +164,14 @@
       align-items: center;
     }
     .hero-photo-circle-big {
-      width: 360px; height: 480px;
+      width: 420px; height: auto;
       position: relative; z-index: 1;
       border: none;
-      -webkit-mask-image:
-        radial-gradient(ellipse 70% 75% at 50% 42%, #000 40%, transparent 92%),
-        linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
-      -webkit-mask-composite: source-in;
-              mask-image:
-        radial-gradient(ellipse 70% 75% at 50% 42%, #000 40%, transparent 92%),
-        linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
-      mask-composite: intersect;
+      display: flex; align-items: flex-end; justify-content: center;
     }
     .hero-photo-circle-big img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 12%;
+      width: 100%; height: auto;
       display: block;
-      filter: brightness(0.92) contrast(1.12);
     }
     .hero-result-float {
       position: absolute;
@@ -910,7 +901,7 @@
     <!-- ФОТО -->
     <div class="hero-photo-wrap">
           <div class="hero-photo-circle-big">
-        <img src="shamil-hero.jpg" alt="Шамиль Мухаметзянов" style="" />
+        <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" />
       </div>
     </div>
   </div>
