@@ -24,7 +24,9 @@ CREATE TABLE IF NOT EXISTS drip_schedule (
   send_at      TIMESTAMPTZ,         -- время отправки UTC
   sent_at      TIMESTAMPTZ,         -- NULL = не отправлено
   paused       BOOLEAN DEFAULT FALSE,
-  message_key  TEXT                 -- "msg_0" .. "msg_7"
+  message_key  TEXT,                -- "msg_0" .. "msg_7"
+  type         TEXT DEFAULT 'drip', -- 'drip' | 'call_reminder' | 'call_followup'
+  UNIQUE (lead_id, step, type)
 );
 
 CREATE TABLE IF NOT EXISTS events (

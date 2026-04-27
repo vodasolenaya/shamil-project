@@ -62,6 +62,24 @@ export default async function handler(req, res) {
     try { sql = getDb(); } catch(e) { console.error('DB init error:', e.message); }
   }
 
+  // ── Дедупликация по update_id ─────────────────────────────────────────────
+  if (update.update_id && sql) {
+    try {
+      await sql`
+        INSERT INTO events (id, lead_id, type, payload)
+        VALUES (
+          ${'tg_upd_' + update.update_id},
+          NULL,
+          'tg_update',
+          ${JSON.stringify({ update_id: update.update_id })}::jsonb
+        )
+      `;
+    } catch(e) {
+      // Дубликат — этот update уже обработан
+      return res.status(200).end();
+    }
+  }
+
   // ── /voice_for_<lead_id> — Шамиль привязывает голосовое к лиду ──────────
   // Шамиль пишет голосовое с подписью /voice_for_abc123 в свой личный чат с ботом
   if (text.startsWith('/voice_for_')) {

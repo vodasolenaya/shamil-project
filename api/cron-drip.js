@@ -73,6 +73,7 @@ export default async function handler(req, res) {
       AND ds.send_at <= NOW()
       AND l.status NOT IN ('unsubscribed', 'converted', 'paid', 'lost')
       AND l.tg_user_id IS NOT NULL
+      AND (ds.type != 'drip' OR ds.step > 0)
     ORDER BY ds.send_at ASC
     LIMIT 100
   `;

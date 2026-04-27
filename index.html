@@ -102,7 +102,7 @@
       .sticky-top-bar-inner { gap: 12px; }
       .sticky-top-bar-cta { padding: 6px 12px; font-size: .76rem; }
       nav { top: 38px; }
-      .hero { padding-top: 118px; }
+      .hero { padding-top: 100px; }
     }
 
     /* ── NAV ── */
@@ -223,10 +223,11 @@
     }
 
     /* ── HERO ── */
+    @media(max-width:768px){ .hero { padding-top: 120px; } }
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: left; padding: 122px 24px 80px;
+      text-align: left; padding: 140px 24px 80px;
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -317,39 +318,6 @@
     .hero-proof-text { font-size: .88rem; color: var(--text2); }
     .hero-proof-text strong { color: var(--gold-text); }
 
-    /* ── STICKY BAR ── */
-    .sticky-bar {
-      position: fixed; top: 64px; left: 0; right: 0; z-index: 89;
-      background: #ffffff;
-      border-bottom: 1px solid rgba(0,0,0,.08);
-      padding: 10px 40px;
-      transform: translateY(-110%);
-      transition: transform .4s cubic-bezier(.16,1,.3,1);
-      pointer-events: none;
-    }
-    .sticky-bar.show { transform: translateY(0); pointer-events: auto; }
-    .sticky-inner {
-      max-width: 960px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    }
-    .sticky-left { display: flex; flex-direction: column; gap: 2px; }
-    .sticky-title { font-size: .9rem; font-weight: 700; color: var(--text); }
-    .sticky-sub { font-size: .78rem; color: var(--text2); }
-    .sticky-cta {
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; font-weight: 800; font-size: .85rem;
-      padding: 10px 22px; border-radius: 8px; text-decoration: none;
-      white-space: nowrap; flex-shrink: 0;
-      transition: opacity .2s, transform .2s;
-    }
-    .sticky-cta:hover { opacity: .9; transform: translateY(-1px); }
-    @media(max-width:680px){
-      .sticky-bar { padding: 10px 16px; }
-      .sticky-sub { display: none; }
-      .sticky-title { font-size: .78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 190px; }
-      .sticky-cta { font-size: .78rem; padding: 8px 14px; }
-    }
-
     /* ── STATS ── */
     .stats-wrap {
       background: var(--bg2);
@@ -414,14 +382,6 @@
     .bento-card.wide { grid-column: span 2; }
     /* Quote mark decoration — removed for cleaner visual */
     .bento-ico { font-size: 1.8rem; margin-bottom: 16px; display: block; }
-    .bento-ico-wrap {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: rgba(201,168,76,.18);
-      border: 1px solid rgba(201,168,76,.3);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px; color: var(--gold-text); flex-shrink: 0;
-    }
-    .bento-ico-wrap svg { width: 18px; height: 18px; color: currentColor; }
     .bento-card h3 {
       font-size: 1.25rem; font-weight: 800; margin-bottom: 10px;
       line-height: 1.3; letter-spacing: -.5px; color: var(--text);
@@ -519,10 +479,6 @@
     @media(max-width:900px){ .cases-grid { grid-template-columns: repeat(2,1fr); } }
     @media(max-width:580px){ .cases-grid { grid-template-columns: 1fr; } }
 
-    /* ── OBJECTION ── */
-    .objection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 860px; }
-    @media(max-width:680px){ .objection-grid { grid-template-columns: 1fr; gap: 32px; } }
-
     /* ── FOR WHOM ── */
     .whom-list { display: flex; flex-direction: column; gap: 12px; }
     .whom-item {
@@ -568,56 +524,6 @@
       .about-inner { grid-template-columns: 1fr; }
       .about-photo-wrap { position: static; display: flex; flex-direction: column; align-items: flex-start; }
       .about-photo-circle { width: 200px; height: 260px; }
-    }
-
-    /* ── FORM ── */
-    .form-outer {
-      background: var(--bg2); border-top: 1px solid var(--border);
-    }
-    .form-card {
-      max-width: 600px; margin: 0 auto;
-      background: var(--card); border: none;
-      border-radius: 24px; padding: 48px 44px;
-      box-shadow: 0 8px 40px rgba(28,20,8,.1), 0 2px 8px rgba(28,20,8,.04);
-    }
-    .form-eyebrow { display: inline-block; color: var(--gold-text); font-size: .75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; border: 1px solid rgba(201,168,76,.4); border-radius: 6px; padding: 5px 14px; }
-    .form-card h2 { font-size: clamp(1.5rem,3vw,2rem); font-weight: 900; letter-spacing: -.5px; margin-bottom: 10px; }
-    .form-card > p { color: var(--text2); font-size: .95rem; margin-bottom: 32px; line-height: 1.6; }
-    .field { margin-bottom: 18px; }
-    .field label { display: block; font-size: .82rem; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
-    .field input, .field select {
-      width: 100%; background: var(--bg); border: 1px solid var(--border2);
-      border-radius: 10px; color: var(--text); font-size: .95rem;
-      padding: 13px 16px; outline: none; transition: border-color .2s, box-shadow .2s;
-      appearance: none;
-    }
-    .field input:focus, .field select:focus {
-      border-color: var(--gold); box-shadow: 0 0 0 3px rgba(240,192,64,.12);
-    }
-    .field select option { background: var(--card); }
-    .fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .btn-submit {
-      width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; font-weight: 800; font-size: 1.05rem;
-      padding: 16px; border-radius: 12px; border: none; cursor: pointer;
-      transition: opacity .2s, transform .2s; margin-top: 8px;
-      box-shadow: 0 4px 24px rgba(240,192,64,.25);
-      position: relative; overflow: hidden;
-    }
-    .btn-submit:hover { opacity: .9; transform: translateY(-1px); }
-    .btn-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-    .form-footer { text-align: center; font-size: .82rem; color: var(--text3); margin-top: 12px; }
-    .form-success {
-      display: none; text-align: center; padding: 28px;
-      background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
-      border-radius: 14px; margin-top: 16px;
-    }
-    .form-success-icon { font-size: 2rem; margin-bottom: 10px; }
-    .form-success h3 { color: var(--green); font-size: 1.15rem; margin-bottom: 6px; }
-    .form-success p { color: var(--text2); font-size: .92rem; }
-    @media(max-width:580px){
-      .form-card { padding: 32px 22px; }
-      .fields-row { grid-template-columns: 1fr; }
     }
 
     /* ── EXIT POPUP ── */
@@ -679,17 +585,6 @@
     }
     .footer-link:hover { border-color: var(--gold); color: var(--gold); }
     .footer-copy { font-size: .82rem; color: var(--text2); }
-
-    /* ── FLOATING CTA (mobile) ── */
-    .float-cta {
-      display: none; position: fixed; bottom: 20px; left: 16px; right: 16px; z-index: 90;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; font-weight: 800; font-size: 1rem;
-      padding: 16px; border-radius: 14px; text-align: center; text-decoration: none;
-      box-shadow: 0 8px 32px rgba(240,192,64,.35);
-      transition: opacity .3s;
-    }
-    @media(max-width:680px){ .float-cta { display: block; } }
 
     /* ── TELEGRAM FLOAT BUTTON ── */
     .tg-float {
@@ -837,81 +732,6 @@
     .guarantee-text { font-size: .85rem; color: var(--text2); line-height: 1.6; }
     .guarantee-text strong { color: var(--text); }
 
-    /* ── PRICING ── */
-    .pricing-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 16px; align-items: stretch;
-    }
-    .price-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r2); padding: 32px 28px; position: relative;
-      transition: border-color .25s, transform .25s, box-shadow .25s;
-      overflow: hidden; display: flex; flex-direction: column;
-      --mx: -999px; --my: -999px;
-      box-shadow: 0 2px 8px rgba(30,20,5,.06), 0 8px 24px rgba(30,20,5,.04);
-    }
-    .price-card::after {
-      content: ''; position: absolute; inset: 0; border-radius: inherit;
-      background: radial-gradient(300px circle at var(--mx) var(--my), rgba(240,192,64,.09), transparent 70%);
-      pointer-events: none; z-index: 0;
-    }
-    .price-card > * { position: relative; z-index: 1; }
-    .price-card:hover { border-color: rgba(240,192,64,.25); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
-    .price-card.featured {
-      background: linear-gradient(160deg, rgba(200,134,10,.12) 0%, var(--card) 50%);
-      border-color: rgba(240,192,64,.4);
-      box-shadow: 0 0 0 1px rgba(240,192,64,.15), 0 8px 48px rgba(200,134,10,.18);
-      padding-top: 52px;
-    }
-    .price-card.featured::before {
-      content: 'Популярное'; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; font-size: .72rem; font-weight: 800; letter-spacing: .5px;
-      padding: 4px 14px; border-radius: 100px; white-space: nowrap; z-index: 2;
-    }
-    .price-tag {
-      display: inline-block;
-      font-size: .72rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--gold-text); margin-bottom: 14px;
-      background: transparent; border: 1px solid #C9A84C;
-      border-radius: 6px; padding: 3px 10px;
-    }
-    .price-name { font-size: 1.25rem; font-weight: 900; margin-bottom: 6px; letter-spacing: -.4px; }
-    .price-desc { font-size: .93rem; color: var(--text2); margin-bottom: 20px; line-height: 1.55; }
-    .price-amount {
-      font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 900; letter-spacing: -1.5px;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 4px; line-height: 1;
-    }
-    .price-amount-sub { font-size: .8rem; color: var(--text2); margin-bottom: 24px; }
-    .price-divider { height: 1px; background: var(--border); margin-bottom: 20px; }
-    .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; flex: 1; }
-    .price-features li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: .87rem; color: var(--text2); line-height: 1.5;
-    }
-    .price-features li .pf-icon {
-      font-size: .75rem; flex-shrink: 0; margin-top: 2px; width: 18px; height: 18px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    }
-    .pf-icon.yes { background: rgba(34,197,94,.15); color: var(--green); }
-    .pf-icon.no  { background: rgba(0,0,0,.05); color: var(--text3); }
-    .price-features li.dim { opacity: .45; }
-    .price-cta {
-      display: block; text-align: center; font-weight: 800; font-size: .92rem;
-      padding: 13px; border-radius: 10px; text-decoration: none; transition: all .2s;
-    }
-    .price-cta.ghost {
-      border: 1.5px solid var(--border2); color: var(--text2);
-    }
-    .price-cta.ghost:hover { border-color: var(--gold); color: var(--gold); }
-    .price-cta.gold {
-      background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000;
-      box-shadow: 0 4px 24px rgba(240,192,64,.25);
-    }
-    .price-cta.gold:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 8px 32px rgba(240,192,64,.35); }
-    @media(max-width:900px){ .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } }
-
     /* ── FAQ ── */
     .faq { background: var(--bg2); }
     .faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 760px; margin: 0 auto; }
@@ -969,9 +789,7 @@
     /* Встроен в hero-noise, body overlay убран — вызывал чёрный экран в WebView */
 
     /* ── BUTTON SHEEN EFFECT ── */
-    .btn-primary::before,
-    .btn-submit::before,
-    .price-cta.gold::before {
+    .btn-primary::before {
       content: ''; position: absolute;
       top: 0; left: -120%; width: 55%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
@@ -998,7 +816,6 @@
     }
     .stat-num.animating { animation: countGlow 1.8s ease-out forwards; }
 
-    /* price-card: no will-change to avoid compositor layer glitches */
     @media(max-width:580px){ .form-mini-testi { grid-template-columns: 1fr !important; } }
 
     /* Light overrides */
@@ -1075,23 +892,11 @@
     <a href="#cases">Кейсы</a>
     <a href="#about">О Шамиле</a>
     <a href="/diagnostic.html">Диагностика</a>
-    <a href="/diagnostic.html" class="nav-cta">Пройти диагностику</a>
+    <a href="/diagnostic.html" class="nav-cta">Найти свой барьер →</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<!-- STICKY BAR -->
-<div class="sticky-bar" id="sticky-bar">
-  <div class="sticky-inner">
-    <div class="sticky-left">
-      <div class="sticky-title">300 000 ₽/мес за 30 дней — продавай лучше, не больше</div>
-      <div class="sticky-sub">Фундамент, система продаж, делегирование · Без давления и манипуляций</div>
-    </div>
-    <a href="/diagnostic.html" class="sticky-cta">Пройти диагностику →</a>
-  </div>
-</div>
-
-
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -1109,7 +914,7 @@
 
       <div class="hero-actions">
         <a href="/diagnostic.html" class="btn-primary">
-          Пройти бесплатную диагностику
+          Найти свой барьер
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <div class="hero-note">
@@ -1227,7 +1032,7 @@
       Потом — диагностика, один барьер, и <strong>за 11 дней 420 000 ₽.</strong> Не потому что начал работать в два раза больше. А потому что перестал продавать из страха.
     </p>
     <a href="/diagnostic.html" class="btn-primary reveal" style="display:inline-flex;margin-top:32px;">
-      Разобраться где я застрял
+      Найти свой барьер
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
@@ -1334,7 +1139,7 @@
     <h2 class="section-title reveal">Как проходит программа</h2>
     <p class="section-sub reveal">Полностью онлайн, с живым присутствием Шамиля.</p>
 
-    <div class="format-grid reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:40px auto 0;">
+    <div class="format-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:40px auto 0;">
       <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
         <div style="font-size:1.8rem;margin-bottom:10px;">📅</div>
         <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">30 дней</h3>
@@ -1342,13 +1147,8 @@
       </div>
       <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
         <div style="font-size:1.8rem;margin-bottom:10px;">💬</div>
-        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">1-2 созвона в неделю</h3>
+        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">1-3 созвона в неделю</h3>
         <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Живые Zoom-разборы с Шамилём плюс работа в группе.</p>
-      </div>
-      <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
-        <div style="font-size:1.8rem;margin-bottom:10px;">📹</div>
-        <h3 style="font-size:1rem;margin-bottom:8px;font-weight:700;">40-50 видеоуроков</h3>
-        <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Короткие модули по 5-15 минут. Доступ навсегда.</p>
       </div>
       <div class="format-card" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-align:center;">
         <div style="font-size:1.8rem;margin-bottom:10px;">📊</div>
@@ -1356,39 +1156,6 @@
         <p style="font-size:.88rem;color:var(--text2);line-height:1.5;">Шамиль видит каждое твоё действие — поправляет где застрял.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-label reveal">Как это работает</div>
-    <h2 class="section-title reveal">Путь от «застрял» до x2 к доходу</h2>
-    <p class="section-sub reveal">Понять где конкретно застрял — первый шаг к росту.</p>
-
-    <div class="steps-grid">
-      <div class="step-item reveal">
-        <div class="step-num">1</div>
-        <div class="step-title">Диагностика продаж</div>
-        <div class="step-desc">15 вопросов. Шамиль читает лично — находит твой барьер.</div>
-      </div>
-      <div class="step-item reveal reveal-delay-1">
-        <div class="step-num">2</div>
-        <div class="step-title">Шамиль пишет в Telegram</div>
-        <div class="step-desc">Конкретный барьер, причина, что менять прямо сейчас.</div>
-      </div>
-      <div class="step-item reveal reveal-delay-2">
-        <div class="step-num">3</div>
-        <div class="step-title">Созвон или письменный разбор</div>
-        <div class="step-desc">Под твою ситуацию — определяем следующий шаг вместе.</div>
-      </div>
-      <div class="step-item reveal reveal-delay-3">
-        <div class="step-num">4</div>
-        <div class="step-title">Полная программа</div>
-        <div class="step-desc">Месяц: фундамент, система, практика. x2–x3 к доходу.</div>
-      </div>
-    </div>
-    <p style="text-align:center;color:var(--text2);font-size:.97rem;margin-top:40px;">Первый шаг — 15 вопросов. Шамиль читает лично и сразу говорит где затык.</p>
   </div>
 </section>
 
@@ -1549,16 +1316,6 @@
         <div class="circle-video-role">Веб-разработчик · 460к в марте</div>
       </div>
 
-      <div class="circle-video-item reveal reveal-delay-2">
-        <div class="circle-video-wrap" onclick="toggleCircleVideo(this)">
-          <video src="/media/ivan.mp4" playsinline preload="metadata" muted></video>
-          <div class="circle-play-overlay">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
-          </div>
-        </div>
-        <div class="circle-video-name">Иван</div>
-        <div class="circle-video-role">Фрилансер · вырос в доходе</div>
-      </div>
 
     </div>
   </div>
@@ -1578,6 +1335,38 @@
       <div class="whom-item reveal reveal-delay-2"><div class="whom-check">✓</div><span>Знаешь что что-то тормозит. Но месяц за месяцем — на том же месте.</span></div>
       <div class="whom-item reveal reveal-delay-3"><div class="whom-check">✓</div><span>Знаешь что надо сделать — позвонить, написать, выйти на контакт. Но снова откладываешь.</span></div>
       <div class="whom-item reveal reveal-delay-3"><div class="whom-check">✓</div><span>Пробовал расти — не пошло. Сейчас непонятно откуда начать снова и есть ли смысл.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ЧТО МЫ НЕ ДЕЛАЕМ -->
+<section class="section" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="section-label reveal">Честно</div>
+    <h2 class="section-title reveal">Чего НЕ будет в программе</h2>
+    <p class="section-sub reveal">Чтобы ты сразу понимал, на что подписываешься.</p>
+
+    <div class="not-grid reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:40px auto 0;">
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Манипулятивных техник продаж</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Давление, ложная срочность, дефицит — это разрушение доверия. Закрываем из ценности, а не из страха потери.</p>
+      </div>
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Обещаний результата без действия</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Если не делаешь — никакая программа не даст 300к. Это правда, без неё нечестно.</p>
+      </div>
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Абстрактного «работай над собой»</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Только конкретные инструменты под твою ситуацию: разбор сделок, переговоры, целеполагание.</p>
+      </div>
+      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
+        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Курса для нулёвых с нуля</h3>
+        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Программа усиления сильного — для тех, у кого уже есть клиенты, опыт, поток. Если только начинаешь — приходи позже.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1660,38 +1449,6 @@
   </div>
 </section>
 
-<!-- ЧТО МЫ НЕ ДЕЛАЕМ -->
-<section class="section" style="background:var(--bg2);">
-  <div class="section-inner">
-    <div class="section-label reveal">Честно</div>
-    <h2 class="section-title reveal">Чего НЕ будет в программе</h2>
-    <p class="section-sub reveal">Чтобы ты сразу понимал, на что подписываешься.</p>
-
-    <div class="not-grid reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:40px auto 0;">
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Скриптов «как впарить»</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Манипулятивные техники работают один раз. Клиент возвращается со скандалом или просто не возвращается.</p>
-      </div>
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Обещаний результата без действия</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Если не делаешь — никакая программа не даст 300к. Это правда, без неё нечестно.</p>
-      </div>
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Абстрактного «работай над собой»</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Только конкретные инструменты под твою ситуацию: разбор сделок, переговоры, система ценообразования.</p>
-      </div>
-      <div class="not-item" style="padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;">
-        <div style="font-size:.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;font-weight:700;">— НЕТ</div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;font-weight:700;">Курса для нулёвых с нуля</h3>
-        <p style="font-size:.92rem;color:var(--text2);line-height:1.6;">Программа усиления сильного — для тех, у кого уже есть клиенты, опыт, поток. Если только начинаешь — приходи позже.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="section faq">
   <div class="section-inner">
@@ -1759,13 +1516,10 @@
       <strong>15 вопросов</strong> — и Шамиль напишет где твой конкретный барьер.
       Бесплатно · в Telegram · без обязательств.
     </p>
-    <a href="/diagnostic.html" class="exit-cta" id="exit-cta-btn">Найти барьер →</a>
+    <a href="/diagnostic.html" class="exit-cta" id="exit-cta-btn">Найти свой барьер →</a>
     <span class="exit-dismiss" id="exit-dismiss">Может, потом...</span>
   </div>
 </div>
-
-<!-- FLOATING CTA -->
-<a href="/diagnostic.html" class="float-cta">Пройти диагностику бесплатно →</a>
 
 <script>
 
@@ -1813,7 +1567,7 @@
   });
 
   /* ── CARD SPOTLIGHT ── */
-  document.querySelectorAll('.bento-card, .price-card, .case-card, .testi-card, .faq-item').forEach(el => {
+  document.querySelectorAll('.bento-card, .case-card, .testi-card, .faq-item').forEach(el => {
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
       el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
@@ -1832,24 +1586,6 @@
       tgFloat.classList.toggle('show', !e.isIntersecting);
     }, { threshold: 0 }).observe(document.querySelector('.hero'));
   }
-
-  /* ── STICKY BAR ── */
-  const stickyBar = document.getElementById('sticky-bar');
-  const heroSection = document.querySelector('.hero');
-  if (stickyBar && heroSection) {
-    new IntersectionObserver(([e]) => {
-      stickyBar.classList.toggle('show', !e.isIntersecting);
-    }, { threshold: 0 }).observe(heroSection);
-  }
-
-  /* ── HIDE FLOAT CTA NEAR FORM ── */
-  const formEl = document.getElementById('form');
-  const floatCTA = document.querySelector('.float-cta');
-  const formObs = new IntersectionObserver(([e]) => {
-    floatCTA.style.opacity = e.isIntersecting ? '0' : '1';
-    floatCTA.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
-  });
-  if (formEl) formObs.observe(formEl);
 
   /* ── FAQ ACCORDION ── */
   document.querySelectorAll('.faq-item').forEach(item => {
@@ -1917,7 +1653,7 @@
   })();
 
   /* ── MAGNETIC BUTTONS ── */
-  document.querySelectorAll('.btn-primary, .nav-cta, .price-cta.gold').forEach(el => {
+  document.querySelectorAll('.btn-primary, .nav-cta').forEach(el => {
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left - r.width * .5) * .18;
@@ -1931,21 +1667,6 @@
     });
     el.addEventListener('mouseenter', () => {
       el.style.transition = 'transform .12s ease, box-shadow .2s, opacity .2s';
-    });
-  });
-
-  /* ── PRICE CARD SPOTLIGHT ── */
-  document.querySelectorAll('.price-card').forEach(el => {
-    el.style.setProperty('--mx', '-999px');
-    el.style.setProperty('--my', '-999px');
-    el.addEventListener('mousemove', e => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.setProperty('--mx', '-999px');
-      el.style.setProperty('--my', '-999px');
     });
   });
 
@@ -1968,21 +1689,6 @@
     // Nav CTA
     document.querySelector('.nav-cta')?.addEventListener('click', () => {
       ym(108665262, 'reachGoal', 'nav_cta_click');
-    });
-    // Sticky CTA
-    document.querySelector('.sticky-cta')?.addEventListener('click', () => {
-      ym(108665262, 'reachGoal', 'sticky_cta_click');
-    });
-    // Float CTA (mobile)
-    document.querySelector('.float-cta')?.addEventListener('click', () => {
-      ym(108665262, 'reachGoal', 'float_cta_click');
-    });
-    // Pricing CTAs
-    document.querySelectorAll('.price-cta').forEach(el => {
-      el.addEventListener('click', () => {
-        const label = el.closest('.price-card')?.querySelector('.price-name')?.textContent || 'unknown';
-        ym(108665262, 'reachGoal', 'pricing_cta_click', { tier: label });
-      });
     });
     // Telegram float button
     document.querySelector('.tg-float')?.addEventListener('click', () => {
