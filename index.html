@@ -170,6 +170,23 @@
     }
     .btn-primary:hover .btn-primary-arrow { transform: translateX(2px); }
 
+    
+    /* ── BUTTON SHEEN (Сургай рекомендация) ── */
+    a.btn-primary { overflow: hidden; }
+    a.btn-primary::before {
+      content: ''; position: absolute;
+      top: 0; left: -120%; width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transform: skewX(-20deg);
+      animation: btnSheen 4.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes btnSheen {
+      0%, 60% { left: -120%; }
+      100%    { left: 200%; }
+    }
+    a.btn-primary > * { position: relative; z-index: 1; }
+
     /* ── HERO (text-left, photo-right, 3 value-cards) ── */
     .hero {
       position: relative;
@@ -1371,6 +1388,90 @@
     @media(max-width:580px){ .urgency-sep { display: none; } .urgency-banner { gap: 12px; } }
 
     
+    
+    /* ── COMPARE ── */
+    .compare-section {
+      background: #0c0c0c;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .compare-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .compare-bills { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .compare-inner {
+      position: relative; z-index: 2;
+      max-width: 1180px; margin: 0 auto;
+    }
+    .compare-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .compare-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 14px;
+    }
+    .compare-sub {
+      font-size: 1rem; color: rgba(255,255,255,.6);
+      text-align: center; margin: 0 auto 56px;
+      max-width: 540px;
+    }
+    .compare-table {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .compare-row {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-cell {
+      padding: 18px 22px;
+      font-size: .92rem; line-height: 1.45;
+      color: rgba(255,255,255,.78);
+      display: flex; align-items: center;
+      border-right: 1px solid rgba(255,255,255,.04);
+    }
+    .compare-cell:last-child { border-right: none; }
+    .compare-cell.muted { color: rgba(255,255,255,.3); }
+    .compare-cell.compare-criteria {
+      font-weight: 500; color: #fff;
+      background: rgba(255,255,255,.02);
+    }
+    .compare-cell.compare-our {
+      background: rgba(201,168,76,.08);
+      color: #fff; font-weight: 500;
+      border-left: 1px solid rgba(201,168,76,.25);
+    }
+    .compare-row.compare-head .compare-cell {
+      font-size: .82rem; font-weight: 600; letter-spacing: .5px;
+      text-transform: uppercase; color: rgba(255,255,255,.55);
+      padding: 16px 22px;
+      background: rgba(0,0,0,.2);
+    }
+    .compare-row.compare-head .compare-cell.compare-our {
+      color: #C9A84C;
+      background: rgba(201,168,76,.12);
+    }
+    @media (max-width: 800px) {
+      .compare-row { grid-template-columns: 1fr; }
+      .compare-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,.04); }
+      .compare-cell.compare-criteria {
+        font-size: .8rem; text-transform: uppercase;
+        letter-spacing: .5px; color: #C9A84C;
+        padding-bottom: 6px;
+      }
+      .compare-cell.compare-our { border-left: none; border-top: 1px solid rgba(201,168,76,.3); }
+      .compare-row.compare-head { display: none; }
+    }
+
     /* ── FINAL CTA ── */
     .final-section {
       background: #0a0a0a;
@@ -2289,6 +2390,74 @@
 </section>
 
 
+
+<!-- COMPARE -->
+<section class="compare-section">
+  <div class="compare-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="compare-inner">
+    <div class="compare-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>СРАВНИТЕ ВАРИАНТЫ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="compare-title">Почему именно программа</h2>
+    <p class="compare-sub">Три пути к большему доходу — выбирай открыто.</p>
+
+    <div class="compare-table">
+      <div class="compare-row compare-head">
+        <div class="compare-cell compare-criteria"></div>
+        <div class="compare-cell">Работать одному</div>
+        <div class="compare-cell">Онлайн-курс</div>
+        <div class="compare-cell compare-our">Программа Шамиля</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-criteria">Срок до первой сделки на новый чек</div>
+        <div class="compare-cell">6+ месяцев</div>
+        <div class="compare-cell">2–3 месяца</div>
+        <div class="compare-cell compare-our">1–2 недели</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-criteria">Разбор твоих реальных сделок</div>
+        <div class="compare-cell muted">—</div>
+        <div class="compare-cell">Общая теория</div>
+        <div class="compare-cell compare-our">Лично, по каждой</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-criteria">Что делать с возражением «дорого»</div>
+        <div class="compare-cell">Скидка</div>
+        <div class="compare-cell">Скрипты-шаблоны</div>
+        <div class="compare-cell compare-our">Ответ под твою сделку</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-criteria">Поддержка в процессе</div>
+        <div class="compare-cell muted">—</div>
+        <div class="compare-cell">Чат одногруппников</div>
+        <div class="compare-cell compare-our">Шамиль каждый день</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-criteria">Делегирование и команда</div>
+        <div class="compare-cell muted">—</div>
+        <div class="compare-cell muted">—</div>
+        <div class="compare-cell compare-our">Отдельный этап программы</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell compare-criteria">Результат</div>
+        <div class="compare-cell">Зависит от удачи</div>
+        <div class="compare-cell">Знания без применения</div>
+        <div class="compare-cell compare-our">Сделки на новый чек</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FINAL CTA -->
 <section class="final-section">
