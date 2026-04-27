@@ -7,7 +7,7 @@
 
 import { getDb, genId } from '../lib/db.js';
 import { getMessage } from '../lib/messages.js';
-import { buildCallFollowup } from '../lib/message-templates.js';
+import { buildCallFollowup, buildCohortPitch } from '../lib/message-templates.js';
 
 async function tgSend(token, chatId, text, reply_markup) {
   const body = { chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true };
@@ -98,12 +98,20 @@ export default async function handler(req, res) {
       }
 
     } else if (dsType === 'call_followup') {
-      // Не отправляем если уже paid/lost/converted
-      if (['paid', 'converted', 'lost'].includes(row.lead_status)) {
+      // Не отправляем если уже lost/converted
+      if (['converted', 'lost'].includes(row.lead_status)) {
         await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
         continue;
       }
       msgText = buildCallFollowup({ name: row.name || '' });
+
+    } else if (dsType === 'cohort_pitch') {
+      // Питч когорты через 48ч после оплаты — только если ещё не конвертирован / не потерян
+      if (['converted', 'lost', 'unsubscribed'].includes(row.lead_status)) {
+        await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
+        continue;
+      }
+      msgText = buildCohortPitch({ name: row.name || '' });
     }
 
     if (!msgText) {

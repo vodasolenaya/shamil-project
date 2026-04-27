@@ -121,9 +121,9 @@ export default async function handler(req, res) {
           VALUES (${genId('ev')}, ${leadId}, 'subscribed', ${JSON.stringify({ tg_user_id: tgUserId })}::jsonb)
         `;
 
-        // Шлём сообщение #0 — сразу
-        const q5raw = lead.quiz_answers?.q5 || '';
-        const m0    = getMessage(0, { name: lead.name || firstName, quiz_q5_short: q5raw });
+        // Шлём сообщение #0 — сразу (используем q15 «что мешает прямо сейчас»)
+        const q15raw = lead.quiz_answers?.q15 || lead.quiz_answers?.q5 || '';
+        const m0     = getMessage(0, { name: lead.name || firstName, quiz_q15_short: q15raw });
         if (m0) await tgSend(BOT_TOKEN, chatId, m0.text, m0.reply_markup);
 
         // Помечаем шаг 0 как отправленный (он вне расписания)

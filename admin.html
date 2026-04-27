@@ -350,6 +350,37 @@
       cursor: pointer; transition: all .15s;
     }
     .filter-chip.active { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Outreach panel ── */
+    .outreach-panel {
+      background: rgba(201,168,76,.05); border: 1px solid rgba(201,168,76,.25);
+      border-radius: 14px; padding: 18px 20px; margin-bottom: 24px;
+    }
+    .outreach-title {
+      font-size: .8rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px;
+    }
+    .outreach-list { display: flex; flex-direction: column; gap: 10px; }
+    .outreach-row {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .outreach-name { font-size: .88rem; font-weight: 700; min-width: 100px; }
+    .outreach-handle { font-size: .78rem; color: var(--gold); min-width: 80px; }
+    .outreach-barrier {
+      flex: 1; font-size: .82rem; color: var(--text2); font-style: italic;
+      background: var(--bg2); border-radius: 6px; padding: 5px 10px;
+      min-width: 160px;
+    }
+    .outreach-btn {
+      padding: 7px 14px; border-radius: 8px;
+      background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.3);
+      color: var(--gold); font-size: .8rem; font-weight: 700;
+      cursor: pointer; white-space: nowrap; transition: all .15s; flex-shrink: 0;
+    }
+    .outreach-btn:hover { background: rgba(201,168,76,.22); }
+    .outreach-btn.sent { background: rgba(34,197,94,.1); color: var(--green); border-color: rgba(34,197,94,.3); }
   </style>
 </head>
 <body>
@@ -424,6 +455,9 @@
         <span class="filter-chip"        onclick="filterLeads('converted')"         data-status="converted">Конвертированы</span>
         <span class="filter-chip"        onclick="filterLeads('unsubscribed')"      data-status="unsubscribed">Отписались</span>
       </div>
+
+      <!-- Outreach panel — показывается когда есть лиды status=new -->
+      <div id="outreach-panel" style="display:none;"></div>
 
       <div id="leads-container">
         <div class="loading"><div class="spinner"></div>Загружаю лиды…</div>
@@ -689,6 +723,9 @@
       document.getElementById('ls-active').textContent  = all.filter(l => l.status === 'active').length;
       document.getElementById('ls-engaged').textContent = all.filter(l => l.status === 'engaged').length;
       document.getElementById('ls-conv').textContent    = all.filter(l => l.status === 'converted').length;
+      // Обновляем панель для «не открывших бота» лидов
+      const newLeads = all.filter(l => l.status === 'new');
+      renderOutreachPanel(newLeads);
     } catch(e) {}
   }
 
@@ -1155,6 +1192,65 @@
 
   // Legacy compat
   function leadAction(id, action, e) { leadPostAction(id, action, e); }
+
+  // ── Outreach panel — лиды status=new (не открыли бота) ──────────────────
+  function renderOutreachPanel(leads) {
+    const panel = document.getElementById('outreach-panel');
+    if (!panel) return;
+    if (!leads || leads.length === 0) { panel.style.display = 'none'; panel.innerHTML = ''; return; }
+
+    const rows = leads.map(l => {
+      const qa      = l.quiz_answers || {};
+      const barrier = qa.q15 || qa.q5 || '—';
+      const handle  = l.tg_handle || '';
+      const deeplink = `https://t.me/artofsales_shamil_bot?start=${l.id}`;
+      return `
+        <div class="outreach-row" id="orow-${l.id}">
+          <div class="outreach-name">${escHtml(l.name || 'Без имени')}</div>
+          <div class="outreach-handle">${escHtml(handle || '—')}</div>
+          <div class="outreach-barrier">«${escHtml(barrier.length > 100 ? barrier.slice(0, 100) + '…' : barrier)}»</div>
+          <button class="outreach-btn" id="obtn-${l.id}"
+            onclick="outreachCopy('${l.id}', ${JSON.stringify(l.name || '')}, ${JSON.stringify(handle)}, ${JSON.stringify(barrier)}, '${deeplink}', event)">
+            📨 Написать
+          </button>
+        </div>`;
+    }).join('');
+
+    panel.innerHTML = `
+      <div class="outreach-panel">
+        <div class="outreach-title">🎯 Не открыли бота — ${leads.length} чел. Напиши им первым</div>
+        <div class="outreach-list">${rows}</div>
+      </div>`;
+    panel.style.display = 'block';
+  }
+
+  function outreachCopy(leadId, name, handle, barrier, deeplink, e) {
+    e.stopPropagation();
+    const firstName = (name || 'Привет').split(' ')[0];
+    const barrierShort = barrier && barrier !== '—'
+      ? barrier.slice(0, 120).trim()
+      : 'ты заполнял диагностику';
+
+    const msg = [
+      `${firstName}, привет. Это Шамиль.`,
+      '',
+      `Ты написал в диагностике: «${barrierShort}».`,
+      '',
+      `Это именно то, с чем я работаю. Вот твой личный разбор — открой бота:`,
+      deeplink,
+    ].join('\n');
+
+    navigator.clipboard.writeText(msg).then(() => {
+      const btn = document.getElementById(`obtn-${leadId}`);
+      if (btn) { btn.textContent = '✅ Скопировано!'; btn.classList.add('sent'); }
+      // Открываем чат в TG если есть handle
+      if (handle && handle.startsWith('@')) {
+        window.open(`https://t.me/${handle.slice(1)}`, '_blank');
+      }
+    }).catch(() => {
+      prompt('Скопируй вручную и отправь:', msg);
+    });
+  }
 </script>
 </body>
 </html>

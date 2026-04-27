@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { getDb } from '../lib/db.js';
+import { getDb, genId } from '../lib/db.js';
 
 function verifyToken(body, password) {
   const all = { ...body, Password: password };
@@ -48,16 +48,28 @@ export default async function handler(req, res) {
       `;
       if (rows[0]) {
         leadName = rows[0].name || '';
+        const tgUserId = rows[0].tg_user_id;
+
         // Логируем событие
         await sql`
           INSERT INTO events (id, lead_id, type, payload)
           VALUES (
-            ${'ev_' + Date.now()},
+            ${genId('ev')},
             ${lead_id},
             'paid',
             ${JSON.stringify({ amount: body.Amount, order_id: body.OrderId })}::jsonb
           )
         `.catch(console.error);
+
+        // Планируем питч когорты через 48 часов (если лид открыл бота)
+        if (tgUserId) {
+          const pitchAt = new Date(Date.now() + 48 * 3600 * 1000);
+          await sql`
+            INSERT INTO drip_schedule (id, lead_id, step, send_at, message_key, type)
+            VALUES (${genId('drip')}, ${lead_id}, 0, ${pitchAt.toISOString()}, 'cohort_pitch', 'cohort_pitch')
+            ON CONFLICT DO NOTHING
+          `.catch(console.error);
+        }
       }
     } catch (e) {
       console.error('Tinkoff webhook DB error:', e.message);
