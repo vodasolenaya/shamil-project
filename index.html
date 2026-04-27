@@ -1370,7 +1370,62 @@
     .urgency-sep { color: var(--border2); }
     @media(max-width:580px){ .urgency-sep { display: none; } .urgency-banner { gap: 12px; } }
 
-    /* ── FAQ ── */
+    
+    /* ── FINAL CTA ── */
+    .final-section {
+      background: #0a0a0a;
+      padding: 120px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.4), transparent);
+    }
+    .final-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .final-inner {
+      position: relative; z-index: 2;
+      max-width: 800px; margin: 0 auto;
+      text-align: center;
+    }
+    .final-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 28px;
+    }
+    .final-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.7px;
+      color: #fff; margin: 0 0 22px;
+    }
+    .final-title em {
+      font-style: normal; color: #C9A84C; font-weight: 500;
+    }
+    .final-sub {
+      font-size: 1.05rem; line-height: 1.65;
+      color: rgba(255,255,255,.7);
+      max-width: 600px; margin: 0 auto 40px;
+    }
+    .final-cta {
+      margin-bottom: 28px;
+    }
+    .final-meta {
+      display: flex; gap: 14px; align-items: center; justify-content: center;
+      font-size: .85rem; color: rgba(255,255,255,.5);
+      flex-wrap: wrap;
+    }
+    .final-meta .dot { color: rgba(255,255,255,.2); }
+
+    @media (max-width: 768px) {
+      .final-section { padding: 80px 20px; }
+      .final-meta { flex-direction: column; gap: 6px; }
+      .final-meta .dot { display: none; }
+    }
+
+        /* ── FAQ ── */
     .faq { background: var(--bg2); }
     .faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 760px; margin: 0 auto; }
     .faq-item {
@@ -2199,80 +2254,40 @@
 
 
 
-<!-- AFTER DIAGNOSTIC — what happens next, no prices -->
-<section class="section" id="after" style="background:var(--bg2);">
-  <div class="section-inner">
-    <div class="section-label reveal">Следующий шаг</div>
-    <h2 class="section-title reveal">Что происходит после</h2>
-    <p class="section-sub reveal">Не общие советы. Разбор твоей конкретной ситуации и что стоит менять первым.</p>
+<!-- FINAL CTA -->
+<section class="final-section">
+  <div class="final-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+    <div class="hero-bill b8"><span class="num">₽</span></div>
+    <div class="hero-bill b9"><span class="num">₽</span></div>
+  </div>
 
-    <div class="whom-list reveal">
-      <div class="whom-item">
-        <div class="whom-check">✓</div>
-        <span><strong>Шамиль пишет в Telegram лично</strong> — не бот, не шаблон. Реальный разбор твоей ситуации.</span>
-      </div>
-      <div class="whom-item">
-        <div class="whom-check">✓</div>
-        <span><strong>Называет конкретный барьер</strong> — почему доход не растёт именно у тебя, а не в целом по рынку.</span>
-      </div>
-      <div class="whom-item">
-        <div class="whom-check">✓</div>
-        <span><strong>Предлагает следующий шаг</strong> — в зависимости от ситуации: разбор, работа над конкретным блоком или полная программа.</span>
-      </div>
-      <div class="whom-item">
-        <div class="whom-check">✓</div>
-        <span><strong>Без давления</strong> — уйдёшь с ясностью что мешает, даже если не захочешь работать дальше.</span>
-      </div>
+  <div class="final-inner">
+    <div class="final-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ПОСЛЕДНИЙ ШАГ</span>
+      <span class="manifesto-line"></span>
     </div>
 
-    <!-- pricing grid removed -->
-  </div>
-</section>
+    <h2 class="final-title">Узнай где именно <em>ты застрял</em></h2>
+    <p class="final-sub">15 вопросов. Шамиль читает ответы лично и пишет в Telegram: в чём твой конкретный барьер и что менять первым. Бесплатно — ответ в течение 24 часов.</p>
 
-<!-- CTA SECTION -->
-<section class="section" id="form" style="background:var(--bg2);">
-  <div class="section-inner">
-    <div class="reveal" style="max-width:620px;margin:0 auto;text-align:center;">
-      <div class="section-label" style="justify-content:center;margin-bottom:20px;">Диагностика бесплатная</div>
-      <h2 class="section-title" style="margin-bottom:16px;">Пройди её и узнаешь<br>где именно застрял</h2>
-      <p style="color:var(--text2);font-size:1rem;line-height:1.7;margin-bottom:32px;">15 вопросов. Шамиль читает ответы лично и пишет в Telegram: в чём твой конкретный барьер и что менять первым.</p>
-      <a href="/diagnostic.html" class="btn-primary" style="display:inline-flex;margin-bottom:20px;">
-        Найти свой барьер
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;">
-        <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2);">
-          15 вопросов — 5 минут
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2);">
-          Шамиль читает лично
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text2);">
-          Без обязательств
-        </div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.15);border-radius:12px;padding:14px 18px;max-width:480px;margin:0 auto;text-align:left;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span style="font-size:.82rem;color:var(--text2);line-height:1.6;"><strong style="color:var(--text);">Никакого давления.</strong> Диагностика — не продажа. Уйдёшь с пониманием своей ситуации в любом случае.</span>
-      </div>
-    </div>
-  </div>
-</section>
+    <a href="/diagnostic.html" class="btn-primary final-cta">
+      <span>Найти свой барьер</span>
+      <span class="btn-primary-arrow">→</span>
+    </a>
 
-<!-- PROOF ANCHOR -->
-<section class="section" style="padding-top:0;padding-bottom:40px;">
-  <div class="section-inner">
-    <div class="reveal" style="max-width:560px;margin:0 auto;text-align:center;padding:28px 32px;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);">
-      <div style="font-size:.82rem;color:var(--text3);margin-bottom:12px;">Всё ещё сомневаешься?</div>
-      <p style="font-size:.95rem;color:var(--text2);line-height:1.6;margin-bottom:16px;">В канале — скрины переводов, войсы учеников, переписки с клиентами. Результаты подтверждены.</p>
-      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-size:.8rem;color:var(--text3);">
-        <span>→ Скрин перевода Олега на 420к</span>
-        <span>→ Войс Марата: 600к</span>
-        <span>→ Переписка Самата на 460к</span>
-      </div>
-      <a href="https://t.me/ozareniecases" target="_blank" style="font-size:.87rem;color:var(--gold-text);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(139,105,20,.3);">
-        Смотреть доказательства →
-      </a>
+    <div class="final-meta">
+      <span>Бесплатно</span><span class="dot">·</span>
+      <span>15 вопросов</span><span class="dot">·</span>
+      <span>Ответ в Telegram</span><span class="dot">·</span>
+      <span>Без обязательств</span>
     </div>
   </div>
 </section>
