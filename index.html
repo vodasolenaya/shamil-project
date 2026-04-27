@@ -617,53 +617,128 @@
       .objection-col { padding: 28px 24px; }
     }
 
-    /* ── 3 STAGES PROGRAM ── */
-    .stages-list {
-      display: flex; flex-direction: column; gap: 20px;
-      max-width: 980px; margin: 40px auto 0;
+    
+    /* ── PROGRAM (3 stages — column layout) ── */
+    .program-section {
+      background: #0a0a0a;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
     }
-    .stage-card {
-      display: grid; grid-template-columns: 80px 1fr; gap: 28px;
-      padding: 32px 36px; background: var(--card);
-      border: 1px solid var(--border); border-radius: var(--r2);
-      transition: border-color .2s, transform .2s;
+    .program-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
     }
-    .stage-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .program-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .program-inner {
+      position: relative; z-index: 2;
+      max-width: 1080px; margin: 0 auto;
+    }
+    .program-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .program-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 14px;
+    }
+    .program-sub {
+      font-size: 1rem; color: rgba(255,255,255,.6);
+      text-align: center; margin: 0 auto 56px;
+      max-width: 560px;
+    }
+    .program-stages {
+      display: flex; flex-direction: column; gap: 22px;
+    }
+    .stage {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 18px;
+      padding: 36px 38px;
+      transition: border-color .25s;
+    }
+    .stage:hover { border-color: rgba(201,168,76,.25); }
+
+    .stage-head {
+      display: flex; align-items: center; gap: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      margin-bottom: 24px;
+    }
     .stage-num {
-      font-size: 4rem; font-weight: 900; line-height: 1; letter-spacing: -3px;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-size: 3.5rem; font-weight: 600; line-height: 1;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #d8b860, #C9A84C 50%, #8B6914);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex-shrink: 0;
     }
-    .stage-content { display: flex; flex-direction: column; gap: 18px; }
-    .stage-header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-    .stage-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -.5px; color: var(--text); margin: 0; }
+    .stage-meta {
+      display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+    }
+    .stage-name {
+      font-size: 1.55rem; font-weight: 500; letter-spacing: -.4px;
+      color: #fff; margin: 0;
+    }
     .stage-duration {
-      font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--gold-text); background: var(--gold-faint);
+      font-size: .72rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: #C9A84C;
+      background: rgba(201,168,76,.1);
       padding: 4px 12px; border-radius: 100px;
     }
-    .stage-items { display: flex; flex-direction: column; gap: 8px; }
-    .stage-item {
-      font-size: .95rem; color: var(--text2); line-height: 1.5;
-      padding-left: 20px; position: relative;
+
+    .stage-body {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; align-items: start;
     }
-    .stage-item::before { content: '—'; position: absolute; left: 0; color: var(--gold-text); font-weight: 700; }
+    .stage-tools {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .stage-tools li {
+      font-size: .92rem; line-height: 1.55;
+      color: rgba(255,255,255,.75);
+      padding-left: 18px; position: relative;
+      margin-bottom: 10px;
+    }
+    .stage-tools li:before {
+      content: '—'; position: absolute; left: 0;
+      color: rgba(201,168,76,.5);
+    }
+    .stage-tools li:last-child { margin-bottom: 0; }
+
     .stage-results {
-      margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--border);
-      display: flex; flex-direction: column; gap: 10px;
+      display: flex; flex-direction: column; gap: 16px;
     }
-    .stage-result { display: flex; align-items: flex-start; gap: 12px; font-size: .92rem; line-height: 1.55; }
-    .stage-result-label {
-      flex-shrink: 0; width: 80px; font-weight: 800; font-size: .76rem;
-      letter-spacing: .08em; text-transform: uppercase; color: var(--gold-text); padding-top: 2px;
+    .stage-result {
+      display: flex; gap: 14px; align-items: flex-start;
+      font-size: .92rem; line-height: 1.55;
+      color: rgba(255,255,255,.8);
     }
-    .stage-result-text { color: var(--text2); }
-    @media(max-width:768px){
-      .stage-card { grid-template-columns: 1fr; padding: 24px 22px; gap: 16px; }
-      .stage-num { font-size: 3rem; }
-      .stage-title { font-size: 1.25rem; }
-      .stage-result { flex-direction: column; gap: 4px; }
-      .stage-result-label { width: auto; }
+    .stage-result-tag {
+      flex-shrink: 0;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.55);
+      min-width: 80px; text-align: center;
+    }
+    .stage-result-tag.gold {
+      background: rgba(201,168,76,.12);
+      color: #C9A84C;
+    }
+
+    @media (max-width: 768px) {
+      .stage { padding: 28px 24px; }
+      .stage-num { font-size: 2.6rem; }
+      .stage-name { font-size: 1.3rem; }
+      .stage-body { grid-template-columns: 1fr; gap: 22px; }
+      .stage-head { flex-wrap: wrap; gap: 16px; }
     }
 
     /* ── CASES ── */
@@ -1255,90 +1330,109 @@
 </section>
 
 <!-- PROGRAM -->
-<section class="section" id="program">
-  <div class="section-inner">
-    <div class="section-label reveal">Программа</div>
-    <h2 class="section-title reveal">3 этапа за 30 дней — целеполагание, продажи, делегирование</h2>
-    <p class="section-sub reveal">Каждый этап даёт результат сразу — и навык, который остаётся с тобой навсегда.</p>
+<!-- PROGRAM (3 stages) -->
+<section class="program-section" id="program">
+  <div class="program-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+    <div class="hero-bill b8"><span class="num">₽</span></div>
+  </div>
 
-    <div class="stages-list reveal">
+  <div class="program-inner">
+    <div class="program-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ПРОГРАММА</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="program-title">3 этапа за 30 дней</h2>
+    <p class="program-sub">Каждый этап даёт результат сразу — и навык, который остаётся с тобой навсегда.</p>
 
-      <!-- ЭТАП 1: ЦЕЛЕПОЛАГАНИЕ -->
-      <div class="stage-card">
-        <div class="stage-num">1</div>
-        <div class="stage-content">
-          <div class="stage-header">
-            <h3 class="stage-title">Целеполагание</h3>
+    <div class="program-stages">
+
+      <div class="stage reveal">
+        <div class="stage-head">
+          <div class="stage-num">01</div>
+          <div class="stage-meta">
+            <h3 class="stage-name">Целеполагание</h3>
             <span class="stage-duration">1 неделя</span>
           </div>
-          <div class="stage-items">
-            <div class="stage-item">SMART-цель: конкретная цифра дохода и срок</div>
-            <div class="stage-item">Декомпозиция цели на ежедневные действия</div>
-            <div class="stage-item">Работа со страхами и зоной комфорта</div>
-            <div class="stage-item">Личная ответственность за результат, без оправданий</div>
-          </div>
+        </div>
+        <div class="stage-body">
+          <ul class="stage-tools">
+            <li>SMART-цель: конкретная цифра дохода и срок</li>
+            <li>Декомпозиция цели на ежедневные действия</li>
+            <li>Работа со страхами и зоной комфорта</li>
+            <li>Личная ответственность за результат, без оправданий</li>
+          </ul>
           <div class="stage-results">
             <div class="stage-result">
-              <span class="stage-result-label">Сразу</span>
-              <span class="stage-result-text">Знаешь сколько хочешь зарабатывать к конкретной дате и что делать прямо сегодня.</span>
+              <span class="stage-result-tag">СРАЗУ</span>
+              <span>Знаешь сколько хочешь зарабатывать к конкретной дате и что делать прямо сегодня.</span>
             </div>
             <div class="stage-result">
-              <span class="stage-result-label">Навсегда</span>
-              <span class="stage-result-text">Навык декомпозиции — ставишь и достигаешь любой цели, не только финансовой.</span>
+              <span class="stage-result-tag gold">НАВСЕГДА</span>
+              <span>Навык декомпозиции — ставишь и достигаешь любой цели, не только финансовой.</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ЭТАП 2: ПРОДАЖИ -->
-      <div class="stage-card">
-        <div class="stage-num">2</div>
-        <div class="stage-content">
-          <div class="stage-header">
-            <h3 class="stage-title">Продажи</h3>
+      <div class="stage reveal">
+        <div class="stage-head">
+          <div class="stage-num">02</div>
+          <div class="stage-meta">
+            <h3 class="stage-name">Продажи</h3>
             <span class="stage-duration">2 недели</span>
           </div>
-          <div class="stage-items">
-            <div class="stage-item">5 этапов сделки — от первого касания до оплаты</div>
-            <div class="stage-item">СПИН-вопросы — клиент сам приходит к решению купить</div>
-            <div class="stage-item">Обоснование цены без страха и заискивания</div>
-            <div class="stage-item">Закрытие «дорого» и «подумаю» без уговоров и скидок</div>
-          </div>
+        </div>
+        <div class="stage-body">
+          <ul class="stage-tools">
+            <li>5 этапов сделки — от первого касания до оплаты</li>
+            <li>СПИН-вопросы — клиент сам приходит к решению купить</li>
+            <li>Обоснование цены без страха и заискивания</li>
+            <li>Ответы на «дорого» и «подумаю» без уговоров и скидок</li>
+          </ul>
           <div class="stage-results">
             <div class="stage-result">
-              <span class="stage-result-label">Сразу</span>
-              <span class="stage-result-text">Первая сделка на новый чек в первые 1–2 недели программы.</span>
+              <span class="stage-result-tag">СРАЗУ</span>
+              <span>Первая сделка на новый чек в первые 1–2 недели программы.</span>
             </div>
             <div class="stage-result">
-              <span class="stage-result-label">Навсегда</span>
-              <span class="stage-result-text">Продаёшь без манипуляций — этот навык работает на любую нишу и любой продукт.</span>
+              <span class="stage-result-tag gold">НАВСЕГДА</span>
+              <span>Продаёшь без манипуляций — навык работает на любую нишу и любой продукт.</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ЭТАП 3: ДЕЛЕГИРОВАНИЕ -->
-      <div class="stage-card">
-        <div class="stage-num">3</div>
-        <div class="stage-content">
-          <div class="stage-header">
-            <h3 class="stage-title">Делегирование</h3>
+      <div class="stage reveal">
+        <div class="stage-head">
+          <div class="stage-num">03</div>
+          <div class="stage-meta">
+            <h3 class="stage-name">Делегирование</h3>
             <span class="stage-duration">1 неделя</span>
           </div>
-          <div class="stage-items">
-            <div class="stage-item">Что делегировать первым, чтобы освободить твоё время</div>
-            <div class="stage-item">Найм и онбординг первого помощника</div>
-            <div class="stage-item">Передача процессов, а не отдельных задач</div>
-            <div class="stage-item">Контроль качества без микроменеджмента</div>
-          </div>
+        </div>
+        <div class="stage-body">
+          <ul class="stage-tools">
+            <li>Что делегировать первым, чтобы освободить твоё время</li>
+            <li>Найм и онбординг первого помощника</li>
+            <li>Передача процессов, а не отдельных задач</li>
+            <li>Контроль качества без микроменеджмента</li>
+          </ul>
           <div class="stage-results">
             <div class="stage-result">
-              <span class="stage-result-label">Сразу</span>
-              <span class="stage-result-text">Первый помощник в команде, ты освобождаешь 5–10 часов в неделю.</span>
+              <span class="stage-result-tag">СРАЗУ</span>
+              <span>Первый помощник в команде — освобождаешь 5–10 часов в неделю.</span>
             </div>
             <div class="stage-result">
-              <span class="stage-result-label">Навсегда</span>
-              <span class="stage-result-text">Из исполнителя становишься человеком с системой и командой — доход растёт без увеличения твоего времени.</span>
+              <span class="stage-result-tag gold">НАВСЕГДА</span>
+              <span>Из исполнителя становишься человеком с системой и командой — доход растёт без увеличения твоего времени.</span>
             </div>
           </div>
         </div>
