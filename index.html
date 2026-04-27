@@ -2696,9 +2696,16 @@
       });
       if (!isOpen) {
         item.classList.add('open');
-        // Force reflow so padding changes apply before measuring
+        // Force padding to apply BEFORE measuring scrollHeight
+        // (.faq-item.open .faq-a меняет padding с 0/32 на 32 со всех сторон)
+        answer.style.paddingTop = '32px';
+        answer.style.paddingBottom = '32px';
         void answer.offsetHeight;
-        answer.style.maxHeight = (answer.scrollHeight + 40) + 'px';
+        const fullHeight = answer.scrollHeight;
+        // Снимаем inline-padding чтобы CSS-правило управляло
+        answer.style.removeProperty('padding-top');
+        answer.style.removeProperty('padding-bottom');
+        answer.style.maxHeight = (fullHeight + 20) + 'px';
       }
     });
   });
