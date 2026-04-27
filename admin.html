@@ -445,6 +445,45 @@
     }
     .outreach-textarea:focus { border-color: var(--gold); }
     .outreach-preview-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ── Lead card sections ── */
+    .lead-section {
+      margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .lead-section-title {
+      font-size: .68rem; font-weight: 700; letter-spacing: .8px;
+      text-transform: uppercase; color: var(--text3); margin-bottom: 10px;
+    }
+
+    /* ── Diagnostics toggle ── */
+    .diag-toggle {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      padding: 10px 14px; border-radius: 8px;
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--text2); font-size: .82rem; font-weight: 600;
+      cursor: pointer; text-align: left; transition: border-color .15s, color .15s;
+    }
+    .diag-toggle:hover { border-color: var(--gold); color: var(--gold); }
+    .diag-chevron { margin-left: auto; display: inline-block; transition: transform .2s; flex-shrink: 0; }
+    .diag-toggle.open .diag-chevron { transform: rotate(180deg); }
+    .diag-answers { padding-top: 14px; }
+
+    /* ── Danger zone ── */
+    .danger-zone {
+      margin-top: 16px; padding: 12px 14px;
+      background: rgba(239,68,68,.04); border: 1px solid rgba(239,68,68,.12);
+      border-radius: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    }
+    .danger-zone-label {
+      font-size: .72rem; color: rgba(239,68,68,.45); font-weight: 600; flex-shrink: 0;
+    }
+
+    /* ── Quick-action bar (stage-specific) ── */
+    .quick-bar {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      padding: 14px 0 0;
+    }
   </style>
 </head>
 <body>
@@ -855,45 +894,98 @@
   }
 
   function renderLeadCard(l) {
-    const initials = (l.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    const date     = new Date(l.created_at);
-    const dateStr  = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
-    const step     = l.current_step != null ? `Шаг ${l.current_step}` : 'Не открыл бот';
-    const QLABELS  = {
-      q1:'Доход сейчас',q2:'Хочу зарабатывать',q3:'Что делал для роста',
-      q4:'Что даёшь клиентам',q5:'Кому нужно / что тормозит',
-      q6:'Где обрывается путь к деньгам',q7:'Чувствуешь когда называешь цену',
-      q8:'Когда клиент говорит «дорого»',q9:'Про более успешного коллегу',
-      q10:'Последний раз называл цену',q11:'Потерянный клиент',
-      q12:'Решения о которых жалеешь',q13:'Люди вокруг',
-      q14:'Жизнь через год',q15:'Что мешает прямо сейчас',
+    const initials  = (l.name || '?').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const date      = new Date(l.created_at);
+    const dateStr   = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+    const step      = l.current_step != null ? `Шаг ${l.current_step}` : 'Не открыл бот';
+
+    const QLABELS = {
+      q1:'Доход сейчас', q2:'Хочу зарабатывать', q3:'Что делал для роста',
+      q4:'Что даёшь клиентам', q5:'Кому нужно / что тормозит',
+      q6:'Где обрывается путь к деньгам', q7:'Чувствуешь когда называешь цену',
+      q8:'Когда клиент говорит «дорого»', q9:'Про более успешного коллегу',
+      q10:'Последний раз называл цену', q11:'Потерянный клиент',
+      q12:'Решения о которых жалеешь', q13:'Люди вокруг',
+      q14:'Жизнь через год', q15:'Что мешает прямо сейчас',
     };
-    const answers  = l.quiz_answers ? Object.entries(l.quiz_answers)
-      .map(([k, v]) => `<div class="answer-item"><div class="answer-q">${escHtml(QLABELS[k] || k)}</div><div class="answer-a">${escHtml(v)}</div></div>`)
-      .join('') : '';
+    const answers = l.quiz_answers
+      ? Object.entries(l.quiz_answers)
+          .map(([k, v]) => `<div class="answer-item"><div class="answer-q">${escHtml(QLABELS[k] || k)}</div><div class="answer-a">${escHtml(v)}</div></div>`)
+          .join('')
+      : '';
 
     const callInfo = l.call_scheduled_at
-      ? `<div class="sub-detail"><div class="sub-detail-label">Созвон</div><div class="sub-detail-value" style="color:var(--gold)">
-           ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Moscow' })} МСК
-         </div></div>` : '';
+      ? `<div class="sub-detail"><div class="sub-detail-label">Созвон</div>
+           <div class="sub-detail-value" style="color:var(--gold)">
+             ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Moscow' })} МСК
+           </div></div>` : '';
 
     const typologyBadge = l.typology && l.typology !== 'unknown'
       ? `<span class="typology-badge typology-${l.typology}">Типаж ${l.typology}</span>` : '';
-
-    const noBotBadge  = !l.tg_user_id
-      ? `<span class="no-bot-badge">бот не открыт</span>` : '';
+    const noBotBadge  = !l.tg_user_id ? `<span class="no-bot-badge">бот не открыт</span>` : '';
     const q15raw      = l.quiz_answers?.q15 || '';
     const barrierLine = q15raw
-      ? `<div class="sub-barrier">«${escHtml(q15raw.length > 95 ? q15raw.slice(0, 95) + '…' : q15raw)}»</div>`
-      : '';
+      ? `<div class="sub-barrier">«${escHtml(q15raw.length > 95 ? q15raw.slice(0, 95) + '…' : q15raw)}»</div>` : '';
     const manualTgUrl = (l.tg_handle || '').startsWith('@')
       ? `https://t.me/${l.tg_handle.slice(1)}` : 'https://t.me/vodasolenaya';
-    const sendOrManualBtn = l.tg_user_id
+
+    // ── Кнопка отправки черновика ─────────────────────────────────────────
+    const sendDraftBtn = l.tg_user_id
       ? `<button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>`
       : `<a class="tg-manual-link" href="${manualTgUrl}" target="_blank" onclick="event.stopPropagation()">📲 Написать вручную в TG</a>`;
 
+    // ── Контекстные кнопки по стадии (видны сразу) ───────────────────────
+    const stageActions = (() => {
+      const s = l.status;
+      const btns = [];
+      if (s === 'call_scheduled') {
+        btns.push(`<button class="lead-btn success" title="Отмечает созвон как прошедший и создаёт follow-up через 24ч" onclick="markCallCompleted('${l.id}',event)">📞 Созвон прошёл</button>`);
+        btns.push(`<button class="lead-btn" title="Удаляет созвон и все напоминания" onclick="cancelCall('${l.id}',event)">Отменить созвон</button>`);
+      }
+      if (s === 'call_done') {
+        btns.push(`<button class="lead-btn success" title="Купил основную программу (курс/наставничество)" onclick="leadPostAction('${l.id}','convert',event)">✅ Купил программу</button>`);
+      }
+      if (!['converted','paid','call_scheduled','call_done','lost','unsubscribed'].includes(s)) {
+        btns.push(`<button class="lead-btn success" title="Купил основную программу (курс/наставничество)" onclick="leadPostAction('${l.id}','convert',event)">✅ Купил программу</button>`);
+      }
+      if (!['paid','converted','lost','unsubscribed'].includes(s)) {
+        btns.push(`<button class="lead-btn" style="border-color:rgba(34,197,94,.3);color:var(--green);" title="Оплатил 990₽ вручную (Tinkoff не сработал)" onclick="leadPostAction('${l.id}','paid',event)">💰 Оплата 990₽</button>`);
+      }
+      if (!l.tg_user_id) {
+        btns.push(`<a class="tg-manual-link" href="${manualTgUrl}" target="_blank" onclick="event.stopPropagation()">📲 Написать в TG</a>`);
+      }
+      return btns.length ? `<div class="quick-bar">${btns.join('')}</div>` : '';
+    })();
+
+    // ── Секция созвона внутри инструментов ────────────────────────────────
+    const callSection = l.call_scheduled_at && l.status !== 'call_done'
+      ? `<div style="font-size:.85rem;color:var(--gold);margin-bottom:4px;">
+           ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { timeZone:'Europe/Moscow' })} МСК
+           · <a href="${escHtml(l.call_zoom_url || '#')}" target="_blank" style="color:var(--gold);">Открыть Zoom →</a>
+         </div>`
+      : `<div class="call-form" id="call-form-${l.id}">
+           <div class="call-form-row">
+             <div>
+               <label class="call-label">Дата и время (МСК)</label>
+               <input type="datetime-local" class="call-input" id="call-time-${l.id}" />
+             </div>
+             <div>
+               <label class="call-label">Ссылка Zoom / Meet</label>
+               <input type="url" class="call-input" id="call-zoom-${l.id}" placeholder="https://zoom.us/j/..." />
+             </div>
+           </div>
+           <div>
+             <label class="call-label">Заметка (опционально)</label>
+             <input type="text" class="call-input" id="call-note-${l.id}" placeholder="О чём говорим..." />
+           </div>
+           <button class="lead-btn primary" title="Назначает созвон, шлёт клиенту напоминание за 1 час"
+             onclick="scheduleCall('${l.id}',event)" style="align-self:flex-start;">Назначить созвон →</button>
+         </div>`;
+
     return `
       <div class="sub-card" id="lead-${l.id}" onclick="toggleLeadCard('${l.id}', event)">
+
+        <!-- ── ШАПКА ── -->
         <div class="sub-header">
           <div class="sub-avatar">${initials}</div>
           <div class="sub-info">
@@ -907,18 +999,21 @@
           </div>
           <span class="sub-chevron">▾</span>
         </div>
+
+        <!-- ── ТЕЛО ── -->
         <div class="sub-body" id="lead-body-${l.id}">
+
+          <!-- 1. Детали -->
           <div class="sub-details-row">
             <div class="sub-detail"><div class="sub-detail-label">Telegram</div><div class="sub-detail-value">${escHtml(l.tg_handle || '—')}</div></div>
             <div class="sub-detail"><div class="sub-detail-label">Доход</div><div class="sub-detail-value">${escHtml(l.income || '—')}</div></div>
-            <div class="sub-detail"><div class="sub-detail-label">Сообщений</div><div class="sub-detail-value">${l.msgs_sent || 0} / 7</div></div>
+            <div class="sub-detail"><div class="sub-detail-label">Бот / шаги</div><div class="sub-detail-value">${l.msgs_sent || 0} из 7 · ${step}</div></div>
             ${callInfo}
             ${l.utm_source ? `<div class="sub-detail"><div class="sub-detail-label">UTM</div><div class="sub-detail-value">${escHtml(l.utm_source)}</div></div>` : ''}
           </div>
-          ${answers ? `<div class="answers-section"><div class="answers-title">📝 Ответы на диагностику</div>${answers}</div>` : ''}
 
-          <!-- NEXT STEP HINT -->
-          <div class="next-step" id="nshint-${l.id}">
+          <!-- 2. Следующий шаг -->
+          <div class="next-step" style="margin-top:16px;">
             <div class="next-step-icon">→</div>
             <div class="next-step-body">
               <div class="next-step-label">Следующий шаг</div>
@@ -926,118 +1021,92 @@
             </div>
           </div>
 
-          <!-- DIRECT-ASSIST: загружается при открытии -->
-          <div id="da-${l.id}" style="display:none;">
-            <div class="da-section">
-              <div class="da-section-title">🎯 Рекомендованный кейс</div>
-              <div class="actions-hint">Кейс ученика с похожей ситуацией — можно упомянуть в разборе</div>
-              <div id="da-case-${l.id}"><div class="loading" style="padding:12px 0;"><div class="spinner" style="width:16px;height:16px;"></div></div></div>
+          <!-- 3. Контекстные кнопки (по стадии) -->
+          ${stageActions}
+
+          <!-- 4. Бот -->
+          <div class="lead-section">
+            <div class="lead-section-title">Drip-бот</div>
+            <div class="lead-actions-group">
+              <button class="lead-btn" title="Ставит drip на паузу — сообщения не придут до возобновления"
+                onclick="leadPostAction('${l.id}','pause',event)">⏸ Пауза</button>
+              <button class="lead-btn" title="Возобновляет drip после паузы"
+                onclick="leadPostAction('${l.id}','resume',event)">▶ Возобновить</button>
             </div>
+          </div>
+
+          <!-- 5. Инструменты (lazy) -->
+          <div id="da-${l.id}" style="display:none;">
+
             <div class="da-section">
-              <div class="da-section-title">✉️ Заготовки первого сообщения</div>
-              <div class="actions-hint">Готовые шаблоны — раскрой, отредактируй и отправь через бот</div>
+              <div class="da-section-title">🎯 Похожий кейс ученика</div>
+              <div class="actions-hint">Упомяни в разборе — клиенту важно видеть себя в чужой истории</div>
+              <div id="da-case-${l.id}">
+                <div class="loading" style="padding:8px 0;"><div class="spinner" style="width:14px;height:14px;margin-bottom:4px;"></div></div>
+              </div>
+            </div>
+
+            <div class="da-section">
+              <div class="da-section-title">✉️ Шаблоны первого сообщения</div>
+              <div class="actions-hint">Раскрой шаблон, отредактируй под клиента, отправь через бот</div>
               <div class="template-cards" id="da-tpl-${l.id}"></div>
             </div>
+
             <div class="da-section">
               <div class="da-section-title">✍️ Черновик разбора</div>
-              <div class="actions-hint">Нажми «Сгенерировать» → отредактируй → отправь клиенту через бот</div>
-              <div class="ai-block" id="da-ai-${l.id}">
-                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-                  <button class="lead-btn" style="background:rgba(99,102,241,.15);color:#a5b4fc;border-color:rgba(99,102,241,.3);"
-                    title="Создаст персональный черновик разбора на основе ответов диагностики"
-                    onclick="generateInAdmin('${l.id}',event)">
-                    ✨ Сгенерировать черновик
+              <div class="actions-hint">Скопируй промпт → вставь в Claude → скопируй ответ ниже → отправь</div>
+              <div class="ai-block">
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+                  <button class="lead-btn"
+                    style="background:rgba(99,102,241,.12);color:#a5b4fc;border-color:rgba(99,102,241,.25);"
+                    title="Копирует промпт с ответами клиента — вставь в Claude и получи черновик"
+                    onclick="copyForClaude('${l.id}', event)">
+                    📋 Скопировать промпт для Claude
                   </button>
                   ${l.typology && l.typology !== 'unknown'
                     ? `<span class="typology-badge typology-${l.typology}">Типаж ${l.typology}</span>`
                     : ''}
                 </div>
                 <textarea class="ai-draft-area" id="draft-${l.id}"
-                  placeholder="Нажми «Сгенерировать» — черновик появится здесь. Потом отредактируй и отправь."
+                  placeholder="Вставь сюда черновик от Claude. Отредактируй и нажми «Отправить клиенту»."
                   onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft || '')}</textarea>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
-                  ${sendOrManualBtn}
-                  <button class="lead-btn" title="Копирует текст разбора в буфер обмена"
+                  ${sendDraftBtn}
+                  <button class="lead-btn" title="Копирует текст черновика в буфер"
                     onclick="copyTemplate('draft-${l.id}',event)">Скопировать текст</button>
                 </div>
               </div>
             </div>
+
             <div class="da-section">
               <div class="da-section-title">📅 Созвон</div>
-              <div class="actions-hint">После созвона нажми «Созвон прошёл» — это отметит статус и запустит follow-up</div>
-              ${l.call_scheduled_at && l.status !== 'call_done'
-                ? `<div style="font-size:.85rem;color:var(--gold);margin-bottom:12px;">
-                     Назначен: ${new Date(l.call_scheduled_at).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })} МСК
-                     · <a href="${escHtml(l.call_zoom_url || '#')}" target="_blank" style="color:var(--gold);">Открыть Zoom →</a>
-                   </div>
-                   <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                     <button class="lead-btn success" title="Отмечает созвон как состоявшийся и создаёт follow-up через 24 часа"
-                       onclick="markCallCompleted('${l.id}',event)">✅ Созвон прошёл</button>
-                     <button class="lead-btn" title="Удаляет созвон и все напоминания"
-                       onclick="cancelCall('${l.id}',event)">Отменить созвон</button>
-                   </div>`
-                : `<div class="call-form" id="call-form-${l.id}">
-                     <div class="call-form-row">
-                       <div>
-                         <label class="call-label">Дата и время (МСК)</label>
-                         <input type="datetime-local" class="call-input" id="call-time-${l.id}" />
-                       </div>
-                       <div>
-                         <label class="call-label">Ссылка Zoom / Meet</label>
-                         <input type="url" class="call-input" id="call-zoom-${l.id}" placeholder="https://zoom.us/j/..." />
-                       </div>
-                     </div>
-                     <div>
-                       <label class="call-label">Заметка (опционально)</label>
-                       <input type="text" class="call-input" id="call-note-${l.id}" placeholder="О чём говорим..." />
-                     </div>
-                     <button class="lead-btn primary" title="Создаёт созвон, шлёт напоминание клиенту за 1 час"
-                       onclick="scheduleCall('${l.id}',event)" style="align-self:flex-start;">Назначить созвон →</button>
-                   </div>`
-              }
+              ${callSection}
             </div>
+
           </div>
 
-          <!-- ACTION GROUPS -->
-          <div class="lead-actions-wrap">
-            <div class="actions-hint">Итог работы с лидом</div>
-            <div class="lead-actions-group">
-              ${!['converted','paid','call_scheduled','call_done'].includes(l.status)
-                ? `<button class="lead-btn success"
-                     title="Купил основную программу (не 990₽ — именно курс/наставничество)"
-                     onclick="leadPostAction('${l.id}','convert',event)">✅ Купил программу</button>`
-                : ''}
-              ${!['paid','converted'].includes(l.status)
-                ? `<button class="lead-btn success" style="color:#4ade80;"
-                     title="Оплатил 990₽ за письменный разбор (если Tinkoff не сработал)"
-                     onclick="leadPostAction('${l.id}','paid',event)">💰 Отметить оплату 990₽</button>`
-                : ''}
-            </div>
+          <!-- 6. Ответы на диагностику (сворачиваемые) -->
+          ${answers ? `
+          <div class="lead-section">
+            <button class="diag-toggle" id="diag-btn-${l.id}"
+              onclick="toggleDiag('${l.id}'); event.stopPropagation();">
+              📝 Ответы на диагностику
+              <span class="diag-chevron">▾</span>
+            </button>
+            <div class="diag-answers" id="diag-${l.id}" style="display:none;">${answers}</div>
+          </div>` : ''}
 
-            <div class="lead-actions-sep"></div>
-
-            <div class="actions-hint">Управление drip-ботом</div>
-            <div class="lead-actions-group">
-              <button class="lead-btn"
-                title="Ставит drip-бот на паузу — сообщения перестанут приходить пока не нажмёшь «Возобновить»"
-                onclick="leadPostAction('${l.id}','pause',event)">⏸ Пауза бота</button>
-              <button class="lead-btn"
-                title="Возобновляет drip-бот после паузы — сообщения продолжат приходить по расписанию"
-                onclick="leadPostAction('${l.id}','resume',event)">▶ Возобновить бота</button>
-            </div>
-
-            <div class="lead-actions-sep"></div>
-
-            <div class="actions-hint" style="color:rgba(239,68,68,.5);">Необратимые действия</div>
-            <div class="lead-actions-danger">
-              <button class="lead-btn danger"
-                title="Помечает лида как потерянного — воронка останавливается, лид остаётся в базе"
-                onclick="leadPostAction('${l.id}','lost',event)">❌ Не купит</button>
-              <button class="lead-btn danger"
-                title="Удаляет лида из базы полностью — вся история и расписание пропадут"
-                onclick="leadPostAction('${l.id}','delete',event)">🗑 Удалить из базы</button>
-            </div>
+          <!-- 7. Необратимые действия -->
+          <div class="danger-zone">
+            <span class="danger-zone-label">Необратимо:</span>
+            <button class="lead-btn danger"
+              title="Помечает как потерянного — воронка стопается, лид остаётся в базе"
+              onclick="leadPostAction('${l.id}','lost',event)">❌ Не купит</button>
+            <button class="lead-btn danger"
+              title="Удаляет из базы полностью — всё пропадёт"
+              onclick="leadPostAction('${l.id}','delete',event)">🗑 Удалить</button>
           </div>
+
         </div>
       </div>
     `;
@@ -1096,7 +1165,7 @@
     if (tplEl && templates) {
       tplEl.innerHTML = templates.map((t, i) => `
         <div class="template-card">
-          <div class="template-head" onclick="toggleTemplate('tpl-${id}-${i}')">
+          <div class="template-head" onclick="toggleTemplate('tpl-${id}-${i}'); event.stopPropagation();">
             <span class="template-label">${escHtml(t.label)}</span>
             <span class="template-toggle" id="tpl-toggle-${id}-${i}">▾ показать</span>
           </div>
@@ -1118,6 +1187,15 @@
     const shown = body.style.display === 'block';
     body.style.display = shown ? 'none' : 'block';
     if (toggle) toggle.textContent = shown ? '▾ показать' : '▴ скрыть';
+  }
+
+  function toggleDiag(id) {
+    const area = document.getElementById(`diag-${id}`);
+    const btn  = document.getElementById(`diag-btn-${id}`);
+    if (!area) return;
+    const shown = area.style.display === 'block';
+    area.style.display = shown ? 'none' : 'block';
+    if (btn) btn.classList.toggle('open', !shown);
   }
 
   async function sendTemplate(leadId, textareaId, e) {
