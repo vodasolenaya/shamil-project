@@ -501,6 +501,122 @@
       .pain-card h3 br { display: none; }
     }
 
+    
+    /* ── OBJECTION (Я сам разберусь) ── */
+    .objection-section {
+      background: #0d0d0d;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .objection-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .objection-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .objection-inner {
+      position: relative; z-index: 2;
+      max-width: 1180px; margin: 0 auto;
+    }
+    .objection-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .objection-quote {
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 500; line-height: 1.18; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 16px;
+      font-style: italic;
+    }
+    .objection-sub {
+      text-align: center; color: rgba(255,255,255,.7);
+      font-size: 1.05rem; margin: 0 0 56px;
+    }
+    .objection-sub strong { color: #C9A84C; font-weight: 600; }
+
+    .objection-grid {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 28px; align-items: stretch;
+    }
+    .objection-col {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .objection-col.after {
+      border-color: rgba(201,168,76,.3);
+      background: linear-gradient(180deg, #1a160c 0%, #141414 100%);
+    }
+    .objection-tag {
+      display: inline-block;
+      font-size: .7rem; font-weight: 600; letter-spacing: 2px;
+      padding: 5px 12px; border-radius: 100px;
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.55);
+      margin-bottom: 18px;
+    }
+    .objection-tag.gold {
+      background: rgba(201,168,76,.12);
+      color: #C9A84C;
+    }
+    .objection-num {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 600; line-height: 1; letter-spacing: -1.5px;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 6px;
+    }
+    .objection-num.gold {
+      background: linear-gradient(135deg, #d8b860, #C9A84C 50%, #8B6914);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .objection-period {
+      font-size: .82rem; color: rgba(255,255,255,.5);
+      margin-bottom: 24px;
+    }
+    .objection-list {
+      list-style: none; padding: 0; margin: 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 20px;
+    }
+    .objection-list li {
+      font-size: .92rem; line-height: 1.55;
+      color: rgba(255,255,255,.75);
+      padding-left: 18px; position: relative;
+      margin-bottom: 10px;
+    }
+    .objection-list li:before {
+      content: '—'; position: absolute; left: 0;
+      color: rgba(255,255,255,.3);
+    }
+    .objection-col.after .objection-list li:before { color: #C9A84C; }
+    .objection-list li:last-child { margin-bottom: 0; }
+
+    .objection-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: #C9A84C;
+      width: 60px; flex-shrink: 0;
+    }
+
+    .objection-cta {
+      display: flex; justify-content: center;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 900px) {
+      .objection-grid { grid-template-columns: 1fr; gap: 16px; }
+      .objection-arrow { transform: rotate(90deg); width: auto; height: 40px; }
+    }
+    @media (max-width: 600px) {
+      .objection-section { padding: 72px 20px; }
+      .objection-col { padding: 28px 24px; }
+    }
+
     /* ── 3 STAGES PROGRAM ── */
     .stages-list {
       display: flex; flex-direction: column; gap: 20px;
@@ -1080,21 +1196,61 @@
   </div>
 </section>
 
-<!-- SAM RAZBERUS -->
-<section class="section" style="background:var(--bg2);">
-  <div class="section-inner">
-    <div class="section-label reveal">Частое возражение</div>
-    <h2 class="section-title reveal">«Я сам разберусь. Просто надо поднажать.»</h2>
-    <p class="section-sub reveal" style="max-width:600px;">
-      Олег думал так <strong>6 месяцев подряд</strong> — составлял планы, читал книги, заставлял себя звонить. Доход на 80к стоял как вкопанный.
-    </p>
-    <p class="section-sub reveal" style="max-width:600px;margin-top:8px;">
-      Потом — диагностика, один барьер, и <strong>за 11 дней 420 000 ₽.</strong> Не потому что начал работать в два раза больше. А потому что перестал продавать из страха.
-    </p>
-    <a href="/diagnostic.html" class="btn-primary reveal" style="display:inline-flex;margin-top:32px;">
-      Найти свой барьер
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+<!-- OBJECTION (Я сам разберусь) -->
+<section class="objection-section">
+  <div class="objection-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="objection-inner">
+    <div class="objection-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ЧАСТОЕ ВОЗРАЖЕНИЕ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="objection-quote">«Я сам разберусь.<br>Просто надо поднажать.»</h2>
+    <p class="objection-sub">Олег думал так <strong>6 месяцев</strong> — пока не получил конкретный барьер.</p>
+
+    <div class="objection-grid">
+      <div class="objection-col before">
+        <div class="objection-tag">ДО</div>
+        <div class="objection-num">80 000 ₽</div>
+        <div class="objection-period">в месяц · 6 месяцев подряд</div>
+        <ul class="objection-list">
+          <li>Составлял планы — не выполнял</li>
+          <li>Читал книги по продажам</li>
+          <li>Заставлял себя звонить клиентам</li>
+          <li>Доход стоял как вкопанный</li>
+        </ul>
+      </div>
+
+      <div class="objection-arrow">→</div>
+
+      <div class="objection-col after">
+        <div class="objection-tag gold">ПОСЛЕ ДИАГНОСТИКИ</div>
+        <div class="objection-num gold">+420 000 ₽</div>
+        <div class="objection-period">за 11 дней</div>
+        <ul class="objection-list">
+          <li>1 диагностика, 1 конкретный барьер</li>
+          <li>Перестал продавать из страха</li>
+          <li>Не «начал работать в 2 раза больше»</li>
+          <li>Просто убрал то, что мешало</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="objection-cta">
+      <a href="/diagnostic.html" class="btn-primary">
+        <span>Найти свой барьер</span>
+        <span class="btn-primary-arrow">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
