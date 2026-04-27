@@ -252,22 +252,22 @@
       border-radius: 100px; padding: 7px 16px;
     }
     .hero h1 {
-      font-size: clamp(1.95rem, 3.4vw, 3rem);
-      font-weight: 800; line-height: 1.18; letter-spacing: -1px;
-      max-width: 580px; margin: 0 0 24px;
+      font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+      font-weight: 700; line-height: 1.2; letter-spacing: -.6px;
+      max-width: 620px; margin: 0 0 22px;
       text-shadow: none;
     }
     .hero h1 em {
       font-style: normal;
       color: var(--gold-text);
-      font-weight: 800;
+      font-weight: 700;
     }
     .hero-sub {
-      font-size: clamp(1rem, 1.6vw, 1.1rem); color: var(--text2);
-      max-width: 480px; margin: 0 0 44px; line-height: 1.8;
+      font-size: clamp(.97rem, 1.3vw, 1.05rem); color: var(--text2);
+      max-width: 480px; margin: 0 0 28px; line-height: 1.6;
     }
     .hero-sub strong { color: var(--text); }
-    .hero-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--gold);
@@ -756,13 +756,10 @@
     }
     .stat-num.animating { animation: countGlow 1.8s ease-out forwards; }
 
-    @media(max-width:580px){ .form-mini-testi { grid-template-columns: 1fr !important; } }
-
     /* Light overrides */
     .hero { text-align: left; }
     .nav-links a:not(.nav-cta) { color: #444444; }
     .nav-links a:not(.nav-cta):hover { color: #0d0d0d; }
-    .hero-badge { background: transparent !important; border: 1px solid rgba(201,168,76,.4) !important; border-radius: 6px !important; }
     .hero-note { color: var(--text2); }
     .hero-proof-text { color: var(--text2); }
 
@@ -770,14 +767,14 @@
     @media(max-width:680px){
       .section { padding: 64px 20px; }
       .btn-primary { font-size: .92rem; padding: 16px 28px; letter-spacing: .5px; }
-      .pain-card h3, .bento-card h3 { font-size: 1.05rem; }
-      .pain-card p, .bento-card p { font-size: .92rem; }
+      .bento-card h3 { font-size: 1.05rem; }
+      .bento-card p { font-size: .92rem; }
       .testi-quote { font-size: .93rem; }
       .case-result { font-size: 1.8rem; }
 
       /* Left-align body text on mobile for readability */
       .section-sub { text-align: left; margin-left: 0; }
-      .bento-card p, .testi-quote, .pain-card p { text-align: left; }
+      .bento-card p, .testi-quote { text-align: left; }
       .about-text p { text-align: left; }
       .stage-item { text-align: left; }
 
