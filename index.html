@@ -912,19 +912,20 @@
       letter-spacing: .3px; margin-bottom: 14px;
     }
     .case-before {
-      font-size: .82rem; line-height: 1.5;
-      color: rgba(255,255,255,.65);
-      margin-bottom: 12px;
+      font-size: .85rem; line-height: 1.5;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 14px;
     }
     .case-before span {
-      font-weight: 600; color: rgba(255,255,255,.85);
+      font-weight: 600; color: #C9A84C;
+      letter-spacing: .3px;
     }
     .case-quote {
-      font-size: .82rem; line-height: 1.5; font-style: italic;
-      color: rgba(255,255,255,.7);
+      font-size: .85rem; line-height: 1.55; font-style: italic;
+      color: rgba(255,255,255,.92);
       margin-top: auto;
       padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,.06);
+      border-top: 1px solid rgba(255,255,255,.08);
     }
 
     .cases-cta {
@@ -1243,14 +1244,7 @@
     .faq-item.open .faq-a { padding: 0 22px 18px; }
 
     /* ── CARD SPOTLIGHT ── */
-    .bento-card, .case-card, .testi-card {
-      --mx: -999px; --my: -999px;
-    }
-    .bento-card::after, .case-card::after, .testi-card::after {
-      content: ''; position: absolute; inset: 0; border-radius: inherit;
-      background: radial-gradient(340px circle at var(--mx) var(--my), rgba(240,192,64,.08), transparent 65%);
-      pointer-events: none;
-    }
+    /* spotlight effect removed for case-card — was creating odd glow on hover */
     .faq-item { position: relative; --mx: -999px; --my: -999px; }
     .faq-item::after {
       content: ''; position: absolute; inset: 0; border-radius: inherit;
@@ -2178,7 +2172,7 @@
   });
 
   /* ── CARD SPOTLIGHT ── */
-  document.querySelectorAll('.bento-card, .case-card, .testi-card, .faq-item').forEach(el => {
+  document.querySelectorAll('.bento-card, .testi-card, .faq-item').forEach(el => {
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
       el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
