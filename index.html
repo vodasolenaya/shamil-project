@@ -912,11 +912,15 @@
       font-weight: 600; margin-bottom: 56px;
     }
     .about-grid {
-      display: grid; grid-template-columns: 480px 1fr;
-      gap: 64px; align-items: end;
+      display: grid; grid-template-columns: 540px 1fr;
+      gap: 56px; align-items: center;
     }
-    .about-photo { display: flex; align-items: end; justify-content: center; }
-    .about-photo img { width: 100%; max-width: 480px; height: auto; display: block; }
+    .about-photo { display: flex; align-items: center; justify-content: center; }
+    .about-photo img {
+      width: 100%; max-width: 540px; height: auto; display: block;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
 
     .about-content { padding-bottom: 16px; }
     .about-name {
@@ -954,23 +958,7 @@
       color: rgba(255,255,255,.55);
     }
 
-    .about-link {
-      display: inline-flex; align-items: center; gap: 10px;
-      color: #C9A84C; font-size: .92rem; font-weight: 500;
-      text-decoration: none; transition: opacity .2s;
-      letter-spacing: -.1px;
-    }
-    .about-link:hover { opacity: .8; }
-    .about-link-arrow {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1px solid rgba(201,168,76,.35);
-      transition: transform .2s, background .2s;
-    }
-    .about-link:hover .about-link-arrow {
-      transform: translateX(3px);
-      background: rgba(201,168,76,.1);
-    }
+    /* about-link removed — using global .btn-primary */
 
     @media (max-width: 900px) {
       .about-grid { grid-template-columns: 1fr; gap: 32px; align-items: center; }
@@ -1683,7 +1671,7 @@
 
     <div class="about-grid">
       <div class="about-photo">
-        <img src="shamil-cutout.png" alt="Шамиль Мухаметзянов" />
+        <img src="photo.jpg" alt="Шамиль Мухаметзянов" />
       </div>
 
       <div class="about-content">
@@ -1706,9 +1694,9 @@
           <div class="about-fact"><span class="fact-num">2+ млн</span><span class="fact-label">вложил в своё развитие</span></div>
         </div>
 
-        <a href="/story" class="about-link">
+        <a href="/story" class="btn-primary">
           <span>Читать мою историю</span>
-          <span class="about-link-arrow">→</span>
+          <span class="btn-primary-arrow">→</span>
         </a>
       </div>
     </div>
