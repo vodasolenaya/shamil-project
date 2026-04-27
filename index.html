@@ -169,21 +169,35 @@
     .hero-coins {
       position: absolute; inset: 0; pointer-events: none; overflow: hidden;
     }
-    .hero-coin {
-      position: absolute; border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #d8b860 0%, #C9A84C 35%, #8B6914 75%, #5a4408 100%);
-      box-shadow: inset -3px -3px 6px rgba(0,0,0,.35), inset 3px 3px 6px rgba(255,220,140,.15);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: rgba(0,0,0,.42);
-      opacity: .35;
+    .hero-bill {
+      position: absolute;
+      width: 110px; height: 56px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #b8944a 0%, #C9A84C 50%, #8B6914 100%);
+      box-shadow: inset 0 0 0 1px rgba(255,220,140,.18), inset -2px -2px 8px rgba(0,0,0,.3);
+      opacity: .22;
     }
-    .hero-coin.c1 { width: 86px; height: 86px; top: 12%; left: 4%; transform: rotate(-12deg); font-size: 28px; opacity: .28; }
-    .hero-coin.c2 { width: 54px; height: 54px; top: 56%; left: 8%; transform: rotate(8deg); font-size: 18px; opacity: .22; }
-    .hero-coin.c3 { width: 42px; height: 42px; top: 18%; left: 38%; transform: rotate(15deg); font-size: 14px; opacity: .18; }
-    .hero-coin.c4 { width: 64px; height: 64px; top: 76%; left: 44%; transform: rotate(-8deg); font-size: 22px; opacity: .2; }
-    .hero-coin.c5 { width: 38px; height: 38px; top: 8%; left: 52%; transform: rotate(20deg); font-size: 13px; opacity: .15; }
+    .hero-bill::before, .hero-bill::after {
+      content: ''; position: absolute;
+      width: 14px; height: 14px;
+      border: 1px solid rgba(0,0,0,.4); border-radius: 50%;
+    }
+    .hero-bill::before { top: 6px; left: 6px; }
+    .hero-bill::after { bottom: 6px; right: 6px; }
+    .hero-bill .num {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-weight: 800; font-size: 18px; color: rgba(0,0,0,.45);
+      letter-spacing: -1px;
+    }
+    .hero-bill.b1 { top: 8%; left: 3%; transform: rotate(-14deg); opacity: .22; }
+    .hero-bill.b2 { top: 62%; left: 9%; transform: rotate(8deg); opacity: .18; }
+    .hero-bill.b3 { top: 18%; left: 32%; transform: rotate(18deg) scale(.75); opacity: .15; }
+    .hero-bill.b4 { top: 78%; left: 38%; transform: rotate(-6deg) scale(.85); opacity: .16; }
+    .hero-bill.b5 { top: 6%; right: 32%; transform: rotate(12deg) scale(.7); opacity: .14; }
+    .hero-bill.b6 { top: 70%; right: 12%; transform: rotate(-10deg) scale(.9); opacity: .15; }
+    .hero-bill.b7 { top: 32%; right: 4%; transform: rotate(20deg) scale(.65); opacity: .12; }
     @media (max-width: 900px) {
-      .hero-coin.c3, .hero-coin.c4, .hero-coin.c5 { display: none; }
+      .hero-bill.b3, .hero-bill.b5, .hero-bill.b7 { display: none; }
     }
     .hero-container {
       position: relative; z-index: 2;
@@ -196,8 +210,9 @@
 
     .hero h1 {
       font-size: clamp(1.7rem, 2.8vw, 2.6rem);
-      font-weight: 500; line-height: 1.2; letter-spacing: -.5px;
-      max-width: 620px; margin: 0 0 28px; color: #ffffff;
+      font-weight: 500; line-height: 1.22; letter-spacing: -.5px;
+      max-width: 680px; margin: 0 0 28px; color: #ffffff;
+      text-wrap: balance;
     }
     .hero h1 em {
       font-style: normal; color: #C9A84C; font-weight: 500;
@@ -777,11 +792,13 @@
 <section class="hero">
   <div class="hero-bg-decor"></div>
   <div class="hero-coins">
-    <div class="hero-coin c1">₽</div>
-    <div class="hero-coin c2">₽</div>
-    <div class="hero-coin c3">₽</div>
-    <div class="hero-coin c4">₽</div>
-    <div class="hero-coin c5">₽</div>
+    <div class="hero-bill b1"><span class="num">300K</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">300K</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
   </div>
 
   <div class="hero-container">
