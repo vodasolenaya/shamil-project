@@ -166,8 +166,8 @@
     .hero {
       position: relative;
       background: #0a0a0a;
-      padding: 96px 24px 0;
-      height: 100vh; min-height: 720px;
+      padding: 110px 24px 0;
+      min-height: auto;
       overflow: hidden;
       display: flex; align-items: stretch;
     }
@@ -230,9 +230,10 @@
       max-width: 1320px; margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 60px; align-items: end;
+      padding-bottom: 0;
     }
 
-    .hero-text { display: flex; flex-direction: column; align-items: flex-start; }
+    .hero-text { display: flex; flex-direction: column; align-items: flex-start; align-self: start; padding-bottom: 56px; }
 
     .hero h1 {
       font-size: clamp(1.7rem, 2.8vw, 2.6rem);
