@@ -438,39 +438,53 @@
     .section.cases + .section,
     .about + .section { border-top: none; }
 
-    /* ── PROGRAM ── */
-    .program-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    @media(max-width:768px){ .program-blocks { grid-template-columns: 1fr; } }
-    .prog-card {
-      background: #ffffff; border: 1px solid rgba(0,0,0,.1);
-      border-radius: 12px; padding: 36px 32px; position: relative;
+    /* ── 3 STAGES PROGRAM ── */
+    .stages-list {
+      display: flex; flex-direction: column; gap: 20px;
+      max-width: 980px; margin: 40px auto 0;
     }
-    .prog-card::after { display: none; }
-    .prog-tag {
-      font-size: .72rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--gold-text); margin-bottom: 16px;
-      display: inline-block; border-bottom: 1px solid rgba(201,168,76,.3); padding-bottom: 10px;
+    .stage-card {
+      display: grid; grid-template-columns: 80px 1fr; gap: 28px;
+      padding: 32px 36px; background: var(--card);
+      border: 1px solid var(--border); border-radius: var(--r2);
+      transition: border-color .2s, transform .2s;
     }
-    .prog-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -.3px; color: var(--text); line-height: 1.4; }
-    .prog-items { display: flex; flex-direction: column; gap: 8px; }
-    .prog-item {
-      background: var(--bg2); border: 1px solid rgba(0,0,0,.08);
-      padding: 14px 18px;
-      font-size: .95rem; color: var(--text2); line-height: 1.6;
-      border-left: 3px solid rgba(201,168,76,.5);
+    .stage-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .stage-num {
+      font-size: 4rem; font-weight: 900; line-height: 1; letter-spacing: -3px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .prog-item strong { color: var(--text); }
-    .prog-formats {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border);
+    .stage-content { display: flex; flex-direction: column; gap: 18px; }
+    .stage-header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    .stage-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -.5px; color: var(--text); margin: 0; }
+    .stage-duration {
+      font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gold-text); background: var(--gold-faint);
+      padding: 4px 12px; border-radius: 100px;
     }
-    .prog-format-tag {
-      font-size: .76rem; color: var(--text2);
-      background: rgba(0,0,0,.04); border: 1px solid var(--border);
-      border-radius: 6px; padding: 4px 10px;
+    .stage-items { display: flex; flex-direction: column; gap: 8px; }
+    .stage-item {
+      font-size: .95rem; color: var(--text2); line-height: 1.5;
+      padding-left: 20px; position: relative;
     }
-    @media(max-width:680px){
-      .program-blocks { grid-template-columns: 1fr; }
+    .stage-item::before { content: '—'; position: absolute; left: 0; color: var(--gold-text); font-weight: 700; }
+    .stage-results {
+      margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .stage-result { display: flex; align-items: flex-start; gap: 12px; font-size: .92rem; line-height: 1.55; }
+    .stage-result-label {
+      flex-shrink: 0; width: 80px; font-weight: 800; font-size: .76rem;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--gold-text); padding-top: 2px;
+    }
+    .stage-result-text { color: var(--text2); }
+    @media(max-width:768px){
+      .stage-card { grid-template-columns: 1fr; padding: 24px 22px; gap: 16px; }
+      .stage-num { font-size: 3rem; }
+      .stage-title { font-size: 1.25rem; }
+      .stage-result { flex-direction: column; gap: 4px; }
+      .stage-result-label { width: auto; }
     }
 
     /* ── CASES ── */
@@ -986,8 +1000,6 @@
 
     /* price-card: no will-change to avoid compositor layer glitches */
     @media(max-width:580px){ .form-mini-testi { grid-template-columns: 1fr !important; } }
-    @media(max-width:680px){ .prog-mechanics-grid { grid-template-columns: 1fr 1fr !important; } }
-    @media(max-width:480px){ .prog-mechanics-grid { grid-template-columns: 1fr !important; } }
 
     /* Light overrides */
     .hero { text-align: left; }
@@ -1010,7 +1022,7 @@
       .section-sub { text-align: left; margin-left: 0; }
       .bento-card p, .testi-quote, .pain-card p { text-align: left; }
       .about-text p { text-align: left; }
-      .prog-item { text-align: left; }
+      .stage-item { text-align: left; }
 
       /* Hero badge — reduce letter-spacing so it doesn't span nearly full width */
       .hero-eyebrow { letter-spacing: .5px; font-size: .7rem; }
@@ -1225,55 +1237,92 @@
 <section class="section" id="program">
   <div class="section-inner">
     <div class="section-label reveal">Программа</div>
-    <h2 class="section-title reveal">Месяц работы — фундамент, система, практика</h2>
+    <h2 class="section-title reveal">3 этапа за 30 дней — целеполагание, продажи, делегирование</h2>
+    <p class="section-sub reveal">Каждый этап даёт результат сразу — и навык, который остаётся с тобой навсегда.</p>
 
-    <div class="program-blocks reveal">
-      <div class="prog-card">
-        <div class="prog-tag">Блок 1 — Фундамент</div>
-        <h3>На выходе: называешь цену спокойно и держишь её</h3>
-        <div class="prog-items">
-          <div class="prog-item">Нейрофизиология страхов — почему мозг саботирует рост</div>
-          <div class="prog-item">SMART-цели — не «хочу больше», а конкретная цифра с датой</div>
-          <div class="prog-item">Зона комфорта — почему знаешь что делать, но не делаешь</div>
-          <div class="prog-item">Сила намерения — ответственность за результат на себя</div>
-        </div>
-      </div>
-      <div class="prog-card">
-        <div class="prog-tag">Блок 2 — Продажи</div>
-        <h3>На выходе: продаёшь без манипуляций и скидок</h3>
-        <div class="prog-items">
-          <div class="prog-item">СПИН-продажи — клиент сам приходит к решению купить</div>
-          <div class="prog-item">5 этапов сделки — от первого контакта до оплаты</div>
-          <div class="prog-item">Обоснование ценника — «дорого» перестаёт быть концом разговора</div>
-          <div class="prog-item">Работа с возражениями — закрываешь без уговоров и скидок</div>
-        </div>
-      </div>
-    </div>
+    <div class="stages-list reveal">
 
-    <div style="margin-top:28px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px 28px;" class="reveal">
-      <div style="font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-text);margin-bottom:14px;">Как это работает изнутри</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="prog-mechanics-grid">
-        <div style="text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(200,134,10,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--gold);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-          <div style="font-size:.82rem;font-weight:700;margin-bottom:4px;">Ежедневные отчёты</div>
-          <div style="font-size:.85rem;color:var(--text3);line-height:1.5;">Пишешь что сделал — я вижу где застрял</div>
-        </div>
-        <div style="text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(200,134,10,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--gold);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
-          <div style="font-size:.82rem;font-weight:700;margin-bottom:4px;">Живые созвоны</div>
-          <div style="font-size:.85rem;color:var(--text3);line-height:1.5;">1–3 раза в неделю — разбираем твои сделки лично</div>
-        </div>
-        <div style="text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(200,134,10,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--gold);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div style="font-size:.82rem;font-weight:700;margin-bottom:4px;">Группа</div>
-          <div style="font-size:.85rem;color:var(--text3);line-height:1.5;">Динамика группы даёт энергию там где сам бы бросил</div>
-        </div>
-        <div style="text-align:center;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(200,134,10,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;color:var(--gold);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-          <div style="font-size:.82rem;font-weight:700;margin-bottom:4px;">Разбор твоих сделок</div>
-          <div style="font-size:.85rem;color:var(--text3);line-height:1.5;">Показываю где именно теряешь деньги в своих переговорах</div>
+      <!-- ЭТАП 1: ЦЕЛЕПОЛАГАНИЕ -->
+      <div class="stage-card">
+        <div class="stage-num">1</div>
+        <div class="stage-content">
+          <div class="stage-header">
+            <h3 class="stage-title">Целеполагание</h3>
+            <span class="stage-duration">1 неделя</span>
+          </div>
+          <div class="stage-items">
+            <div class="stage-item">SMART-цель: конкретная цифра дохода и срок</div>
+            <div class="stage-item">Декомпозиция цели на ежедневные действия</div>
+            <div class="stage-item">Работа со страхами и зоной комфорта</div>
+            <div class="stage-item">Личная ответственность за результат, без оправданий</div>
+          </div>
+          <div class="stage-results">
+            <div class="stage-result">
+              <span class="stage-result-label">Сразу</span>
+              <span class="stage-result-text">Знаешь сколько хочешь зарабатывать к конкретной дате и что делать прямо сегодня.</span>
+            </div>
+            <div class="stage-result">
+              <span class="stage-result-label">Навсегда</span>
+              <span class="stage-result-text">Навык декомпозиции — ставишь и достигаешь любой цели, не только финансовой.</span>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- ЭТАП 2: ПРОДАЖИ -->
+      <div class="stage-card">
+        <div class="stage-num">2</div>
+        <div class="stage-content">
+          <div class="stage-header">
+            <h3 class="stage-title">Продажи</h3>
+            <span class="stage-duration">2 недели</span>
+          </div>
+          <div class="stage-items">
+            <div class="stage-item">5 этапов сделки — от первого касания до оплаты</div>
+            <div class="stage-item">СПИН-вопросы — клиент сам приходит к решению купить</div>
+            <div class="stage-item">Обоснование цены без страха и заискивания</div>
+            <div class="stage-item">Закрытие «дорого» и «подумаю» без уговоров и скидок</div>
+          </div>
+          <div class="stage-results">
+            <div class="stage-result">
+              <span class="stage-result-label">Сразу</span>
+              <span class="stage-result-text">Первая сделка на новый чек в первые 1–2 недели программы.</span>
+            </div>
+            <div class="stage-result">
+              <span class="stage-result-label">Навсегда</span>
+              <span class="stage-result-text">Продаёшь без манипуляций — этот навык работает на любую нишу и любой продукт.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ЭТАП 3: ДЕЛЕГИРОВАНИЕ -->
+      <div class="stage-card">
+        <div class="stage-num">3</div>
+        <div class="stage-content">
+          <div class="stage-header">
+            <h3 class="stage-title">Делегирование</h3>
+            <span class="stage-duration">1 неделя</span>
+          </div>
+          <div class="stage-items">
+            <div class="stage-item">Что делегировать первым, чтобы освободить твоё время</div>
+            <div class="stage-item">Найм и онбординг первого помощника</div>
+            <div class="stage-item">Передача процессов, а не отдельных задач</div>
+            <div class="stage-item">Контроль качества без микроменеджмента</div>
+          </div>
+          <div class="stage-results">
+            <div class="stage-result">
+              <span class="stage-result-label">Сразу</span>
+              <span class="stage-result-text">Первый помощник в команде, ты освобождаешь 5–10 часов в неделю.</span>
+            </div>
+            <div class="stage-result">
+              <span class="stage-result-label">Навсегда</span>
+              <span class="stage-result-text">Из исполнителя становишься человеком с системой и командой — доход растёт без увеличения твоего времени.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
