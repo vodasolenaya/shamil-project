@@ -173,31 +173,37 @@
       position: absolute;
       width: 110px; height: 56px;
       border-radius: 4px;
-      background: linear-gradient(135deg, #b8944a 0%, #C9A84C 50%, #8B6914 100%);
-      box-shadow: inset 0 0 0 1px rgba(255,220,140,.18), inset -2px -2px 8px rgba(0,0,0,.3);
-      opacity: .22;
+      background: linear-gradient(135deg, #2f5e3d 0%, #3d7a4f 45%, #1d3d27 100%);
+      box-shadow: inset 0 0 0 1px rgba(160,220,180,.22), inset -2px -2px 8px rgba(0,0,0,.35);
     }
     .hero-bill::before, .hero-bill::after {
       content: ''; position: absolute;
       width: 14px; height: 14px;
-      border: 1px solid rgba(0,0,0,.4); border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.45); border-radius: 50%;
+      background: rgba(255,255,255,.04);
     }
     .hero-bill::before { top: 6px; left: 6px; }
     .hero-bill::after { bottom: 6px; right: 6px; }
     .hero-bill .num {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      font-weight: 800; font-size: 18px; color: rgba(0,0,0,.45);
+      font-weight: 800; font-size: 22px; color: rgba(180,230,200,.85);
       letter-spacing: -1px;
     }
-    .hero-bill.b1 { top: 8%; left: 3%; transform: rotate(-14deg); opacity: .22; }
-    .hero-bill.b2 { top: 62%; left: 9%; transform: rotate(8deg); opacity: .18; }
-    .hero-bill.b3 { top: 18%; left: 32%; transform: rotate(18deg) scale(.75); opacity: .15; }
-    .hero-bill.b4 { top: 78%; left: 38%; transform: rotate(-6deg) scale(.85); opacity: .16; }
-    .hero-bill.b5 { top: 6%; right: 32%; transform: rotate(12deg) scale(.7); opacity: .14; }
-    .hero-bill.b6 { top: 70%; right: 12%; transform: rotate(-10deg) scale(.9); opacity: .15; }
-    .hero-bill.b7 { top: 32%; right: 4%; transform: rotate(20deg) scale(.65); opacity: .12; }
+    .hero-bill.b1  { top: 6%;  left: 2%;   transform: rotate(-14deg); opacity: .35; }
+    .hero-bill.b2  { top: 58%; left: 6%;   transform: rotate(8deg);   opacity: .28; }
+    .hero-bill.b3  { top: 14%; left: 24%;  transform: rotate(18deg) scale(.75); opacity: .22; }
+    .hero-bill.b4  { top: 76%; left: 32%;  transform: rotate(-6deg) scale(.85);  opacity: .25; }
+    .hero-bill.b5  { top: 4%;  left: 44%;  transform: rotate(12deg) scale(.7);   opacity: .2; }
+    .hero-bill.b6  { top: 68%; right: 8%;  transform: rotate(-10deg) scale(.9);  opacity: .25; }
+    .hero-bill.b7  { top: 28%; right: 2%;  transform: rotate(20deg) scale(.65);  opacity: .2; }
+    .hero-bill.b8  { top: 88%; left: 18%;  transform: rotate(-22deg) scale(.6);  opacity: .18; }
+    .hero-bill.b9  { top: 38%; left: 14%;  transform: rotate(28deg) scale(.55);  opacity: .16; }
+    .hero-bill.b10 { top: 84%; right: 28%; transform: rotate(15deg) scale(.7);   opacity: .22; }
+    .hero-bill.b11 { top: 50%; right: 22%; transform: rotate(-18deg) scale(.6);  opacity: .15; }
+    .hero-bill.b12 { top: 22%; right: 18%; transform: rotate(8deg) scale(.5);    opacity: .14; }
     @media (max-width: 900px) {
-      .hero-bill.b3, .hero-bill.b5, .hero-bill.b7 { display: none; }
+      .hero-bill.b3, .hero-bill.b5, .hero-bill.b7,
+      .hero-bill.b9, .hero-bill.b11, .hero-bill.b12 { display: none; }
     }
     .hero-container {
       position: relative; z-index: 2;
@@ -792,13 +798,18 @@
 <section class="hero">
   <div class="hero-bg-decor"></div>
   <div class="hero-coins">
-    <div class="hero-bill b1"><span class="num">300K</span></div>
+    <div class="hero-bill b1"><span class="num">₽</span></div>
     <div class="hero-bill b2"><span class="num">₽</span></div>
     <div class="hero-bill b3"><span class="num">₽</span></div>
-    <div class="hero-bill b4"><span class="num">300K</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
     <div class="hero-bill b5"><span class="num">₽</span></div>
     <div class="hero-bill b6"><span class="num">₽</span></div>
     <div class="hero-bill b7"><span class="num">₽</span></div>
+    <div class="hero-bill b8"><span class="num">₽</span></div>
+    <div class="hero-bill b9"><span class="num">₽</span></div>
+    <div class="hero-bill b10"><span class="num">₽</span></div>
+    <div class="hero-bill b11"><span class="num">₽</span></div>
+    <div class="hero-bill b12"><span class="num">₽</span></div>
   </div>
 
   <div class="hero-container">
