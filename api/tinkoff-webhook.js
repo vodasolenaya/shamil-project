@@ -139,27 +139,54 @@ export default async function handler(req, res) {
 
   // ── Уведомляем Шамиля ─────────────────────────────────────────────────────
   if (BOT_TOKEN && CHAT_ID) {
-    const productLabel = PRODUCT_LABELS[product] || product;
-    const leadLine = leadName
-      ? `👤 <b>${leadName}</b>${leadHandle ? ` · ${leadHandle}` : ''}${lead_id ? ` · <code>${lead_id}</code>` : ''}`
-      : `🔑 OrderId: <code>${body.OrderId || '—'}</code>`;
+    const nameStr   = leadName   || 'Неизвестно';
+    const handleStr = leadHandle || '—';
+    let text;
 
-    const followupLine = product === 'breakdown'
-      ? `\n📤 Питч уроков запланирован через 48ч`
-      : product === 'tripwire'
-      ? `\n📤 Доступ к урокам будет отправлен через 5 мин`
-      : '';
-
-    const text =
-      `💳 <b>Оплата получена — ${amount} ₽ (${productLabel})!</b>\n\n` +
-      `${leadLine}\n` +
-      `Сумма: <b>${amount} ₽</b>${followupLine}\n\n` +
-      `<a href="https://artofsales.art/admin">Открыть админку →</a>`;
+    if (product === 'tripwire') {
+      // Уроки 3 000₽ — максимально чётко для выдачи доступа
+      text =
+        `💰 <b>ОПЛАТА 3 000₽ — УРОКИ</b>\n\n` +
+        `👤 <b>${nameStr}</b>\n` +
+        `📱 Telegram: <b>${handleStr}</b>\n` +
+        (lead_id ? `🔑 ID: <code>${lead_id}</code>\n` : '') +
+        `\n⚡️ <b>НУЖНО ВЫДАТЬ ДОСТУП К УРОКАМ</b>\n\n` +
+        `<a href="https://artofsales.art/admin">Открыть в админке →</a>`;
+    } else if (product === 'call') {
+      text =
+        `💰 <b>ОПЛАТА 5 000₽ — СОЗВОН</b>\n\n` +
+        `👤 <b>${nameStr}</b>\n` +
+        `📱 Telegram: <b>${handleStr}</b>\n` +
+        (lead_id ? `🔑 ID: <code>${lead_id}</code>\n` : '') +
+        `\n📅 Назначь время <a href="https://artofsales.art/admin">в админке →</a>`;
+    } else {
+      // Разбор 990₽
+      text =
+        `💳 <b>Оплата 990₽ — разбор</b>\n\n` +
+        `👤 <b>${nameStr}</b> · ${handleStr}\n` +
+        `📤 Питч уроков запланирован через 48ч\n\n` +
+        `<a href="https://artofsales.art/admin">Открыть админку →</a>`;
+    }
 
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' }),
     }).catch(console.error);
+
+    // Если настроен чат ассистента — дублируем уведомление о выдаче доступа
+    const ASSISTANT_CHAT_ID = process.env.ASSISTANT_CHAT_ID;
+    if (ASSISTANT_CHAT_ID && product === 'tripwire') {
+      const assistantText =
+        `⚡️ <b>Выдать доступ к урокам</b>\n\n` +
+        `Клиент: <b>${nameStr}</b>\n` +
+        `Telegram: <b>${handleStr}</b>\n\n` +
+        `Оплатил 3 000₽ только что.`;
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ chat_id: ASSISTANT_CHAT_ID, text: assistantText, parse_mode: 'HTML' }),
+      }).catch(console.error);
+    }
   }
 }
