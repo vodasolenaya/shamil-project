@@ -7,7 +7,12 @@
 
 import { getDb, genId } from '../lib/db.js';
 import { getMessage } from '../lib/messages.js';
-import { buildCallFollowup, buildCohortPitch } from '../lib/message-templates.js';
+import {
+  buildCallFollowup,
+  buildTripwirePitch,
+  buildTripwireAccess,
+  buildCallPitch,
+} from '../lib/message-templates.js';
 
 async function tgSend(token, chatId, text, reply_markup) {
   const body = { chat_id: chatId, text, parse_mode: 'HTML', disable_web_page_preview: true };
@@ -105,13 +110,32 @@ export default async function handler(req, res) {
       }
       msgText = buildCallFollowup({ name: row.name || '' });
 
-    } else if (dsType === 'cohort_pitch') {
-      // Питч когорты через 48ч после оплаты — только если ещё не конвертирован / не потерян
+    } else if (dsType === 'tripwire_pitch') {
+      // Питч трипваера (3 000₽) через 48ч после оплаты разбора (990₽)
       if (['converted', 'lost', 'unsubscribed'].includes(row.lead_status)) {
         await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
         continue;
       }
-      msgText = buildCohortPitch({ name: row.name || '' });
+      msgText = buildTripwirePitch({ name: row.name || '' });
+      // Кнопка оплаты — прямой редирект на Tinkoff
+      markup = {
+        inline_keyboard: [[{
+          text: 'Купить за 3 000₽ →',
+          url:  `https://artofsales.art/api/pay-redirect?product=tripwire&lead_id=${row.lead_id}`,
+        }]],
+      };
+
+    } else if (dsType === 'tripwire_access') {
+      // Подтверждение доступа к урокам после оплаты трипваера
+      msgText = buildTripwireAccess({ name: row.name || '' });
+
+    } else if (dsType === 'call_pitch') {
+      // Питч созвона (5 000₽) через 3 дня после трипваера
+      if (['converted', 'lost', 'unsubscribed'].includes(row.lead_status)) {
+        await sql`UPDATE drip_schedule SET sent_at = NOW() WHERE id = ${row.drip_id}`;
+        continue;
+      }
+      msgText = buildCallPitch({ name: row.name || '' });
     }
 
     if (!msgText) {

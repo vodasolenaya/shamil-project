@@ -351,6 +351,29 @@
     }
     .filter-chip.active { border-color: var(--gold); color: var(--gold); }
 
+    /* ── No-bot badge ── */
+    .no-bot-badge {
+      display: inline-block; font-size: .62rem; font-weight: 700;
+      letter-spacing: .3px; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 4px;
+      background: rgba(239,68,68,.1); color: #f87171;
+      border: 1px solid rgba(239,68,68,.2); margin-left: 7px;
+      vertical-align: middle;
+    }
+    .sub-barrier {
+      font-size: .76rem; color: var(--text3); font-style: italic;
+      margin-top: 3px; overflow: hidden; text-overflow: ellipsis;
+      white-space: nowrap; max-width: 380px;
+    }
+    .tg-manual-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; border-radius: 8px; font-size: .8rem; font-weight: 600;
+      color: #818cf8; text-decoration: none;
+      border: 1px solid rgba(99,102,241,.3); background: rgba(99,102,241,.08);
+      transition: background .15s; cursor: pointer;
+    }
+    .tg-manual-link:hover { background: rgba(99,102,241,.18); }
+
     /* ── Outreach panel ── */
     .outreach-panel {
       background: rgba(201,168,76,.05); border: 1px solid rgba(201,168,76,.25);
@@ -788,13 +811,26 @@
     const typologyBadge = l.typology && l.typology !== 'unknown'
       ? `<span class="typology-badge typology-${l.typology}">Типаж ${l.typology}</span>` : '';
 
+    const noBotBadge  = !l.tg_user_id
+      ? `<span class="no-bot-badge">бот не открыт</span>` : '';
+    const q15raw      = l.quiz_answers?.q15 || '';
+    const barrierLine = q15raw
+      ? `<div class="sub-barrier">«${escHtml(q15raw.length > 95 ? q15raw.slice(0, 95) + '…' : q15raw)}»</div>`
+      : '';
+    const manualTgUrl = (l.tg_handle || '').startsWith('@')
+      ? `https://t.me/${l.tg_handle.slice(1)}` : 'https://t.me/vodasolenaya';
+    const sendOrManualBtn = l.tg_user_id
+      ? `<button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>`
+      : `<a class="tg-manual-link" href="${manualTgUrl}" target="_blank" onclick="event.stopPropagation()">📲 Написать вручную в TG</a>`;
+
     return `
       <div class="sub-card" id="lead-${l.id}" onclick="toggleLeadCard('${l.id}', event)">
         <div class="sub-header">
           <div class="sub-avatar">${initials}</div>
           <div class="sub-info">
-            <div class="sub-name">${escHtml(l.name || 'Без имени')}${typologyBadge}</div>
+            <div class="sub-name">${escHtml(l.name || 'Без имени')}${typologyBadge}${noBotBadge}</div>
             <div class="sub-tg">${escHtml(l.tg_handle || '—')}</div>
+            ${barrierLine}
           </div>
           <div class="sub-meta">
             <span class="lead-status ${l.status}">${statusLabel(l.status)}</span>
@@ -812,14 +848,7 @@
           </div>
           ${answers ? `<div class="answers-section"><div class="answers-title">📝 Ответы на диагностику</div>${answers}</div>` : ''}
 
-          <!-- COPY FOR CLAUDE -->
-          ${l.quiz_answers && Object.keys(l.quiz_answers).length > 0 ? `
-          <div style="margin:10px 0 4px;">
-            <button class="lead-btn" style="background:rgba(99,102,241,.12);color:#818cf8;border-color:rgba(99,102,241,.25);"
-              onclick="copyForClaude('${l.id}',event)">
-              📋 Скопировать для Claude → вставь в чат и получи черновик
-            </button>
-          </div>` : ''}
+          <!-- copy-for-claude removed — используй кнопку «Сгенерировать черновик» -->
 
           <!-- DIRECT-ASSIST: загружается при открытии -->
           <div id="da-${l.id}" style="display:none;">
@@ -847,7 +876,7 @@
                   placeholder="Нажми «Сгенерировать» — черновик появится здесь. Потом отредактируй и отправь."
                   onchange="saveDraft('${l.id}', this.value)">${escHtml(l.ai_draft || '')}</textarea>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
-                  <button class="lead-btn primary" onclick="sendFinal('${l.id}',event)">Отправить клиенту →</button>
+                  ${sendOrManualBtn}
                   <button class="lead-btn" onclick="copyTemplate('draft-${l.id}',event)">Скопировать</button>
                 </div>
               </div>
@@ -976,6 +1005,16 @@
 
   async function sendTemplate(leadId, textareaId, e) {
     e.stopPropagation();
+    // Проверяем что лид открыл бота
+    const lead = leadsData.find(x => x.id === leadId) || leadDetails[leadId]?.lead;
+    if (lead && !lead.tg_user_id) {
+      const handle = lead.tg_handle || '';
+      const url    = handle.startsWith('@') ? `https://t.me/${handle.slice(1)}` : 'https://t.me/vodasolenaya';
+      if (confirm(`${handle || 'Лид'} не открыл бота — отправить через бот нельзя.\n\nОткрыть чат в Telegram?`)) {
+        window.open(url, '_blank');
+      }
+      return;
+    }
     const text = document.getElementById(textareaId)?.value?.trim();
     if (!text) return;
     if (!confirm('Отправить это сообщение клиенту через бот?')) return;
@@ -1053,6 +1092,16 @@
 
   async function sendFinal(leadId, e) {
     e.stopPropagation();
+    // Проверяем что лид открыл бота
+    const lead = leadsData.find(x => x.id === leadId) || leadDetails[leadId]?.lead;
+    if (lead && !lead.tg_user_id) {
+      const handle = lead.tg_handle || '';
+      const url    = handle.startsWith('@') ? `https://t.me/${handle.slice(1)}` : 'https://t.me/vodasolenaya';
+      if (confirm(`${handle || 'Лид'} не открыл бота — отправить через бот нельзя.\n\nОткрыть чат в Telegram вручную?`)) {
+        window.open(url, '_blank');
+      }
+      return;
+    }
     const draft = document.getElementById(`draft-${leadId}`)?.value?.trim();
     if (!draft) { alert('Нет текста для отправки'); return; }
     if (!confirm('Отправить этот разбор клиенту?')) return;
@@ -1200,17 +1249,23 @@
     if (!leads || leads.length === 0) { panel.style.display = 'none'; panel.innerHTML = ''; return; }
 
     const rows = leads.map(l => {
-      const qa      = l.quiz_answers || {};
-      const barrier = qa.q15 || qa.q5 || '—';
-      const handle  = l.tg_handle || '';
+      const qa       = l.quiz_answers || {};
+      const barrier  = (qa.q15 || qa.q5 || '').trim();
+      const handle   = l.tg_handle || '';
       const deeplink = `https://t.me/artofsales_shamil_bot?start=${l.id}`;
+      const short    = barrier.length > 100 ? barrier.slice(0, 100) + '…' : barrier;
       return `
         <div class="outreach-row" id="orow-${l.id}">
           <div class="outreach-name">${escHtml(l.name || 'Без имени')}</div>
           <div class="outreach-handle">${escHtml(handle || '—')}</div>
-          <div class="outreach-barrier">«${escHtml(barrier.length > 100 ? barrier.slice(0, 100) + '…' : barrier)}»</div>
+          <div class="outreach-barrier">${short ? '«' + escHtml(short) + '»' : '—'}</div>
           <button class="outreach-btn" id="obtn-${l.id}"
-            onclick="outreachCopy('${l.id}', ${JSON.stringify(l.name || '')}, ${JSON.stringify(handle)}, ${JSON.stringify(barrier)}, '${deeplink}', event)">
+            data-lead-id="${escHtml(l.id)}"
+            data-name="${escHtml(l.name || '')}"
+            data-handle="${escHtml(handle)}"
+            data-barrier="${escHtml(barrier.slice(0, 120))}"
+            data-deeplink="${escHtml(deeplink)}"
+            onclick="outreachCopy(this, event)">
             📨 Написать
           </button>
         </div>`;
@@ -1224,12 +1279,16 @@
     panel.style.display = 'block';
   }
 
-  function outreachCopy(leadId, name, handle, barrier, deeplink, e) {
+  function outreachCopy(btn, e) {
     e.stopPropagation();
-    const firstName = (name || 'Привет').split(' ')[0];
-    const barrierShort = barrier && barrier !== '—'
-      ? barrier.slice(0, 120).trim()
-      : 'ты заполнял диагностику';
+    const leadId   = btn.dataset.leadId;
+    const name     = btn.dataset.name    || '';
+    const handle   = btn.dataset.handle  || '';
+    const barrier  = btn.dataset.barrier || '';
+    const deeplink = btn.dataset.deeplink || '';
+
+    const firstName    = (name || 'Привет').split(' ')[0];
+    const barrierShort = barrier || 'ты заполнял диагностику';
 
     const msg = [
       `${firstName}, привет. Это Шамиль.`,
@@ -1241,9 +1300,8 @@
     ].join('\n');
 
     navigator.clipboard.writeText(msg).then(() => {
-      const btn = document.getElementById(`obtn-${leadId}`);
-      if (btn) { btn.textContent = '✅ Скопировано!'; btn.classList.add('sent'); }
-      // Открываем чат в TG если есть handle
+      btn.textContent = '✅ Скопировано!';
+      btn.classList.add('sent');
       if (handle && handle.startsWith('@')) {
         window.open(`https://t.me/${handle.slice(1)}`, '_blank');
       }

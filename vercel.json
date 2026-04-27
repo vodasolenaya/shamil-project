@@ -4,8 +4,7 @@
     { "source": "/диагностика",  "destination": "/diagnostic.html" },
     { "source": "/thanks",       "destination": "/thanks.html" },
     { "source": "/story",        "destination": "/story.html" },
-    { "source": "/admin",        "destination": "/admin.html" },
-    { "source": "/cohort",       "destination": "/cohort.html" }
+    { "source": "/admin",        "destination": "/admin.html" }
   ],
   "crons": [
     { "path": "/api/cron-drip", "schedule": "0 8 * * *" },
