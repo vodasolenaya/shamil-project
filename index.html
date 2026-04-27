@@ -838,36 +838,116 @@
     }
 
     /* ── CASES ── */
-    .cases { background: var(--bg2); }
-    .cases-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .cases-section {
+      background: #0c0c0c;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cases-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .cases-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .cases-inner {
+      position: relative; z-index: 2;
+      max-width: 1320px; margin: 0 auto;
+    }
+    .cases-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .cases-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 14px;
+    }
+    .cases-sub {
+      font-size: 1rem; color: rgba(255,255,255,.6);
+      text-align: center; margin: 0 auto 56px;
+      max-width: 520px;
+    }
+
+    .cases-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
     .case-card {
-      background: var(--card); border: none;
-      border-radius: var(--r2); padding: 26px 24px; position: relative;
-      display: flex; flex-direction: column; gap: 0;
-      transition: box-shadow .25s, transform .25s;
-      box-shadow: 0 2px 12px rgba(28,20,8,.05);
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+      padding: 26px 22px;
+      display: flex; flex-direction: column;
+      transition: border-color .25s, transform .25s;
     }
-    .case-card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(28,20,8,.1); }
-    .case-card.cta-card {
-      background: var(--gold-faint); border: none;
-      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-      gap: 16px; box-shadow: none;
+    .case-card:hover {
+      border-color: rgba(201,168,76,.3);
+      transform: translateY(-3px);
     }
-    .case-result {
-      font-size: clamp(2rem,3.2vw,2.6rem); font-weight: 900; letter-spacing: -1.5px;
-      background: linear-gradient(135deg, #8B6914, #7A5810);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      line-height: 1; margin-bottom: 5px;
+    .case-num {
+      font-size: 1.5rem; font-weight: 600; letter-spacing: -1px; line-height: 1.05;
+      background: linear-gradient(135deg, #d8b860, #C9A84C 50%, #8B6914);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
     }
-    .case-period { font-size: .84rem; color: var(--text2); margin-bottom: 16px; line-height: 1.4; }
-    .case-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
-    .case-name { font-size: .8rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--text); margin-bottom: 6px; }
-    .case-before { font-size: .83rem; color: #333333; line-height: 1.45; margin-bottom: 10px; }
-    .case-quote { font-size: .84rem; color: #333333; line-height: 1.55; font-style: italic; }
-    .cta-card-title { font-size: 1.2rem; font-weight: 800; line-height: 1.3; }
-    .cta-card-sub { font-size: .85rem; color: var(--text2); line-height: 1.5; }
-    @media(max-width:900px){ .cases-grid { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:580px){ .cases-grid { grid-template-columns: 1fr; } }
+    .case-period {
+      font-size: .78rem; color: rgba(255,255,255,.5);
+      margin-bottom: 18px; line-height: 1.4;
+    }
+    .case-divider {
+      height: 1px; background: rgba(255,255,255,.08);
+      margin-bottom: 14px;
+    }
+    .case-name {
+      font-size: 1rem; font-weight: 500; color: #fff;
+      margin-bottom: 2px;
+    }
+    .case-role {
+      font-size: .78rem; color: #C9A84C;
+      letter-spacing: .3px; margin-bottom: 14px;
+    }
+    .case-before {
+      font-size: .82rem; line-height: 1.5;
+      color: rgba(255,255,255,.65);
+      margin-bottom: 12px;
+    }
+    .case-before span {
+      font-weight: 600; color: rgba(255,255,255,.85);
+    }
+    .case-quote {
+      font-size: .82rem; line-height: 1.5; font-style: italic;
+      color: rgba(255,255,255,.7);
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    .cases-cta {
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      margin-top: 56px;
+    }
+    .cases-link {
+      font-size: .85rem; color: rgba(255,255,255,.55);
+      text-decoration: none; transition: color .2s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .cases-link:hover { color: #C9A84C; }
+    .cases-link-arrow { font-size: .9rem; }
+
+    @media (max-width: 1100px) {
+      .cases-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .cases-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .cases-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── FOR WHOM ── */
     .whom-list { display: flex; flex-direction: column; gap: 12px; }
@@ -1704,53 +1784,88 @@
 </section>
 
 <!-- CASES -->
-<section class="section cases" id="cases">
-  <div class="section-inner wide">
-    <div class="section-label reveal">Кейсы учеников</div>
-    <h2 class="section-title reveal">Они были там, где ты сейчас</h2>
-    <p class="section-sub reveal">Реальные люди, реальные цифры, один месяц работы.</p>
+<section class="cases-section" id="cases">
+  <div class="cases-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="cases-inner">
+    <div class="cases-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>КЕЙСЫ УЧЕНИКОВ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="cases-title">Они были там, где ты сейчас</h2>
+    <p class="cases-sub">Реальные люди, реальные цифры, один месяц работы.</p>
 
     <div class="cases-grid">
+
       <div class="case-card reveal">
-        <div class="case-result">420 000 ₽</div>
-        <div class="case-period">за 11 дней после начала работы</div>
+        <div class="case-num">420 000 ₽</div>
+        <div class="case-period">за 11 дней</div>
         <div class="case-divider"></div>
-        <div class="case-name">Олег · Digital-агентство</div>
-        <div class="case-before">Было: 80к/мес, полгода прокрастинации, избегал звонков</div>
+        <div class="case-name">Олег</div>
+        <div class="case-role">Digital-агентство</div>
+        <div class="case-before"><span>Было:</span> 80к/мес, 6 мес прокрастинации</div>
         <div class="case-quote">«Думал что просто не умею продавать.»</div>
       </div>
+
       <div class="case-card reveal reveal-delay-1">
-        <div class="case-result">600 000 ₽</div>
-        <div class="case-period">доход ×2 + запустил своё обучение</div>
+        <div class="case-num">600 000 ₽</div>
+        <div class="case-period">×2 + запустил обучение</div>
         <div class="case-divider"></div>
-        <div class="case-name">Марат · Дизайнер</div>
-        <div class="case-before">Было: 280к, не верил в свой ценник, тянул всё сам</div>
-        <div class="case-quote">«Называл цену — и что-то внутри говорило: нет, это слишком много.»</div>
+        <div class="case-name">Марат</div>
+        <div class="case-role">Дизайнер</div>
+        <div class="case-before"><span>Было:</span> 280к, не верил в ценник</div>
+        <div class="case-quote">«Внутри говорило: нет, это слишком много.»</div>
       </div>
+
       <div class="case-card reveal reveal-delay-2">
-        <div class="case-result">460 000 ₽</div>
-        <div class="case-period">в марте · окупил обучение в первый месяц</div>
+        <div class="case-num">460 000 ₽</div>
+        <div class="case-period">в марте · окупил обучение</div>
         <div class="case-divider"></div>
-        <div class="case-name">Самат · Таргетолог</div>
-        <div class="case-before">Было: нестабильный доход, системы не было</div>
-        <div class="case-quote">«В этом месяце деньги есть — а в следующем? Непонятно.»</div>
+        <div class="case-name">Самат</div>
+        <div class="case-role">Веб-разработчик</div>
+        <div class="case-before"><span>Было:</span> нестабильный доход</div>
+        <div class="case-quote">«А в следующем месяце? Непонятно.»</div>
       </div>
+
       <div class="case-card reveal reveal-delay-1">
-        <div class="case-result">300 000+ ₽</div>
-        <div class="case-period">пробил потолок, который стоял месяцами</div>
+        <div class="case-num">300 000+ ₽</div>
+        <div class="case-period">пробил потолок</div>
         <div class="case-divider"></div>
-        <div class="case-name">Фёдор · Веб-разработчик, Новосибирск</div>
-        <div class="case-before">Было: 150–180к, одна и та же цифра месяц за месяцем</div>
-        <div class="case-quote">«Пробуешь — и снова та же цифра. Что ни делай.»</div>
+        <div class="case-name">Фёдор</div>
+        <div class="case-role">Веб-разработчик, Новосибирск</div>
+        <div class="case-before"><span>Было:</span> 150–180к месяц за месяцем</div>
+        <div class="case-quote">«Пробуешь — и снова та же цифра.»</div>
       </div>
+
       <div class="case-card reveal reveal-delay-2">
-        <div class="case-result">100 000 ₽</div>
-        <div class="case-period">за первый месяц · с абсолютного нуля</div>
+        <div class="case-num">100 000 ₽</div>
+        <div class="case-period">первый месяц · с нуля</div>
         <div class="case-divider"></div>
-        <div class="case-name">Егор · Маркетинг</div>
-        <div class="case-before">Было: 0 ₽, несколько лет без результата</div>
-        <div class="case-quote">«Несколько лет пытался — ничего. Чувствовал себя полным нулём.»</div>
+        <div class="case-name">Егор</div>
+        <div class="case-role">Маркетинг</div>
+        <div class="case-before"><span>Было:</span> 0 ₽, годы без результата</div>
+        <div class="case-quote">«Чувствовал себя полным нулём.»</div>
       </div>
+
+    </div>
+
+    <div class="cases-cta">
+      <a href="/diagnostic.html" class="btn-primary">
+        <span>Найти свой барьер</span>
+        <span class="btn-primary-arrow">→</span>
+      </a>
+      <a href="https://t.me/ozareniecases" target="_blank" class="cases-link">
+        Все кейсы в канале <span class="cases-link-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
