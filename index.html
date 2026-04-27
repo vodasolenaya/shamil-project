@@ -1219,30 +1219,74 @@
     }
 
     /* ── CIRCLE VIDEOS ── */
-    .circle-video-section { background: var(--bg2); }
+    /* ── VIDEO CIRCLES ── */
+    .video-section {
+      background: #0c0c0c;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+    }
+    .video-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .video-inner {
+      position: relative; z-index: 2;
+      max-width: 1080px; margin: 0 auto;
+    }
+    .video-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .video-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 14px;
+    }
+    .video-sub {
+      font-size: 1rem; color: rgba(255,255,255,.6);
+      text-align: center; margin: 0 auto 56px;
+      max-width: 540px;
+    }
     .circle-video-grid {
-      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 40px;
+      display: flex; justify-content: center; gap: 56px; flex-wrap: wrap;
     }
-    .circle-video-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .circle-video-item { display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .circle-video-wrap {
-      width: 160px; height: 160px; border-radius: 50%; overflow: hidden;
-      position: relative; cursor: pointer; background: #0d0d0d;
-      box-shadow: 0 0 0 3px var(--gold), 0 8px 32px rgba(0,0,0,.18);
+      width: 180px; height: 180px; border-radius: 50%; overflow: hidden;
+      position: relative; cursor: pointer; background: #141414;
+      box-shadow: 0 0 0 2px rgba(201,168,76,.6), 0 12px 32px rgba(0,0,0,.4);
       flex-shrink: 0;
+      transition: transform .25s, box-shadow .25s;
     }
-    .circle-video-wrap video {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+    .circle-video-wrap:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 0 2px #C9A84C, 0 16px 48px rgba(201,168,76,.18);
     }
+    .circle-video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
     .circle-play-overlay {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,.38); transition: opacity .2s;
+      background: rgba(0,0,0,.5); transition: opacity .2s;
     }
-    .circle-play-overlay svg { filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
+    .circle-play-overlay svg { filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
     .circle-video-wrap.playing .circle-play-overlay { opacity: 0; }
     .circle-video-wrap.playing:hover .circle-play-overlay { opacity: 1; }
-    .circle-video-name { font-size: .9rem; font-weight: 800; color: var(--text); }
-    .circle-video-role { font-size: .8rem; color: var(--text3); margin-top: -8px; }
-    @media(max-width:580px){ .circle-video-wrap { width: 130px; height: 130px; } .circle-video-grid { gap: 24px; } }
+    .circle-video-name {
+      font-size: .98rem; font-weight: 500; color: #fff;
+    }
+    .circle-video-role {
+      font-size: .82rem; color: #C9A84C;
+      letter-spacing: .3px; text-align: center;
+    }
+    @media (max-width: 700px) {
+      .circle-video-grid { gap: 32px; }
+      .circle-video-wrap { width: 150px; height: 150px; }
+    }
 
     /* ── URGENCY BANNER ── */
     .urgency-banner {
@@ -1973,11 +2017,26 @@
 </section>
 
 <!-- CIRCLE VIDEO TESTIMONIALS -->
-<section class="section circle-video-section">
-  <div class="section-inner">
-    <div class="section-label reveal" style="justify-content:center;">Послушай</div>
-    <h2 class="section-title reveal" style="text-align:center;">Не текст — живой голос</h2>
-    <p class="section-sub reveal" style="text-align:center;">Нажми на кружок — услышишь как они говорят про деньги до и после программы.</p>
+<section class="video-section">
+  <div class="video-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="video-inner">
+    <div class="video-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ПОСЛУШАЙ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="video-title">Не текст — живой голос</h2>
+    <p class="video-sub">Нажми на кружок — услышишь как они говорят про деньги до и после программы.</p>
+
     <div class="circle-video-grid">
 
       <div class="circle-video-item reveal">
@@ -1999,7 +2058,7 @@
           </div>
         </div>
         <div class="circle-video-name">Самат</div>
-        <div class="circle-video-role">Таргетолог · 460к в марте</div>
+        <div class="circle-video-role">Веб-разработчик · 460к в марте</div>
       </div>
 
       <div class="circle-video-item reveal reveal-delay-2">
@@ -2010,7 +2069,7 @@
           </div>
         </div>
         <div class="circle-video-name">Иван</div>
-        <div class="circle-video-role">Фрилансер · вырос в доходе</div>
+        <div class="circle-video-role">Торги · +800 000 ₽ за обучение</div>
       </div>
 
     </div>
