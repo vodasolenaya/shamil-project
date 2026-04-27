@@ -946,22 +946,90 @@
     }
 
     /* ── FOR WHOM ── */
-    .whom-list { display: flex; flex-direction: column; gap: 12px; }
-    .whom-item {
-      display: flex; gap: 18px; align-items: flex-start;
-      background: var(--card); border: none;
-      border-radius: var(--r); padding: 20px 24px;
-      box-shadow: 0 2px 12px rgba(28,20,8,.05);
-      transition: box-shadow .2s, transform .2s;
+    /* ── WHOM ── */
+    .whom-section {
+      background: #0a0a0a;
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
     }
-    .whom-item:hover { box-shadow: 0 8px 32px rgba(28,20,8,.08); transform: translateY(-1px); }
-    .whom-check {
-      width: 22px; height: 22px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 1px; font-size: .7rem; color: #000; font-weight: 900;
+    .whom-section::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
     }
-    .whom-item span { font-size: .95rem; line-height: 1.55; }
+    .whom-bills {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .whom-inner {
+      position: relative; z-index: 2;
+      max-width: 1080px; margin: 0 auto;
+    }
+    .whom-eyebrow {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      font-size: .72rem; letter-spacing: 3px; color: #C9A84C;
+      font-weight: 600; margin-bottom: 22px;
+    }
+    .whom-title {
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500; line-height: 1.15; letter-spacing: -.6px;
+      text-align: center; color: #fff; margin: 0 0 56px;
+    }
+    .whom-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .whom-col {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 32px 30px;
+    }
+    .whom-col-tag {
+      display: inline-block;
+      font-size: .7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px;
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.55);
+      margin-bottom: 22px;
+    }
+    .whom-col-tag.gold {
+      background: rgba(201,168,76,.12);
+      color: #C9A84C;
+    }
+    .whom-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .whom-list li {
+      font-size: .92rem; line-height: 1.55;
+      color: rgba(255,255,255,.78);
+      padding-left: 22px; position: relative;
+    }
+    .whom-list li:before {
+      content: '—'; position: absolute; left: 0;
+      color: rgba(255,255,255,.3);
+    }
+    .whom-col:has(.gold) .whom-list li:before { color: #C9A84C; }
+
+    .whom-outro {
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      margin-top: 56px; text-align: center;
+    }
+    .whom-outro p {
+      font-size: 1.1rem; color: #fff;
+      font-weight: 500; letter-spacing: -.2px;
+    }
+    .whom-arrow {
+      font-size: 1.4rem; color: #C9A84C; opacity: .8;
+      animation: painBounce 2s ease-in-out infinite;
+    }
+    @media (max-width: 768px) {
+      .whom-section { padding: 72px 20px; }
+      .whom-grid { grid-template-columns: 1fr; gap: 16px; }
+      .whom-col { padding: 26px 22px; }
+    }
 
     /* ── ABOUT ── */
     .about-section {
@@ -2077,19 +2145,54 @@
 </section>
 
 <!-- FOR WHOM -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-label reveal">Проверь себя</div>
-    <h2 class="section-title reveal">Тебе точно сюда, если</h2>
-    <p class="section-sub reveal">Узнаешь себя в 2-3 пунктах — стоит пройти диагностику. Остальные пункты могут быть не про тебя — это нормально.</p>
-    <div class="whom-list">
-      <div class="whom-item reveal"><div class="whom-check">✓</div><span>Называешь цену — и сам не веришь в неё. Внутри что-то сжимается.</span></div>
-      <div class="whom-item reveal reveal-delay-1"><div class="whom-check">✓</div><span>Клиент говорит «дорого» — и ты уже думаешь как дать скидку.</span></div>
-      <div class="whom-item reveal reveal-delay-1"><div class="whom-check">✓</div><span>Работы много, а денег будто нет. Устал, но ценник не поднимаешь.</span></div>
-      <div class="whom-item reveal reveal-delay-2"><div class="whom-check">✓</div><span>Клиенты приходят — но не те, с кем хочется работать.</span></div>
-      <div class="whom-item reveal reveal-delay-2"><div class="whom-check">✓</div><span>Знаешь что что-то тормозит. Но месяц за месяцем — на том же месте.</span></div>
-      <div class="whom-item reveal reveal-delay-3"><div class="whom-check">✓</div><span>Знаешь что надо сделать — позвонить, написать, выйти на контакт. Но снова откладываешь.</span></div>
-      <div class="whom-item reveal reveal-delay-3"><div class="whom-check">✓</div><span>Пробовал расти — не пошло. Сейчас непонятно откуда начать снова и есть ли смысл.</span></div>
+<section class="whom-section">
+  <div class="whom-bills">
+    <div class="hero-bill b1"><span class="num">₽</span></div>
+    <div class="hero-bill b2"><span class="num">₽</span></div>
+    <div class="hero-bill b3"><span class="num">₽</span></div>
+    <div class="hero-bill b4"><span class="num">₽</span></div>
+    <div class="hero-bill b5"><span class="num">₽</span></div>
+    <div class="hero-bill b6"><span class="num">₽</span></div>
+    <div class="hero-bill b7"><span class="num">₽</span></div>
+  </div>
+
+  <div class="whom-inner">
+    <div class="whom-eyebrow">
+      <span class="manifesto-line"></span>
+      <span>ПРОВЕРЬ СЕБЯ</span>
+      <span class="manifesto-line"></span>
+    </div>
+    <h2 class="whom-title">Тебе сюда, если</h2>
+
+    <div class="whom-grid">
+
+      <div class="whom-col">
+        <div class="whom-col-tag gold">ТЕБЕ СЮДА</div>
+        <ul class="whom-list">
+          <li>У тебя уже есть клиенты, опыт и поток заявок</li>
+          <li>Хочешь больше дохода без увеличения часов работы</li>
+          <li>Готов уделить 30–60 минут в день на конкретные действия</li>
+          <li>Готов перестать продавать из страха и держать рамку</li>
+          <li>Понимаешь что система продаж — это навык, а не магия</li>
+        </ul>
+      </div>
+
+      <div class="whom-col">
+        <div class="whom-col-tag">ГДЕ ТЫ СЕЙЧАС</div>
+        <ul class="whom-list">
+          <li>Доход 80–200к и стоит на месте уже несколько месяцев</li>
+          <li>Клиент говорит «дорого» — ты уже думаешь о скидке</li>
+          <li>Сарафан и биржа — не система, а лотерея</li>
+          <li>Знаешь что делать — не делаешь уже несколько недель</li>
+          <li>Работы много, устал — но ценник не поднимаешь</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="whom-outro">
+      <p>Узнал себя? Пора разобраться.</p>
+      <div class="whom-arrow">↓</div>
     </div>
   </div>
 </section>
